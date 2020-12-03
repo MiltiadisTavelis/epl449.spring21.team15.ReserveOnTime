@@ -1,0 +1,13 @@
+input {
+	width: 100%
+}
+
+.login-text{
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 12px;
+}
+
+.form-action {
+  text-align:center;
+}
+

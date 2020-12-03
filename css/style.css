@@ -1,0 +1,599 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: Century Gothic;
+}
+
+header.homepage{
+	height: 6vh;
+	background-size: cover;
+	background-position: center;
+}
+
+header.loginpage{
+	height: 6vh;
+	background-size: cover;
+	background-position: center;
+	border-bottom-style: dashed;
+	margin-bottom: 200px;
+}
+
+header.shoppage{
+	height: 6vh;
+	background-size: cover;
+	background-position: center;
+	border-bottom-style: dashed;
+	margin-bottom: 200px;
+}
+
+header.signInpage{
+	height: 6vh;
+	background-size: cover;
+	background-position: center;
+	border-bottom-style: dashed;
+}
+
+h1{
+	color: grey;
+}
+
+ul{
+	float: right;
+	list-style-type: none;
+}
+
+ul li{
+	display: inline-block;
+}
+ul li input[type=text] {
+	width: 80%;
+  	margin-right: 160px;
+  	text-decoration: none;
+	color: #fff;
+	padding: 5px 20px;
+	border: 1px solid #fff;
+	border border-radius: 0px;
+	margin-top: 1px; /* Add a top margin */
+  margin-bottom: 0px; /* Bottom margin */
+  margin-left: 0px;
+  margin-right: none;
+}
+
+ul li a{
+	text-decoration: none;
+	color: #fff;
+	padding: 5px 20px;
+	border: 1px solid #fff;
+	transition: 0.6s ease;
+}
+
+ul li a.rsvation{
+	text-decoration: none;
+	color: #fff;
+	padding: 5px 10px;
+	border: 1px solid #fff;
+	transition: 0.6s ease;
+	margin-right: 10px;
+	float: center;
+}
+
+ul li a.footer{
+	text-decoration: none;
+	color: #fff;
+	padding: 5px 10px;
+	border: 1px solid #fff;
+	transition: 0.6s ease;
+	margin-left: 10px;
+	float: center;
+}
+
+ul.shop{
+	float: left;
+	padding-left: 10px;
+}
+
+ul li.shop{
+	padding-right: 20px;
+}
+
+ul li a.shop{
+	text-decoration: none;
+	color: black;
+	padding: 5px 10px;
+	border: 1px solid black;
+	font-size: 12px;
+}
+
+ul li a.shop:hover{
+	background-color: transparent;
+  	color: black;
+  	padding: 5px 10px;
+  	border: 2px solid black;
+  	cursor: pointer;
+}
+
+ul li a.shop2{
+	text-decoration: none;
+	color: white;
+	padding: 5px 10px;
+	border: 1px solid black;
+	font-size: 14px;
+}
+ul li a.shop2:hover{
+	background-color: transparent;
+  	color: white;
+  	padding: 5px 10px;
+  	border: 1px solid white;
+  	cursor: pointer;
+}
+
+ul.recommended{
+	float: left;
+	padding-left: 20px;
+
+}
+
+ul li.recommended{
+	padding-right: 20px;
+	display: block;
+}
+
+ul li a.recommended{
+	cursor: pointer;
+}
+
+ul li a.cancel{
+	background-color: #ff5e4e;
+  	color: white;
+  	padding: 12px 20px;
+  	border-radius: 4px;
+  	border: none;
+  	cursor: pointer;
+}
+ul li a.cancel:hover{
+	background-color: #ff5e4e;
+  	color: white;
+  	padding: 12px 20px;
+  	border-radius: 4px;
+  	border: none;
+  	cursor: pointer;
+}
+
+a.shop2{
+	float: left;
+	display: inline-block;
+}
+
+a.thankyou{
+	background-color: #4CAF50;
+  	color: white;
+  	text-decoration: none;
+  	padding: 12px 20px;
+  	border-radius: 4px;
+  	border: none;
+  	cursor: pointer;
+  	position: absolute;
+  	margin-top: 55px;
+  	margin-left: 640px;
+
+}
+a.thankyou:hover{
+  	cursor: pointer;
+}
+a.makersv3{
+	background-color: #0fafba;
+  	color: white;
+  	text-decoration: none;
+  	padding: 12px 20px;
+  	border-radius: 4px;
+  	border: none;
+  	cursor: pointer;
+  	float: right;
+  	margin-right: 20px;
+  	margin-bottom: 100px;
+}
+a.makersv3:hover{
+  	cursor: pointer;
+}
+
+a.makersv2{
+	background-color: #4CAF50;
+  	color: white;
+  	text-decoration: none;
+  	padding: 12px 20px;
+  	border-radius: 4px;
+  	border: none;
+  	cursor: pointer;
+  	float: right;
+  	margin-right: 20px;
+  	margin-bottom: 100px;
+}
+a.makersv2:hover{
+  	cursor: pointer;
+}
+
+ul li a.makersv{
+	background-color: #4CAF50;
+  	color: white;
+  	padding: 12px 20px;
+  	border-radius: 4px;
+  	border: none;
+  	cursor: pointer;
+}
+ul li a.makersv:hover{
+	background-color: #4CAF50;
+  	color: white;
+  	padding: 12px 20px;
+  	border-radius: 4px;
+  	border: none;
+  	cursor: pointer;
+}
+ul li a:hover{
+	background-color: #009999;
+	color: #000;
+}
+
+ul li.active a{
+	background-color: #009999;
+	color: #000;
+}
+
+h1{
+	float: left;
+	height: auto;
+}
+body.signInpage{
+	background-image: url(../1.jpg);
+}
+
+form.signInForm{
+	background-image: url(../1.jpg);
+	height: 100px; 
+}
+
+body.loginpage{
+	background-image: url(../1.jpg);
+}
+
+body.homepage{
+	background-image: url(../1.jpg);
+}
+body.reservation{
+	background-image: url(../1.jpg);
+}
+body.shoppage{
+	background-image: url(../1.jpg);
+}
+
+/* Style inputs with type="text", select elements and textareas */
+input[type=text], select, textarea {
+  width: 30%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+input[type=date], select, textarea {
+  width: 30%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+input[type=password], select, textarea {
+  width: 30%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+input[type=phone], select, textarea {
+  width: 30%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+input[type=email], select, textarea {
+  width: 30%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=time], select, textarea {
+  width: 30%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+form label,input,option,select{
+	display: block;
+	margin-left: 500px;
+}
+textarea,input,option,select{
+	color: black;
+	background-color: grey;
+}
+label{
+	color: white;
+}
+::placeholder {
+  color: black;
+  opacity: 0.5; 
+}
+label.or{
+	display: inline-block;
+	color: white;
+	margin-left: 0px;
+}
+
+
+button.loginbtn {
+	background-color: #4CAF50;
+  	color: white;
+  	padding: 12px 20px;
+  	border: none;
+  	border-radius: 4px;
+  	cursor: pointer;
+  	margin-left: 500px;
+}
+button.loginbtnfb {
+	background-color: #3b5998;
+  	color: white;
+  	padding: 12px 20px;
+  	border: none;
+  	border-radius: 4px;
+  	cursor: pointer;
+}
+button.logininstead {
+	background-color: inherit;
+	color: white;
+  	padding: 12px 20px;
+  	border: none;
+  	border-radius: 4px;
+  	cursor: pointer;
+  	font-size: 16px;
+  	margin-bottom: 5px;
+}
+
+button.search {
+	background-color: white;
+  	border: 1px solid #fff;
+	border border-radius: 0px;
+	margin-top: 1px; /* Add a top margin */
+  margin-bottom: 0px; /* Bottom margin */
+  margin-left: 0px;
+  cursor: pointer;
+}
+button.cancel{
+	background-color: #ff5e4e;
+  	color: white;
+  	padding: 12px 20px;
+  	border: none;
+  	border-radius: 4px;
+  	cursor: pointer;
+}
+button.makersv{
+	background-color: #4CAF50;
+  	color: white;
+  	padding: 12px 20px;
+  	border: none;
+  	border-radius: 4px;
+  	cursor: pointer;
+  	margin-left: 500px;
+}
+
+
+}
+button.thankyou{
+	display: block;
+	background-color: transparent;
+  	color: transparent;
+  	padding: 12px 20px;
+  	border: none;
+  	border-radius: 4px;
+  	cursor: pointer;
+  	margin-left: 500px;
+}
+
+div.title{
+	color: #009999;
+	text-decoration: overline;
+	text-shadow: black;
+	outline-color: blue;
+	position: center;
+	margin-top: 200px;
+	margin-left: 430px;
+	font-size: 80px;
+	font-family: Arial Black, cursive;
+}
+div.undertitle{
+	color: grey;
+	float: inherit;
+	margin-left: 600px;
+	position: center;
+	font-size: 15px;
+	font-variant: normal;
+	font-family: tahoma, cursive;
+}
+
+ul.title2{
+	float: none;
+	margin-top: 80px;
+	margin-left: 555px;
+}
+
+ul.title3{
+	float: none;
+	margin-top: 80px;
+	margin-left: 620px;
+	margin-bottom: 50px;
+}
+
+
+ul.reservation{
+	float: none;
+}
+button.rsvation{
+	text-decoration: none;
+	color: #fff;
+	background: transparent;
+	padding: 5px 20px;
+	border: 1px solid #fff;
+	transition: 0.6s ease;
+	cursor: pointer;
+}
+button.rsvation:hover{
+	background-color: #009999;
+	color: #000;
+}
+
+button.footer{
+	text-decoration: none;
+	color: #fff;
+	background: transparent;
+	padding: 5px 20px;
+	border: 1px solid #fff;
+	transition: 0.6s ease;
+	cursor: pointer;
+}
+button.footer:hover{
+	background-color: #009999;
+	color: #000;
+}
+
+button.rsvation.active{
+	background-color: #009999;
+	color: #000;
+}
+label.thankyou{
+	display: block;
+	margin-top: 100px;
+	margin-left: 490px;
+	width: 30%;
+	text-align: center;
+	position: center;
+	float: center; 
+	font-size: 30px;
+}
+
+div.mnglogin{
+	margin-bottom: 30px;
+}
+
+h2.restaurantHeader {
+	background-image: url(../restaurant.jpg);
+	height: 300px;
+}
+h2.cafeHeader {
+	background-image: url(../cafe.jpg);
+	height: 300px;
+}
+h2.barHeader {
+	background-image: url(../bar.jpg);
+	height: 300px;
+}
+div.displayshop{
+	background-color: #c9bebd;
+	display: inline-block;
+	border-color: grey;
+	border-style: solid;
+	border-bottom-style: none;
+	width: 60%;
+	margin-top: -200px;
+	margin-left: 300px;
+}
+p {
+	margin-top: 10px;
+}
+
+
+img.logo{
+	float: left;
+}
+
+label.LogIn{
+	margin-left: 500px;
+}
+label.shop1{
+	color: black;
+	margin-left: 5px;
+}
+label.shop1rest{
+	color: black;
+	margin-left: 85px;
+}
+
+div.recommended{
+	display: inline-block;
+	padding-left: 70px;
+	padding-right: 70px;
+	width: 40%;
+	border: 2px solid grey;
+}
+label.recommended{
+	text-decoration-line: underline;
+	float: left;
+}
+label.recommended2{
+	float: right;
+	text-align: center;
+	margin-top: 70px;
+	margin-left: 10px;
+}
+
+img.recommended{
+	float: left;
+	margin-top: 30px;
+}
+p.about{
+	color: white;
+	display: block;
+	margin-top: 50px;
+	margin-left: 500px;
+	width: 30%;
+	text-align: center;
+	position: center;
+	float: center; 
+	font-size: 30px;
+}

@@ -1,0 +1,222 @@
+@font-face {
+        font-family: "Louis-George-Cafe-Light";
+        src: url(../ttf/Louis-George-Cafe-Light.ttf);
+}
+
+@font-face {
+        font-family: "Louis-George-Cafe-Bold";
+        src: url(../ttf/Louis-George-Cafe-Bold.ttf);
+}
+
+@font-face {
+        font-family: "Louis-George-Cafe";
+        src: url(../ttf/Louis-George-Cafe.ttf);
+}
+
+*{
+  margin-bottom: 0.1rem;
+}
+.main {
+  scroll-behavior: smooth;
+}
+
+label{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html{
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+body {
+  background-image:url("../img/signup4.jpg");
+  margin:auto;
+  background-size:     cover;                     
+  background-repeat:   no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+input {
+  line-height:10px;
+  padding: 6px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-family: inherit;
+  overflow: hidden;
+  width:45%;
+  margin: 5px 0;
+  border: 2px solid #ccc;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+
+select {
+  overflow: hidden;
+  line-height:15px;
+  font-size: 12px;
+  width: 49%;
+  padding: 6px 6px;
+  margin: 5px 0;
+  border: 2px solid #ccc;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  -moz-appearance: none;
+  -webkit-border-radius: 3px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, black 50%),
+    linear-gradient(135deg, black 50%, transparent 50%),
+    linear-gradient(to right, transparent, transparent);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
+.date select{
+  width: 32.4%
+}
+
+select::-ms-expand {
+  /* For IE10 */
+  display: none;
+}
+
+
+.link{
+  color: #f7b733;
+  font-size: 12px;
+  cursor:pointer;
+  text-decoration: none;
+}
+
+#signupbtn {
+  display: inline-block;
+  line-height: 30px;
+  padding: 0 30px;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  font-size: 10px;
+  color: #fff;
+  border:0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #007cc7;
+}
+
+#signupbtn:hover {
+  background: #4da8da;
+} 
+
+.header-center{
+  text-align: center;
+  font-family: "Louis-George-Cafe-Bold";
+  font-size: 35px;
+}
+
+.subheader-center{
+  text-align: center;
+  font-family: "Louis-George-Cafe";
+  font-size: 15px;
+  color: #9B9897;
+}
+
+
+/* Style the header with a grey background and some padding */
+.header {
+  overflow: hidden;
+  background-color: #333;
+  padding: 10px;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.header a {
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  color: white; 
+}
+
+.menu{
+  float: right;
+}
+
+.menu a.active:hover {
+  color: orange;
+}
+
+.login-text{
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 12px;
+}
+
+.form{
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 12px;
+}
+
+
+.container {
+  position: absolute;
+  width: 400px;
+  min-height: 500px;
+  left: 50%;
+  top: 500px;
+  transform: translate(-50%, -50%);
+  border-radius: 25px;
+  padding: 20px 50px 20px;
+  background-color: #fff;
+  border: 0px solid rgba(0,0,0,0.1);
+  box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.25), 0 0px 5px 0 rgba(0, 0, 0, 0.25);  
+}
+
+.form-action {
+  text-align:center;
+}
+
+.error{
+  color:red;
+}
+#l1,#fname{
+  float: left;
+}
+#lname{
+  margin-left: 35%;
+}
+
+#l2{
+   margin-left: 36.5%;
+}
+
+}
+
