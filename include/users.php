@@ -13,6 +13,7 @@
     $pnum = $_POST["pnum"];
     $email = $_POST["email"];
     $password = $_POST["password"];
+    $password = hash("sha256", $password);
     $usertype = 'u';
 
     if($connect->connect_error){
