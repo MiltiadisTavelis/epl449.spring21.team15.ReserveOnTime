@@ -14,6 +14,7 @@
     $name = $r2->fetch_assoc()["fname"];
     $type = $r1->fetch_assoc()["usertype"];
     $id = $r3->fetch_assoc()["id"];
+    $password = hash("sha256", $password);
     $sql_query = "SELECT count(*) AS cntUser FROM USERS WHERE email='".$uemail."' and password='".$password."'";
     $result = mysqli_query($con,$sql_query);
     $row = mysqli_fetch_array($result);
