@@ -2,8 +2,6 @@
 
 ReserveOnTime
 
-GITHUB: https://github.com/MIltiadisTavelis/epl343-Team15
-
 THIS IS THE FINAL PAGE: www.reserveontime.com
 
 Test User: test@test.com  1234
