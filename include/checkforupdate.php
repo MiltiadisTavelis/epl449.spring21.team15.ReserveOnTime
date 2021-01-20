@@ -21,7 +21,7 @@
 		    </div>
 		    
 		    <p class="lead">
-              <a href="reservationlist.html" class="btn btn-lg btn-default">View Reservations</a>
+              <a href="reservationlist" class="btn btn-lg btn-default">View Reservations</a>
             </p>';
     }
     else if($order_status == -1){
@@ -33,7 +33,7 @@
 	    	    </svg>
 	    	 </div>
 	    	<p class="lead">
-              <a href="reservationlist.html" class="btn btn-lg btn-default">View Reservations</a>
+              <a href="reservationlist" class="btn btn-lg btn-default">View Reservations</a>
             </p>';
     }else{
         echo 0;

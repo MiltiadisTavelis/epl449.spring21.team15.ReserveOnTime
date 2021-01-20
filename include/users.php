@@ -28,7 +28,7 @@
         
         ?>
         <script type="text/javascript">
-            window.location = "../index.html";
+            window.location = "../index";
         </script>      
         <?php
     }

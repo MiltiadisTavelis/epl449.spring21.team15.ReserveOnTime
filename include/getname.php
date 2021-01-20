@@ -10,12 +10,12 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">'.$name.' <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="logout.php" id="logoutbtn">Logout</a></li>
-          <li><a href="reservationlist.html">Reservations</a></li>
+          <li><a href="reservationlist">Reservations</a></li>
         </ul>
         </li>';
     }else{
      echo '<li class="nav-item">
-                <a class="nav-link" href="login.html">Log In</a>
+                <a class="nav-link" href="login">Log In</a>
             </li>';    
     }
 

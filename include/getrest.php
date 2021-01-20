@@ -9,7 +9,7 @@
     while($row = mysqli_fetch_array($result)){
         $output .= '<div class="col-lg-4">
                         <figure class="rounded p-3 bg-white shadow-sm">
-          	                <a href="'.$row["id"].'.html">
+          	                <a href="'.$row["id"].'">
           		                <img src="img/'.$row["id"].'.jpg" alt="" class="w-100 card-img-top">
           	                </a>
                             <figcaption class="p-4 card-img-bottom">
