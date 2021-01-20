@@ -7,7 +7,7 @@ $(document).ready(function(){
                 method:"POST",
                 data:{search:txt},
                 success:function(data){
-                    $('#result').html(data);
+                    $('#results').html(data);
                 }
             });
         }
