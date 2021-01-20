@@ -3,7 +3,7 @@
             $.ajax({
                 url: 'include/logout.php',
                 success: function(){
-                    window.location = '../index.html';
+                    window.location = '../index';
                 }
             });
         });

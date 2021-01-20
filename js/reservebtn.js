@@ -4,9 +4,9 @@ $( document ).ready(function() {
     		method: "POST",
     		success:function(data) {
     			if(data == 1){
-    			    $('#reservebtn').attr("href", "reservation.html");
+    			    $('#reservebtn').attr("href", "reservation");
     	        }else if(data == 0){
-    	            $('#reservebtn').attr("href", "login.html");
+    	            $('#reservebtn').attr("href", "login");
     	        }
 		    }
 	});

@@ -13,7 +13,7 @@ $(document).ready(function(){
                 var res = JSON.parse(response);
                 var msg = "";
                 if(res.statusCode == 200){
-                    window.location = "index.html";
+                    window.location = "index";
                 }
             }
         });

@@ -9,7 +9,7 @@ $(document).ready(function(){
             data:{day:day,time:time,people:people},
             success:function(data){
                 if(data == 1){ 
-                    window.location = "thankyou.html";
+                    window.location = "thankyou";
                 }
             }
         });
