@@ -7,7 +7,7 @@
 # About
 Reserve On Time aims at providing a simple and convenient interface for clients to make reservations to their favorite place and for managers to handle and manage such reservations with similar ease. By providing the manager with the option to add images, text and events to their managed place, one can customize and provide useful information to any potential customer through the site. With our review mechanisms users have a chance to leave honest reviews and feedback for the shop and the manager as well as see past reviews from other users.
 
-# Capabilities
+# Features
 ### Client
 - Browse and search through all available shops
 - Make a reservation for X people at a certain available date and time
