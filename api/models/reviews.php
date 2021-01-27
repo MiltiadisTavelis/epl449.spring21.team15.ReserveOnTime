@@ -34,7 +34,7 @@
 		
 		//CREATE NEW REVIEW
 		public function create_shop(){
-			$sql = 'INSERT INTO SHOPS (
+			$sql = 'INSERT INTO REVIEWS (
 							sname,
 							stype,
 							email,
