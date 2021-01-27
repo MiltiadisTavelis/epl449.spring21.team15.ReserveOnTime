@@ -1,7 +1,7 @@
 <div align="center">
     <h1>Reserve On Time</h1>
     <p>An online system that provides a convenient way for making reservations and managing reservations for customers and managers respectively.</p>
-    <a href="www.reserveontime.com"><img alt="Reserve On Time" src="/images/logo-tp.png"></a>
+    <a href="http://www.reserveontime.com"><img alt="Reserve On Time" src="/images/logo-tp.png"></a>
 </div>
 
 # About
