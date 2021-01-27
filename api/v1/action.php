@@ -47,7 +47,19 @@
 			}else{
 				echo $error;
 			}
-		}else{
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'reviews')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/reviews.php';
+			$type = $data['type'];
+			unset($data['type']);
+			if((strcasecmp($type, 'reviews/shop') == 0) && count($data) == 1 && (isset($data['id']) != 0)){
+				$_GET['id'] = $data['id'];
+				include 'reviews/shop.php';
+			}else{
+				echo $error;
+			}
+		}
+		else{
 			echo $error;
 		}
 

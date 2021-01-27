@@ -17,9 +17,9 @@
 			$this->conn = $db;
 		}
 
-		//SHOW REVIEWS BY TYPE
-		public function type(){
-			$sql = 'SELECT content,rating,sub_date, fname, lname FROM REVIEWS,USERS WHERE REVIEWS.uid = USERS.id ORDER BY sub_date';
+		//SHOW REVIEWS BY shop_id
+		public function shop_reviews(){
+			$sql = 'SELECT fname, lname, content,rating,sub_date  FROM REVIEWS,USERS WHERE REVIEWS.uid = USERS.id and REVIEWS.shop_id = '.$this->shop_id.' ORDER BY sub_date DESC';
 			$stmt = $this->conn->prepare($sql);
             if(!mysqli_stmt_prepare($stmt,$sql)){
                 echo "Error";
@@ -34,7 +34,7 @@
 		
 		//CREATE NEW REVIEW
 		public function create_shop(){
-			$sql = 'INSERT INTO REVIEWS (
+			$sql = 'INSERT INTO SHOPS (
 							sname,
 							stype,
 							email,
