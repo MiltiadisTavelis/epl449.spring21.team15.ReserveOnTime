@@ -19,7 +19,7 @@ USERS
 SHOPS
 - [x] Display open Shops (type: shops/isopen) GET OK
 - [x] Sort shops by date added (Default) (type: shops/sort) GET OK
-- [x] Sort shops by name (type: shops/sort) GET OK
+- [x] Sort shops by name (type: shops/sort) GET OK ****** REMOVED
 - [x] Display shops by type (type: shops/type) GET OK
 - [x] Search Shop by name (type: shops/search) GET OK
 - [x] Update shop details (type: shops/update) PUT OK
