@@ -6,32 +6,23 @@
 	header('Access-Control-Allow-Origin: *');
 	header('Content-Type: application/json');
 	header('Access-Control-Allow-Methods: POST');
-	header('Access-Control-Allow-Headers:
-			Access-Control-Allow-Headers,
-			Content-Type,
-			Access-Control-Allow-Methods,
-			Authorization,
-			X-Requested-With');
+	header('Access-Control-Allow-Headers:Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods,Authorization,X-Requested-With');
 
 	//include_once '../../config/config.php';
 	//include_once '../../models/shops.php';
 
 	$database = new Connection();
 	$db = $database->connect();
-	$shop = new Shops($db);
+	$review = new Review($db);
 
 	$data = json_decode(file_get_contents("php://input"));
 
-	$shop->sname = $data->sname;
-	$shop->stype = $data->stype;
-	$shop->email = $data->email;
-	$shop->pnum = $data->pnum;
-	$shop->description = $data->description;
-	$shop->mngid = $data->mngid;
-	$shop->capacity = $data->capacity;
-	$shop->tables = $data->tables;
+	$review->shop_id = $data->shop_id;
+	$review->uid = $data->uid;
+	$review->content = $data->content;
+	$review->rating = $data->rating;
 
-	if($shop->create_shop()){
+	if($review->create_review()){
 		$msg['status'] = 'Successfully Created';
 		echo json_encode($msg);
 	}

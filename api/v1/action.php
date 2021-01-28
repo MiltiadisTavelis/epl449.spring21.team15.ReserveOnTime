@@ -52,8 +52,8 @@
 			include_once '../models/reviews.php';
 			$type = $data['type'];
 			unset($data['type']);
-			if((strcasecmp($type, 'reviews/shop') == 0) && count($data) == 1 && (isset($data['id']) != 0)){
-				$_GET['id'] = $data['id'];
+			if((strcasecmp($type, 'reviews/shop') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
+				$_GET['id'] = $data['shop_id'];
 				include 'reviews/shop.php';
 			}else{
 				echo $error;
@@ -84,7 +84,22 @@
 				echo $error;
 				http_response_code(400);
 			}
-		}else{
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'reviews')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/reviews.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//CREATE REVIEW
+			if((strcasecmp($type, 'reviews/creview') == 0) && (count($data) == 4) && (isset($data['shop_id'],$data['uid'],$data['content'],$data['rating']) != 0)){
+				include 'reviews/creview.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+		}
+
+		else{
 			echo $error;
 			http_response_code(400);
 		}

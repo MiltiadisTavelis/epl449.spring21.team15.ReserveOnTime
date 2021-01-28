@@ -33,39 +33,27 @@
 
 		
 		//CREATE NEW REVIEW
-		public function create_shop(){
-			$sql = 'INSERT INTO SHOPS (
-							sname,
-							stype,
-							email,
-							pnum,
-							description,
-							mngid,
-							capacity,
-							tables,
-							reg_date) VALUES (?,?,?,?,?,?,?,?,?)';
+		public function create_review(){
+			$sql = 'INSERT INTO REVIEWS (
+							shop_id,
+							uid,
+							content,
+							rating,
+							sub_date) VALUES (?,?,?,?,?)';
 			$stmt = $this->conn->prepare($sql);
-			$this->sname = htmlspecialchars(strip_tags($this->sname));
-			$this->stype = htmlspecialchars(strip_tags($this->stype));
-			$this->email = htmlspecialchars(strip_tags($this->email));
-			$this->pnum = htmlspecialchars(strip_tags($this->pnum));
-			$this->description = htmlspecialchars(strip_tags($this->description));
-			$this->mngid = htmlspecialchars(strip_tags($this->mngid));
-			$this->capacity = htmlspecialchars(strip_tags($this->capacity));
-			$this->tables = htmlspecialchars(strip_tags($this->tables));
-			$this->reg_date = new DateTime();
-			$this->reg_date = date_format($this->reg_date, 'Y-m-d');
+			$this->shop_id = htmlspecialchars(strip_tags($this->shop_id));
+			$this->uid = htmlspecialchars(strip_tags($this->uid));
+			$this->content = htmlspecialchars(strip_tags($this->content));
+			$this->rating = htmlspecialchars(strip_tags($this->rating));
+			$this->sub_date = new DateTime();
+			$this->sub_date = date_format($this->sub_date, 'Y-m-d H:i:s');
 
-			$stmt->bind_param('sssssiiis',
-										$this->sname,
-										$this->stype,
-										$this->email,
-										$this->pnum,
-										$this->description,
-										$this->mngid,
-										$this->capacity,
-										$this->tables,
-										$this->reg_date);
+			$stmt->bind_param('iisis',
+										$this->shop_id,
+										$this->uid,
+										$this->content,
+										$this->rating,
+										$this->sub_date);
 			if($stmt->execute()){
 				return true;
 			}
