@@ -16,33 +16,31 @@
 			include_once '../models/shops.php';
 			$type = $data['type'];
 			unset($data['type']);
-			//GET ALL SHOPS
-			if((strcasecmp($type, 'shops/all') == 0) && empty($data)){
+
+			//GET ALL SHOPS (OPTIONAL: SORT BY DAY ADDED, GET SHOPS BY TYPE, GET OPEN SHOPS, SEARCH BY NAME)
+			if((strcasecmp($type, 'shops/all') == 0) && count($data) <= 4){
+				if(isset($data['sname'])){
+					if(preg_match("/[\[^\'£$%^&*()}{@:\'#~?><>,;@\|\\\-=\-_+\-¬\`\]]/", $string)){
+						echo json_encode(array('SpecialCharError' => 'Bad Request'));
+						return;
+					}
+					$_GET['sname'] = $data['sname'];
+				}
+				if(isset($data['stype']) && ($data['stype'] >= 1) && ($data['stype'] <= 11)){
+					$_GET['stype'] = $data['stype'];
+				}
+				if(isset($data['sort']) && ((strcasecmp($data['sort'], 'newest') == 0) || (strcasecmp($data['sort'], 'oldest') == 0)) ){
+					$_GET['sort'] = $data['sort'];
+				}
+				if(isset($data['open']) && $data['open'] == 1){
+					$_GET['open'] = $data['open'];
+				}
 				include 'shops/all.php';
 
 			//GET SHOP BY ID
 			}elseif((strcasecmp($type, 'shops/shop') == 0) && count($data) == 1 && (isset($data['id']) != 0)){
 				$_GET['id'] = $data['id'];
 				include 'shops/shop.php';
-
-			//SEARCH SHOP
-			}elseif((strcasecmp($type, 'shops/search') == 0) && count($data) == 1  && (isset($data['search']) != 0)){
-				$_GET['search'] = $data['search'];
-				include 'shops/search.php';
-
-			//SEARCH SHOP BY TYPE
-			}elseif((strcasecmp($type, 'shops/type') == 0) && (count($data) == 1) && (isset($data['stype']) != 0)){
-				$_GET['stype'] = $data['stype'];
-				include 'shops/type.php';
-
-			//SORT SHOPS BY NAME OR REG_DATE
-			}elseif((strcasecmp($type, 'shops/sort') == 0) && (count($data) == 1) && (isset($data['sort']) != 0) && in_array($data['sort'], ['sname','reg_date'], true)){
-				$_GET['sort'] = $data['sort'];
-				include 'shops/sort.php';
-
-			//DISPLAY OPEN SHOPS
-			}elseif((strcasecmp($type, 'shops/isopen') == 0) && empty($data)){
-				include 'shops/isopen.php';
 
 			}else{
 				echo $error;

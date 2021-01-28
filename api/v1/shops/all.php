@@ -13,6 +13,11 @@
 	$db = $database->connect();
 
 	$shops = new Shops($db);
+	$shops->sort = $_GET['sort'];
+	$shops->sname = $_GET['sname'];
+	$shops->stype = $_GET['stype'];
+	$shops->open = $_GET['open'];
+
 	$results = $shops->shops();
 	$cnt = mysqli_num_rows($results);
 	$json = array();
