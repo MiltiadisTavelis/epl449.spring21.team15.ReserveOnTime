@@ -129,6 +129,46 @@
 			echo $error;
 			http_response_code(400);
 		}
+	}elseif((strcasecmp($_SERVER['REQUEST_METHOD'], 'DELETE')) == 0 && (strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0){
+
+		$data = json_decode(file_get_contents("php://input"),true);
+
+		if(json_last_error() !== JSON_ERROR_NONE || empty($data) || !isset($data['type'])){
+			echo $error;
+			http_response_code(400);
+			return;
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'users')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/users.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//DELETE USER
+			if((strcasecmp($type, 'users/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'users/delete.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+		}
+		elseif((strcasecmp(explode("/", $data['type'])[0],'reviews')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/reviews.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//DELETE REVIEW
+			if((strcasecmp($type, 'reviews/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'reviews/delete.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}else{
+			echo $error;
+			http_response_code(400);
+		}
 	}else{
 		echo $error;
 		echo "string4";

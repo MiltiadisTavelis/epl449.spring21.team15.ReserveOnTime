@@ -9,17 +9,17 @@
 	header('Access-Control-Allow-Headers:Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods,Authorization,X-Requested-With');
 
 	// include_once '../../config/config.php';
-	// include_once '../../models/users.php';
+	// include_once '../../models/reviews.php';
 
 	$database = new Connection();
 	$db = $database->connect();
-	$user = new Users($db);
+	$review = new Review($db);
 
 	$data = json_decode(file_get_contents("php://input"));
 
-	$user->id = $data->id;
+	$review->id = $data->id;
 
-	if($user->delete_user()){
+	if($review->delete_review()){
 		$msg['status'] = 'Successfully Deleted';
 		echo json_encode($msg);
 	}
