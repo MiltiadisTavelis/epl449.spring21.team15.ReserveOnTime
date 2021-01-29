@@ -8,6 +8,7 @@
 		public $id;
 		public $fname;
 		public $lname;
+		public $birth;
 		public $gender;
 		public $phone_code;
 		public $pnum;
@@ -36,30 +37,34 @@
             $this->usertype = $row["usertype"];
 		}
 
-		//CREATE NEW USER FROM JSON FILE
+		//CREATE NEW USER
 		public function create_user(){
 			$sql = 'INSERT INTO USERS (
 							fname,
 							lname,
+							birth,
 							gender,
 							phone_code,
 							pnum,
 							email,
 							password,
-							usertype) VALUES (?,?,?,?,?,?,?,?)';
+							usertype) VALUES (?,?,?,?,?,?,?,?,?)';
 			$stmt = $this->conn->prepare($sql);
 			$this->fname = htmlspecialchars(strip_tags($this->fname));
 			$this->lname = htmlspecialchars(strip_tags($this->lname));
+			$this->birth = htmlspecialchars(strip_tags($this->birth));
 			$this->gender = htmlspecialchars(strip_tags($this->gender));
 			$this->phone_code = htmlspecialchars(strip_tags($this->phone_code));
 			$this->pnum = htmlspecialchars(strip_tags($this->pnum));
 			$this->email = htmlspecialchars(strip_tags($this->email));
 			$this->password = htmlspecialchars(strip_tags($this->password));
-			$this->usertype = htmlspecialchars(strip_tags($this->usertype));
 			$this->password = hash("sha256", $this->password);
-			$stmt->bind_param('ssssssss',
+			$this->usertype = 'u';
+
+			$stmt->bind_param('sssssssss',
 										$this->fname,
 										$this->lname,
+										$this->birth,
 										$this->gender,
 										$this->phone_code,
 										$this->pnum,

@@ -8,10 +8,10 @@ PUT updates existing data.
 DELETE removes data.
 
 USERS 
-- [x] Create user (ENCRYPTED PASS SHA256) (type: users/cuser) POST
+- [x] Create user (ENCRYPTED PASS SHA256) (type: users/cuser) POST OK
 - [x] Delete user (type: users/delete) DELETE OK
-- [x] Update user details (type: users/update) PUT
-- [x] Get user by id (type: users/user) GET
+- [x] Update user details (type: users/update) PUT OK
+- [x] Get user by id (type: users/user) GET OK
 - [ ] Account Login
 - [ ] Account Logout
 - [ ] Remember Me

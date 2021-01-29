@@ -6,12 +6,7 @@
 	header('Access-Control-Allow-Origin: *');
 	header('Content-Type: application/json');
 	header('Access-Control-Allow-Methods: POST');
-	header('Access-Control-Allow-Headers:
-			Access-Control-Allow-Headers,
-			Content-Type,
-			Access-Control-Allow-Methods,
-			Authorization,
-			X-Requested-With');
+	header('Access-Control-Allow-Headers:Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods,Authorization,X-Requested-With');
 
 	// include_once '../../config/config.php';
 	// include_once '../../models/users.php';
@@ -24,11 +19,11 @@
 
 	$user->fname = $data->fname;
 	$user->lname = $data->lname;
+	$user->birth = $data->birth;
 	$user->gender = $data->gender;
 	$user->phone_code = $data->phone_code;
 	$user->pnum = $data->pnum;
 	$user->email = $data->email;
-	$user->usertype = $data->usertype;
 	$user->password = $data->password;
 
 	if($user->create_user()){

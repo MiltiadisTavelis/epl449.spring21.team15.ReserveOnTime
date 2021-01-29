@@ -50,14 +50,29 @@
 			include_once '../models/reviews.php';
 			$type = $data['type'];
 			unset($data['type']);
+
+			//GET REVIEWS BY SHOP ID
 			if((strcasecmp($type, 'reviews/shop') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
 				$_GET['id'] = $data['shop_id'];
 				include 'reviews/shop.php';
 			}else{
 				echo $error;
 			}
-		}
-		else{
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'users')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/users.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//GET USERS BY ID
+			if((strcasecmp($type, 'users/user') == 0) && count($data) == 1 && (isset($data['id']) != 0)){
+				$_GET['id'] = $data['id'];
+				include 'users/user.php';
+			}else{
+				echo $error;
+			}
+		}else{
 			echo $error;
 		}
 
@@ -95,9 +110,26 @@
 				echo $error;
 				http_response_code(400);
 			}
-		}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'users')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/users.php';
+			$type = $data['type'];
+			unset($data['type']);
 
-		else{
+			//CREATE USER
+			if((strcasecmp($type, 'users/cuser') == 0) && (count($data) == 8) && (isset($data['fname'],$data['lname'],$data['birth'],$data['gender'],$data['phone_code'],$data['pnum'],$data['email'],$data['password']) != 0)){
+				foreach($data as $in) { 
+					if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_¬]/', $in)){
+						echo json_encode(array('SpecialCharError' => 'Bad Request'));
+						return;
+					}
+				}
+				include 'users/cuser.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+		}else{
 			echo $error;
 			http_response_code(400);
 		}
@@ -118,6 +150,20 @@
 			//UPDATE SHOP
 			if((strcasecmp($type, 'shops/update') == 0) && (count($data) == 8) && (isset($data['sname'],$data['stype'],$data['email'],$data['pnum'],$data['description'],$data['id'],$data['capacity'],$data['tables']) != 0)){
 				include 'shops/update.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'users')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/users.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//UPDATE SHOP
+			if((strcasecmp($type, 'users/update') == 0) && (count($data) == 6) && (isset($data['id'],$data['fname'],$data['lname'],$data['email'],$data['pnum'],$data['phone_code']) != 0)){
+				include 'users/update.php';
 			}else{
 				echo $error;
 				http_response_code(400);
