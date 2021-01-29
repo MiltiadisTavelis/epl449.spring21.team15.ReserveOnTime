@@ -20,7 +20,7 @@
 			//GET ALL SHOPS (OPTIONAL: SORT BY DAY ADDED, GET SHOPS BY TYPE, GET OPEN SHOPS, SEARCH BY NAME)
 			if((strcasecmp($type, 'shops/all') == 0) && count($data) <= 4){
 				if(isset($data['sname'])){
-					if(preg_match("/[\[^\'£$%^&*()}{@:\'#~?><>,;@\|\\\-=\-_+\-¬\`\]]/", $string)){
+					if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $data['sname'])){
 						echo json_encode(array('SpecialCharError' => 'Bad Request'));
 						return;
 					}
