@@ -24,10 +24,14 @@
 	$user->phone_code = $data->phone_code;
 	$user->pnum = $data->pnum;
 	$user->email = $data->email;
-	$user->password = $data->password;
+	$user->password = $data->password;	
 
-	if($user->create_user()){
-		$msg['status'] = 'Successfully Created';
-		echo json_encode($msg);
+	$results = $user->create_user();
+
+	if(!empty($results)){
+		$json = array();
+		$json['status'] = 'Successfully Created';
+		$json['verify'] = 'Click here to verify: '.$results;
+		echo json_encode($json);
 	}
 ?>

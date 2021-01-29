@@ -22,7 +22,8 @@
 		'phone_code' => $user->phone_code,
 		'pnum' => $user->pnum,
 		'email' => $user->email,
-		'usetype' => $user->usertype
+		'usetype' => $user->usertype,
+		'verify' => $user->verify
 	);
 
 	print_r(json_encode($json));

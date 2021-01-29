@@ -12,6 +12,9 @@ USERS
 - [x] Delete user (type: users/delete) DELETE OK
 - [x] Update user details (type: users/update) PUT OK
 - [x] Get user by id (type: users/user) GET OK
+- [x] Send email to verify user account (type: users/sendemail) POST OK 
+
+SESSION
 - [ ] Account Login
 - [ ] Account Logout
 - [ ] Remember Me
@@ -37,8 +40,8 @@ PENDING_SHOPS
 - [ ] Delete a pending shop DELETE 
 
 PENDING_USER
-- [ ] Create pending user POST
-- [ ] Delete pending user DELETE
+- [x] Create pending user while creating an account
+- [x] Delete pending user if has been verified
 
 RESERVATIONS
 - [ ] Accept/Decline/Cancel Reservation PUT
@@ -54,9 +57,10 @@ REVIEWS
 - [x] Add review (reviews/creview) POST OK
 - [x] Delete review (reviews/delete) DELETE OK
 - [x] Display reviews by shop id (reviews/shop) GET OK
+- [ ] Add rating and calculate average rating for the specific shop POST 
 
 EVENTS
-- [ ] Add event POST
-- [ ] Update event description/date PUT
-- [ ] Delete Event DELETE
-- [ ] Display events by shop id GET
+- [x] Add event (events/create) POST OK
+- [ ] Update event title/description/date PUT
+- [x] Delete Event (events/delete) DELETE OK
+- [x] Display events by shop id (events/delete) GET OK

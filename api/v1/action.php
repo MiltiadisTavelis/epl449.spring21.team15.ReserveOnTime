@@ -72,6 +72,7 @@
 			}else{
 				echo $error;
 			}
+			
 		}else{
 			echo $error;
 		}
@@ -119,12 +120,20 @@
 			//CREATE USER
 			if((strcasecmp($type, 'users/cuser') == 0) && (count($data) == 8) && (isset($data['fname'],$data['lname'],$data['birth'],$data['gender'],$data['phone_code'],$data['pnum'],$data['email'],$data['password']) != 0)){
 				foreach($data as $in) { 
-					if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_¬]/', $in)){
+					if(preg_match('/[\'^£$%&*()}{#~?><>,|=_¬]/', $in)){
 						echo json_encode(array('SpecialCharError' => 'Bad Request'));
 						return;
 					}
 				}
 				include 'users/cuser.php';
+
+			//SEND VERIFY EMAIL TO USER
+			}elseif((strcasecmp($type, 'users/sendemail') == 0) && (count($data) == 1) && (isset($data['email']) != 0)){
+				if(preg_match('/[\'^£$%&*()}{#~?><>,|=_¬]/', $data['email'])){
+					echo json_encode(array('SpecialCharError' => 'Bad Request'));
+					return;
+				}
+				include 'users/sendemail.php';
 			}else{
 				echo $error;
 				http_response_code(400);
