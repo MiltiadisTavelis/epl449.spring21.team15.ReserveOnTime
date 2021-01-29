@@ -73,6 +73,20 @@
 				echo $error;
 			}
 			
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'events')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/events.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//GET EVENTS BY SHOP ID
+			if((strcasecmp($type, 'events/shop') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
+				//$_GET['id'] = $data['shop_id'];
+				include 'events/shop.php';
+			}else{
+				echo $error;
+			}
+
 		}else{
 			echo $error;
 		}
@@ -138,6 +152,19 @@
 				echo $error;
 				http_response_code(400);
 			}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'events')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/events.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//CREATE EVENT
+			if((strcasecmp($type, 'events/create') == 0) && (count($data) == 7) && (isset($data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date'],$data['shop_id']) != 0)){
+				include 'events/create.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
 		}else{
 			echo $error;
 			http_response_code(400);
@@ -178,6 +205,20 @@
 				http_response_code(400);
 			}
 
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'events')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/events.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//UPDATE EVENT
+			if((strcasecmp($type, 'events/update') == 0) && (count($data) == 7) && (isset($data['id'],$data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date']) != 0)){
+				include 'events/update.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
 		}else{
 			echo $error;
 			http_response_code(400);
@@ -213,6 +254,20 @@
 			//DELETE REVIEW
 			if((strcasecmp($type, 'reviews/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
 				include 'reviews/delete.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'events')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/events.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//DELETE EVENT
+			if((strcasecmp($type, 'events/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'events/delete.php';
 			}else{
 				echo $error;
 				http_response_code(400);
