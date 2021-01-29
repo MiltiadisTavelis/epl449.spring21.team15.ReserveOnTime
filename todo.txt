@@ -36,8 +36,8 @@ SHOPS_HOURS
 - [ ] Update open/close hours PUT
 
 PENDING_SHOPS
-- [ ] Add a pending shop POST
-- [ ] Delete a pending shop DELETE 
+- [x] Add a pending shop (pendingShops/create) POST OK
+- [x] Delete a pending shop (pendingShops/delete) DELETE OK
 
 PENDING_USER
 - [x] Create pending user while creating an account

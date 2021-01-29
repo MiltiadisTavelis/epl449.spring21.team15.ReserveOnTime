@@ -165,6 +165,19 @@
 				echo $error;
 				http_response_code(400);
 			}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'pendingShops')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/pendingShops.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//CREATE PENDING SHOP
+			if((strcasecmp($type, 'pendingShops/create') == 0) && (count($data) == 5) && (isset($data['sname'],$data['stype'],$data['email'],$data['name'],$data['pnum']) != 0)){
+				include 'pendingShops/create.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
 		}else{
 			echo $error;
 			http_response_code(400);
@@ -268,6 +281,20 @@
 			//DELETE EVENT
 			if((strcasecmp($type, 'events/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
 				include 'events/delete.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'pendingShops')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/pendingShops.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//DELETE EVENT
+			if((strcasecmp($type, 'pendingShops/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'pendingShops/delete.php';
 			}else{
 				echo $error;
 				http_response_code(400);
