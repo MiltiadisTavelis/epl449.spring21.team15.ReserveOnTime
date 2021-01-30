@@ -20,5 +20,6 @@ Reserve On Time aims at providing a simple and convenient interface for clients 
 ### Manager
 - Modify details, pictures and events on the managed shop's page
 - View all, past present and future, reservations made through a convenient interface
+- Get useful statistics/insights regarding the order history of the shop
 - Accept/Reject upcoming reservations
 - Edit all account details

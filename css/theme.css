@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+h3 {
+    color: white;
+}
+
+body {
+    background: rgb(255,255,255);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav {
+    background-color: transparent;
+}
+
+#navlogo {
+    position: relative;
+    bottom: 8px;
+    left: 14px;
+}
+
+.navbar-brand {
+    font-family: 'Lobster Two', cursive;
+    font-size: 26px;
+}
+
+.nav-item {
+    margin-left: 5px;
+}
