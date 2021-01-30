@@ -1,0 +1,66 @@
+REST API CALLS
+
+Content-Type must be application/json
+
+GET retrieves resources. 
+POST submits new data to the server. 
+PUT updates existing data. 
+DELETE removes data.
+
+USERS 
+- [x] Create user (ENCRYPTED PASS SHA256) (type: users/cuser) POST OK
+- [x] Delete user (type: users/delete) DELETE OK
+- [x] Update user details (type: users/update) PUT OK
+- [x] Get user by id (type: users/user) GET OK
+- [x] Send email to verify user account (type: users/sendemail) POST OK 
+
+SESSION
+- [ ] Account Login
+- [ ] Account Logout
+- [ ] Remember Me
+
+SHOPS
+- [x] Display open Shops (type: shops/isopen) GET OK
+- [x] Sort shops by date added (Default) (type: shops/sort) GET OK
+- [x] Sort shops by name (type: shops/sort) GET OK ****** REMOVED
+- [x] Display shops by type (type: shops/type) GET OK
+- [x] Search Shop by name (type: shops/search) GET OK
+- [x] Update shop details (type: shops/update) PUT OK
+- [x] Show shop by id (type: shops/shop) GET OK
+- [x] Show all (type: shops/all) GET OK 
+- [x] Create shop (type: shops/cshop) POST OK
+
+SHOPS_HOURS
+- [ ] Add open/close hours POST
+- [ ] Delete open/close hours DELETE
+- [ ] Update open/close hours PUT
+
+PENDING_SHOPS
+- [x] Add a pending shop (pendingShops/create) POST OK
+- [x] Delete a pending shop (pendingShops/delete) DELETE OK
+
+PENDING_USER
+- [x] Create pending user while creating an account
+- [x] Delete pending user if has been verified
+
+RESERVATIONS
+- [ ] Accept/Decline/Cancel Reservation PUT
+- [ ] Add reservation (Pending) POST
+- [ ] Display reservation by shop id (managers) GET
+- [ ] Search reservation by name of the user and sorted by date added (managers) GET
+- [ ] Search reservation by name of the shop and sorted by date added (users) GET
+- [ ] Search reservation by phone number (managers) GET
+- [ ] Sort reservations by date added (users/managers) GET
+- [ ] Update reservation PUT
+
+REVIEWS
+- [x] Add review (reviews/creview) POST OK
+- [x] Delete review (reviews/delete) DELETE OK
+- [x] Display reviews by shop id (reviews/shop) GET OK
+- [ ] Add rating and calculate average rating for the specific shop POST 
+
+EVENTS
+- [x] Add event (events/create) POST OK
+- [x] Update event title/description/date (events/create) PUT OK
+- [x] Delete Event (events/delete) DELETE OK
+- [x] Display events by shop id (events/delete) GET OK

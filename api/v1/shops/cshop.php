@@ -13,8 +13,8 @@
 			Authorization,
 			X-Requested-With');
 
-	// include_once '../../config/config.php';
-	// include_once '../../models/shops.php';
+	//include_once '../../config/config.php';
+	//include_once '../../models/shops.php';
 
 	$database = new Connection();
 	$db = $database->connect();

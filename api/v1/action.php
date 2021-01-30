@@ -16,8 +16,25 @@
 			include_once '../models/shops.php';
 			$type = $data['type'];
 			unset($data['type']);
-			//GET ALL SHOPS
-			if((strcasecmp($type, 'shops/all') == 0) && empty($data)){
+
+			//GET ALL SHOPS (OPTIONAL: SORT BY DAY ADDED, GET SHOPS BY TYPE, GET OPEN SHOPS, SEARCH BY NAME)
+			if((strcasecmp($type, 'shops/all') == 0) && count($data) <= 4){
+				if(isset($data['sname'])){
+					if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $data['sname'])){
+						echo json_encode(array('SpecialCharError' => 'Bad Request'));
+						return;
+					}
+					$_GET['sname'] = $data['sname'];
+				}
+				if(isset($data['stype']) && ($data['stype'] >= 1) && ($data['stype'] <= 11)){
+					$_GET['stype'] = $data['stype'];
+				}
+				if(isset($data['sort']) && ((strcasecmp($data['sort'], 'newest') == 0) || (strcasecmp($data['sort'], 'oldest') == 0)) ){
+					$_GET['sort'] = $data['sort'];
+				}
+				if(isset($data['open']) && $data['open'] == 1){
+					$_GET['open'] = $data['open'];
+				}
 				include 'shops/all.php';
 
 			//GET SHOP BY ID
@@ -25,28 +42,51 @@
 				$_GET['id'] = $data['id'];
 				include 'shops/shop.php';
 
-			//SEARCH SHOP
-			}elseif((strcasecmp($type, 'shops/search') == 0) && count($data) == 1  && (isset($data['search']) != 0)){
-				$_GET['search'] = $data['search'];
-				include 'shops/search.php';
-
-			//SEARCH SHOP BY TYPE
-			}elseif((strcasecmp($type, 'shops/type') == 0) && (count($data) == 1) && (isset($data['stype']) != 0)){
-				$_GET['stype'] = $data['stype'];
-				include 'shops/type.php';
-
-			//SORT SHOPS BY NAME OR REG_DATE
-			}elseif((strcasecmp($type, 'shops/sort') == 0) && (count($data) == 1) && (isset($data['sort']) != 0) && in_array($data['sort'], ['sname','reg_date'], true)){
-				$_GET['sort'] = $data['sort'];
-				include 'shops/sort.php';
-
-			//DISPLAY OPEN SHOPS
-			}elseif((strcasecmp($type, 'shops/isopen') == 0) && empty($data)){
-				include 'shops/isopen.php';
-
 			}else{
 				echo $error;
 			}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'reviews')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/reviews.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//GET REVIEWS BY SHOP ID
+			if((strcasecmp($type, 'reviews/shop') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
+				$_GET['id'] = $data['shop_id'];
+				include 'reviews/shop.php';
+			}else{
+				echo $error;
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'users')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/users.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//GET USERS BY ID
+			if((strcasecmp($type, 'users/user') == 0) && count($data) == 1 && (isset($data['id']) != 0)){
+				$_GET['id'] = $data['id'];
+				include 'users/user.php';
+			}else{
+				echo $error;
+			}
+			
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'events')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/events.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//GET EVENTS BY SHOP ID
+			if((strcasecmp($type, 'events/shop') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
+				//$_GET['id'] = $data['shop_id'];
+				include 'events/shop.php';
+			}else{
+				echo $error;
+			}
+
 		}else{
 			echo $error;
 		}
@@ -72,6 +112,72 @@
 				echo $error;
 				http_response_code(400);
 			}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'reviews')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/reviews.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//CREATE REVIEW
+			if((strcasecmp($type, 'reviews/creview') == 0) && (count($data) == 4) && (isset($data['shop_id'],$data['uid'],$data['content'],$data['rating']) != 0)){
+				include 'reviews/creview.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'users')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/users.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//CREATE USER
+			if((strcasecmp($type, 'users/cuser') == 0) && (count($data) == 8) && (isset($data['fname'],$data['lname'],$data['birth'],$data['gender'],$data['phone_code'],$data['pnum'],$data['email'],$data['password']) != 0)){
+				foreach($data as $in) { 
+					if(preg_match('/[\'^£$%&*()}{#~?><>,|=_¬]/', $in)){
+						echo json_encode(array('SpecialCharError' => 'Bad Request'));
+						return;
+					}
+				}
+				include 'users/cuser.php';
+
+			//SEND VERIFY EMAIL TO USER
+			}elseif((strcasecmp($type, 'users/sendemail') == 0) && (count($data) == 1) && (isset($data['email']) != 0)){
+				if(preg_match('/[\'^£$%&*()}{#~?><>,|=_¬]/', $data['email'])){
+					echo json_encode(array('SpecialCharError' => 'Bad Request'));
+					return;
+				}
+				include 'users/sendemail.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'events')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/events.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//CREATE EVENT
+			if((strcasecmp($type, 'events/create') == 0) && (count($data) == 7) && (isset($data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date'],$data['shop_id']) != 0)){
+				include 'events/create.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'pendingShops')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/pendingShops.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//CREATE PENDING SHOP
+			if((strcasecmp($type, 'pendingShops/create') == 0) && (count($data) == 5) && (isset($data['sname'],$data['stype'],$data['email'],$data['name'],$data['pnum']) != 0)){
+				include 'pendingShops/create.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
 		}else{
 			echo $error;
 			http_response_code(400);
@@ -93,6 +199,102 @@
 			//UPDATE SHOP
 			if((strcasecmp($type, 'shops/update') == 0) && (count($data) == 8) && (isset($data['sname'],$data['stype'],$data['email'],$data['pnum'],$data['description'],$data['id'],$data['capacity'],$data['tables']) != 0)){
 				include 'shops/update.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'users')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/users.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//UPDATE SHOP
+			if((strcasecmp($type, 'users/update') == 0) && (count($data) == 6) && (isset($data['id'],$data['fname'],$data['lname'],$data['email'],$data['pnum'],$data['phone_code']) != 0)){
+				include 'users/update.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'events')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/events.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//UPDATE EVENT
+			if((strcasecmp($type, 'events/update') == 0) && (count($data) == 7) && (isset($data['id'],$data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date']) != 0)){
+				include 'events/update.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}else{
+			echo $error;
+			http_response_code(400);
+		}
+	}elseif((strcasecmp($_SERVER['REQUEST_METHOD'], 'DELETE')) == 0 && (strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0){
+
+		$data = json_decode(file_get_contents("php://input"),true);
+
+		if(json_last_error() !== JSON_ERROR_NONE || empty($data) || !isset($data['type'])){
+			echo $error;
+			http_response_code(400);
+			return;
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'users')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/users.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//DELETE USER
+			if((strcasecmp($type, 'users/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'users/delete.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+		}
+		elseif((strcasecmp(explode("/", $data['type'])[0],'reviews')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/reviews.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//DELETE REVIEW
+			if((strcasecmp($type, 'reviews/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'reviews/delete.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'events')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/events.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//DELETE EVENT
+			if((strcasecmp($type, 'events/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'events/delete.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'pendingShops')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/pendingShops.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//DELETE EVENT
+			if((strcasecmp($type, 'pendingShops/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'pendingShops/delete.php';
 			}else{
 				echo $error;
 				http_response_code(400);

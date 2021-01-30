@@ -17,6 +17,7 @@
 		public $tables;
 		public $reg_date;
 		public $sort;
+		public $open;
 
 		public function __construct($db)
 		{
@@ -25,7 +26,44 @@
 
 		//SHOW ALL
 		public function shops(){
-			$sql = 'SELECT id,sname,stype,email,pnum,description,capacity,tables,reg_date FROM SHOPS';
+			$where = array();
+			$sql = 'SELECT SHOPS.id,sname,stype,email,pnum,description,capacity,tables,reg_date FROM SHOPS';
+			$order = '';
+			$open = "";
+			if(isset($this->sname)){
+			    $where[] = 'sname LIKE \'%'.$this->sname.'%\'';
+			}
+			if(isset($this->stype)){
+			    $where[] = 'stype = '.$this->stype;
+			}
+			if(isset($this->sort) && (strcasecmp($this->sort, 'oldest') == 0)){
+			    $order = 'ORDER BY reg_date';
+			}elseif(isset($this->sort) && (strcasecmp($this->sort, 'newest') == 0)){
+			    $order = 'ORDER BY reg_date DESC';
+			}
+			// elseif(isset($sort) && (strcasecmp($sort, 'A to Z') == 0)){
+			//     $where[] = 'ORDER BY sname';
+			// }elseif(isset($sort) && (strcasecmp($sort, 'Z to A') == 0)){
+			//     $where[] = 'ORDER BY reg_date DESC';
+			// }
+
+			if(isset($this->open) && $this->open == 1){
+				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
+				$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
+				$sql .= ', SHOP_HOURS WHERE SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'"';
+			}
+
+			$where_string = implode(' AND ' , $where);
+
+			if($where){
+				if($this->open == 1){
+					$sql .= ' AND ' . $where_string .' '. $order;
+				}else{
+					$sql .= ' WHERE ' . $where_string .' '. $order;
+				}
+			    
+			}
+			
 			$stmt = $this->conn->prepare($sql);
             if(!mysqli_stmt_prepare($stmt,$sql)){
                 echo "Error";
@@ -53,34 +91,6 @@
             $this->capacity = $row["capacity"];
             $this->tables = $row["tables"];
             $this->reg_date = $row["reg_date"];
-		}
-
-		//SHOW SHOPS BY TYPE
-		public function type(){
-			$sql = 'SELECT id,sname,stype,email,pnum,description,capacity,tables,reg_date FROM SHOPS WHERE stype = '.$this->stype;
-			$stmt = $this->conn->prepare($sql);
-            if(!mysqli_stmt_prepare($stmt,$sql)){
-                echo "Error";
-                exit();
-            }else{
-            	mysqli_stmt_execute($stmt);
-            	$result = mysqli_stmt_get_result($stmt);
-            	return $result;
-        	}
-		}
-
-		//SORT SHOPS BY NAME
-		public function sort(){
-			$sql = 'SELECT id,sname,stype,email,pnum,description,capacity,tables,reg_date FROM SHOPS ORDER BY ' .$this->sort;
-			$stmt = $this->conn->prepare($sql);
-            if(!mysqli_stmt_prepare($stmt,$sql)){
-                echo "Error";
-                exit();
-            }else{
-            	mysqli_stmt_execute($stmt);
-            	$result = mysqli_stmt_get_result($stmt);
-            	return $result;
-        	}
 		}
 
 		//UPDATE SHOP DETAILS BY ID
@@ -166,37 +176,5 @@
 
 			return false;
 		}
-
-		//SEARCH
-		public function search($s){
-			// $sql = 'SELECT id,sname,stype,email,pnum,description,capacity,tables,reg_date FROM SHOPS WHERE Match(sname) Against(\''.$s.'\')';
-			$sql = 'SELECT id,sname,stype,email,pnum,description,capacity,tables,reg_date FROM SHOPS WHERE sname LIKE \'%'.$s.'%\'';
-			$stmt = $this->conn->prepare($sql);
-            if(!mysqli_stmt_prepare($stmt,$sql)){
-                echo "Error";
-                exit();
-            }else{
-            	mysqli_stmt_execute($stmt);
-            	$result = mysqli_stmt_get_result($stmt);
-            	return $result;
-        	}
-		}
-
-		//DISPLAY OPEN SHOPS
-		public function isopen(){
-			$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
-			$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
-			$sql = 'SELECT SHOPS.id,SHOPS.sname,SHOPS.stype,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date FROM SHOPS, SHOP_HOURS WHERE SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'"';
-			$stmt = $this->conn->prepare($sql);
-            if(!mysqli_stmt_prepare($stmt,$sql)){
-                echo "Error";
-                exit();
-            }else{
-            	mysqli_stmt_execute($stmt);
-            	$result = mysqli_stmt_get_result($stmt);
-            	return $result;
-        	}
-		}
-
 	}
 ?>

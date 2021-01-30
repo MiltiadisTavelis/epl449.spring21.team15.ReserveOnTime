@@ -6,13 +6,18 @@
 	header('Access-Control-Allow-Origin: *');
 	header('Content-Type: application/json');
 
-	// include_once '../../config/config.php';
-	// include_once '../../models/shops.php';
+	//include_once '../../config/config.php';
+	//include_once '../../models/shops.php';
 
 	$database = new Connection();
 	$db = $database->connect();
 
 	$shops = new Shops($db);
+	$shops->sort = $_GET['sort'];
+	$shops->sname = $_GET['sname'];
+	$shops->stype = $_GET['stype'];
+	$shops->open = $_GET['open'];
+
 	$results = $shops->shops();
 	$cnt = mysqli_num_rows($results);
 	$json = array();
