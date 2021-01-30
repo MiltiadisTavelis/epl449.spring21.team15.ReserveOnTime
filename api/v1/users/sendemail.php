@@ -33,7 +33,7 @@
 	if($result == "0"){
 		$msg['status'] = 'Already Verified';
 		echo json_encode($msg);
-	}elseif($result == 3){
+	}elseif($result == "3"){
 		$msg['status'] = 'Please make sure you have submited the right email address';
 		echo json_encode($msg);
 	}elseif(empty($result)){
