@@ -30,7 +30,7 @@
 		$sendto = $data['email'];
 		$result = $user->geturl($data['email']);
 	}
-	if($result == 0){
+	if($result == "0"){
 		$msg['status'] = 'Already Verified';
 		echo json_encode($msg);
 	}elseif($result == 3){
