@@ -25,13 +25,14 @@
 	$user->pnum = $data->pnum;
 	$user->email = $data->email;
 	$user->password = $data->password;	
-
+	$_SESSION['email'] = $data->email;
 	$results = $user->create_user();
 
 	if(!empty($results)){
 		$json = array();
 		$json['status'] = 'Successfully Created';
-		$json['verify'] = 'Click here to verify: '.$results;
+		require 'sendemail.php';
+		//$json['verify'] = 'Click here to verify: '.$results;
 		echo json_encode($json);
 	}
 ?>

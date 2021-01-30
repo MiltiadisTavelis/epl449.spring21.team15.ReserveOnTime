@@ -39,6 +39,19 @@
             $this->verify = $row["verify"];
 		}
 
+		//GET USER DETAILS BY ID
+		public function name(){
+			$sql = 'SELECT fname,lname FROM USERS WHERE email = ?';
+			$stmt = $this->conn->prepare($sql);
+			$stmt->bind_param('s',$this->email);
+			$stmt->execute();
+			$row = $stmt->get_result();
+			$row = $row->fetch_array(MYSQLI_ASSOC);
+            $this->fname = $row["fname"];
+            $this->lname = $row["lname"];
+            return $this->fname.' '.$this->lname;
+		}
+
 		//GET USER ID BY EMAIL (helper method)
 		private function getid($s){
 			$sql = 'SELECT USERS.id FROM USERS WHERE email = "'.$s.'"';
