@@ -31,8 +31,8 @@
 	if(!empty($results)){
 		$json = array();
 		$json['status'] = 'Successfully Created';
+		echo json_encode($json);
 		require 'sendemail.php';
 		//$json['verify'] = 'Click here to verify: '.$results;
-		echo json_encode($json);
 	}
 ?>
