@@ -191,7 +191,7 @@
             $hash = $this->getidhash($this->getid($e));
 
 			if(!empty($hash)){
-				return $_SERVER['HTTP_HOST'].'/api/v1/verify?hash='.$hash.'&email='.$e;
+				return 'reserveontime.com/v2/api/v1/verify?hash='.$hash.'&email='.$e;
 			}else{
 				return "";
 			}
