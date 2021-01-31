@@ -178,6 +178,21 @@
 				echo $error;
 				http_response_code(400);
 			}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'session')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/session.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//LOGIN
+			if((strcasecmp($type, 'session/login') == 0) && (count($data) == 2) && (isset($data['email'],$data['password']) != 0)){
+				include 'session/login.php';
+			}elseif((strcasecmp($type, 'session/logout') == 0) && (count($data) == 0)){
+				include 'session/logout.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
 		}else{
 			echo $error;
 			http_response_code(400);

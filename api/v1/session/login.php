@@ -1,0 +1,48 @@
+<?php
+	if(count(get_included_files()) == 1){
+		echo json_encode(array('status' => 'Bad Request'));
+		return;
+	};
+
+	session_start();
+
+	if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+		echo json_encode(array('EmailError' => 'No valid email address'));
+		return;
+	}
+
+	header('Access-Control-Allow-Origin: *');
+	header('Content-Type: application/json');
+
+	//include_once '../../config/config.php';
+	//include_once '../../models/reviews.php';
+
+	$database = new Connection();
+	$db = $database->connect();
+	$session = new Session($db);
+
+	$session->email = $data['email'];
+	$session->password = hash("sha256", $data['password']);
+
+	if(!$session->islogin()){
+		$result = $session->login();
+		if($result == "0"){
+			$msg['status'] = 'Wrong email or password';
+			echo json_encode($msg);
+		}elseif($result == "1"){
+	        $_SESSION['user_name'] = $session->fname;
+	        $_SESSION['user_id'] = $session->id;
+			$msg['status'] = 'Welcome '. $session->fname;
+			echo json_encode($msg);
+		}elseif($result == "3"){
+			$msg['status'] = 'Please verify your account';
+			echo json_encode($msg);
+		}else{
+			$msg['status'] = 'Server Error! Please try again';
+			echo json_encode($msg);
+		}
+	}else{
+		$msg['message'] = 'Your name is '.$_SESSION['user_name'];
+		echo json_encode($msg);
+	}
+?>
