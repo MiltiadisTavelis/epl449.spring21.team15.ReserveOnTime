@@ -1,0 +1,30 @@
+form * {
+    text-align: left;
+}
+
+#contents1 {
+    padding: 50px;
+}
+
+h1 {
+    font-family: 'Lobster Two', cursive;
+    font-size: 48px;
+    margin-bottom: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+h2 {
+    position: relative;
+    bottom: 10px;
+    font-size: 24px;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.btn {
+    margin-bottom: 30px;
+}

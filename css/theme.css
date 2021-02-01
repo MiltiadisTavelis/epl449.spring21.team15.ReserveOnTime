@@ -4,14 +4,11 @@
     font-family: 'Noto Sans', sans-serif;
     font-size: 18px;
     text-align: center;
-}
-
-h3 {
     color: white;
 }
 
 body {
-    background: rgb(255,255,255);
+    background: rgb(0,0,0);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -33,4 +30,24 @@ nav {
 
 .nav-item {
     margin-left: 5px;
+}
+
+.container-fluid {
+    padding-top: 150px;
+    padding-bottom: 150px;
+    background-image: url(../images/wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.input-group-text .fas {
+    color: #343A40;
+}
+
+.datepicker * {
+    color: black;
 }
