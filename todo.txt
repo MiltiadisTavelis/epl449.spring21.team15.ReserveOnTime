@@ -15,8 +15,9 @@ USERS
 - [x] Send email to verify user account (type: users/sendemail) POST OK 
 
 SESSION
-- [ ] Account Login
-- [ ] Account Logout
+- [x] Account Login (type: session/login) POST OK
+- [x] Manager Account Login (type: session/manager) POST OK
+- [x] Account Logout (type: session/login) POST OK
 - [ ] Remember Me
 
 SHOPS
