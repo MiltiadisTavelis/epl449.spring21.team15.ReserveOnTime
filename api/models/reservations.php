@@ -36,8 +36,9 @@
 				return -1;
 			}
 			
+			date_default_timezone_set('GMT');
 			$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
-			$time = date("Y-m-d", time()+(60*60)); //GMT+2 (CYPRUS)
+			$time = date("Y-m-d",time()+(2*60*60)); //GMT+2 (CYPRUS)
 
 			if($this->today == "1"){
 				$sql .= 'AND DATE(RESERVATIONS.day) = "'.$time.'" ';
