@@ -1,0 +1,28 @@
+#heading {
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+#heading-left, #heading-right {
+    margin-bottom: 10px;
+    height: 200px;
+}
+
+#heading-left img {
+    display: flex;
+    float: right;
+}
+
+#heading-right form {
+    margin-top: 15px;
+}
+
+.nav-pills .nav-link {
+    margin: 0px 5px;
+    color: white!important;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.nav-pills .active {
+    background-color: grey!important;
+}

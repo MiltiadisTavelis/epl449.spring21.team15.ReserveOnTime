@@ -17,10 +17,8 @@ nav {
     background-color: transparent;
 }
 
-#navlogo {
-    position: relative;
-    bottom: 8px;
-    left: 14px;
+hr {
+    background-color: white;
 }
 
 .navbar-brand {
@@ -50,6 +48,14 @@ nav {
 
 .datepicker * {
     color: black;
+}
+
+.popover-title * {
+    color: grey;
+}
+
+.popover-title .text-primary {
+    color: black!important;
 }
 
 input[readonly] {
