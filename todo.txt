@@ -44,14 +44,14 @@ PENDING_USER
 - [x] Delete pending user if has been verified
 
 RESERVATIONS
-- [ ] Accept/Decline/Cancel Reservation PUT
-- [ ] Add reservation (Pending) POST
-- [ ] Display reservation by shop id (managers) GET
-- [ ] Search reservation by name of the user and sorted by date added (managers) GET
-- [ ] Search reservation by name of the shop and sorted by date added (users) GET
-- [ ] Search reservation by phone number (managers) GET
-- [ ] Sort reservations by date added (users/managers) GET
-- [ ] Update reservation PUT
+- [x] Accept/Decline/Cancel Reservation (type: reservasions/status) PUT OK
+- [x] Add reservation (Pending) (type: reservasions/create) POST OK
+- [x] Display reservation by shop id (managers) (type: reservasions/all) GET OK
+- [x] Search reservation by name of the user and sorted by date added (managers) (type: reservasions/all) GET OK
+- [x] Search reservation by name of the shop and sorted by date added (users) (type: reservasions/all) GET OK
+- [x] Search reservation by phone number (managers) (type: reservasions/all) GET OK
+- [x] Sort reservations by date added (users/managers) (type: reservasions/all) GET OK
+- [x] Update reservation (type: reservasions/update) PUT OK
 
 REVIEWS
 - [x] Add review (reviews/creview) POST OK
