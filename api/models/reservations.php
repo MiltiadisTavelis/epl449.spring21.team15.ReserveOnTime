@@ -186,7 +186,6 @@
 			$sql = "";
 			if($_SESSION['user_type'] == "m" && ($this->status == "0" || $this->status == "1")){
 				$sql = 'SELECT * FROM RESERVATIONS,SHOPS WHERE RESERVATIONS.shopid = SHOPS.id AND RESERVATIONS.id = '.$this->id.' AND SHOPS.mngid = '.$_SESSION['user_id'];
-				echo $sql;
 			}elseif(($_SESSION['user_type'] == "u" && $this->status == "3") || ($_SESSION['user_type'] == "m" && $this->status == "3")){
 				$sql = 'SELECT * FROM RESERVATIONS WHERE RESERVATIONS.id = '.$this->id.' AND RESERVATIONS.userid = '.$_SESSION['user_id'];
 			}else{
