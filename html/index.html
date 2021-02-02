@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css" integrity="sha512-p4vIrJ1mDmOVghNMM4YsWxm0ELMJ/T0IkdEvrkNHIcgFsSzDi/fV7YxzTzb3mnMvFPawuIyIrHcpxClauEfpQg==" crossorigin="anonymous" />
     <link rel="stylesheet" href="../plugins/clockpicker/src/clockpicker.css">
     <link rel="stylesheet" href="../plugins/clockpicker/src/standalone.css">
     <script src="../plugins/clockpicker/src/clockpicker.js"></script>
@@ -60,7 +59,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                             </div>
-                            <input type="text" id="date-input" class="form-control datepicker" value="">
+                            <input readonly type="text" id="date-input" class="form-control datepicker" value="" placeholder="Pick a date">
                         </div>
                     </div>
                     <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
@@ -68,7 +67,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-clock"></i></span>
                             </div>
-                            <input type="text" id="time-input" class="form-control clockpicker" value="20:00">
+                            <input readonly type="text" id="time-input" class="form-control clockpicker" value="" placeholder="Pick a time">
                         </div>
                     </div>
                     <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">

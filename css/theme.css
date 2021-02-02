@@ -37,9 +37,9 @@ nav {
     padding-bottom: 150px;
     background-image: url(../images/wallpaper.jpg);
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: cover;
-    height: 100%;
+    background-attachment: scroll;
+    height: auto;
     display: flex;
     justify-content: center;
 }
@@ -50,4 +50,8 @@ nav {
 
 .datepicker * {
     color: black;
+}
+
+input[readonly] {
+  background-color: white!important;
 }
