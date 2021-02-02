@@ -3,6 +3,18 @@
 		echo json_encode(array('status' => 'Bad Request'));
 		return;
 	};
+
+	session_start();
+
+	if(!isset($_SESSION['user_id'])){
+		echo json_encode(array('message' => 'Not logged in'));
+		return;
+	};
+	if(($_SESSION['user_type']!='m')){
+		echo json_encode(array('message' => 'Not authorized'));
+		return;
+	};
+
 	header('Access-Control-Allow-Origin: *');
 	header('Content-Type: application/json');
 	header('Access-Control-Allow-Methods: POST');
