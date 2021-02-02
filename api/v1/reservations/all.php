@@ -69,6 +69,7 @@
 	if($results == "-1"){
 		$msg['status'] = 'Please select your shop to see your reservations';
 		echo json_encode($msg);
+		return;
 	}
 	$cnt = mysqli_num_rows($results);
 	$json = array();
