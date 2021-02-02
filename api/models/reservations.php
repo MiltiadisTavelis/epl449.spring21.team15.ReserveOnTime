@@ -67,7 +67,6 @@
 			}
 
 			$stmt = $this->conn->prepare($sql);
-			echo $sql;
 	        if(!mysqli_stmt_prepare($stmt,$sql)){
 	            echo "Error";
 	            exit();
