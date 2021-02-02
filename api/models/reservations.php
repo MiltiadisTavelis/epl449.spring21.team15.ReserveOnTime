@@ -46,8 +46,7 @@
 			if(isset($this->status)){
 				$sql .= 'AND RESERVATIONS.status = '.$this->status.' ';
 			}
-			echo isset($this->phone);
-			echo preg_match('/^[0-9 ]*$/', $this->phone);
+			
 			if(isset($this->lname) && !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->lname)){
 			    $sql .= 'AND USERS.lname LIKE \'%'.$this->lname.'%\' ';
 			}elseif(isset($this->phone) && preg_match('/^[0-9 ]*$/', $this->phone) == 1){
