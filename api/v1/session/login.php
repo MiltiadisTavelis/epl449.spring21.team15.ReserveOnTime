@@ -4,8 +4,6 @@
 		return;
 	};
 
-	session_start();
-
 	if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
 		echo json_encode(array('EmailError' => 'No valid email address'));
 		return;
@@ -30,9 +28,7 @@
 			$msg['status'] = 'Wrong email or password';
 			echo json_encode($msg);
 		}elseif($result == "1"){
-	        $_SESSION['user_name'] = $session->fname;
-	        $_SESSION['user_id'] = $session->id;
-			$msg['status'] = 'Welcome '. $session->fname;
+			$msg['status'] = 'Welcome '.$_SESSION['user_name'];
 			echo json_encode($msg);
 		}elseif($result == "3"){
 			$msg['status'] = 'Please verify your account';

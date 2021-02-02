@@ -3,11 +3,9 @@
 		echo json_encode(array('status' => 'Bad Request'));
 		return;
 	};
-   	session_start();
 
-   	$name = $_SESSION['user_name'];
-
-   	if(isset($name)){
+   	if(isset($_SESSION['user_name'])){
+   		$name = $_SESSION['user_name'];
 	   	if(session_destroy()) {
 	      	$msg['message'] = 'Bye '.$name;
 			echo json_encode($msg);

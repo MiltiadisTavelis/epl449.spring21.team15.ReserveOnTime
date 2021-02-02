@@ -2,7 +2,9 @@
 	header('Access-Control-Allow-Origin: *');
 	header('Content-Type: application/json');
 
-	$error = json_encode(array('status' => 'Bad Request'));
+	session_start();
+
+ 	$error = json_encode(array('status' => 'Bad Request'));
 	if((strcasecmp($_SERVER['REQUEST_METHOD'], 'GET')) == 0 && (strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0){
 		$data = json_decode(file_get_contents("php://input"),true);
 
@@ -83,6 +85,19 @@
 			if((strcasecmp($type, 'events/shop') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
 				//$_GET['id'] = $data['shop_id'];
 				include 'events/shop.php';
+			}else{
+				echo $error;
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'reservations')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/reservations.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//GET RESERVATIONS
+			if((strcasecmp($type, 'reservations/all') == 0)){
+				include 'reservations/all.php';
 			}else{
 				echo $error;
 			}
@@ -187,8 +202,23 @@
 			//LOGIN
 			if((strcasecmp($type, 'session/login') == 0) && (count($data) == 2) && (isset($data['email'],$data['password']) != 0)){
 				include 'session/login.php';
+			}elseif((strcasecmp($type, 'session/manager') == 0) && (count($data) == 2) && (isset($data['email'],$data['password']) != 0)){
+				include 'session/manager.php';
 			}elseif((strcasecmp($type, 'session/logout') == 0) && (count($data) == 0)){
 				include 'session/logout.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'reservations')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/reservations.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//CREATE NEW RESERVATION
+			if((strcasecmp($type, 'reservations/create') == 0) && (count($data) == 3) && (isset($data['day'],$data['people'],$data['shop_id']) != 0)){
+				include 'reservations/create.php';
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -242,6 +272,22 @@
 			//UPDATE EVENT
 			if((strcasecmp($type, 'events/update') == 0) && (count($data) == 7) && (isset($data['id'],$data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date']) != 0)){
 				include 'events/update.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'reservations')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/reservations.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//UPDATE RESERVATION
+			if((strcasecmp($type, 'reservations/update') == 0) && (count($data) == 3) && (isset($data['id'],$data['people'],$data['day']) != 0)){
+				include 'reservations/update.php';
+			}elseif((strcasecmp($type, 'reservations/status') == 0) && (count($data) == 2) && (isset($data['id'],$data['status']) != 0)){
+				include 'reservations/status.php';
 			}else{
 				echo $error;
 				http_response_code(400);
