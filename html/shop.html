@@ -74,8 +74,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input required type="number" id="people-input" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-2" min="1" maxlength="2">
-                                <button type="submit" class="btn btn-light col-xs-6 col-sm-6 col-md-6 col-lg-8 col-xl-10">Make Reservation</button>
+                                <input required type="number" id="people-input" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-4" min="1" maxlength="2">
+                                <button type="submit" class="btn btn-light col-xs-6 col-sm-6 col-md-6 col-lg-8 col-xl-8">Make Reservation</button>
                             </div>
                         </div>
                     </form>
@@ -85,17 +85,44 @@
             <nav class="nav justify-content-center nav-pills flex-column flex-md-row">
                 <a href="#overview" class="nav-link active" data-toggle="tab">Overview</a>
                 <a href="#photos" class="nav-link" data-toggle="tab">Photos</a>
+                <a href="#events" class="nav-link" data-toggle="tab">Events</a>
                 <a href="#reviews" class="nav-link" data-toggle="tab">Reviews</a>
             </nav>
             <div class="tab-content">
                 <div id="overview" class="tab-pane active">
-                    <p>OVERVIEW CONTENT</p>
+                    <div class="card mb-3">
+                        <img id="cover-img" class="card-img-top" src="../images/testcover.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-star"></i><span id="rating">5</span> | <span id="type"> Restaurant</span></h5>
+                            <p id="description" class="card-text">Description content..</p>
+                        </div>
+                    </div>
                 </div>
                 <div id="photos" class="tab-pane">
-                    <p>PHOTOS CONTENT</p>
+                    <div id="photo-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="..." alt="First slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div id="events" class="tab-pane">
                 </div>
                 <div id="reviews" class="tab-pane">
-                    <p>REVIEWS CONTENT</p>
                 </div>
             </div>
         </div>

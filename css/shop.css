@@ -8,21 +8,20 @@
     height: 200px;
 }
 
-#heading-left img {
-    display: flex;
-    float: right;
-}
-
 #heading-right form {
-    margin-top: 15px;
+    margin: 15px 0;
 }
 
 .nav-pills .nav-link {
-    margin: 0px 5px;
+    margin: 5px 5px;
     color: white!important;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 .nav-pills .active {
     background-color: grey!important;
+}
+
+.card-body * {
+    color: black;
 }
