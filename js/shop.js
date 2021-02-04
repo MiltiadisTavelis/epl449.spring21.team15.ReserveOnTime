@@ -3,6 +3,7 @@ bootstrapValidate('#people-input', 'integer:Please choose a valid amount of peop
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
+    startDate: "today",
     todayHighlight: true
 });
 

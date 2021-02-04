@@ -8,5 +8,6 @@ bootstrapValidate('#passwordre-input', 'matches:#password-input:Make sure the pa
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
+    endDate: "today",
     todayHighlight: true
 });
