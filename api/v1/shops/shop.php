@@ -24,7 +24,12 @@
 		'description' => $shops->description,
 		'capacity' => $shops->capacity,
 		'tables' => $shops->tables,
-		'reg_date' => $shops->reg_date
+		'reg_date' => $shops->reg_date,
+		'street' => $shops->street,
+		'streetnum' => $shops->streetnum,
+		'area' => $shops->area,
+		'city' => $shops->city,
+		'postal_code' => $shops->pc
 	);
 
 	print_r(json_encode($json));

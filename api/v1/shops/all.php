@@ -13,10 +13,25 @@
 	$db = $database->connect();
 
 	$shops = new Shops($db);
-	$shops->sort = $_GET['sort'];
-	$shops->sname = $_GET['sname'];
-	$shops->stype = $_GET['stype'];
-	$shops->open = $_GET['open'];
+	if(isset($data['sname'])){
+		if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $data['sname'])){
+			echo json_encode(array('SpecialCharError' => 'Bad Request'));
+			return; 
+		}
+		$shops->sname = $data['sname'];
+	}
+	if(isset($data['stype']) && ($data['stype'] >= 1) && ($data['stype'] <= 11)){
+		$shops->stype = $data['stype'];
+	}
+	if(isset($data['sort']) && ((strcasecmp($data['sort'], 'newest') == 0) || (strcasecmp($data['sort'], 'oldest') == 0)) ){
+		$shops->sort = $data['sort'];
+	}
+	if(isset($data['open']) && $data['open'] == 1){
+		$shops->open = $data['open'];
+	}
+	if(isset($data['city']) && $data['city'] == 1){
+		$shops->city = $data['city'];
+	}	
 
 	$results = $shops->shops();
 	$cnt = mysqli_num_rows($results);
@@ -28,13 +43,18 @@
 			$shop = array(
 				'id' => $id,
 				'sname' => $sname,
-				'stype' => $stype,
+				'stype' => $type,
 				'email' => $email,
 				'pnum' => $pnum,
 				'description' => $description,
 				'capacity' => $capacity,
 				'tables' => $tables,
-				'reg_date' => $reg_date
+				'reg_date' => $reg_date,
+				'street' => $street,
+				'streetnum' => $streetnum,
+				'area' => $area,
+				'city' => $name,
+				'postal_code' => $pc
 			);
 			array_push($json['Shops'], $shop);
 		}

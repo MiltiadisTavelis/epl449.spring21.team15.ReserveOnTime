@@ -20,23 +20,7 @@
 			unset($data['type']);
 
 			//GET ALL SHOPS (OPTIONAL: SORT BY DAY ADDED, GET SHOPS BY TYPE, GET OPEN SHOPS, SEARCH BY NAME)
-			if((strcasecmp($type, 'shops/all') == 0) && count($data) <= 4){
-				if(isset($data['sname'])){
-					if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $data['sname'])){
-						echo json_encode(array('SpecialCharError' => 'Bad Request'));
-						return;
-					}
-					$_GET['sname'] = $data['sname'];
-				}
-				if(isset($data['stype']) && ($data['stype'] >= 1) && ($data['stype'] <= 11)){
-					$_GET['stype'] = $data['stype'];
-				}
-				if(isset($data['sort']) && ((strcasecmp($data['sort'], 'newest') == 0) || (strcasecmp($data['sort'], 'oldest') == 0)) ){
-					$_GET['sort'] = $data['sort'];
-				}
-				if(isset($data['open']) && $data['open'] == 1){
-					$_GET['open'] = $data['open'];
-				}
+			if((strcasecmp($type, 'shops/all') == 0) && count($data) <= 5){
 				include 'shops/all.php';
 
 			//GET SHOP BY ID
