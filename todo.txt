@@ -61,7 +61,7 @@ REVIEWS
 - [x] Delete review (type: reviews/delete) DELETE OK
 - [x] Display reviews by shop id (type: reviews/shop) GET OK
 - [x] Calculate average rating after new review (type: reviews/creview) POST OK
-- [ ] Add rating and calculate average rating for the specific shop POST 
+- [x] Add rating and calculate average rating for the specific shop POST 
 
 EVENTS
 - [x] Add event (events/create) POST OK
