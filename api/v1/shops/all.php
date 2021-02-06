@@ -23,7 +23,7 @@
 	if(isset($data['stype']) && ($data['stype'] >= 1) && ($data['stype'] <= 11)){
 		$shops->stype = $data['stype'];
 	}
-	if(isset($data['sort']) && ((strcasecmp($data['sort'], 'newest') == 0) || (strcasecmp($data['sort'], 'oldest') == 0)) ){
+	if(isset($data['sort']) && ((strcasecmp($data['sort'], 'newest') == 0) || (strcasecmp($data['sort'], 'oldest') == 0) || (strcasecmp($data['sort'], 'rating') == 0)) ){
 		$shops->sort = $data['sort'];
 	}
 	if(isset($data['open']) && $data['open'] == 1){
@@ -54,7 +54,8 @@
 				'streetnum' => $streetnum,
 				'area' => $area,
 				'city' => $name,
-				'postal_code' => $pc
+				'postal_code' => $pc,
+				'rating' => number_format($avg_rating,1)
 			);
 			array_push($json['Shops'], $shop);
 		}

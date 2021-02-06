@@ -12,9 +12,8 @@
 	$database = new Connection();
 	$db = $database->connect();
 	$shops = new Shops($db);
-	$shops->id = isset($_GET['id']) ? $_GET['id'] : die();
+	$shops->id = $data['id'];
 	$shops->shop();
-
 	$json = array(
 		'id' => $shops->id,
 		'sname' => $shops->sname,
@@ -29,7 +28,8 @@
 		'streetnum' => $shops->streetnum,
 		'area' => $shops->area,
 		'city' => $shops->city,
-		'postal_code' => $shops->pc
+		'postal_code' => $shops->pc,
+		'rating' => number_format($shops->avg_rating, 1)
 	);
 
 	print_r(json_encode($json));

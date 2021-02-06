@@ -31,6 +31,7 @@ SHOPS
 - [x] Show all (type: shops/all) GET OK 
 - [x] Create shop (type: shops/cshop) POST OK
 - [x] Display Shops by City (type: shops/all) GET OK
+- [x] Sort Shops by rating (type: shops/all) GET OK
 
 SHOPS_HOURS
 - [ ] Add open/close hours POST
@@ -56,9 +57,10 @@ RESERVATIONS
 - [x] Update reservation (type: reservasions/update) PUT OK
 
 REVIEWS
-- [x] Add review (reviews/creview) POST OK
-- [x] Delete review (reviews/delete) DELETE OK
-- [x] Display reviews by shop id (reviews/shop) GET OK
+- [x] Add review (type: reviews/creview) POST OK
+- [x] Delete review (type: reviews/delete) DELETE OK
+- [x] Display reviews by shop id (type: reviews/shop) GET OK
+- [x] Calculate average rating after new review (type: reviews/creview) POST OK
 - [ ] Add rating and calculate average rating for the specific shop POST 
 
 EVENTS

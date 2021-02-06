@@ -25,7 +25,6 @@
 
 			//GET SHOP BY ID
 			}elseif((strcasecmp($type, 'shops/shop') == 0) && count($data) == 1 && (isset($data['id']) != 0)){
-				$_GET['id'] = $data['id'];
 				include 'shops/shop.php';
 
 			}else{

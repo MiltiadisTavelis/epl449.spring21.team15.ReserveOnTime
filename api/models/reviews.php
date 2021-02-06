@@ -10,6 +10,7 @@
 		public $uid;
 		public $content;
 		public $rating;
+		public $allrating;
 		public $sub_date;
 
 		public function __construct($db)
@@ -30,7 +31,6 @@
             	return $result;
         	}
 		}
-
 		
 		//CREATE NEW REVIEW
 		public function create_review(){
@@ -54,12 +54,41 @@
 										$this->content,
 										$this->rating,
 										$this->sub_date);
-			if($stmt->execute()){
+			if($stmt->execute() && $this->calculate_rating() && $this->update_rating()){
 				return true;
 			}
 
 			printf("Error: %s.\n",$stmt->error);
 
+			return false;
+		}
+
+		//CALCULATE AVERAGE RATING
+		private function calculate_rating(){
+			//SELECT CAST(AVG(REVIEWS.rating) AS DECIMAL(2,1)) AS avg_rating
+			$sql = '
+			SELECT ROUND(AVG(REVIEWS.rating), 1) AS avg_rating
+			FROM REVIEWS
+			WHERE REVIEWS.shop_id = '.$this->shop_id;
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$result = $stmt->get_result();
+				$row = $result->fetch_array(MYSQLI_ASSOC);
+				$this->allrating = $row["avg_rating"];
+				return true;
+			}
+			printf("Error: %s.\n",$stmt->error);
+			return false;
+		}
+
+		//UPDATE AVERAGE RATING
+		private function update_rating(){
+			$sql = 'UPDATE SHOPS SET avg_rating = '.$this->allrating.' WHERE SHOPS.id = '.$this->shop_id;
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				return true;
+			}
+			printf("Error: %s.\n",$stmt->error);
 			return false;
 		}
 
