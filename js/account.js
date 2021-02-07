@@ -6,5 +6,6 @@ bootstrapValidate('#email-input', 'email:Please enter a valid e-mail address.')
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
-    todayHighlight: true
+    endDate: "today",
+    startView: 2
 });
