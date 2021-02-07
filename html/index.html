@@ -47,29 +47,55 @@
             <h3>Reserve your favorite spot on time</h3>
             <form>
                 <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                        <div class="input-group mb-3">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                             </div>
                             <input readonly type="text" id="date-input" class="form-control datepicker" value="" placeholder="Pick a date">
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-2">
-                        <div class="input-group mb-3">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-clock"></i></span>
                             </div>
                             <input readonly type="text" id="time-input" class="form-control clockpicker" value="" placeholder="Pick a time">
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
-                        <div class="input-group mb-3">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                            </div>
+                            <select required id="shop-city-input" class="custom-select">
+                                <option value="" disabled selected>City</option>
+                                <option value="Nicosia">Nicosia</option>
+                                <option value="Limassol">Limassol</option>
+                                <option value="Larnaca">Larnaca</option>
+                                <option value="Paphos">Paphos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-align-center"></i></div>
+                            </div>
+                            <select required id="shop-type-input" class="custom-select">
+                                <option value="" disabled selected>Shop Type</option>
+                                <option value="any">Any</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
                             <select id="people-input" class="custom-select">
-                                <option selected value="1">1</option>
+                                <option value="" disabled selected>People</option>
+                                <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="3">4</option>
@@ -82,9 +108,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-9 col-lg-10 col-xl-5">
-                        <div class="input-group mb-3">
-                            <input id="keyword-input" class="form-control" type="search" placeholder="Location, Shop Name or Type" aria-describedby="button-addon5">
+                    <div class="form-group col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-6">
+                        <div class="input-group">
+                            <input id="keyword-input" class="form-control" type="search" placeholder="Shop Name" aria-describedby="button-addon5">
                             <div class="input-group-append">
                                 <button id="submit-button" type="submit" class="btn btn-dark"><i class="fa fa-search"></i></button>
                             </div>
