@@ -18,9 +18,33 @@
     <script src="../js/reservations.js" defer></script>
 </head>
 <body>
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark animate__animated animate__fadeIn animate__slow">
+        <p class="navbar-brand">Reserve On Time</p>
+        <button class="navbar-toggler">
+            <span class="navbar-toggler-icon" data-toggle="collapse" data-target="#nav-list"></span>
+        </button>
+        <div id="nav-list" class="collapse navbar-collapse">
+            <ul class="navbar-nav nav-fill ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="reservations.html">Reservations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="account.html">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a id="login-btn" class="btn btn-md btn-dark" href="">Sign out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container-fluid h-100">
         <div id="contents1" class="container w-75">
+            <div id="upcoming">
 
+            </div>
+            <div id="past">
+
+            </div>
         </div>
     </div>
 </body>
