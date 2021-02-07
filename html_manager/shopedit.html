@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Account Settings - Reserve On Time</title>
+    <title>Shop Edit - Reserve On Time</title>
     <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -18,7 +18,8 @@
     <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
     <link rel="stylesheet" href="../css/theme.css"/>
     <link rel="stylesheet" href="../css/forms.css"/>
-    <script src="../js/account.js" defer></script>
+    <link rel="stylesheet" href="../css/manager.css"/>
+    <script src="../js_manager/shopedit.js" defer></script>
     <script src="../js/validation.js" defer></script>
 </head>
 <body>
@@ -36,6 +37,9 @@
                     <a class="nav-link" href="account.html">Account</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="shopedit.html">My Shop</a>
+                </li>
+                <li class="nav-item">
                     <a id="login-btn" class="btn btn-md btn-dark" href="">Sign out</a>
                 </li>
             </ul>
@@ -43,50 +47,53 @@
     </nav>
     <div class="container-fluid h-100">
         <div id="contents1" class="container w-75">
-            <div id="heading">
-                <h1>Account Settings</h1>
-            </div>
+            <h1>Shop Edit</h1>
             <form class="main-form needs-validation" novalidate>
                 <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                    <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-user"></i></div>
+                                <div class="input-group-text"><i class="fas fa-store"></i></div>
                             </div>
-                            <input required type="text" class="form-control" id="firstname-input" placeholder="First Name">
-                            <input required type="text" class="form-control" id="lastname-input" placeholder="Last Name">
+                            <input required type="text" id="shop-name-input" class="form-control" placeholder="Shop Name">
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                    <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-venus-mars"></i></div>
+                                <div class="input-group-text"><i class="fas fa-align-center"></i></div>
                             </div>
-                            <select required class="custom-select" id="gender-input">
-                                <option value="" disabled selected>Gender</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
-                                <option value="3">Other</option>
-                            </select>
+                            <input required type="text" id="shop-type-input" class="form-control" placeholder="Shop Type">
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                                <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
                             </div>
-                            <input required readonly type="text" id="date-input" class="form-control datepicker" placeholder="Birthdate" value="">
+                            <select required class="custom-select col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="shop-city-input">
+                                <option value="" disabled selected>City</option>
+                                <option value="Nicosia">Nicosia</option>
+                                <option value="Limassol">Limassol</option>
+                                <option value="Larnaca">Larnaca</option>
+                                <option value="Paphos">Paphos</option>
+                            </select>
+                            <input required type="text" id="shop-province-input" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" placeholder="Province">
+                            <input required type="text" id="shop-address-input" class="form-control col-xs-5 col-sm-5 col-md-5 col-lg-6 col-xl-6" placeholder="Address">
+                            <input required type="text" id="shop-zipcode-input" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" placeholder="Postcode" minlength="4" maxlength="4">
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-phone-alt"></i> <i class="fas fa-plus"></i></div>
+                                <div class="input-group-text"><i class="fas fa-phone-alt"></i></div>
+                                <span class="input-group-text">+357</span>
                             </div>
-                            <input required type="text" id="telcode-input" value="357" maxlength="3" class="form-control col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                            <input required type="tel" id="tel-input" class="form-control" placeholder="Telephone Number" minlength="8" maxlength="8">
+                            <input required type="tel" id="shop-tel-input" class="form-control" placeholder="Shop's Telephone Number" minlength="8" maxlength="8">
                         </div>
                     </div>
                 </div>
@@ -95,12 +102,10 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-at"></i></div>
                         </div>
-                        <input required type="email" class="form-control" id="email-input" aria-describeby="emailHelp" placeholder="Email">
+                        <input required type="email" id="shop-email-input" class="form-control" aria-describeby="emailHelp" placeholder="Shop's Email">
                     </div>
-                    <small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
                 </div>
-                <button type="submit" class="btn btn-lg btn-light">Save</button>
-                <button type="submit" class="btn btn-lg btn-dark">Reset Password</button>
+                <button type="submit" class="btn btn-lg btn-light">Update Shop</button>
             </form>
         </div>
     </div>

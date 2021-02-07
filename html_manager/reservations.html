@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Request Password Reset - Reserve On Time</title>
+    <title>Reservations - Reserve On Time</title>
     <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -15,27 +15,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
     <link rel="stylesheet" href="../css/theme.css"/>
-    <link rel="stylesheet" href="../css/forms.css"/>
-    <script src="../js/requestreset.js" defer></script>
-    <script src="../js/validation.js" defer></script>
+    <link rel="stylesheet" href="../css/manager.css"/>
+    <script src="../js_manager/reservations.js" defer></script>
 </head>
 <body>
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark animate__animated animate__fadeIn animate__slow">
+        <p class="navbar-brand">Reserve On Time</p>
+        <button class="navbar-toggler">
+            <span class="navbar-toggler-icon" data-toggle="collapse" data-target="#nav-list"></span>
+        </button>
+        <div id="nav-list" class="collapse navbar-collapse">
+            <ul class="navbar-nav nav-fill ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="reservations.html">Reservations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="account.html">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="shopedit.html">My Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a id="login-btn" class="btn btn-md btn-dark" href="">Sign out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container-fluid h-100">
         <div id="contents1" class="container w-75">
-            <div id="heading">
-                <h1>Reserve On Time</h1>
-            </div>
-            <form class="main-form needs-validation" novalidate>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text"><i class="fas fa-at"></i></div>
-                        </div>
-                        <input required type="email" class="form-control" id="email-input" aria-describeby="emailHelp" placeholder="Email">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-lg btn-light">Request Password Reset</button>
-            </form>
+
         </div>
     </div>
 </body>

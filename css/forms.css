@@ -6,10 +6,13 @@ form * {
     padding: 50px;
 }
 
+#heading {
+    margin-bottom: 30px;
+}
+
 h1 {
     font-family: 'Lobster Two', cursive;
     font-size: 48px;
-    margin-bottom: 50px;
     white-space: nowrap;
     overflow: hidden;
 }

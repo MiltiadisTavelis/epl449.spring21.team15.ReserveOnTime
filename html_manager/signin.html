@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Password Reset - Reserve On Time</title>
+    <title>Sign In - Reserve On Time</title>
     <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -16,14 +16,16 @@
     <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
     <link rel="stylesheet" href="../css/theme.css"/>
     <link rel="stylesheet" href="../css/forms.css"/>
-    <script src="../js/passreset.js" defer></script>
+    <link rel="stylesheet" href="../css/manager.css"/>
+    <script src="../js_manager/signin.js" defer></script>
     <script src="../js/validation.js" defer></script>
 </head>
 <body>
-    <div class="container-fluid h-100">
+    <div class="container-fluid">
         <div id="contents1" class="container w-75">
             <div id="heading">
                 <h1>Reserve On Time</h1>
+                <h2>Manager</h2>
             </div>
             <form class="main-form needs-validation" novalidate>
                 <div class="form-group">
@@ -31,7 +33,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-at"></i></div>
                         </div>
-                        <input disabled type="email" class="form-control" id="email-input" aria-describeby="emailHelp" value="example@mail.com">
+                        <input required type="email" class="form-control" id="email-input" placeholder="Email Address">
                     </div>
                 </div>
                 <div class="form-group">
@@ -39,20 +41,13 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-key"></i></div>
                         </div>
-                        <input required type="password" class="form-control" id="password-input" aria-describedby="passHelp" placeholder="New Password" minlength="8">
+                        <input required type="password" id="password-input" class="form-control" aria-describedby="passHelp" placeholder="Password" minlength="8">
                     </div>
-                    <small id="passHelp" class="form-text">Your password must be atleast 8 characters long.</small>
+                    <small id="passHelp" class="form-text">If you forgot your password click <a href="passrecover.html">here</a></small>
                 </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text"><i class="fas fa-key"></i></div>
-                        </div>
-                        <input required type="password" class="form-control" id="passwordre-input" placeholder="Re-type New Password">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-lg btn-light">Reset Password</button>
+                <button type="submit" class="btn btn-lg btn-light">Sign In</button>
             </form>
+            <p>Don't have a manager account? <a href="shopregister.html">Register your shop</a></div></p>
         </div>
     </div>
 </body>
