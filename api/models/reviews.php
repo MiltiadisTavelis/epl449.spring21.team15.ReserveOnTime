@@ -42,7 +42,7 @@
 			$sql = 'CALL create_review("'.$this->shop_id.'","'.$this->uid.'","'.$this->content.'","'.$this->rating.'","'.$this->sub_date.'")';
 			
 			$stmt = $this->conn->prepare($sql);
-			if($stmt->execute()){
+			if($stmt->execute() && $this->calculate_rating() && $this->update_rating()){
 				return true;
 			}else{
 				printf("Error: %s.\n",$stmt->error);
