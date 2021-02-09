@@ -33,33 +33,21 @@
 		
 		//CREATE NEW REVIEW
 		public function create_review(){
-			$sql = 'INSERT INTO REVIEWS (
-							shop_id,
-							uid,
-							content,
-							rating,
-							sub_date) VALUES (?,?,?,?,?)';
-			$stmt = $this->conn->prepare($sql);
 			$this->shop_id = htmlspecialchars(strip_tags($this->shop_id));
 			$this->uid = htmlspecialchars(strip_tags($this->uid));
 			$this->content = htmlspecialchars(strip_tags($this->content));
 			$this->rating = htmlspecialchars(strip_tags($this->rating));
 			$this->sub_date = new DateTime();
 			$this->sub_date = date_format($this->sub_date, 'Y-m-d H:i:s');
-
-			$stmt->bind_param('iisis',
-										$this->shop_id,
-										$this->uid,
-										$this->content,
-										$this->rating,
-										$this->sub_date);
-			if($stmt->execute() && $this->calculate_rating() && $this->update_rating()){
+			$sql = 'CALL create_review("'.$this->shop_id.'","'.$this->uid.'","'.$this->content.'","'.$this->rating.'","'.$this->sub_date.'")';
+			
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
 				return true;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
 			}
-
-			printf("Error: %s.\n",$stmt->error);
-
-			return false;
 		}
 
 		//CALCULATE AVERAGE RATING
