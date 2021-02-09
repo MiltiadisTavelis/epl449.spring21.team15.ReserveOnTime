@@ -20,16 +20,15 @@
 
 		//SHOW REVIEWS BY shop_id
 		public function shop_reviews(){
-			$sql = 'SELECT fname, lname, content,rating,sub_date  FROM REVIEWS,USERS WHERE REVIEWS.uid = USERS.id and REVIEWS.shop_id = '.$this->shop_id.' ORDER BY sub_date DESC';
-			$stmt = $this->conn->prepare($sql);
-            if(!mysqli_stmt_prepare($stmt,$sql)){
-                echo "Error";
-                exit();
-            }else{
-            	mysqli_stmt_execute($stmt);
-            	$result = mysqli_stmt_get_result($stmt);
-            	return $result;
-        	}
+			// execute the stored procedure
+            $sql = 'CALL shop_review('.$this->shop_id.')';
+            $stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				return $stmt->get_result();
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
+			}
 		}
 		
 		//CREATE NEW REVIEW
