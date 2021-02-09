@@ -65,6 +65,6 @@ REVIEWS 5
 
 EVENTS 4
 - [x] Add event (events/create) POST OK
-- [x] Update event title/description/date (events/create) PUT OK
+- [x] Update event title/description/date (events/update) PUT OK
 - [x] Delete Event (events/delete) DELETE OK
-- [x] Display events by shop id (events/delete) GET OK 
+- [x] Display events by shop id (events/shop) GET OK 
