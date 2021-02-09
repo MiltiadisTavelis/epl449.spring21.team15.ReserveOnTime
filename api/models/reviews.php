@@ -81,18 +81,15 @@
 
 		//DELETE REVIEW BY ID
 		public function delete_review(){
-			$sql = 'DELETE FROM REVIEWS WHERE id=?';
-			$stmt = $this->conn->prepare($sql);
 			$this->id = htmlspecialchars(strip_tags($this->id));
-			$stmt->bind_param('i',$this->id);
-
+			$sql = 'CALL delete_review('.$this->id.')';
+			$stmt = $this->conn->prepare($sql);
 			if($stmt->execute()){
 				return true;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
 			}
-
-			printf("Error: %s.\n",$stmt->error);
-
-			return false;
 		}
 	}
 ?>
