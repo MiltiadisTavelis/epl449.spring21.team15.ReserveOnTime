@@ -21,30 +21,21 @@
 
 		//SHOW EVENTS BY shop_id
 		public function shop_event(){
-			$sql = 'SELECT title,content,pic,link,start_date,stop_date  FROM EVENTS WHERE EVENTS.shop_id = '.$this->shop_id.' ORDER BY start_date ';
-			$stmt = $this->conn->prepare($sql);
-            if(!mysqli_stmt_prepare($stmt,$sql)){
-                echo "Error";
-                exit();
-            }else{
-            	mysqli_stmt_execute($stmt);
-            	$result = mysqli_stmt_get_result($stmt);
-            	return $result;
-        	}
+        
+            // execute the stored procedure
+            $sql = 'CALL shop_events('.$this->shop_id.')';
+            $stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				return $stmt->get_result();
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
+			}
 		}
 
 		
 		//CREATE NEW EVENT
 		public function create_event(){
-			$sql = 'INSERT INTO EVENTS (
-							title,
-							content,
-							pic,
-							link,
-							start_date,
-							stop_date,
-							shop_id) VALUES (?,?,?,?,?,?,?)';
-			$stmt = $this->conn->prepare($sql);
 			$this->title = htmlspecialchars(strip_tags($this->title));
 			$this->content = htmlspecialchars(strip_tags($this->content));
 			$this->pic = htmlspecialchars(strip_tags($this->pic));
@@ -52,75 +43,48 @@
 			$this->start_date = htmlspecialchars(strip_tags($this->start_date));
 			$this->stop_date = htmlspecialchars(strip_tags($this->stop_date));
 			$this->shop_id = htmlspecialchars(strip_tags($this->shop_id));
-
-			$stmt->bind_param('ssssssi',
-										$this->title,
-										$this->content,
-										$this->pic,
-										$this->link,
-										$this->start_date,
-										$this->stop_date,
-										$this->shop_id);
+			$sql = 'CALL create_event("'.$this->title.'","'.$this->content.'","'.$this->pic.'","'.$this->link.'","'.$this->start_date.'","'.$this->stop_date.'",'.$this->shop_id.')';
+			
+			$stmt = $this->conn->prepare($sql);
 			if($stmt->execute()){
 				return true;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
 			}
-
-			printf("Error: %s.\n",$stmt->error);
-
-			return false;
 		}
 
 		//DELETE EVENT BY ID
 		public function delete_event(){
-			$sql = 'DELETE FROM EVENTS WHERE id=?';
-			$stmt = $this->conn->prepare($sql);
 			$this->id = htmlspecialchars(strip_tags($this->id));
-			$stmt->bind_param('i',$this->id);
-
+			$sql = 'CALL delete_event('.$this->id.')';
+			$stmt = $this->conn->prepare($sql);
 			if($stmt->execute()){
 				return true;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
 			}
-
-			printf("Error: %s.\n",$stmt->error);
-
-			return false;
 		}
 
 		//UPDATE EVENT DETAILS BY ID
 		public function update_event(){
-			$sql = 'UPDATE EVENTS SET
-							title = ?,
-							content = ?,
-							pic = ?,
-							link = ?,
-							start_date = ?,
-							stop_date = ?
-							WHERE id=?';
-			$stmt = $this->conn->prepare($sql);
-			$this->id = htmlspecialchars(strip_tags($this->id));
 			$this->title = htmlspecialchars(strip_tags($this->title));
 			$this->content = htmlspecialchars(strip_tags($this->content));
 			$this->pic = htmlspecialchars(strip_tags($this->pic));
 			$this->link = htmlspecialchars(strip_tags($this->link));
 			$this->start_date = htmlspecialchars(strip_tags($this->start_date));
 			$this->stop_date = htmlspecialchars(strip_tags($this->stop_date));
-
-			$stmt->bind_param('ssssssi',
-										$this->title,
-										$this->content,
-										$this->pic,
-										$this->link,
-										$this->start_date,
-										$this->stop_date,
-										$this->id);
-
+			$this->id = htmlspecialchars(strip_tags($this->id));
+			$sql = 'CALL update_event("'.$this->title.'","'.$this->content.'","'.$this->pic.'","'.$this->link.'","'.$this->start_date.'","'.$this->stop_date.'","'.$this->id.'")';
+			echo $sql;
+			$stmt = $this->conn->prepare($sql);
 			if($stmt->execute()){
 				return true;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
 			}
-
-			printf("Error: %s.\n",$stmt->error);
-
-			return false;
 		}
 	}
 ?>
