@@ -267,5 +267,19 @@
         	}
 		}
 
+		//GET ALL SHOP TYPES
+		public function types(){
+		    $sql = 'SELECT * FROM SHOP_TYPE';
+		    $stmt = $this->conn->prepare($sql);
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                echo "Error";
+                exit();
+            }else{
+            	mysqli_stmt_execute($stmt);
+            	$result = mysqli_stmt_get_result($stmt);
+            	return $result;
+        	}
+		}
+
 	}
 ?>

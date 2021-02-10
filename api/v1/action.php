@@ -40,6 +40,10 @@
 			}elseif((strcasecmp($type, 'shops/addhour') == 0)){
 				include 'shops/addhour.php';
 
+			//GET ALL SHOP TYPES
+			}elseif((strcasecmp($type, 'shops/types') == 0)){
+				include 'shops/types.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -309,5 +313,6 @@
 		}
 	}else{
 		echo $error;
+		http_response_code(400);
 	}
 ?>

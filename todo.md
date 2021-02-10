@@ -13,6 +13,7 @@ USERS 5
 - [x] Update user details (type: users/update) PUT OK
 - [x] Get user by id (type: users/user) GET OK
 - [x] Send email to verify user account (type: users/sendemail) POST OK 
+- [ ] Get user data (GDPR)
 
 SESSION 4 
 - [x] Account Login (type: session/login) POST OK
@@ -32,6 +33,7 @@ SHOPS 11
 - [x] Create shop (type: shops/cshop) POST OK
 - [x] Display Shops by City (type: shops/all) GET OK
 - [x] Sort Shops by rating (type: shops/all) GET OK
+- [x] Get all shop types (type: shops/types) GET OK
 
 SHOPS_HOURS 2
 - [x] Add open hours (type: shops/addhour) POST OK
