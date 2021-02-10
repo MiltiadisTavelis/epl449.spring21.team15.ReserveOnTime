@@ -3,3 +3,20 @@ h3 {
     font-weight: bold;
     text-shadow: 2px 2px #343A40;
 }
+
+h4 {
+    text-align: left;
+}
+
+#shop-display {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.card {
+    white-space: normal;
+    display: inline-block;
+    width: 15rem;
+    margin: 15px;
+}
