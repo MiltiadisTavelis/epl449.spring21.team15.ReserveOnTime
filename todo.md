@@ -33,14 +33,13 @@ SHOPS 11
 - [x] Display Shops by City (type: shops/all) GET OK
 - [x] Sort Shops by rating (type: shops/all) GET OK
 
-SHOPS_HOURS 3 
-- [ ] Add open/close hours POST
-- [ ] Delete open/close hours DELETE
-- [ ] Update open/close hours PUT
+SHOPS_HOURS 2
+- [x] Add open hours (type: shops/addhour) POST OK
+- [x] Display open hours (type: shops/hours) GET OK
 
 PENDING_SHOPS 2
-- [x] Add a pending shop (pendingShops/create) POST OK
-- [x] Delete a pending shop (pendingShops/delete) DELETE OK
+- [x] Add a pending shop (type: pendingShops/create) POST OK
+- [x] Delete a pending shop (type: pendingShops/delete) DELETE OK
  
 PENDING_USER 2
 - [x] Create pending user while creating an account
@@ -64,7 +63,7 @@ REVIEWS 5
 - [x] Add rating and calculate average rating for the specific shop POST 
 
 EVENTS 4
-- [x] Add event (events/create) POST OK
-- [x] Update event title/description/date (events/update) PUT OK
-- [x] Delete Event (events/delete) DELETE OK
-- [x] Display events by shop id (events/shop) GET OK 
+- [x] Add event (type: events/create) POST OK
+- [x] Update event title/description/date (type: events/update) PUT OK
+- [x] Delete Event (type: events/delete) DELETE OK
+- [x] Display events by shop id (type: events/shop) GET OK 

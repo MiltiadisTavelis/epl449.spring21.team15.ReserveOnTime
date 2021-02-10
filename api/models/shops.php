@@ -167,6 +167,19 @@
 			return false;
 		}
 
+		//VERIFY IF THE SHOP IS OWNED THE USER
+		public function shop_verify($u,$s){
+			$sql = 'SELECT * FROM SHOPS WHERE mngid = '.$u.' AND SHOPS.id = '.$s;
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$row = $stmt->get_result();
+				return (mysqli_num_rows($row) == 1) ? true : false;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
+			}
+		}
+
 		//CREATE NEW SHOP
 		public function create_shop(){
 			$sql = 'INSERT INTO SHOPS (
@@ -209,5 +222,50 @@
 
 			return false;
 		}
+
+		//CHECK FOR CONFLICTS IN DATABASE (NOT USED)
+		private function conflictCheck($s,$o,$c,$d){
+			$sql = 'SELECT * 
+					FROM SHOP_HOURS 
+					WHERE SHOP_HOURS.shopid = '.$s.' 
+					AND SHOP_HOURS.day = '.$d.' 
+					AND (( SHOP_HOURS.open <= "'.$o.'" AND SHOP_HOURS.close >= "'.$o.'" ) 
+					OR ( SHOP_HOURS.open <= "'.$c.'" AND  SHOP_HOURS.close >= "'.$c.'") 
+					OR (SHOP_HOURS.open >= "'.$o.'" AND SHOP_HOURS.close <= "'.$c.'"))';
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$row = $stmt->get_result();
+				return (mysqli_num_rows($row) == 0) ? $this->insertHour($s,$o,$c,$d) : false;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
+			}
+		}
+
+		//ADD NEW HOUR
+		public function addhour($arr){
+		   	$sql = 'DELETE FROM SHOP_HOURS WHERE SHOP_HOURS.shopid = '.$arr['shop_id'].' AND SHOP_HOURS.day = '.$arr['day'].'; INSERT INTO SHOP_HOURS (`shopid`, `open`, `close`, `day`) VALUES ('.$arr['shop_id'].',"'.$arr['open'].'","'.$arr['close'].'",'.$arr['day'].');';
+			if($this->conn->multi_query($sql)){
+				return true;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
+			}
+		}
+
+		//DISPLAY HOURS BY SHOP ID
+		public function showhours($s){
+		    $sql = 'SELECT open,close,day FROM SHOP_HOURS WHERE SHOP_HOURS.shopid = '.$s.' ORDER BY day';
+		    $stmt = $this->conn->prepare($sql);
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                echo "Error";
+                exit();
+            }else{
+            	mysqli_stmt_execute($stmt);
+            	$result = mysqli_stmt_get_result($stmt);
+            	return $result;
+        	}
+		}
+
 	}
 ?>

@@ -44,5 +44,5 @@ function submit() {
 
     xhr.open("GET", "http://api.reserveontime.com/action");
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
+    xhr.send(JSON.stringify(data));
 }

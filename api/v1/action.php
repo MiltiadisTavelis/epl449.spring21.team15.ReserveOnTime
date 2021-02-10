@@ -27,6 +27,10 @@
 			}elseif((strcasecmp($type, 'shops/shop') == 0) && count($data) == 1 && (isset($data['id']) != 0)){
 				include 'shops/shop.php';
 
+			//DISPLAY HOURS BY SHOP ID
+			}elseif((strcasecmp($type, 'shops/hours') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
+				include 'shops/hours.php';
+
 			}else{
 				echo $error;
 			}
@@ -106,6 +110,8 @@
 			//CREATE SHOP
 			if((strcasecmp($type, 'shops/cshop') == 0) && (count($data) == 8) && (isset($data['sname'],$data['stype'],$data['email'],$data['pnum'],$data['description'],$data['mngid'],$data['capacity'],$data['tables']) != 0)){
 				include 'shops/cshop.php';
+			}elseif((strcasecmp($type, 'shops/addhour') == 0)){
+				include 'shops/addhour.php';
 			}else{
 				echo $error;
 				http_response_code(400);
