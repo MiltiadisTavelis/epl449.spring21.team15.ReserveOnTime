@@ -26,22 +26,21 @@ function submit() {
 
     xhr.onload = function() {
         if (xhr.status === 200) {
-            console.log(xhr.responseText);
+            var response = JSON.parse(xhr.responseText);
+            var shops = response["Shops"];
+            for (entry in shops) {
+                console.log('Name: ' + shops[entry].sname);
+                console.log('Type: ' + shops[entry].stype);
+                console.log('Area: ' + shops[entry].area);
+                console.log('Tel: ' + shops[entry].pnum);
+                console.log('\n\n');
+            }
         } else {
-            var message = document.createElement('div');
-            message.setAttribute("class", "alert alert-danger text-center");
-            message.setAttribute("role", "alert");
-            message.textContent = "There was an unexpected error.";
-            var container = document.getElementById("contents");
-            container.appendChild(message);
-
-            $(".alert-danger").delay(3000).fadeOut(function() {
-                $(this).remove();
-            });
+            popUpMessage("There was an unexpected error", "danger");
         }
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/actions');
+    xhr.open('POST', 'http://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }

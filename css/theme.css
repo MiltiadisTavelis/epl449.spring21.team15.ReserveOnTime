@@ -55,3 +55,10 @@ hr {
 input[readonly] {
   background-color: white!important;
 }
+
+.popup {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
