@@ -21,28 +21,27 @@ function submit() {
 
     var xhr = new XMLHttpRequest();
     var data = {
-        type: "shops/all"
+        "type": "shops/all"
     };
 
     xhr.onload = function() {
-        if (xhr.status != 200) {
+        if (xhr.status === 200) {
+            console.log(xhr.responseText);
+        } else {
             var message = document.createElement('div');
             message.setAttribute("class", "alert alert-danger text-center");
             message.setAttribute("role", "alert");
-            message.textContent = xhr.responseText;
-            var container = document.getElementById("contents1");
+            message.textContent = "There was an unexpected error.";
+            var container = document.getElementById("contents");
             container.appendChild(message);
 
-            $(".alert-danger").delay(4000)
-                .fadeOut(function() {
-                    $(this).remove();
-                });
-        } else {
-            console.log(xhr.responseText);
+            $(".alert-danger").delay(3000).fadeOut(function() {
+                $(this).remove();
+            });
         }
     }
 
-    xhr.open("GET", "http://api.reserveontime.com/action");
+    xhr.open('POST', 'http://api.reserveontime.com/actions');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
