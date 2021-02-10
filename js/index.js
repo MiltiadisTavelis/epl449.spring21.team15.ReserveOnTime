@@ -60,7 +60,7 @@ function loadHomeShops() {
             var shopDisplay = document.getElementById("shop-display");
             if (response.hasOwnProperty('NoShopsFound')) {
                 var displayMessage = document.createElement("div");
-                displayMessage.classList.add('alert', 'alert-secondary');
+                displayMessage.classList.add('alert', 'alert-dark');
                 displayMessage.innerHTML = "There are currently no open shops.";
                 shopDisplay.appendChild(displayMessage);
                 return;
