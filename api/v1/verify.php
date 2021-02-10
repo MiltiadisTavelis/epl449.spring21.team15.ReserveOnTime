@@ -1,6 +1,7 @@
 <?php
-	header('Access-Control-Allow-Origin: *');
-	header('Content-Type: application/json');
+    header("Access-Control-Allow-Headers: Authorization, Content-Type");
+    header("Access-Control-Allow-Origin: *");
+    header('content-type: application/json; charset=utf-8');
 
 	if(!preg_match('/^[a-f0-9]{32}$/', $_GET['hash'])){
 		echo json_encode(array('HashError' => 'Please make sure you are using the right URL'));
