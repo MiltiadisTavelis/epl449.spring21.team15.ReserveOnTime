@@ -56,9 +56,17 @@ function loadHomeShops() {
     xhr.onload = function() {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
-            var shops = response["Shops"];
 
             var shopDisplay = document.getElementById("shop-display");
+            if (response.hasOwnProperty('NoShopsFound')) {
+                var displayMessage = document.createElement("div");
+                displayMessage.classList.add('alert', 'alert-secondary');
+                displayMessage.innerHTML = "There are currently no open shops.";
+                shopDisplay.appendChild(displayMessage);
+                return;
+            }
+            var shops = response["Shops"];
+
             for (entry in shops) {
                 var shop = shops[entry]
 
