@@ -37,7 +37,7 @@ hr {
     height: auto;
     display: flex;
     justify-content: center;
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
 }
 

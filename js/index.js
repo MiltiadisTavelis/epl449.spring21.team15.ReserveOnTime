@@ -34,7 +34,7 @@ function submit() {
 
             var shopDisplay = document.getElementById("shop-display");
             for (entry in shops) {
-                console.log("Name: " + shops[entry].sname);
+                var shop = shops[entry]
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");
