@@ -38,18 +38,15 @@
 
 		//DELETE PENDING SHOP BY ID
 		public function delete_pendingShop(){
-			$sql = 'DELETE FROM PENDING_SHOPS WHERE id=?';
-			$stmt = $this->conn->prepare($sql);
 			$this->id = htmlspecialchars(strip_tags($this->id));
-			$stmt->bind_param('i',$this->id);
-
+			$sql = 'CALL delete_pendingShop("'.$this->id.'")';
+			$stmt = $this->conn->prepare($sql);
 			if($stmt->execute()){
 				return true;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
 			}
-
-			printf("Error: %s.\n",$stmt->error);
-
-			return false;
-		}
 	}
+}	
 ?>
