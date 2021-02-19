@@ -19,32 +19,21 @@
 		
 		//CREATE NEW PENDING SHOP
 		public function create_pendingShop(){
-			$sql = 'INSERT INTO PENDING_SHOPS (
-							sname,
-							stype,
-							email,
-							name,
-							pnum) VALUES (?,?,?,?,?)';
-			$stmt = $this->conn->prepare($sql);
 			$this->sname = htmlspecialchars(strip_tags($this->sname));
 			$this->stype = htmlspecialchars(strip_tags($this->stype));
 			$this->email = htmlspecialchars(strip_tags($this->email));
 			$this->name = htmlspecialchars(strip_tags($this->name));
 			$this->pnum = htmlspecialchars(strip_tags($this->pnum));
 
-			$stmt->bind_param('ssssi',
-										$this->sname,
-										$this->stype,
-										$this->email,
-										$this->name,
-										$this->pnum);
+			$sql = 'CALL create_pendingShop("'.$this->sname.'","'.$this->stype.'","'.$this->email.'","'.$this->name.'"
+			,"'.$this->pnum.'")';
+			$stmt = $this->conn->prepare($sql);
 			if($stmt->execute()){
 				return true;
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				return false;
 			}
-
-			printf("Error: %s.\n",$stmt->error);
-
-			return false;
 		}
 
 		//DELETE PENDING SHOP BY ID
