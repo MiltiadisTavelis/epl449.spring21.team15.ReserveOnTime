@@ -20,3 +20,24 @@
 .card-body * {
     color: black;
 }
+
+.grey-text {
+    color: #BDBDBD
+}
+
+.white-text {
+    color: #FFFFFF
+}
+
+.checked {
+  color: orange;
+}
+
+.rate-hr {
+	width: 80%;
+	margin: auto;
+}
+
+.uname{
+	margin-top: 10px;
+}
