@@ -24,7 +24,7 @@
 	if(isset($data['sort']) && ((strcasecmp($data['sort'], 'newest') == 0) || (strcasecmp($data['sort'], 'oldest') == 0) || (strcasecmp($data['sort'], 'rating') == 0)) ){
 		$shops->sort = $data['sort'];
 	}
-	if(isset($data['open']) && $data['open'] == 1){
+	if(isset($data['open']) && $data['open'] == 1 || $data['open'] == 0){
 		$shops->open = $data['open'];
 	}
 	if(isset($data['city']) && $data['city'] == 1){
