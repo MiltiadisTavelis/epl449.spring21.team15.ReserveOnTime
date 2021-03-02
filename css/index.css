@@ -8,10 +8,15 @@ h4 {
     text-align: left;
 }
 
-#shop-display {
+.shop-display {
     white-space: nowrap;
     overflow-y: hidden;
     overflow-x: auto;
+}
+
+.shop-display * {
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .card {
