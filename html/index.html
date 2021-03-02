@@ -54,7 +54,7 @@
             <h3>Reserve your favorite spot on time</h3>
             <form>
                 <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
@@ -62,7 +62,7 @@
                             <input readonly type="text" id="date-input" class="form-control datepicker" value="" placeholder="Pick a date">
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-clock"></i></span>
@@ -70,7 +70,7 @@
                             <input readonly type="text" id="time-input" class="form-control clockpicker" value="" placeholder="Pick a time">
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
@@ -84,7 +84,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-store"></i></div>
@@ -95,27 +95,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-2 col-xl-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <select id="people-input" class="custom-select">
-                                <option value="" disabled>People</option>
-                                <option value="1" selected>1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="3">4</option>
-                                <option value="2">5</option>
-                                <option value="3">6</option>
-                                <option value="3">7</option>
-                                <option value="2">8</option>
-                                <option value="3">9</option>
-                                <option value="3">10+</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-6">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-12 col-xl-12">
                         <div class="input-group">
                             <input id="keyword-input" class="form-control" type="search" placeholder="Shop Name" aria-describedby="button-addon5">
                             <div class="input-group-append">
@@ -125,6 +105,10 @@
                     </div>
                 </div>
             </form>
+            <div id="search-shops" class="d-none shop-display">
+                <h4>Results</h4>
+                <hr/>
+            </div>
             <div id="toprated-shops" class="shop-display">
                 <h4>Top Rated Shops</h4>
                 <hr/>

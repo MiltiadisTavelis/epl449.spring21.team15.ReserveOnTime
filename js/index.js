@@ -63,6 +63,7 @@ function loadShopTypes() {
             for (entry in types) {
                 var type = document.createElement("option");
                 type.text = types[entry].type;
+                type.value = types[entry].id;
                 comboBox.add(type);
             }
         } else {
@@ -79,7 +80,7 @@ function loadTopRatedShops() {
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "shops/all",
-        "open": "1"
+        "sort": "rating"
     };
 
     xhr.onload = function() {
