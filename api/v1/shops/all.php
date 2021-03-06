@@ -31,6 +31,21 @@
 		$shops->city = $data['city'];
 	}	
 
+	if(isset($data['time']) && preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/", $data['time'])){
+		$shops->checkTime = $data['time'];
+	}	
+
+	if(isset($data['day'])){
+		$date = $data['day'];
+		$date = str_replace('/', '-', $data['day']);
+		if(false !== strtotime($date)){
+			list($day, $month, $year) = explode('-', $date); 
+			if(checkdate($day, $month, $year)){
+				$shops->checkDay = str_replace('/', '-', $data['day']);
+			}
+		}
+	}	
+
 	$results = $shops->shops();
 	$cnt = mysqli_num_rows($results);
 	$json = array();
