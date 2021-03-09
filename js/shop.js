@@ -13,6 +13,146 @@ $('.clockpicker').clockpicker({
     donetext: ''
 });
 
+var shopname;
+
+loadShopContent();
+function loadShopContent() {
+    var url = window.location.href;
+    let id = url ? url.split('?').pop() : window.location.search.slice(1);
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/shop",
+        "id": id
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            var name = document.getElementById("shop-name");
+            console.log(response);
+            if (response.hasOwnProperty('NoShopsFound')) {
+                var displayMessage = document.createElement("div");
+                displayMessage.classList.add('alert', 'alert-dark');
+                displayMessage.innerHTML = "Null Shop";
+                name.appendChild(displayMessage);
+                return;
+            }
+            shopname = response.sname;
+            name.innerText = response.sname;
+            document.getElementById('type').innerText = response.stype;
+            document.getElementById('description').innerText = response.description;
+            document.getElementById('rating').innerText = response.rating;
+
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+
+    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
+loadShopPhotos();
+function loadShopPhotos() {
+    var pictures = document.getElementById("photos");
+
+    var carousel = document.createElement("div");
+    carousel.setAttribute("id","photo-carousel");
+    carousel.classList.add("carousel", "slide");
+    carousel.setAttribute("data-ride","carousel");
+
+    var ol = document.createElement("ol");
+    ol.classList.add("carousel-indicators");
+
+    var li = document.createElement("li");
+    li.setAttribute("data-slide-to","0");
+    li.setAttribute("data-target","#indicators");
+    li.classList.add("active");
+    ol.appendChild(li);
+
+    li = document.createElement("li");
+    li.setAttribute("data-slide-to","1");
+    li.setAttribute("data-target","#indicators");
+    ol.appendChild(li);
+
+    li = document.createElement("li");
+    li.setAttribute("data-slide-to","2");
+    li.setAttribute("data-target","#indicators");
+    ol.appendChild(li);
+
+    carousel.appendChild(ol);
+
+    var photos = document.createElement("div");
+    photos.classList.add("carousel-inner");
+
+    var p = document.createElement("div");
+    p.classList.add("carousel-item","active");
+
+    var pi = document.createElement("img");
+    pi.classList.add("d-block","w-100");
+    pi.setAttribute("src","https://dummyimage.com/200/000/fff&text=Test");
+    p.appendChild(pi);
+    photos.appendChild(p);
+
+    p = document.createElement("div");
+    p.classList.add("carousel-item");
+
+    pi = document.createElement("img");
+    pi.classList.add("d-block","w-100");
+    pi.setAttribute("src","https://dummyimage.com/200/000/fff&text=Test2");
+    p.appendChild(pi);
+    photos.appendChild(p);
+
+    p = document.createElement("div");
+    p.classList.add("carousel-item");
+
+    pi = document.createElement("img");
+    pi.classList.add("d-block","w-100");
+    pi.setAttribute("src","https://dummyimage.com/200/000/fff&text=Test3");
+    p.appendChild(pi);
+    photos.appendChild(p);
+
+    carousel.appendChild(photos);
+
+    var a = document.createElement("a");
+    a.classList.add("carousel-control-prev");
+    a.setAttribute("role", "button");
+    a.setAttribute("href","#indicators");
+    a.setAttribute("data-slide", "prev");
+
+    var span = document.createElement("span");
+    span.classList.add("carousel-control-prev-icon");
+    span.setAttribute("aria-hidden", "true");
+    a.appendChild(span);
+    span = document.createElement("span");
+    span.classList.add("sr-only");
+    span.innerText = "Preview";
+    a.appendChild(span);
+
+    carousel.appendChild(a);
+
+    a = document.createElement("a");
+    a.classList.add("carousel-control-next");
+    a.setAttribute("role", "button");
+    a.setAttribute("href","#indicators");
+    a.setAttribute("data-slide", "next");
+
+    var span = document.createElement("span");
+    span.classList.add("carousel-control-next-icon");
+    span.setAttribute("aria-hidden", "true");
+    a.appendChild(span);
+    span = document.createElement("span");
+    span.classList.add("sr-only");
+    span.innerText = "Next";
+    a.appendChild(span);
+
+    carousel.appendChild(a);
+    pictures.appendChild(carousel);
+
+}
+
 loadReviews();
 function loadReviews() {
     var url = window.location.href;
@@ -99,37 +239,111 @@ function loadReviews() {
     xhr.send(JSON.stringify(data));
 }
 
-loadShopContent();
-function loadShopContent() {
+const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+];
+
+function checkTime(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
+
+loadEvents();
+function loadEvents() {
     var url = window.location.href;
-	let id = url ? url.split('?').pop() : window.location.search.slice(1);
+    let id = url ? url.split('?').pop() : window.location.search.slice(1);
     var xhr = new XMLHttpRequest();
     var data = {
-        "type": "shops/shop",
-        "id": id
+        "type": "events/shop",
+        "shop_id": id
     };
 
     xhr.onload = function() {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
 
-            var name = document.getElementById("shop-name");
-            console.log(response);
-            if (response.hasOwnProperty('NoShopsFound')) {
+            var main = document.getElementById("events");
+
+            if (response.hasOwnProperty('NoEventsFound')) {
                 var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
-                displayMessage.innerHTML = "Null Shop";
-                name.appendChild(displayMessage);
+                displayMessage.innerHTML = "There are no Events on the Shop.";
+                main.appendChild(displayMessage);
                 return;
             }
-            name.innerText = response.sname;
-            document.getElementById('type').innerText = response.stype;
-            document.getElementById('description').innerText = response.description;
-            document.getElementById('rating').innerText = response.rating;
+            var events = response["Events"];
 
+            for (entry in events) {
+                var event = events[entry]
+
+                // CREATE ROW FOR EVERY EVENT
+                var list = document.createElement("div");
+                list.classList.add("row", "mx-auto", "d-flex", "justify-content-center","col-12");
+
+                var card = document.createElement("article");
+                card.classList.add("event-card","fl");
+
+                var date = document.createElement('section');
+                date.classList.add("date");
+
+                var start = new Date(event.start_date.replace(/-/g, "/"));
+
+                var time = document.createElement("time");
+                time.setAttribute("datetime", start.getDate() + " " + monthNames[start.getMonth()]);
+
+                var day = document.createElement("span");
+                day.innerText = start.getDate();
+
+                var month = document.createElement("span");
+                month.innerText = monthNames[start.getMonth()];
+
+                time.appendChild(day);
+                time.appendChild(month);
+                date.appendChild(time);
+                card.appendChild(date);
+
+                var cont = document.createElement('section');
+                cont.classList.add("card-cont");
+
+                var name = document.createElement("small");
+                name.innerText = shopname;
+                cont.appendChild(name);
+
+                var title = document.createElement("h3");
+                title.classList.add("title");
+                title.innerText = event.title;
+                cont.appendChild(title);
+
+                var desc = document.createElement("p");
+                desc.classList.add("desc");
+                desc.innerText = event.content;
+                cont.appendChild(desc);
+
+                var button = document.createElement("a");
+                button.setAttribute("href",event.link);
+                button.innerText = "Link";
+                cont.appendChild(button);
+                console.log("hey");
+
+                // start.getDate();
+                // det.innerText = monthNames[start.getMonth()];
+                // det.innerText = start.getFullYear();
+                // var h = start.getHours();
+                // var m = checkTime(start.getMinutes());
+                // det.innerText = h + ":" + m;
+
+                card.appendChild(cont);
+                list.appendChild(card);
+                main.appendChild(list);
+            }
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        var line = document.createElement('hr');
+        line.classList.add('rate-hr');
+        main.appendChild(line);
     }
 
     xhr.open('POST', 'http://api.reserveontime.com/action');
