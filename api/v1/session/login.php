@@ -25,7 +25,7 @@
 			$msg['status'] = 'Wrong email or password';
 			echo json_encode($msg);
 		}elseif($result == "1"){
-			$msg['status'] = 'Welcome '.$_SESSION['user_name'];
+			$msg['message'] = 'Welcome '.$_SESSION['user_name'];
 			echo json_encode($msg);
 		}elseif($result == "3"){
 			$msg['status'] = 'Please verify your account';
@@ -34,6 +34,8 @@
 			$msg['status'] = 'Server Error! Please try again';
 			echo json_encode($msg);
 		}
+		http_response_code(403);
+		
 	}else{
 		$msg['message'] = 'Your name is '.$_SESSION['user_name'];
 		echo json_encode($msg);
