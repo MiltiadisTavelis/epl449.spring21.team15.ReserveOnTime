@@ -23,6 +23,8 @@
 		public $open;
 		public $city;
 		public $avg_rating;
+		public $checkTime;
+		public $checkDay;
 
 		public function __construct($db)
 		{
@@ -66,6 +68,7 @@
 			// }elseif(isset($sort) && (strcasecmp($sort, 'Z to A') == 0)){
 			//     $where[] = 'ORDER BY reg_date DESC';
 			// }
+
 			if(isset($this->open) && $this->open == 1){
 				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
 				$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
@@ -74,6 +77,12 @@
 				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
 				$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
 				$where[] = 'NOT (SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'") AND SHOPS.id NOT IN (SELECT DISTINCT shopid FROM SHOPS,SHOP_HOURS WHERE SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'")';
+			}else if(isset($this->checkTime) && !isset($this->checkDay)){
+				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
+				$where[] = 'SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
+			}else if(isset($this->checkTime) && isset($this->checkDay)){
+				$day = date('N', strtotime($this->checkDay)); //DAY NUMBER MON=1 .. 
+				$where[] = 'SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
 			}
 
 			$where_string = implode(' AND ' , $where);
