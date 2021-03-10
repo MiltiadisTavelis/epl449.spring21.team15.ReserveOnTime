@@ -17,8 +17,8 @@ function submit() {
             } else if (response["status"] === '1') {
                 popUpMessage(response["status"], "success");
                 window.setTimeout(function() {
-                        window.location = "index.html";, 1000);
-                }
+                    window.location = "index.html";
+                }, 1000);
             }
         } else {
             popUpMessage("Unexpected error", "danger");
