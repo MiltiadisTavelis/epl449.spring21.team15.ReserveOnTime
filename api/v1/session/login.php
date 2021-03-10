@@ -25,7 +25,6 @@
             $msg['status'] = 'Welcome '.$_SESSION['user_name'];
             echo json_encode($msg);
         } else {
-            http_response_code(403);
             if($result == "0"){
                 $msg['status'] = 'Wrong email or password';
                 echo json_encode($msg);
@@ -36,6 +35,7 @@
                 $msg['status'] = 'Server Error! Please try again';
                 echo json_encode($msg);
             }
+            http_response_code(403);
         }
 	}else{
 		$msg['message'] = 'Your name is '.$_SESSION['user_name'];
