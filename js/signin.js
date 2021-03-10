@@ -1,5 +1,4 @@
 function submit() {
-    var error = document.getElementById('pass');
     var email = document.getElementById('email-input');
     var pass = document.getElementById('password-input');
     var xhr = new XMLHttpRequest();
@@ -10,15 +9,17 @@ function submit() {
     };
 
     xhr.onload = function() {
-        var response = JSON.parse(xhr.responseText);
         if (xhr.status === 200) {
-            popUpMessage(response["status"], "success");
+            var response = JSON.parse(xhr.responseText);
 
-            //window.setTimeout(function() {
-            //    window.location = "index.html";
-            //, 1000);
-        } else if (xhr.status === 403) {
-            popUpMessage(response["status"], "danger");
+            if (response["status"] === '0') {
+                popUpMessage(response["status"], "danger");
+            } else if (response["status"] === '1') {
+                popUpMessage(response["status"], "success");
+                window.setTimeout(function() {
+                        window.location = "index.html";, 1000);
+                }
+            }
         } else {
             popUpMessage("Unexpected error", "danger");
         }
