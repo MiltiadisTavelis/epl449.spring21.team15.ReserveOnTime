@@ -12,10 +12,10 @@ function submit() {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
 
-            if (response["status"] === '0') {
-                popUpMessage(response["status"], "danger");
-            } else if (response["status"] === '1') {
-                popUpMessage(response["status"], "success");
+            if (response["status"] === 0) {
+                popUpMessage(response["message"], "danger");
+            } else if (response["status"] === 1) {
+                popUpMessage(response["message"], "success");
                 window.setTimeout(function() {
                     window.location = "index.html";
                 }, 1000);
