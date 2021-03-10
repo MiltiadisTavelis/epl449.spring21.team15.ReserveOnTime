@@ -16,11 +16,6 @@ h4 {
     overflow-x: auto;
 }
 
-.shop-display * {
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
 .card {
     height: 620px;
     white-space: normal;

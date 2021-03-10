@@ -23,7 +23,7 @@
 		$result = $session->login();
         $msg['status'] = $result;
         if($result == "1") {
-            $msg['message'] = 'Welcome '.$_SESSION['user_name'];
+            $msg['message'] = 'Welcome '.$_SESSION['user_name']. '!';
             echo json_encode($msg);
         } else {
             if($result == "0"){
