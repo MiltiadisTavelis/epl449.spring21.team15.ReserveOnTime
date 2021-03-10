@@ -83,6 +83,9 @@
 			}else if(isset($this->checkTime) && isset($this->checkDay)){
 				$day = date('N', strtotime($this->checkDay)); //DAY NUMBER MON=1 .. 
 				$where[] = 'SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
+			}else if(!isset($this->checkTime) && isset($this->checkDay)){
+				$day = date('N', strtotime($this->checkDay)); //DAY NUMBER MON=1 .. 
+				$where[] = 'SHOP_HOURS.day = '.$day;
 			}
 
 			$where_string = implode(' AND ' , $where);
