@@ -164,6 +164,8 @@
 				include 'session/manager.php';
 			}elseif((strcasecmp($type, 'session/logout') == 0) && (count($data) == 0)){
 				include 'session/logout.php';
+			}elseif((strcasecmp($type, 'session/islogin') == 0) && (count($data) == 0)){
+				include 'session/islogin.php';
 			}else{
 				echo $error;
 				http_response_code(400);
