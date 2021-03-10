@@ -1,31 +1,34 @@
 bootstrapValidate('#email-input', 'email:Please enter a valid e-mail address.')
 bootstrapValidate('#password-input', 'min:8:The password must be atleast 8 characters long.')
 
+const submitButton = document.getElementById('submit-button');
+//submitButton.onclick = signIn;
+
 function signIn() {
+    event.stopPropagation();
+
     var error = document.getElementById('pass');
- 	var email = document.getElementById('email-input');
-	var pass = document.getElementById('password-input');
-   	var xhr = new XMLHttpRequest();
+    var email = document.getElementById('email-input');
+    var pass = document.getElementById('password-input');
+    var xhr = new XMLHttpRequest();
     var data = {
         "type": "session/login",
         "email": email.value,
         "password": pass.value
     };
 
-    xhr.onload = function(){
+    xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
         if (xhr.status === 200) {
-            popUpMessage(response["status"],"success");
+            popUpMessage(response["status"], "success");
             //window.location = "www.reserveontime.com";
             window.setTimeout(function() {
-               window.location = "index.html";
+                window.location = "index.html";
             }, 1000);
 
-        }
-        else if (xhr.status === 403){
+        } else if (xhr.status === 403) {
             popUpMessage(response["status"], "danger");
-        }
-        else{
+        } else {
             popUpMessage("Unexpected error", "danger");
         }
     }
