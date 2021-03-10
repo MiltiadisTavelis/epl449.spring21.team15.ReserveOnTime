@@ -48,6 +48,12 @@ function formPage() {
     xhr.send(JSON.stringify(data));
 }
 
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 function search() {
     event.preventDefault();
     event.stopPropagation();
@@ -73,6 +79,7 @@ function search() {
             var response = JSON.parse(xhr.responseText);
             var shopDisplay = document.getElementById("search-shops");
             shopDisplay.classList.remove('d-none')
+            removeAllChildNodes(shopDisplay)
 
             if (response.hasOwnProperty('NoShopsFound')) {
                 var displayMessage = document.createElement("div");

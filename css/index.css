@@ -10,7 +10,7 @@ h4 {
 
 .shop-display {
     padding: 0px;
-    margin: 50px 0px;
+    margin-bottom: 50px;
     white-space: nowrap;
     overflow-y: hidden;
     overflow-x: auto;
