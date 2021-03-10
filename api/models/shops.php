@@ -61,7 +61,7 @@
 			}elseif(isset($this->sort) && (strcasecmp($this->sort, 'newest') == 0)){
 			    $order = 'ORDER BY reg_date DESC';
 			}elseif(isset($this->sort) && (strcasecmp($this->sort, 'rating') == 0)){
-			    $order = 'ORDER BY avg_rating LIMIT 10 DESC';
+			    $order = 'ORDER BY avg_rating DESC LIMIT 10';
 			}
 			// elseif(isset($sort) && (strcasecmp($sort, 'A to Z') == 0)){
 			//     $where[] = 'ORDER BY sname';
