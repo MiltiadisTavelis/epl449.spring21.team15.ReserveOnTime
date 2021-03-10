@@ -55,25 +55,31 @@ function search() {
     var date = document.getElementById('date-input');
     var time = document.getElementById('time-input');
     var city = document.getElementById('shop-city-input');
-    var type = document.getElementById('shop-type-input');
+    var stype = document.getElementById('shop-type-input');
     var keyword = document.getElementById('keyword-input');
 
     var xhr = new XMLHttpRequest();
     var data = {
-        "type": "shops/all"
+        "type": "shops/all",
+        "date": date.value,
+        "time": time.value,
+        "city": city.value,
+        "stype": stype.value,
+        "sname": keyword.value
     };
 
     xhr.onload = function() {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
+            var shopDisplay = document.getElementById("search-shops");
+            shopDisplay.classList.remove('d-none')
 
-            var shopDisplay = document.getElementById("toprated-shops");
             if (response.hasOwnProperty('NoShopsFound')) {
                 var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
                 displayMessage.innerHTML = "No shops meet the criteria";
                 shopDisplay.appendChild(displayMessage);
-                return;
+                return
             }
             var shops = response["Shops"];
 
