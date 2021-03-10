@@ -10,7 +10,7 @@ window.addEventListener('load', function() {
             event.stopPropagation();
 
             if (form.checkValidity() === true) {
-                submit()
+                submit();
             }
 
             form.classList.add('was-validated');
