@@ -1,5 +1,3 @@
-bootstrapValidate('#people-input', 'integer:Please choose a valid amount of people.')
-
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
@@ -16,6 +14,7 @@ $('.clockpicker').clockpicker({
 var shopname;
 
 loadShopContent();
+
 function loadShopContent() {
     var url = window.location.href;
     let id = url ? url.split('?').pop() : window.location.search.slice(1);
@@ -55,31 +54,32 @@ function loadShopContent() {
 }
 
 loadShopPhotos();
+
 function loadShopPhotos() {
     var pictures = document.getElementById("photos");
 
     var carousel = document.createElement("div");
-    carousel.setAttribute("id","photo-carousel");
+    carousel.setAttribute("id", "photo-carousel");
     carousel.classList.add("carousel", "slide");
-    carousel.setAttribute("data-ride","carousel");
+    carousel.setAttribute("data-ride", "carousel");
 
     var ol = document.createElement("ol");
     ol.classList.add("carousel-indicators");
 
     var li = document.createElement("li");
-    li.setAttribute("data-slide-to","0");
-    li.setAttribute("data-target","#indicators");
+    li.setAttribute("data-slide-to", "0");
+    li.setAttribute("data-target", "#indicators");
     li.classList.add("active");
     ol.appendChild(li);
 
     li = document.createElement("li");
-    li.setAttribute("data-slide-to","1");
-    li.setAttribute("data-target","#indicators");
+    li.setAttribute("data-slide-to", "1");
+    li.setAttribute("data-target", "#indicators");
     ol.appendChild(li);
 
     li = document.createElement("li");
-    li.setAttribute("data-slide-to","2");
-    li.setAttribute("data-target","#indicators");
+    li.setAttribute("data-slide-to", "2");
+    li.setAttribute("data-target", "#indicators");
     ol.appendChild(li);
 
     carousel.appendChild(ol);
@@ -88,11 +88,11 @@ function loadShopPhotos() {
     photos.classList.add("carousel-inner");
 
     var p = document.createElement("div");
-    p.classList.add("carousel-item","active");
+    p.classList.add("carousel-item", "active");
 
     var pi = document.createElement("img");
-    pi.classList.add("d-block","w-100");
-    pi.setAttribute("src","https://dummyimage.com/200/000/fff&text=Test");
+    pi.classList.add("d-block", "w-100");
+    pi.setAttribute("src", "https://dummyimage.com/200/000/fff&text=Test");
     p.appendChild(pi);
     photos.appendChild(p);
 
@@ -100,8 +100,8 @@ function loadShopPhotos() {
     p.classList.add("carousel-item");
 
     pi = document.createElement("img");
-    pi.classList.add("d-block","w-100");
-    pi.setAttribute("src","https://dummyimage.com/200/000/fff&text=Test2");
+    pi.classList.add("d-block", "w-100");
+    pi.setAttribute("src", "https://dummyimage.com/200/000/fff&text=Test2");
     p.appendChild(pi);
     photos.appendChild(p);
 
@@ -109,8 +109,8 @@ function loadShopPhotos() {
     p.classList.add("carousel-item");
 
     pi = document.createElement("img");
-    pi.classList.add("d-block","w-100");
-    pi.setAttribute("src","https://dummyimage.com/200/000/fff&text=Test3");
+    pi.classList.add("d-block", "w-100");
+    pi.setAttribute("src", "https://dummyimage.com/200/000/fff&text=Test3");
     p.appendChild(pi);
     photos.appendChild(p);
 
@@ -119,7 +119,7 @@ function loadShopPhotos() {
     var a = document.createElement("a");
     a.classList.add("carousel-control-prev");
     a.setAttribute("role", "button");
-    a.setAttribute("href","#indicators");
+    a.setAttribute("href", "#indicators");
     a.setAttribute("data-slide", "prev");
 
     var span = document.createElement("span");
@@ -136,7 +136,7 @@ function loadShopPhotos() {
     a = document.createElement("a");
     a.classList.add("carousel-control-next");
     a.setAttribute("role", "button");
-    a.setAttribute("href","#indicators");
+    a.setAttribute("href", "#indicators");
     a.setAttribute("data-slide", "next");
 
     var span = document.createElement("span");
@@ -154,9 +154,10 @@ function loadShopPhotos() {
 }
 
 loadReviews();
+
 function loadReviews() {
     var url = window.location.href;
-	let id = url ? url.split('?').pop() : window.location.search.slice(1);
+    let id = url ? url.split('?').pop() : window.location.search.slice(1);
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "reviews/shop",
@@ -185,53 +186,53 @@ function loadReviews() {
                 var card = document.createElement("div");
                 card.classList.add('review');
 
-        		var line = document.createElement('hr');
-        		line.classList.add('rate-hr');
-				card.appendChild(line);
+                var line = document.createElement('hr');
+                line.classList.add('rate-hr');
+                card.appendChild(line);
 
-	            var nameTime = document.createElement('div');
-	          //  nameTime.classList.add('d-flex','flex-column','pl-3');
+                var nameTime = document.createElement('div');
+                //  nameTime.classList.add('d-flex','flex-column','pl-3');
 
-	            var name = document.createElement('h4');
-	            name.classList.add('uname');
-	            name.innerText = review.fname;
-	            nameTime.appendChild(name);
+                var name = document.createElement('h4');
+                name.classList.add('uname');
+                name.innerText = review.fname;
+                nameTime.appendChild(name);
 
-	            var time = document.createElement('small');
-	            time.classList.add('grey-text');
-	            time.innerText = review.sub_date.split(' ')[0];
-	            nameTime.appendChild(time);
-	            card.appendChild(nameTime);
+                var time = document.createElement('small');
+                time.classList.add('grey-text');
+                time.innerText = review.sub_date.split(' ')[0];
+                nameTime.appendChild(time);
+                card.appendChild(nameTime);
 
-	            var rating = document.createElement('div');
-	            for(var i = 1; i<=5; i++){
-	            	if(i<=parseInt(review.rating)){
-	            		var star = document.createElement('div');
-	            		star.classList.add('fa','fa-star','checked');
-	            	}else{
-	            		var star = document.createElement('div');
-	            		star.classList.add('fa','fa-star');
-	            	}
-	            	rating.appendChild(star);
-	            }
-	            card.appendChild(rating);
+                var rating = document.createElement('div');
+                for (var i = 1; i <= 5; i++) {
+                    if (i <= parseInt(review.rating)) {
+                        var star = document.createElement('div');
+                        star.classList.add('fa', 'fa-star', 'checked');
+                    } else {
+                        var star = document.createElement('div');
+                        star.classList.add('fa', 'fa-star');
+                    }
+                    rating.appendChild(star);
+                }
+                card.appendChild(rating);
 
 
-		        var description = document.createElement("div");   
-		        var descriptionContent =  document.createElement('p');
-		        descriptionContent.classList.add('white-text');
-		        descriptionContent.innerText = review.content; 
-		        description.appendChild(descriptionContent); 
-		       	card.appendChild(description); 
+                var description = document.createElement("div");
+                var descriptionContent = document.createElement('p');
+                descriptionContent.classList.add('white-text');
+                descriptionContent.innerText = review.content;
+                description.appendChild(descriptionContent);
+                card.appendChild(description);
 
-               	main.appendChild(card);
+                main.appendChild(card);
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
         var line = document.createElement('hr');
         line.classList.add('rate-hr');
-		main.appendChild(line);
+        main.appendChild(line);
     }
 
     xhr.open('POST', 'http://api.reserveontime.com/action');
@@ -240,17 +241,18 @@ function loadReviews() {
 }
 
 const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
 ];
 
 function checkTime(i) {
-  if (i < 10) {
-    i = "0" + i;
-  }
-  return i;
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
 }
 
 loadEvents();
+
 function loadEvents() {
     var url = window.location.href;
     let id = url ? url.split('?').pop() : window.location.search.slice(1);
@@ -280,10 +282,10 @@ function loadEvents() {
 
                 // CREATE ROW FOR EVERY EVENT
                 var list = document.createElement("div");
-                list.classList.add("row", "mx-auto", "d-flex", "justify-content-center","col-12");
+                list.classList.add("row", "mx-auto", "d-flex", "justify-content-center", "col-12");
 
                 var card = document.createElement("article");
-                card.classList.add("event-card","fl");
+                card.classList.add("event-card", "fl");
 
                 var date = document.createElement('section');
                 date.classList.add("date");
@@ -322,7 +324,7 @@ function loadEvents() {
                 cont.appendChild(desc);
 
                 var button = document.createElement("a");
-                button.setAttribute("href",event.link);
+                button.setAttribute("href", event.link);
                 button.innerText = "Link";
                 cont.appendChild(button);
                 console.log("hey");
