@@ -48,7 +48,7 @@ function loadShopContent() {
         }
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
@@ -235,7 +235,7 @@ function loadReviews() {
         main.appendChild(line);
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
@@ -348,7 +348,7 @@ function loadEvents() {
         main.appendChild(line);
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }

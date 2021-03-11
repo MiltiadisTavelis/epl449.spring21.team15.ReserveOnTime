@@ -24,7 +24,7 @@ function submit() {
             popUpMessage("Unexpected error", "danger");
         }
     }
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }

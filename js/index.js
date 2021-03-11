@@ -43,7 +43,7 @@ function formPage() {
         }
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
@@ -146,7 +146,7 @@ function search() {
         }
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
@@ -174,7 +174,7 @@ function loadShopTypes() {
         }
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
@@ -256,7 +256,7 @@ function loadTopRatedShops() {
         }
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
@@ -338,7 +338,7 @@ function loadOpenShops() {
         }
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
@@ -420,7 +420,7 @@ function loadClosedShops() {
         }
     }
 
-    xhr.open('POST', 'http://api.reserveontime.com/action');
+    xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
