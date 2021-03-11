@@ -47,7 +47,7 @@ function loadShopContent() {
             popUpMessage("There was an unexpected error", "danger");
         }
     }
-
+    xhr.withCredentials = true;
     xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
@@ -234,7 +234,7 @@ function loadReviews() {
         line.classList.add('rate-hr');
         main.appendChild(line);
     }
-
+    xhr.withCredentials = true;
     xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
@@ -347,7 +347,7 @@ function loadEvents() {
         line.classList.add('rate-hr');
         main.appendChild(line);
     }
-
+    xhr.withCredentials = true;
     xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));

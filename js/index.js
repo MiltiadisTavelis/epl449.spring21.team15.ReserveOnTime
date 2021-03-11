@@ -42,7 +42,7 @@ function formPage() {
             popUpMessage("There was an unexpected error", "danger");
         }
     }
-
+    xhr.withCredentials = true;
     xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
@@ -145,7 +145,7 @@ function search() {
             popUpMessage("There was an unexpected error", "danger");
         }
     }
-
+    xhr.withCredentials = true;
     xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
@@ -173,7 +173,7 @@ function loadShopTypes() {
             popUpMessage("There was an unexpected error", "danger");
         }
     }
-
+    xhr.withCredentials = true;
     xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
@@ -255,7 +255,7 @@ function loadTopRatedShops() {
             popUpMessage("There was an unexpected error", "danger");
         }
     }
-
+    xhr.withCredentials = true;
     xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
@@ -337,7 +337,7 @@ function loadOpenShops() {
             popUpMessage("There was an unexpected error", "danger");
         }
     }
-
+    xhr.withCredentials = true;
     xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
@@ -419,7 +419,7 @@ function loadClosedShops() {
             popUpMessage("There was an unexpected error", "danger");
         }
     }
-
+    xhr.withCredentials = true;
     xhr.open('POST', 'https://api.reserveontime.com/action');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));

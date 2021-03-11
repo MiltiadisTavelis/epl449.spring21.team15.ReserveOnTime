@@ -1,9 +1,11 @@
 <?php
-    header("Access-Control-Allow-Headers: Authorization, Content-Type");
-    header("Access-Control-Allow-Origin: *");
-    header('content-type: application/json; charset=utf-8');
 
-	session_start();
+    session_start();
+
+    header("Access-Control-Allow-Headers: Authorization, Content-Type");
+    header("Access-Control-Allow-Origin: https://reserveontime.com");
+    header("Access-Control-Allow-Credentials: true");
+    header('content-type: application/json; charset=utf-8');
 	
  	$error = json_encode(array('status' => 'Bad Request'));
 	if((strcasecmp($_SERVER['REQUEST_METHOD'], 'POST')) == 0 && (strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0){
