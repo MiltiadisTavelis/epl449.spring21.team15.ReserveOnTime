@@ -17,7 +17,19 @@
 
 	$user->fname = $data->fname;
 	$user->lname = $data->lname;
-	$user->birth = $data->birth;
+
+	if(isset($data->birth)){
+		$date = $data->birth;
+		$date = str_replace('/', '-', $date);
+		if(false !== strtotime($date)){
+			list($day, $month, $year) = explode('-', $date); 
+			if(checkdate($day, $month, $year)){
+				$date = str_replace('/', '-', $data->birth);
+				$user->birth = date('Y-m-d', strtotime($date));
+			}
+		}
+	}
+	
 	$user->gender = $data->gender;
 	$user->phone_code = $data->phone_code;
 	$user->pnum = $data->pnum;
