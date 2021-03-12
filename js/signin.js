@@ -1,4 +1,3 @@
-var api = ""; // your xampp path to action.php example: "http://192.168.64.4/api/v1/action"
 
 function submit() {
     var email = document.getElementById('email-input');
