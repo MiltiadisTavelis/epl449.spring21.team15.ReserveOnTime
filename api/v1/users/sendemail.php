@@ -162,11 +162,5 @@
    </body>
 </html>
 ';
-
-		if($mail->send() == false){
-		    $msg['status'] = 'Email Error ! '.$mail->ErrorInfo;
-			echo json_encode($msg);
-		}
-		echo json_encode(array('link' => $result));
 	}
 ?>
