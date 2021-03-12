@@ -13,7 +13,7 @@ $('.clockpicker').clockpicker({
     donetext: ''
 });
 
-const signout = document.getElementById('signout-btn');
+const signout = document.getElementById('logout-btn');
 signout.onclick = logout;
 
 function logout() {
