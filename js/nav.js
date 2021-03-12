@@ -1,5 +1,3 @@
-var api = ""; // your xampp path to action.php example: "http://192.168.64.4/api/v1/action"
-
 const signout = document.getElementById('signout-btn');
 signout.onclick = logout;
 
