@@ -33,12 +33,12 @@ function submit() {
             var response = JSON.parse(xhr.responseText);
 
             if (response.hasOwnProperty("status")) {
-                popUpMessage(response["message"], "success");
+                popUpMessage(response["status"], "success");
                 window.setTimeout(function() {
                     window.location = "signin.html";
                 }, 1000);
             } else {
-                popUpMessage(response["message"], "danger");
+                popUpMessage("Unexpected error", "danger");
             }
         } else {
             popUpMessage("Unexpected error", "danger");
