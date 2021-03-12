@@ -22,7 +22,7 @@ function submit() {
                     window.location = "index.html";
                 }, 1000);
             } else if(response["status"] === 3){
-                popUpMessage(response["message"], "verify");
+                popUpMessage(response["message"], "danger");
             }
         } else {
             popUpMessage("Unexpected error", "danger");
