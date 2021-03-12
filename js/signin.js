@@ -21,6 +21,8 @@ function submit() {
                 window.setTimeout(function() {
                     window.location = "index.html";
                 }, 1000);
+            } else if(response["status"] === 3){
+                popUpMessage(response["message"], "verify");
             }
         } else {
             popUpMessage("Unexpected error", "danger");
