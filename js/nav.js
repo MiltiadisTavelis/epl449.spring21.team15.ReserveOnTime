@@ -1,5 +1,3 @@
-var api = "";
-
 const signout = document.getElementById('signout-btn');
 signout.onclick = logout;
 
