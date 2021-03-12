@@ -1,3 +1,5 @@
+var api = ""; // your xampp path to action.php example: "http://192.168.64.4/api/v1/action"
+
 function submit() {
     var email = document.getElementById('email-input');
     var pass = document.getElementById('password-input');
@@ -25,7 +27,7 @@ function submit() {
         }
     }
     xhr.withCredentials = true;
-    xhr.open('POST', 'https://api.reserveontime.com/action');
+    xhr.open('POST', api);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }

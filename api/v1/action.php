@@ -1,9 +1,9 @@
 <?php
 
-    session_start();
-
+	session_start();
+    $http_origin = $_SERVER['HTTP_ORIGIN'];
     header("Access-Control-Allow-Headers: Authorization, Content-Type");
-    header("Access-Control-Allow-Origin: https://reserveontime.com");
+    header("Access-Control-Allow-Origin: $http_origin");
     header("Access-Control-Allow-Credentials: true");
     header('content-type: application/json; charset=utf-8');
 	
