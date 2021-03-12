@@ -57,7 +57,6 @@ function loadShopContent() {
             var response = JSON.parse(xhr.responseText);
 
             var name = document.getElementById("shop-name");
-            console.log(response);
             if (response.hasOwnProperty('NoShopsFound')) {
                 var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
@@ -355,7 +354,6 @@ function loadEvents() {
                 button.setAttribute("href", event.link);
                 button.innerText = "Link";
                 cont.appendChild(button);
-                console.log("hey");
 
                 // start.getDate();
                 // det.innerText = monthNames[start.getMonth()];
