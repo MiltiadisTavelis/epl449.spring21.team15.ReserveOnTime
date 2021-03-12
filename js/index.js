@@ -17,41 +17,10 @@ $('.clockpicker').clockpicker({
 const submitButton = document.getElementById('submit-button');
 submitButton.onclick = search;
 
-const signout = document.getElementById('signout-btn');
-signout.onclick = logout;
-
-formPage();
 loadShopTypes();
 loadTopRatedShops();
 loadOpenShops();
 loadClosedShops();
-
-function formPage() {
-    var xhr = new XMLHttpRequest();
-    var data = {
-        "type": "session/islogin"
-    };
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            if (response["status"] === "1") {
-                document.getElementById('account-btn').classList.remove('d-none')
-                document.getElementById('reservations-btn').classList.remove('d-none')
-                document.getElementById('signout-btn').classList.remove('d-none')
-            } else {
-                document.getElementById('signin-btn').classList.remove('d-none')
-                document.getElementById('signup-btn').classList.remove('d-none')
-            }
-        } else {
-            popUpMessage("There was an unexpected error", "danger");
-        }
-    }
-    xhr.withCredentials = true;
-    xhr.open('POST', api);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
-}
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -424,29 +393,6 @@ function loadClosedShops() {
             popUpMessage("There was an unexpected error", "danger");
         }
     }
-    xhr.withCredentials = true;
-    xhr.open('POST', api);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
-}
-
-function logout() {
-    var xhr = new XMLHttpRequest();
-    var data = {
-        "type": "session/logout",
-    };
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            //var response = JSON.parse(xhr.responseText);
-            window.setTimeout(function() {
-                window.location = "index.html";
-            }, 1000);
-        } else {
-            popUpMessage("Unexpected error", "danger");
-        }
-    }
-
     xhr.withCredentials = true;
     xhr.open('POST', api);
     xhr.setRequestHeader('Content-Type', 'application/json');
