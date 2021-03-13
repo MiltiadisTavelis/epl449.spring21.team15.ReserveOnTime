@@ -10,7 +10,14 @@
 	$database = new Connection();
 	$db = $database->connect();
 	$user = new Users($db);
-	$user->id = isset($_GET['id']) ? $_GET['id'] : die();
+
+	if(isset($_SESSION['user_id'])){
+		$user->id = $_SESSION['user_id'];
+	}else{
+		echo json_encode(array('status' => 'No online user found'));
+		exit();
+	}
+
 	$user->user();
 
 	$json = array(

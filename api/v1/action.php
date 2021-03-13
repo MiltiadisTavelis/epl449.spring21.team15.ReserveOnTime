@@ -77,8 +77,7 @@
 			unset($data['type']);
 
 			//GET USERS BY ID
-			if((strcasecmp($type, 'users/user') == 0) && count($data) == 1 && (isset($data['id']) != 0)){
-				$_GET['id'] = $data['id'];
+			if((strcasecmp($type, 'users/user') == 0) && count($data) == 0){
 				include 'users/user.php';
 			
 			//CREATE USER
