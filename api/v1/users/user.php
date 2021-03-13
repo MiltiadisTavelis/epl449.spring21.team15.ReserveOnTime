@@ -24,6 +24,7 @@
 		'id' => $user->id,
 		'fname' => $user->fname,
 		'lname' => $user->lname,
+		'gender' => $user->gender,
 		'phone_code' => $user->phone_code,
 		'pnum' => $user->pnum,
 		'email' => $user->email,
