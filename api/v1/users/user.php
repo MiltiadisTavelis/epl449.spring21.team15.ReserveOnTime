@@ -20,11 +20,15 @@
 
 	$user->user();
 
+	$timestamp = strtotime($user->birth);
+	$birth = date("d/m/Y", $timestamp);
+	
 	$json = array(
 		'id' => $user->id,
 		'fname' => $user->fname,
 		'lname' => $user->lname,
 		'gender' => $user->gender,
+		'birth' => $birth,
 		'phone_code' => $user->phone_code,
 		'pnum' => $user->pnum,
 		'email' => $user->email,

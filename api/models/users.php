@@ -24,7 +24,7 @@
 
 		//GET USER DETAILS BY ID
 		public function user(){
-			$sql = "SELECT id,fname,lname,phone_code,pnum,email,usertype,verify,gender FROM USERS WHERE id = ?";
+			$sql = "SELECT id,fname,lname,phone_code,pnum,email,usertype,verify,gender,birth FROM USERS WHERE id = ?";
 			$stmt = $this->conn->prepare($sql);
 			$stmt->bind_param('i',$this->id);
 			$stmt->execute();
@@ -34,6 +34,7 @@
             $this->lname = $row["lname"];
             $this->phone_code = $row["phone_code"];
             $this->pnum = $row["pnum"];
+            $this->birth = $row["birth"];
             $this->email = $row["email"];
             $this->usertype = $row["usertype"];
             $this->verify = $row["verify"];
