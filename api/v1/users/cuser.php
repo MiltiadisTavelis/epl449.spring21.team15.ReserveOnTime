@@ -18,12 +18,18 @@
 	$user->fname = $data->fname;
 	$user->lname = $data->lname;
 
+	function validateDate($date, $format = 'Y-m-d H:i:s')
+	{
+    	$d = DateTime::createFromFormat($format, $date);
+    	return $d && $d->format($format) == $date;
+	}
+
 	if(isset($data->birth)){
 		$date = $data->birth;
 		$date = str_replace('/', '-', $date);
 		if(false !== strtotime($date)){
-			list($day, $month, $year) = explode('-', $date); 
-			if(checkdate($day, $month, $year)){
+			list($day, $month, $year) = explode('-', $date);
+			if(validateDate($data->birth, 'd/m/Y')){
 				$date = str_replace('/', '-', $data->birth);
 				$user->birth = date('Y-m-d', strtotime($date));
 			}

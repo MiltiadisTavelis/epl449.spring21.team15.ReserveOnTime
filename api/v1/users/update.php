@@ -17,13 +17,38 @@
 
 	$data = json_decode(file_get_contents("php://input"));
 
-	$user->id = $data->id;
+	if(isset($_SESSION['user_id'])){
+		$user->id = $_SESSION['user_id'];
+	}else{
+		echo json_encode(array('status' => 'No online user found'));
+		exit();
+	}
+
+	function validateDate($date, $format = 'Y-m-d H:i:s')
+	{
+    	$d = DateTime::createFromFormat($format, $date);
+    	return $d && $d->format($format) == $date;
+	}
+
+	if(isset($data->birth)){
+		$date = $data->birth;
+		$date = str_replace('/', '-', $date);
+		if(false !== strtotime($date)){
+			list($day, $month, $year) = explode('-', $date);
+			if(validateDate($data->birth, 'd/m/Y')){
+				$date = str_replace('/', '-', $data->birth);
+				$user->birth = date('Y-m-d', strtotime($date));
+			}
+		}
+	}
+
+	$user->gender = $data->gender;
 	$user->fname = $data->fname;
 	$user->lname = $data->lname;
 	$user->phone_code = $data->phone_code;
 	$user->pnum = $data->pnum;
 	$user->email = $data->email;
-
+	
 	if($user->update_user()){
 		$msg['status'] = 'Successfully Updated';
 		echo json_encode($msg);

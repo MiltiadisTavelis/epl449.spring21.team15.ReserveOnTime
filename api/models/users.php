@@ -135,6 +135,8 @@
 							lname = ?,
 							phone_code = ?,
 							pnum = ?,
+							gender = ?,
+							birth = ?,
 							email = ?
 							WHERE id=?';
 			$stmt = $this->conn->prepare($sql);
@@ -144,11 +146,15 @@
 			$this->phone_code = htmlspecialchars(strip_tags($this->phone_code));
 			$this->pnum = htmlspecialchars(strip_tags($this->pnum));
 			$this->email = htmlspecialchars(strip_tags($this->email));
-			$stmt->bind_param('sssssi',
+			$this->gender = htmlspecialchars(strip_tags($this->gender));
+			$this->birth = htmlspecialchars(strip_tags($this->birth));
+			$stmt->bind_param('sssssssi',
 										$this->fname,
 										$this->lname,
 										$this->phone_code,
 										$this->pnum,
+										$this->gender,
+										$this->birth,
 										$this->email,
 										$this->id);
 
