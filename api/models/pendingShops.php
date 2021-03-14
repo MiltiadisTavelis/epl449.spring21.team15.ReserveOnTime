@@ -6,11 +6,21 @@
 	{
 		private $conn;
 		public $id;
+		public $fname;
+		public $lname;
+		public $gender;
+		public $phone_code;
+		public $number;
+		public $personal_email;
 		public $sname;
 		public $stype;
-		public $email;
-		public $name;
-		public $pnum;
+		public $city;
+		public $province;
+		public $address;
+		public $postcode;
+		public $phone_code2;
+		public $shop_number;
+		public $shop_email;
 
 		public function __construct($db)
 		{
@@ -19,14 +29,23 @@
 		
 		//CREATE NEW PENDING SHOP
 		public function create_pendingShop(){
+			$this->fname = htmlspecialchars(strip_tags($this->fname));
+			$this->lname = htmlspecialchars(strip_tags($this->lname));
+			$this->gender = htmlspecialchars(strip_tags($this->gender));
+			$this->phone_code = htmlspecialchars(strip_tags($this->phone_code));
+			$this->number = htmlspecialchars(strip_tags($this->number));
+			$this->personal_email = htmlspecialchars(strip_tags($this->personal_email));
 			$this->sname = htmlspecialchars(strip_tags($this->sname));
 			$this->stype = htmlspecialchars(strip_tags($this->stype));
-			$this->email = htmlspecialchars(strip_tags($this->email));
-			$this->name = htmlspecialchars(strip_tags($this->name));
-			$this->pnum = htmlspecialchars(strip_tags($this->pnum));
+			$this->city = htmlspecialchars(strip_tags($this->city));
+			$this->province = htmlspecialchars(strip_tags($this->province));
+			$this->address = htmlspecialchars(strip_tags($this->address));
+			$this->postcode = htmlspecialchars(strip_tags($this->postcode));
+			$this->phone_code2 = htmlspecialchars(strip_tags($this->phone_code2));
+			$this->shop_number = htmlspecialchars(strip_tags($this->shop_number));
+			$this->shop_email = htmlspecialchars(strip_tags($this->shop_email));
 
-			$sql = 'CALL create_pendingShop("'.$this->sname.'","'.$this->stype.'","'.$this->email.'","'.$this->name.'"
-			,"'.$this->pnum.'")';
+			$sql = 'CALL create_pendingShop("'.$this->fname.'","'.$this->lname.'","'.$this->gender.'","'.$this->phone_code.'","'.$this->number.'","'.$this->personal_email.'","'.$this->sname.'","'.$this->stype.'","'.$this->city.'","'.$this->province.'","'.$this->address.'","'.$this->postcode.'","'.$this->phone_code2.'","'.$this->shop_number.'","'.$this->shop_email.'")';
 			$stmt = $this->conn->prepare($sql);
 			if($stmt->execute()){
 				return true;
