@@ -59,8 +59,8 @@ function loadShopPhotos() {
     var pictures = document.getElementById("photos");
 
     var carousel = document.createElement("div");
-    carousel.setAttribute("id", "photo-carousel");
-    carousel.classList.add("carousel", "slide");
+    carousel.setAttribute("id", "carousel");
+    carousel.classList.add("carousel", "slide", "carousel-fade");
     carousel.setAttribute("data-ride", "carousel");
 
     var ol = document.createElement("ol");
@@ -68,24 +68,25 @@ function loadShopPhotos() {
 
     var li = document.createElement("li");
     li.setAttribute("data-slide-to", "0");
-    li.setAttribute("data-target", "#indicators");
+    li.setAttribute("data-target", "#carousel");
     li.classList.add("active");
     ol.appendChild(li);
 
     li = document.createElement("li");
     li.setAttribute("data-slide-to", "1");
-    li.setAttribute("data-target", "#indicators");
+    li.setAttribute("data-target", "#carousel");
     ol.appendChild(li);
 
     li = document.createElement("li");
     li.setAttribute("data-slide-to", "2");
-    li.setAttribute("data-target", "#indicators");
+    li.setAttribute("data-target", "#carousel");
     ol.appendChild(li);
 
     carousel.appendChild(ol);
 
     var photos = document.createElement("div");
     photos.classList.add("carousel-inner");
+    photos.setAttribute("role", "listbox");
 
     var p = document.createElement("div");
     p.classList.add("carousel-item", "active");
@@ -119,7 +120,7 @@ function loadShopPhotos() {
     var a = document.createElement("a");
     a.classList.add("carousel-control-prev");
     a.setAttribute("role", "button");
-    a.setAttribute("href", "#indicators");
+    a.setAttribute("href", "#carousel");
     a.setAttribute("data-slide", "prev");
 
     var span = document.createElement("span");
@@ -136,7 +137,7 @@ function loadShopPhotos() {
     a = document.createElement("a");
     a.classList.add("carousel-control-next");
     a.setAttribute("role", "button");
-    a.setAttribute("href", "#indicators");
+    a.setAttribute("href", "#carousel");
     a.setAttribute("data-slide", "next");
 
     var span = document.createElement("span");
@@ -323,10 +324,12 @@ function loadEvents() {
                 desc.innerText = event.content;
                 cont.appendChild(desc);
 
-                var button = document.createElement("a");
-                button.setAttribute("href", event.link);
-                button.innerText = "Link";
-                cont.appendChild(button);
+                if(event.link != ""){
+                    var button = document.createElement("a");
+                    button.setAttribute("href", event.link);
+                    button.innerText = "Link";
+                    cont.appendChild(button);
+                }
 
                 // start.getDate();
                 // det.innerText = monthNames[start.getMonth()];
