@@ -205,8 +205,8 @@
 			$type = $data['type'];
 			unset($data['type']);
 
-			//UPDATE SHOP
-			if((strcasecmp($type, 'users/update') == 0) && (count($data) == 6) && (isset($data['id'],$data['fname'],$data['lname'],$data['email'],$data['pnum'],$data['phone_code']) != 0)){
+			//UPDATE USER
+			if((strcasecmp($type, 'users/update') == 0) && (count($data) == 7) && (isset($data['fname'],$data['lname'],$data['email'],$data['pnum'],$data['phone_code'],$data['birth'],$data['gender']) != 0)){
 				include 'users/update.php';
 			}else{
 				echo $error;
