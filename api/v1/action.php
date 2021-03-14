@@ -146,8 +146,9 @@
 			unset($data['type']);
 
 			//CREATE PENDING SHOP
-			if((strcasecmp($type, 'pendingShops/create') == 0) && (count($data) == 5) && (isset($data['sname'],$data['stype'],$data['email'],$data['name'],$data['pnum']) != 0)){
+			if((strcasecmp($type, 'pendingShops/create') == 0) && (count($data) == 15) && (isset($data['fname'],$data['lname'],$data['gender'],$data['phone_code'],$data['number'],$data['personal_email'],$data['sname'],$data['stype'],$data['city'],$data['province'],$data['address'],$data['postcode'],$data['phone_code2'],$data['shop_number'],$data['shop_email']) != 0)){
 				include 'pendingShops/create.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);
