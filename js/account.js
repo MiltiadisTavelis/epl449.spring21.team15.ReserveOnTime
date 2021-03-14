@@ -5,10 +5,7 @@ $('.datepicker').datepicker({
     startView: 2
 });
 
-const saveButton = document.getElementById('save');
-saveButton.onclick = save;
-
-function save() {
+function submit() {
 	var name = document.getElementById('firstname-input');
     var surname = document.getElementById('lastname-input');
     var gender = document.getElementById('gender-input');
