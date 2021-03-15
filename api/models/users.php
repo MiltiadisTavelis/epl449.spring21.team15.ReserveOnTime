@@ -16,6 +16,7 @@
 		public $usertype;
 		public $password;
 		public $verify;
+		public $url;
 
 		public function __construct($db)
 		{
@@ -370,6 +371,8 @@
 				if($count == "0"){
 					return true;
 				}else{
+					$row = $result->fetch_array(MYSQLI_ASSOC);
+					$this->url = 'https://reserveontime.com/passreset.html?hash='.$row['code'].'&email='.$e;
 					return false;
 				}
 			}else{

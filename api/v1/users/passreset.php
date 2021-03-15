@@ -16,16 +16,19 @@
 	$database = new Connection();
 	$db = $database->connect();
 	$user = new Users($db);
-   if($user->passrescheck($data['email']) == false){
-      $msg['status'] = 'The email has already been sent.';
-      echo json_encode($msg);
-      exit();
-   }
-	$result = "";
-	$email = "";
+   $url = "";
+   $result = "";
+   $email = "";
    $user->email = $data['email'];
    $sendto = $data['email'];
-   $result = $user->getpassurl($data['email']);
+   $option = 0;
+   if($user->passrescheck($data['email']) == false){
+      $msg['status'] = 'The email has already been sent. We have resend the email to you.';
+      $result = $user->url;
+      $option = 1;
+   }else{
+      $result = $user->getpassurl($data['email']);
+   }
 	if($result == "3"){
 		$msg['status'] = 'Please make sure you have submited the right email address';
 		echo json_encode($msg);
@@ -164,6 +167,10 @@
 		echo json_encode($msg);
       exit();
 	}
-	echo json_encode(array('message' => "Your password reset email has been sent!"));
+   if($option == 1){
+       echo json_encode($msg);
+   }else{
+	  echo json_encode(array('message' => "Your password reset email has been sent!"));
+   }
 	}
 ?>
