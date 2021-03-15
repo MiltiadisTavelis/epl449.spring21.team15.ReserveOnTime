@@ -47,7 +47,6 @@
 	$user->lname = $data->lname;
 	$user->phone_code = $data->phone_code;
 	$user->pnum = $data->pnum;
-	$user->email = $data->email;
 	
 	if($user->update_user()){
 		$msg['status'] = 'Successfully Updated';

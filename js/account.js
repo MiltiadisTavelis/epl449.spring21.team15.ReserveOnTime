@@ -14,13 +14,11 @@ function submit() {
     var birthday = document.getElementById('date-input');
     var code = document.getElementById('telcode-input');
     var number = document.getElementById('tel-input');
-    var email = document.getElementById('email-input');
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "users/update",
         "fname": name.value,
         "lname": surname.value,
-        "email": email.value,
         "pnum": number.value,
         "phone_code": code.value,
         "birth": birthday.value,

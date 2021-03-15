@@ -226,7 +226,7 @@
 			unset($data['type']);
 
 			//UPDATE USER
-			if((strcasecmp($type, 'users/update') == 0) && (count($data) == 7) && (isset($data['fname'],$data['lname'],$data['email'],$data['pnum'],$data['phone_code'],$data['birth'],$data['gender']) != 0)){
+			if((strcasecmp($type, 'users/update') == 0) && (count($data) == 6) && (isset($data['fname'],$data['lname'],$data['pnum'],$data['phone_code'],$data['birth'],$data['gender']) != 0)){
 				include 'users/update.php';
 
 			//UPDATE PASSWORD
