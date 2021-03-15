@@ -18,7 +18,7 @@ function loadReservations() {
                 shopDisplay.appendChild(displayMessage);
                 return;
             }
-            var shops = response["Reservations"];
+            var reservations = response["Reservations"];
 
             for (entry in reservations) {
                 var reservation = reservations[entry]
