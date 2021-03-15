@@ -5,6 +5,8 @@ $('.datepicker').datepicker({
     startView: 2
 });
 
+loadDet();
+
 function submit() {
 	var name = document.getElementById('firstname-input');
     var surname = document.getElementById('lastname-input');
@@ -44,7 +46,6 @@ function submit() {
     xhr.send(JSON.stringify(data));
 }
 
-loadDet();
 function loadDet() {
     var name = document.getElementById('firstname-input');
     var surname = document.getElementById('lastname-input');
@@ -85,3 +86,32 @@ function loadDet() {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
+
+var reset = document.getElementById('res-pass');
+
+reset.addEventListener('click', function() {
+    var email = document.getElementById('email-input');
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "users/passreset",
+        "email": email.value
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response['status'], "danger");
+                return;
+            }
+            popUpMessage(response['message'], "success");
+        } else {
+            popUpMessage("Unexpected error", "danger");
+        }
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}, false);

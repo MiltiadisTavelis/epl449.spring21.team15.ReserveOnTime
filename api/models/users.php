@@ -205,6 +205,31 @@
 			}
 		}
 
+		//GET URL FOR PASSWORD RESET
+		public function getpassurl($e){
+			if(!$this->exist($e)){
+				return 3; 
+			}
+            $hash = $this->getidpasshash($e);
+			if(!empty($hash)){
+				return 'https://reserveontime.com/passreset.html?hash='.$hash.'&email='.$e;
+			}else{
+				return "";
+			}
+		}
+
+		//GET USER HASH BY ID (helper method)
+		private function getidpasshash($e){
+			$hash = md5(rand(0,1000));
+			$sql = 'INSERT INTO PRESET SET user_email = "'.$e.'", code = "'.$hash.'"';
+			$stmt = $this->conn->prepare($sql);
+			if(!$stmt->execute()){
+				printf("Password Reset Error: %s.\n",$stmt->error);
+				return false;
+			}
+			return $hash;
+		}
+
 		//VERIFY USER
 		public function verify_user(){
 			//Check if user exist
@@ -293,6 +318,60 @@
 				$row = $stmt->get_result();
 				$row = $row->fetch_array(MYSQLI_ASSOC);
 				return $row['code'];
+			}else{
+				return "";
+			}
+		}
+
+		//VERIFY HASH (PASSRESET)
+		public function verifyhash($e,$h){
+			$sql = 'SELECT code FROM PRESET WHERE user_email = "'.$e.'"';
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$row = $stmt->get_result();
+				$row = $row->fetch_array(MYSQLI_ASSOC);
+				if(strcmp($row['code'],$h) == 0){
+					return "1";
+				}else{
+					return "0";
+				}
+			}else{
+				return "";
+			}
+		}
+
+		//CHANGE PASSWORD (PASSRESET)
+		public function newpass($e,$p,$h){
+			if($this->verifyhash($e,$h) == "1"){
+				$pass = htmlspecialchars(strip_tags($p));
+				$pass = hash("sha256", $p);
+				$sql = 'UPDATE USERS SET USERS.password = "'.$pass.'" WHERE USERS.email = "'.$e.'"';
+				$stmt = $this->conn->prepare($sql);
+				if($stmt->execute()){
+					$sql = 'DELETE FROM PRESET WHERE user_email = "'.$e.'"';
+					$stmt = $this->conn->prepare($sql);
+					$stmt->execute();
+					return "1";
+				}else{
+					return "0";
+				}
+			}else{
+				return "0";
+			}
+		}
+
+		//CHECK IF EMAIL EXIST IN PASS RESET
+		public function passrescheck($e){
+			$sql = 'SELECT * FROM PRESET WHERE user_email = "'.$e.'"';
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$result = $stmt->get_result();
+				$count = mysqli_num_rows($result);
+				if($count == "0"){
+					return true;
+				}else{
+					return false;
+				}
 			}else{
 				return "";
 			}

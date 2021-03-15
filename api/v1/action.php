@@ -97,6 +97,26 @@
 					return;
 				}
 				include 'users/sendemail.php';
+
+			//SEND PASS RESET EMAIL TO USER
+			}elseif((strcasecmp($type, 'users/passreset') == 0) && (count($data) == 1) && (isset($data['email']) != 0)){
+				if(preg_match('/[\'^£$%&*()}{#~?><>,|=_¬]/', $data['email'])){
+					echo json_encode(array('SpecialCharError' => 'Bad Request'));
+					return;
+				}
+				include 'users/passreset.php';
+
+			//HASH AND EMAIL CHECK (PASSRESET)
+			}elseif((strcasecmp($type, 'users/verifyhash') == 0) && (count($data) == 2) && (isset($data['email'],$data['hash']) != 0)){
+				if(preg_match('/[\'^£$%&*()}{#~?><>,|=_¬]/', $data['email'])){
+					echo json_encode(array('SpecialCharError' => 'Bad Request'));
+					return;
+				}
+				if(preg_match('/[\'^£$%&*()}{#~?><>,|=_¬]/', $data['hash'])){
+					echo json_encode(array('SpecialCharError' => 'Bad Request'));
+					return;
+				}
+				include 'users/verifyhash.php';
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -208,6 +228,10 @@
 			//UPDATE USER
 			if((strcasecmp($type, 'users/update') == 0) && (count($data) == 7) && (isset($data['fname'],$data['lname'],$data['email'],$data['pnum'],$data['phone_code'],$data['birth'],$data['gender']) != 0)){
 				include 'users/update.php';
+
+			//UPDATE PASSWORD
+			}if((strcasecmp($type, 'users/newpass') == 0) && (count($data) == 3) && (isset($data['email'],$data['pass'],$data['hash']) != 0)){
+				include 'users/newpass.php';
 			}else{
 				echo $error;
 				http_response_code(400);
