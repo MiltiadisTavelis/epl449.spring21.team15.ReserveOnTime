@@ -9,9 +9,16 @@ function submit() {
     xhr.onload = function() {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
+
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response['status'], "danger");
+                return;
+            }
+
             window.setTimeout(function() {
                 window.location = "index.html";
             }, 3000);
+
             popUpMessage(response['message'], "success");
         } else {
             popUpMessage("Unexpected error", "danger");
