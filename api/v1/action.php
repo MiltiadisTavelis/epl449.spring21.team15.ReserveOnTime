@@ -228,9 +228,9 @@
 			//UPDATE USER
 			if((strcasecmp($type, 'users/update') == 0) && (count($data) == 6) && (isset($data['fname'],$data['lname'],$data['pnum'],$data['phone_code'],$data['birth'],$data['gender']) != 0)){
 				include 'users/update.php';
-
+				
 			//UPDATE PASSWORD
-			}if((strcasecmp($type, 'users/newpass') == 0) && (count($data) == 3) && (isset($data['email'],$data['pass'],$data['hash']) != 0)){
+			}else if((strcasecmp($type, 'users/newpass') == 0) && (count($data) == 3) && (isset($data['email'],$data['pass'],$data['hash']) != 0)){
 				include 'users/newpass.php';
 			}else{
 				echo $error;
