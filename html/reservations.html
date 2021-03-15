@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
     <link rel="stylesheet" href="../css/theme.css"/>
-    <script type="text/javascript" src="../js/api.js" defer></script>
+    <link rel="stylesheet" href="../css/reservations.css"/>
+    <script type="text/javascript" src="../js/globals.js" defer></script>
     <script type="text/javascript" src="../js/reservations.js" defer></script>
     <script type="text/javascript" src="../js/utils.js" defer></script>
     <script type="text/javascript" src="../js/nav.js" defer></script>
@@ -29,13 +30,13 @@
         <div id="nav-list" class="collapse navbar-collapse">
             <ul class="navbar-nav nav-fill ml-auto">
                 <li class="nav-item">
-                    <a id="reservations-btn" class="nav-link d-none" href="reservations.html">Reservations</a>
+                    <a id="reservations-btn" class="nav-link d-none" href="reservations.html"><b>Reservations</b></a>
                 </li>
                 <li class="nav-item">
                     <a id="account-btn" class="nav-link d-none" href="account.html">Account</a>
                 </li>
                 <li class="nav-item">
-                    <a id="signout-btn" class="btn btn-md btn-dark d-none" href="signout.html">Sign out</a>
+                    <button id="signout-btn" type="button" class="btn btn-md btn-dark d-none">Sign out</button>
                 </li>
                 <li class="nav-item">
                     <a id="signin-btn" class="btn btn-md btn-dark d-none" href="signin.html">Sign in</a>
@@ -48,11 +49,11 @@
     </nav>
     <div class="container-fluid h-100">
         <div id="contents" class="container w-75">
-            <div id="upcoming">
-
+            <div id="pending" class="reservation-display">
             </div>
-            <div id="past">
-
+            <div id="upcoming" class="reservation-display">
+            </div>
+            <div id="history" class="reservation-display">
             </div>
         </div>
     </div>

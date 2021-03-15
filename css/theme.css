@@ -10,6 +10,10 @@ h1, h2, h3, h4, small, .form-text {
     color: white;
 }
 
+h4 {
+    text-align: left;
+}
+
 nav {
     background-color: transparent;
 }
