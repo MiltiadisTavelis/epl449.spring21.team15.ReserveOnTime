@@ -6,12 +6,13 @@
     text-align: center;
 }
 
-h1, h2, h3, h4, small, .form-text {
+h1, h2, h3, h4, h5, small, .form-text {
     color: white;
 }
 
-h4 {
+h5 {
     text-align: left;
+    font-weight: bold;
 }
 
 nav {

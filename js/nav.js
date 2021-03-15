@@ -11,10 +11,7 @@ function logout() {
 
     xhr.onload = function() {
         if (xhr.status === 200) {
-            //var response = JSON.parse(xhr.responseText);
-            window.setTimeout(function() {
-                window.location = "index.html";
-            }, 1000);
+            window.location = "index.html";
         } else {
             popUpMessage("Unexpected error", "danger");
         }
