@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="../plugins/clockpicker/src/standalone.css">
     <script src="../plugins/clockpicker/src/clockpicker.js"></script>
     <link rel="stylesheet" href="../css/theme.css"/>
-    <link rel="stylesheet" href="../css/index.css"/>
     <script type="text/javascript" src="../js/globals.js" defer></script>
     <script type="text/javascript" src="../js/index.js" defer></script>
     <script type="text/javascript" src="../js/utils.js" defer></script>
@@ -101,26 +100,16 @@
                         <div class="input-group">
                             <input id="keyword-input" class="form-control" type="search" placeholder="Shop Name" aria-describedby="button-addon5">
                             <div class="input-group-append">
-                                <button id="submit-button" type="submit" class="btn btn-dark"><i class="fa fa-search"></i></button>
+                                <button id="search-button" type="button" class="btn btn-dark"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="results" class="d-none"></div>
             </form>
-            <div id="search-shops" class="d-none shop-display">
-            </div>
-            <hr/>
-            <div id="toprated-shops" class="shop-display">
-                <h5>Top Rated Shops</h5>
-            </div>
-            <hr/>
-            <div id="open-shops" class="shop-display">
-                <h5>Open Shops</h5>
-            </div>
-            <hr/>
-            <div id="closed-shops" class="shop-display">
-                <h5>Closed Shops</h5>
-            </div>
+            <div id="top" class="d-none"></div>
+            <div id="open" class="d-none"></div>
+            <div id="closed" class="d-none"></div>
         </div>
     </div>
 </body>
