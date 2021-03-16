@@ -56,7 +56,6 @@ function loadPendingReservations() {
     let data = {
         "type": "reservations/all",
         "status": "2",
-        "today": "2",
         "sort": "oldest"
     }
 
