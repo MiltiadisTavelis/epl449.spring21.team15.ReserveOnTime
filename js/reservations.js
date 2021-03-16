@@ -1,27 +1,39 @@
-let xhr = new XMLHttpRequest()
-let data = {
-    "type": "reservations/all"
-}
+loadPage()
 
-xhr.onload = function() {
-    if (response.hasOwnProperty("NoRsrvFound")) {
-        let div = document.createElement("div")
-        div.setAttribute("class", "alert alert-dark text-center")
-        div.textContent = "You don't have any reservations."
-        let contents = document.getElementById("contents")
-        contents.appendChild(div)
-    } else {
-        loadTodayReservations()
-        loadPendingReservations()
-        loadUpcomingReservations()
-        loadHistoryReservations()
+
+functionloadPage() {
+    let xhr = new XMLHttpRequest()
+    let data = {
+        "type": "reservations/all"
     }
-}
 
-xhr.withCredentials = true
-xhr.open('POST', api)
-xhr.setRequestHeader('Content-Type', 'application/json')
-xhr.send(JSON.stringify(data))
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            let response = JSON.parse(xhr.responseText)
+
+            if (response.hasOwnProperty("NoRsrvFound")) {
+                let div = document.createElement("div")
+                div.setAttribute("class", "alert alert-dark text-center")
+                div.textContent = "You don't have any reservations."
+                let contents = document.getElementById("contents")
+                contents.appendChild(div)
+            } else {
+                loadTodayReservations()
+                loadPendingReservations()
+                loadUpcomingReservations()
+                loadHistoryReservations()
+            }
+        } else {
+            popUpMessage("Can't load reservations. There was an unexpected error", "danger")
+        }
+    }
+
+    xhr.withCredentials = true
+    xhr.open('POST', api)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.send(JSON.stringify(data))
+
+}
 
 function loadTodayReservations() {
     let xhr = new XMLHttpRequest()
