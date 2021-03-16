@@ -70,7 +70,7 @@ function loadReservationSection(xhr, sectionId) {
             let headerTitle = document.createElement("h4")
             headerTitle.textContent = title
             header.appendChild(headerTitle)
-            header.appendChild(document.createElement("hr"))
+
 
             let table = createReservationsTable(sectionId)
             let reservations = response["Reservations"]

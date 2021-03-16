@@ -1,3 +1,24 @@
+let xhr = new XMLHttpRequest()
+let data = {
+    "type": "reservations/all"
+}
+
+xhr.onload = function() {
+    if (response.hasOwnProperty("NoRsrvFound")) {
+        let div = document.createElement("div")
+        div.setAttribute("class", "alert alert-dark text-center")
+        div.textContent = "You don't have any reservations."
+        let contents = document.getElementById("contents")
+        contents.appendChild(div)
+    }
+}
+
+xhr.withCredentials = true
+xhr.open('POST', api)
+xhr.setRequestHeader('Content-Type', 'application/json')
+xhr.send(JSON.stringify(data))
+
+
 loadTodayReservations()
 loadPendingReservations()
 loadUpcomingReservations()
