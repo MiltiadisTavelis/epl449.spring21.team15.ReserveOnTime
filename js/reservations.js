@@ -1,7 +1,6 @@
 loadPage()
 
-
-functionloadPage() {
+function loadPage() {
     let xhr = new XMLHttpRequest()
     let data = {
         "type": "reservations/all"
