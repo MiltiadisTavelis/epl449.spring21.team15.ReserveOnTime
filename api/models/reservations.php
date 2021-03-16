@@ -44,12 +44,12 @@
 			if($this->today == "1"){
 				$sql .= 'AND RESERVATIONS.day >= "'.$time.'" AND DATE(RESERVATIONS.day) = "'.$time2.'" ';
 			}elseif($this->today == "0"){
-				$sql .= 'AND RESERVATIONS.day < "'.$time.'" ';
+				$sql .= 'AND (RESERVATIONS.day < "'.$time.'" OR (RESERVATIONS.day >= "'.$time.'" AND (RESERVATIONS.status = 0 OR  RESERVATIONS.status = 3))) ';
 			}elseif($this->today == "2"){
 				$sql .= 'AND RESERVATIONS.day >= "'.$time.'" AND RESERVATIONS.status = 1 ';
 			}
 
-			if(isset($this->status)){
+			if(isset($this->status) && $this->today != "2"){
 				$sql .= 'AND RESERVATIONS.status = '.$this->status.' ';
 			}
 			
