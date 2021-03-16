@@ -37,12 +37,14 @@ function createReservationsTable(sectionId) {
         tr.append(th)
     }
 
+    let th = document.createElement("th")
+    th.setAttribute("scope", "col")
     if (sectionId === "history") {
-        let th = document.createElement("th")
-        th.setAttribute("scope", "col")
         th.textContent = "Status"
-        tr.append(th)
+    } else {
+        th.textContent = ""
     }
+    tr.append(th)
 
     let body = document.createElement("tbody")
 
@@ -112,6 +114,13 @@ function createReservationEntry(reservation, sectionId) {
         let status = document.createElement("td")
         status.textContent = reservation.status
         tr.appendChild(status)
+    } else {
+        let cancellation = document.createElement("td")
+        let cancelBtn = document.createElement("button")
+        cancelBtn.textContent = "Cancel"
+        cancelBtn.setAttribute("class", "btn btn-sm btn-dark")
+        cancellation.appendChild(cancelBtn)
+        tr.appendChild(cancellation)
     }
 
     return tr
