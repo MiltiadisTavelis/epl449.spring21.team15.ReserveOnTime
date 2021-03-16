@@ -10,6 +10,11 @@ xhr.onload = function() {
         div.textContent = "You don't have any reservations."
         let contents = document.getElementById("contents")
         contents.appendChild(div)
+    } else {
+        loadTodayReservations()
+        loadPendingReservations()
+        loadUpcomingReservations()
+        loadHistoryReservations()
     }
 }
 
@@ -17,12 +22,6 @@ xhr.withCredentials = true
 xhr.open('POST', api)
 xhr.setRequestHeader('Content-Type', 'application/json')
 xhr.send(JSON.stringify(data))
-
-
-loadTodayReservations()
-loadPendingReservations()
-loadUpcomingReservations()
-loadHistoryReservations()
 
 function loadTodayReservations() {
     let xhr = new XMLHttpRequest()
