@@ -25,7 +25,7 @@
 		//SHOW ALL
 		public function reservations(){
 			$where = array();
-			$sql = 'SELECT RESERVATIONS.id, RESERVATIONS.day, RESERVATIONS.people, STATUS.status, SHOPS.sname';
+			$sql = 'SELECT RESERVATIONS.id, RESERVATIONS.shopid, RESERVATIONS.day, RESERVATIONS.people, STATUS.status, SHOPS.sname';
 			$order = '';
 
 			if(isset($this->shopid) && $_SESSION['page_type'] == "m"){

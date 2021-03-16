@@ -81,6 +81,7 @@
 				$time = $datetime->format('H:i:s');
 				$rsrv = array(
 					'id' => $id,
+					'shopid' => $shopid,
 					'sname' => $sname,
 					'day' => $date,
 					'time' => $time,
@@ -98,6 +99,7 @@
 				$time = $datetime->format('H:i:s');
 				$rsrv = array(
 					'id' => $id,
+					'shopid' => $shopid,
 					'fname' => $fname,
 					'lname' => $lname,
 					'pnum' => $pnum,
