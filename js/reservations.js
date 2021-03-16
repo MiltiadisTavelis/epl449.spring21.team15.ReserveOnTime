@@ -31,7 +31,6 @@ function loadPage() {
     xhr.open('POST', api)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send(JSON.stringify(data))
-
 }
 
 function loadTodayReservations() {

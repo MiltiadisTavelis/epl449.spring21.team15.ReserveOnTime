@@ -7,6 +7,18 @@
     margin: 15px 0;
 }
 
+.uname {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.title {
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+}
+
 .nav-pills .nav-link {
     margin: 5px 5px;
     color: white!important;
@@ -177,7 +189,7 @@
     width: 100%;
     margin-bottom: 10px
   }
-  
+
   .card-cont .even-date,
   .card-cont .even-info
   {

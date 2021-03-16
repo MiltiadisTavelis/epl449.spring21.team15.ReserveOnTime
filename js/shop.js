@@ -1,4 +1,3 @@
-
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
@@ -194,7 +193,7 @@ function loadReviews() {
                 var nameTime = document.createElement('div');
                 //  nameTime.classList.add('d-flex','flex-column','pl-3');
 
-                var name = document.createElement('h4');
+                var name = document.createElement('p');
                 name.classList.add('uname');
                 name.innerText = review.fname;
                 nameTime.appendChild(name);
@@ -314,7 +313,7 @@ function loadEvents() {
                 name.innerText = shopname;
                 cont.appendChild(name);
 
-                var title = document.createElement("h3");
+                var title = document.createElement("p");
                 title.classList.add("title");
                 title.innerText = event.title;
                 cont.appendChild(title);
@@ -324,7 +323,7 @@ function loadEvents() {
                 desc.innerText = event.content;
                 cont.appendChild(desc);
 
-                if(event.link != ""){
+                if (event.link != "") {
                     var button = document.createElement("a");
                     button.setAttribute("href", event.link);
                     button.innerText = "Link";
