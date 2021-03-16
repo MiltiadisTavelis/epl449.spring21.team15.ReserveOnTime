@@ -15,11 +15,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
     <link rel="stylesheet" href="../css/theme.css"/>
-    <link rel="stylesheet" href="../css/reservations.css"/>
     <script type="text/javascript" src="../js/globals.js" defer></script>
-    <script type="text/javascript" src="../js/reservations.js" defer></script>
     <script type="text/javascript" src="../js/utils.js" defer></script>
     <script type="text/javascript" src="../js/nav.js" defer></script>
+    <script type="text/javascript" src="../js/reservations.js" defer></script>
 </head>
 <body>
     <nav class="navbar fixed-top navbar-expand-md navbar-dark animate__animated animate__fadeIn animate__slow">
@@ -49,12 +48,10 @@
     </nav>
     <div class="container-fluid h-100">
         <div id="contents" class="container w-75">
-            <div id="pending" class="reservation-display">
-            </div>
-            <div id="upcoming" class="reservation-display">
-            </div>
-            <div id="history" class="reservation-display">
-            </div>
+            <div id="today" class="d-none"></div>
+            <div id="pending" class="d-none"></div>
+            <div id="upcoming" class="d-none"></div>
+            <div id="history" class="d-none"></div>
         </div>
     </div>
 </body>
