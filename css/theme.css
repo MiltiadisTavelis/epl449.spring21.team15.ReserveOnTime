@@ -61,7 +61,12 @@ a:hover {
 
 .reservation-table {
     padding: 0px;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
+}
+
+.reservation-table a {
+    color: black;
+    font-weight: bold;
 }
 
 .navbar-brand {

@@ -22,11 +22,12 @@ function createReservationsTable(sectionId) {
 
     let table = document.createElement("table")
     table.classList.add("table")
-    table.classList.add("table-dark")
+    table.classList.add("table-light")
     table.classList.add("reservation-table")
     table.setAttribute("id", sectionId + "-table")
 
     let head = document.createElement("thead")
+    head.classList.add("thead-dark")
     let tr = document.createElement("tr")
     head.appendChild(tr)
     for (i = 0; i < tableTitles.length; i++) {
@@ -89,7 +90,7 @@ function createReservationEntry(reservation, sectionId) {
 
     let shopName = document.createElement("td")
     let shopLink = document.createElement("a")
-    shopLink.href = "shop.html?" + reservation.id
+    shopLink.href = "shop.html?" + reservation.shopid
     shopLink.textContent = reservation.sname
     shopName.appendChild(shopLink)
     tr.appendChild(shopName)
