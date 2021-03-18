@@ -22,8 +22,14 @@
 
 	$data = json_decode(file_get_contents("php://input"));
 
-	if(isset($data->time) && preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/", $data->time)){
-		$rsrv->res_time = $data->time;
+	if(isset($data->time)){
+		if(preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/", $data->time)){
+			$rsrv->res_time = $data->time;
+		}
+	}else{
+		$msg['status'] = 'Please set the time!';
+		echo json_encode($msg);
+		exit();
 	}	
 
 	if(isset($data->day)){
@@ -35,6 +41,10 @@
 				$rsrv->day = str_replace('/', '-', $data->day);
 			}
 		}
+	}else{
+		$msg['status'] = 'Please set the date!';
+		echo json_encode($msg);
+		exit();
 	}
 
 	$rsrv->people = $data->people;
