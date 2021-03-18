@@ -62,4 +62,12 @@ function applyValidationRules() {
     if (document.getElementById('people-input') != null) {
         bootstrapValidate('#people-input', 'integer:Please choose a valid amount of people.|required:')
     }
+
+    if (document.getElementById('date-req-input') != null) {
+        bootstrapValidate('#date-req-input', 'required:')
+    }
+
+    if (document.getElementById('time-req-input') != null) {
+        bootstrapValidate('#time-req-input', 'required:')
+    }
 }

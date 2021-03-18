@@ -1,4 +1,3 @@
-
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
@@ -18,8 +17,8 @@ function submit() {
     var url = window.location.href;
     let id = url ? url.split('?').pop() : window.location.search.slice(1);
     var people = document.getElementById('people-input');
-    var day = document.getElementById('date-input');
-    var time = document.getElementById('time-input');
+    var day = document.getElementById('date-req-input');
+    var time = document.getElementById('time-req-input');
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "reservations/create",
@@ -34,13 +33,13 @@ function submit() {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
 
-            if (response.hasOwnProperty('NotOnline')){
+            if (response.hasOwnProperty('NotOnline')) {
                 window.setTimeout(function() {
                     window.location = "signin.html";
                 }, 1000);
-            }else if (response.hasOwnProperty('message')) {
+            } else if (response.hasOwnProperty('message')) {
                 popUpMessage(response['message'], "success");
-            }else{
+            } else {
                 popUpMessage(response['status'], "danger");
             }
 
