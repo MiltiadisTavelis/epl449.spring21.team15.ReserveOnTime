@@ -16,6 +16,7 @@
 		public $phone;
 		public $shop;
 		public $today;
+		public $res_time;
 
 		public function __construct($db)
 		{
@@ -146,30 +147,74 @@
 			return false;
 		}
 
+		public function check_time($t,$d){
+			$sql = 'SELECT * FROM SHOP_HOURS WHERE SHOP_HOURS.open <= "'.$t.'" AND SHOP_HOURS.close > "'.$t.'" AND SHOP_HOURS.day = "'.$d.'" AND SHOP_HOURS.shopid = '.$this->shopid;
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$result = $stmt->get_result();
+				$count = mysqli_num_rows($result);
+				if($count == "1"){					
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+			}
+		}
+
+		private function check_available($t,$d,$r){
+			$sql = 'SELECT SUM(people) AS PEOPLE, SHOPS.tables FROM RESERVATIONS R, SHOPS WHERE R.active = 1 AND R.shopid = '.$this->shopid.' AND SHOPS.id = R.shopid';
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$row = $stmt->get_result();
+				$row = $row->fetch_array(MYSQLI_ASSOC);
+				if($row['tables'] - ceil($row['PEOPLE']/4) - $r >= 0){
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				exit();
+			}
+		}
+
 		//CREATE NEW RESERVATION
 		public function create_rsrv(){
-			$sql = 'INSERT INTO RESERVATIONS (
-							day,
-							people,
-							shopid,
-							userid) VALUES (?,?,?,?)';
-			$stmt = $this->conn->prepare($sql);
-			$this->day = htmlspecialchars(strip_tags($this->day));
-			$this->people = htmlspecialchars(strip_tags($this->people));
-			$this->shopid = htmlspecialchars(strip_tags($this->shopid));
+			date_default_timezone_set('GMT');
+			$day = date('N', strtotime(date($this->day))); //DAY NUMBER MON=1 .. 
+			if($this->check_time($this->res_time,$day)){
+				//if($this->check_available($this->res_time,$day,ceil($this->people/4))){
+					$this->day = date('Y-m-d', strtotime($this->day)).' '.$this->res_time;
+					$sql = 'INSERT INTO RESERVATIONS (
+									day,
+									people,
+									shopid,
+									userid) VALUES (?,?,?,?)';
+					$stmt = $this->conn->prepare($sql);
+					$this->day = htmlspecialchars(strip_tags($this->day));
+					$this->people = htmlspecialchars(strip_tags($this->people));
+					$this->shopid = htmlspecialchars(strip_tags($this->shopid));
 
-			$stmt->bind_param('siii',
-										$this->day,
-										$this->people,
-										$this->shopid,
-										$this->userid);
-			if($stmt->execute()){
-				return true;
+					$stmt->bind_param('siii',
+												$this->day,
+												$this->people,
+												$this->shopid,
+												$this->userid);
+					if($stmt->execute()){
+						return "1";
+					}
+
+					printf("Error: %s.\n",$stmt->error);
+
+					return "3";
+				//}else{
+				//	return "4";
+				//}
+			}else{
+				return "2";
 			}
-
-			printf("Error: %s.\n",$stmt->error);
-
-			return false;
 		}
 
 		//UPDATE RESERVATION STATUS

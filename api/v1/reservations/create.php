@@ -22,12 +22,36 @@
 
 	$data = json_decode(file_get_contents("php://input"));
 
-	$rsrv->day = $data->day;
+	if(isset($data->time) && preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/", $data->time)){
+		$rsrv->res_time = $data->time;
+	}	
+
+	if(isset($data->day)){
+		$date = $data->day;
+		$date = str_replace('/', '-', $data->day);
+		if(false !== strtotime($date)){
+			list($day, $month, $year) = explode('-', $date); 
+			if(checkdate($month, $day, $year)){
+				$rsrv->day = str_replace('/', '-', $data->day);
+			}
+		}
+	}
+
 	$rsrv->people = $data->people;
 	$rsrv->shopid = $data->shop_id;
 	$rsrv->userid = $_SESSION['user_id'];
-	if($rsrv->create_rsrv()){
-		$msg['status'] = 'Successfully Created';
+	$result = $rsrv->create_rsrv();
+	if($result == "1"){
+		$msg['message'] = 'Successfully Created';
+		echo json_encode($msg);
+	}elseif($result == "2"){
+		$msg['status'] = "You can't make a reservation if the shop is closed!";
+		echo json_encode($msg);
+	}elseif($result == "3"){
+		$msg['status'] = 'Server Error';
+		echo json_encode($msg);
+	}elseif($result == "4"){
+		$msg['NotAvailable'] = 'The shop is full';
 		echo json_encode($msg);
 	}
 ?>
