@@ -1,5 +1,4 @@
 <?php
-
 	session_start();
     $http_origin = $_SERVER['HTTP_ORIGIN'];
     header("Access-Control-Allow-Headers: Authorization, Content-Type");
@@ -152,7 +151,7 @@
 				include 'reservations/all.php';
 			
 			//CREATE NEW RESERVATION
-			}elseif((strcasecmp($type, 'reservations/create') == 0) && (count($data) == 4) && (isset($data['day'],$data['people'],$data['shop_id'],$data['time']) != 0)){
+			}elseif((strcasecmp($type, 'reservations/create') == 0) && (count($data) == 3) && (isset($data['day'],$data['people'],$data['shop_id']) != 0)){
 				include 'reservations/create.php';
 			}else{
 				echo $error;
@@ -188,6 +187,8 @@
 				include 'session/logout.php';
 			}elseif((strcasecmp($type, 'session/islogin') == 0) && (count($data) == 0)){
 				include 'session/islogin.php';
+			}elseif((strcasecmp($type, 'session/cookie') == 0) && (count($data) == 2) && (isset($data['email'],$data['password']) != 0)){
+				include 'session/cookie.php';
 			}else{
 				echo $error;
 				http_response_code(400);
