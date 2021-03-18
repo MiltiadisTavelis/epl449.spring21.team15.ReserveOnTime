@@ -23,9 +23,9 @@ function submit() {
                     create_cookies();
                 }
                 popUpMessage(response["message"], "success");
-               /* window.setTimeout(function() {
+               window.setTimeout(function() {
                     window.location = "index.html";
-                }, 1000);*/
+                }, 1000);
             } else if(response["status"] === 3){
                 popUpMessage(response["message"], "danger");
             }
