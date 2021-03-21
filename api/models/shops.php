@@ -296,5 +296,23 @@
         	}
 		}
 
+		//IS FULL
+		public function isFull(){
+		    $sql = 'SELECT full FROM SHOPS WHERE id = '.$this->id;
+		    $stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$row = $stmt->get_result();
+				$row = $row->fetch_array(MYSQLI_ASSOC);
+				if($row['full'] == "1"){
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+				printf("Error: %s.\n",$stmt->error);
+				exit();
+			}
+		}
+
 	}
 ?>

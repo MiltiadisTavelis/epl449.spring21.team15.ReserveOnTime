@@ -13,6 +13,40 @@ $('.clockpicker').clockpicker({
 
 var shopname;
 
+isfull();
+
+function isfull() {
+    var url = window.location.href;
+    let id = url ? url.split('?').pop() : window.location.search.slice(1);
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/isfull",
+        "shop_id": id
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var av = document.getElementById("available-status");
+
+            if(response.status === "Available"){
+                av.classList.add("badge","badge-success");
+                av.innerText = "Available";
+            }else if(response.status === "Full"){
+                av.classList.add("badge","badge-danger");
+                av.innerText = "Full";
+            }
+
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
 function submit() {
     var url = window.location.href;
     let id = url ? url.split('?').pop() : window.location.search.slice(1);
