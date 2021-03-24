@@ -51,7 +51,7 @@ function create_cookies() {
         "email": email.value,
         "password": pass.value
     };
-console.log(data);
+
     xhr.onload = function() {
         }
     xhr.withCredentials = true;

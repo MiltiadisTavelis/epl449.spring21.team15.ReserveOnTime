@@ -45,6 +45,10 @@
 			}elseif((strcasecmp($type, 'shops/types') == 0)){
 				include 'shops/types.php';
 
+			//IS FULL
+			}elseif((strcasecmp($type, 'shops/isfull') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
+				include 'shops/isfull.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);
