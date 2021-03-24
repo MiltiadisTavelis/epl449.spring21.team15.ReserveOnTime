@@ -155,7 +155,7 @@
 				include 'reservations/all.php';
 			
 			//CREATE NEW RESERVATION
-			}elseif((strcasecmp($type, 'reservations/create') == 0) && (count($data) == 3) && (isset($data['day'],$data['people'],$data['shop_id']) != 0)){
+			}elseif((strcasecmp($type, 'reservations/create') == 0) && (count($data) == 4) && (isset($data['day'],$data['people'],$data['shop_id'],$data['time']) != 0)){
 				include 'reservations/create.php';
 			}else{
 				echo $error;
