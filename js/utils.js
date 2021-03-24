@@ -216,7 +216,7 @@ function loadShopSection(xhr, sectionId) {
         let shops = response["Shops"]
 
         if (response.hasOwnProperty('NoShopsFound')) {
-            popUpMessage("There was an unexpected error when loading the shops", "danger")
+            popUpMessage("No shops were found", "danger")
         } else {
             section = document.getElementById(sectionId)
             if (section === null) {
