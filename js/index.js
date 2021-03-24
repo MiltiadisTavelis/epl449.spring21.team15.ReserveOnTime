@@ -41,6 +41,9 @@ function search() {
     };
 
     xhr.onload = function() {
+        resultsSection = document.getElementById("results")
+        if (results != null)
+            removeAllChildNodes(resultsSection)
         loadShopSection(this, "results")
     }
 
