@@ -66,6 +66,20 @@
 				printf("Error: %s.\n",$stmt->error);
 				return false;
 			}
-	}
-}	
+		}
+
+		//GET ALL PENDING SHOPS
+		public function pendingShops(){
+			$sql = "SELECT * FROM PENDING_SHOPS";
+			$stmt = $this->conn->prepare($sql);
+	        if(!mysqli_stmt_prepare($stmt,$sql)){
+	            echo "Error";
+	            exit();
+	        }else{
+	        	mysqli_stmt_execute($stmt);
+	           	$result = mysqli_stmt_get_result($stmt);
+	          	return $result;
+	        }
+		}
+	}	
 ?>
