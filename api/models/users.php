@@ -17,6 +17,7 @@
 		public $password;
 		public $verify;
 		public $url;
+		public $shop_id;
 
 		public function __construct($db)
 		{
@@ -40,6 +41,17 @@
             $this->usertype = $row["usertype"];
             $this->verify = $row["verify"];
             $this->gender = $row["gender"];
+		}
+
+		//GET USER DETAILS BY ID
+		public function shop(){
+			$sql = "SELECT id FROM SHOPS WHERE mngid = ?";
+			$stmt = $this->conn->prepare($sql);
+			$stmt->bind_param('i',$this->id);
+			$stmt->execute();
+			$row = $stmt->get_result();
+			$row = $row->fetch_array(MYSQLI_ASSOC);
+            $this->shop_id = $row["id"];
 		}
 
 		//GET USER DETAILS BY ID

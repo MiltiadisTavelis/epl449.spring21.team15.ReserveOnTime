@@ -25,6 +25,7 @@
 		public $avg_rating;
 		public $checkTime;
 		public $checkDay;
+		public $postcode;
 
 		public function __construct($db)
 		{
@@ -285,6 +286,102 @@
 		//GET ALL SHOP TYPES
 		public function types(){
 		    $sql = 'SELECT * FROM SHOP_TYPE';
+		    $stmt = $this->conn->prepare($sql);
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                echo "Error";
+                exit();
+            }else{
+            	mysqli_stmt_execute($stmt);
+            	$result = mysqli_stmt_get_result($stmt);
+            	return $result;
+        	}
+		}
+
+		//GET ALL POSTCODES
+		public function postcode(){
+			$where = array();
+			$sql = 'SELECT DISTINCT ADDRESS.pc FROM STREETS,ADDRESS,AREAS,CITIES WHERE ADDRESS.city = CITIES.ID AND AREAS.id = ADDRESS.area AND ADDRESS.street = STREETS.id';
+
+			if(isset($this->area) && !empty($this->area)){
+			    $where[] = 'AREAS.area = "'.$this->area.'"';
+			}
+			if(isset($this->street) && !empty($this->street)){
+			    $where[] = 'STREETS.street = "'.$this->street.'"';
+			}
+			if(isset($this->city) && !empty($this->city)){
+			    $where[] = 'CITIES.name = "'.$this->city.'"';
+			}
+
+			$where_string = implode(' AND ' , $where);
+
+			if($where){
+				$sql .= ' AND ' . $where_string . ' ORDER BY ADDRESS.pc';
+			}
+
+		    $stmt = $this->conn->prepare($sql);
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                echo "Error";
+                exit();
+            }else{
+            	mysqli_stmt_execute($stmt);
+            	$result = mysqli_stmt_get_result($stmt);
+            	return $result;
+        	}
+		}
+
+		//GET ALL STREETS
+		public function streets(){
+			$where = array();
+			$sql = 'SELECT DISTINCT STREETS.street FROM STREETS,ADDRESS,AREAS,CITIES WHERE ADDRESS.city = CITIES.ID AND AREAS.id = ADDRESS.area AND ADDRESS.street = STREETS.id';
+
+			if(isset($this->postcode) && !empty($this->postcode)){
+			    $where[] = 'ADDRESS.pc = "'.$this->postcode.'"';
+			}
+			if(isset($this->area) && !empty($this->area)){
+			    $where[] = 'AREAS.area = "'.$this->area.'"';
+			}
+			if(isset($this->city) && !empty($this->city)){
+			    $where[] = 'CITIES.name = "'.$this->city.'"';
+			}
+
+			$where_string = implode(' AND ' , $where);
+
+			if($where){
+				$sql .= ' AND ' . $where_string . ' ORDER BY STREETS.street';
+			}
+
+		    $stmt = $this->conn->prepare($sql);
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                echo "Error";
+                exit();
+            }else{
+            	mysqli_stmt_execute($stmt);
+            	$result = mysqli_stmt_get_result($stmt);
+            	return $result;
+        	}
+		}
+
+		//GET ALL AREAS
+		public function area(){
+			$where = array();
+			$sql = 'SELECT DISTINCT AREAS.area FROM STREETS,ADDRESS,AREAS,CITIES WHERE ADDRESS.city = CITIES.ID AND AREAS.id = ADDRESS.area AND ADDRESS.street = STREETS.id';
+
+			if(isset($this->postcode) && !empty($this->postcode)){
+			    $where[] = 'ADDRESS.pc = "'.$this->postcode.'"';
+			}
+			if(isset($this->street) && !empty($this->street)){
+			    $where[] = 'STREETS.street = "'.$this->street.'"';
+			}
+			if(isset($this->city) && !empty($this->city)){
+			    $where[] = 'CITIES.name = "'.$this->city.'"';
+			}
+
+			$where_string = implode(' AND ' , $where);
+
+			if($where){
+				$sql .= ' AND ' . $where_string . ' ORDER BY AREAS.area';
+			}
+
 		    $stmt = $this->conn->prepare($sql);
             if(!mysqli_stmt_prepare($stmt,$sql)){
                 echo "Error";

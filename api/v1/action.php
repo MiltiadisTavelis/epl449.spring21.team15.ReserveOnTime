@@ -49,6 +49,18 @@
 			}elseif((strcasecmp($type, 'shops/isfull') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
 				include 'shops/isfull.php';
 
+			//GET ALL AREAS
+			}elseif((strcasecmp($type, 'shops/area') == 0) && count($data) == 3 && (isset($data['street'],$data['postcode'],$data['city']) != 0)){
+				include 'shops/area.php';
+
+			//GET ALL ADDRESSES
+			}elseif((strcasecmp($type, 'shops/street') == 0) && count($data) == 3 && (isset($data['area'],$data['postcode'],$data['city']) != 0)){
+				include 'shops/streets.php';
+
+			//GET ALL POSTCODES
+			}elseif((strcasecmp($type, 'shops/postcode') == 0) && count($data) == 3 && (isset($data['street'],$data['area'],$data['city']) != 0)){
+				include 'shops/postcode.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -120,6 +132,11 @@
 					return;
 				}
 				include 'users/verifyhash.php';
+
+			//GET SHOP BY USER
+			}elseif((strcasecmp($type, 'users/shop') == 0) && count($data) == 0){
+				include 'users/shop.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);

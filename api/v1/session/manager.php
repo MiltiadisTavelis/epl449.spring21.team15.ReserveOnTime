@@ -21,19 +21,22 @@
 
 	if(!$session->islogin()){
 		$result = $session->mlogin();
-		if($result == "0"){
-			$msg['status'] = 'Wrong email or password';
-			echo json_encode($msg);
-		}elseif($result == "1"){
-			$msg['status'] = 'Welcome '.$_SESSION['user_name'];
-			echo json_encode($msg);
-		}elseif($result == "3"){
-			$msg['status'] = 'Please verify your account';
-			echo json_encode($msg);
-		}else{
-			$msg['status'] = 'Server Error! Please try again';
-			echo json_encode($msg);
-		}
+        $msg['status'] = $result;
+        if($result == "1") {
+            $msg['message'] = 'Welcome '.$_SESSION['user_name']. '!';
+            echo json_encode($msg);
+        } else {
+            if($result == "0"){
+                $msg['message'] = 'Wrong email or password';
+                echo json_encode($msg);
+            }elseif($result == "3"){
+                $msg['message'] = 'Please verify your account';
+                echo json_encode($msg);
+            }else{
+                $msg['message'] = 'Server Error! Please try again';
+                echo json_encode($msg);
+            }
+        }
 	}else{
 		$msg['message'] = 'Your name is '.$_SESSION['user_name'];
 		echo json_encode($msg);
