@@ -185,12 +185,12 @@ function createManagerReservationEntry(reservation, sectionId) {
     } else if (sectionId === "requests") {
         let decision = document.createElement("td")
 
-        let approveBtn = document.createElement("button")
-        approveBtn.textContent = "Approve"
-        approveBtn.setAttribute("class", "btn btn-sm btn-success btn-approve")
-        approveBtn.setAttribute("id", "approve-" + reservation.id)
-        approveBtn.setAttribute("type", "button")
-        approveBtn.onclick = function() {
+        let acceptBtn = document.createElement("button")
+        acceptBtn.textContent = "accept"
+        acceptBtn.setAttribute("class", "btn btn-sm btn-success btn-accept")
+        acceptBtn.setAttribute("id", "accept-" + reservation.id)
+        acceptBtn.setAttribute("type", "button")
+        acceptBtn.onclick = function() {
             let xhr = new XMLHttpRequest()
 
             let reservationId = this.id.split("-")[1]
@@ -203,12 +203,12 @@ function createManagerReservationEntry(reservation, sectionId) {
             xhr.onload = function() {
                 if (xhr.status === 200) {
 
-                    popUpMessage("Succesfully approved reservation!", "success")
+                    popUpMessage("Succesfully accepted reservation!", "success")
                     setTimeout(function() {
                         window.location.reload()
                     }, 2000);
                 } else {
-                    popUpMessage("Couldn't approve reservation", "danger")
+                    popUpMessage("Couldn't accept reservation", "danger")
                 }
             }
 
@@ -250,7 +250,7 @@ function createManagerReservationEntry(reservation, sectionId) {
             xhr.send(JSON.stringify(data))
         }
 
-        decision.appendChild(approveBtn)
+        decision.appendChild(acceptBtn)
         decision.appendChild(declineBtn)
         tr.appendChild(decision)
     } else {
@@ -387,7 +387,7 @@ function loadShopSection(xhr, sectionId) {
         let shops = response["Shops"]
 
         if (response.hasOwnProperty('NoShopsFound')) {
-            popUpMessage("No shops " + sectionId + " were found", "danger")
+            popUpMessage("No " + sectionId + "shops were found", "danger")
         } else {
             section = document.getElementById(sectionId)
             if (section === null) {
