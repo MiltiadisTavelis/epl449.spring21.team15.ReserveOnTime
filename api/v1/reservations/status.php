@@ -1,5 +1,6 @@
 <?php
-	
+	header('Access-Control-Allow-Methods: PUT');
+
 	if(count(get_included_files()) == 1){
 		echo json_encode(array('status' => 'Bad Request'));
 		return;
