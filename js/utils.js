@@ -98,7 +98,6 @@ function createReservationEntry(reservation, sectionId) {
 
             xhr.onload = function() {
                 if (xhr.status === 200) {
-
                     popUpMessage("Succesfully cancelled reservation!", "success")
                     setTimeout(function() {
                         window.location.reload()
@@ -159,8 +158,12 @@ function createManagerReservationEntry(reservation, sectionId) {
     tr.setAttribute("id", "reservation-" + reservation.id)
 
     let customerName = document.createElement("td")
-    customerName.textContent = reservation.name
+    customerName.textContent = reservation.fname + " " + reservation.lname
     tr.appendChild(customerName)
+
+    let customerNumber = document.createElement("td")
+    customerNumber.textContent = reservation.pnum
+    tr.appendChild(customerNumber)
 
     let dateTime = document.createElement("td")
     let stringTime = reservation.time.split(":")
@@ -232,7 +235,6 @@ function createManagerReservationEntry(reservation, sectionId) {
 
             xhr.onload = function() {
                 if (xhr.status === 200) {
-
                     popUpMessage("Succesfully declined reservation!", "success")
                     setTimeout(function() {
                         window.location.reload()
@@ -247,7 +249,6 @@ function createManagerReservationEntry(reservation, sectionId) {
             xhr.setRequestHeader('Content-Type', 'application/json')
             xhr.send(JSON.stringify(data))
         }
-
 
         decision.appendChild(approveBtn)
         decision.appendChild(declineBtn)
@@ -312,7 +313,7 @@ function loadManagerReservationSection(xhr, sectionId) {
             headerTitle.textContent = title
             header.appendChild(headerTitle)
 
-            let table = createReservationsTable(sectionId, ["Name", "Date/Time", "People"])
+            let table = createReservationsTable(sectionId, ["Name", "Phone #", "Date/Time", "People"])
             let reservations = response["Reservations"]
             for (entry in reservations) {
                 table.tBodies[0].appendChild(createManagerReservationEntry(reservations[entry], sectionId))
@@ -386,7 +387,7 @@ function loadShopSection(xhr, sectionId) {
         let shops = response["Shops"]
 
         if (response.hasOwnProperty('NoShopsFound')) {
-            popUpMessage("No shops were found", "danger")
+            popUpMessage("No shops " + sectionId + " were found", "danger")
         } else {
             section = document.getElementById(sectionId)
             if (section === null) {
