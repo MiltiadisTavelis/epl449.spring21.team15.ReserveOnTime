@@ -86,7 +86,7 @@ function createShopCard(shop) {
 
     let cardListRating = document.createElement('li')
     cardListRating.classList.add('list-group-item')
-    cardListRating.innerHTML = '<i class="fas fa-star"></i>   ' + shop.rating
+    cardListRating.innerHTML = '<i class="fas fa-star"></i>   ' + shop.rating + "/5"
     cardList.appendChild(cardListRating)
 
     let cardFooter = document.createElement('div')
