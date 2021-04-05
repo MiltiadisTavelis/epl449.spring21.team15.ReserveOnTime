@@ -51,12 +51,22 @@ a:hover {
     height: 620px;
     white-space: normal;
     display: inline-block;
+    height: 575px;
     width: 15rem;
     margin: 15px;
 }
 
 .shop-card .card-title {
     font-weight: bold;
+}
+
+.shop-card * {
+    margin: 0;
+}
+
+.shop-card .card-textContent {
+    height: 25px;
+    overflow-y: auto;
 }
 
 .reservation-table {
