@@ -43,6 +43,29 @@
     </nav>
     <div class="container-fluid h-100">
         <div id="contents" class="container w-75">
+            <div id="stats" class="d-none mb-5">
+                <table class="table table-sm">
+                    <thead>
+                        <tr class="table-info">
+                            <th id="stats-shopname" colspan="4"></th>
+                        </tr>
+                        <tr class="table-secondary">
+                            <th>Total</th>
+                            <th>Accepted</th>
+                            <th>Declined</th>
+                            <th>Cancelled</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-light">
+                            <td id="stats-total"></td>
+                            <td id="stats-accepted"></td>
+                            <td id="stats-declined"></td>
+                            <td id="stats-cancelled"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div id="requests" class="d-none"></div>
             <div id="today" class="d-none"></div>
             <div id="upcoming" class="d-none"></div>
