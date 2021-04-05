@@ -58,7 +58,7 @@ function createShopCard(shop) {
 
     let cardImg = document.createElement("img")
     cardImg.classList.add('card-img-top')
-    cardImg.src = "../images/shop_thumbnails/" + shop.id
+    cardImg.src = "../images/shop_logos/" + shop.id
     shopCard.appendChild(cardImg)
 
     let cardBody = document.createElement("div")
