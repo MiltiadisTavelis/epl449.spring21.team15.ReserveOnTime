@@ -227,6 +227,18 @@ function loadShopPhotos() {
     pictures.appendChild(carousel);
 
 }
+loadLogo();
+
+function loadLogo(){
+
+    var logo = document.getElementById("shop-image");
+    var url = window.location.href;
+    let id = url ? url.split('?').pop() : window.location.search.slice(1);
+
+    str1 = "../images/shop_logos/";
+    str2 = id;
+    logo.setAttribute("src", str1.concat(str2));
+}
 
 loadReviews();
 
