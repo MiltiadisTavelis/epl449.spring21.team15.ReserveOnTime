@@ -61,6 +61,10 @@
 			}elseif((strcasecmp($type, 'shops/postcode') == 0) && count($data) == 3 && (isset($data['street'],$data['area'],$data['city']) != 0)){
 				include 'shops/postcode.php';
 
+			//GET ALL IMAGES
+			}elseif((strcasecmp($type, 'shops/images') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
+				include 'shops/images.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);
