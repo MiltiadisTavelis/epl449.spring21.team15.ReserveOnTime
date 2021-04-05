@@ -199,7 +199,15 @@ function loadPage() {
                 if (x.status === 200) {
                     reservations = JSON.parse(x.responseText)
 
-                    if (reservations.hasOwnProperty("NoRsrvFound")) {
+                    if (reservations.hasOwnProperty("status")) {
+                        let div = document.createElement("div")
+                        div.setAttribute("class", "alert alert-dark text-center")
+                        div.textContent = reservations["status"]
+                        let contents = document.getElementById("contents")
+                        contents.appendChild(div)
+
+                        logout()
+                    } else if (reservations.hasOwnProperty("NoRsrvFound")) {
                         let div = document.createElement("div")
                         div.setAttribute("class", "alert alert-dark text-center")
                         div.textContent = "There are no reservations."
@@ -317,7 +325,7 @@ function loadStats() {
 
     xhr.onload = function() {
         if (xhr.status === 200) {
-            let response = JSON.parse(xhr.responseText);
+            let response = JSON.parse(xhr.responseText)
             document.getElementById("stats-shopname").textContent = response.sname + " Reservation Statistics"
 
             let totalDisplay = document.getElementById("stats-total")
@@ -348,7 +356,7 @@ function loadStats() {
             cancelledDisplay.textContent = cancelledCounter + " (" + Math.trunc(cancelledCounter * 100 / total) + "%)"
             document.getElementById("stats").classList.remove('d-none')
         } else {
-            popUpMessage("There was an unexpected error", "danger");
+            popUpMessage("There was an unexpected error", "danger")
         }
     }
 
