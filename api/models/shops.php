@@ -410,6 +410,20 @@
 				exit();
 			}
 		}
-
+		
+		
+		//GET ALL IMAGES
+		public function images(){
+		    $sql = 'SELECT image_url FROM IMAGES WHERE shop_id = '.$this->id;
+		    $stmt = $this->conn->prepare($sql);
+		    if(!mysqli_stmt_prepare($stmt,$sql)){
+			echo "Error";
+			exit();
+		    }else{
+			mysqli_stmt_execute($stmt);
+			$result = mysqli_stmt_get_result($stmt);
+			return $result;
+		    }
+		}
 	}
 ?>
