@@ -216,6 +216,8 @@
 				include 'session/islogin.php';
 			}elseif((strcasecmp($type, 'session/cookie') == 0) && (count($data) == 2) && (isset($data['email'],$data['password']) != 0)){
 				include 'session/cookie.php';
+			}elseif((strcasecmp($type, 'session/type') == 0) && (count($data) == 0)){
+				include 'session/type.php';
 			}else{
 				echo $error;
 				http_response_code(400);
