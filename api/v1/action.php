@@ -61,6 +61,10 @@
 			}elseif((strcasecmp($type, 'shops/postcode') == 0) && count($data) == 3 && (isset($data['street'],$data['area'],$data['city']) != 0)){
 				include 'shops/postcode.php';
 
+			//GET ALL IMAGES
+			}elseif((strcasecmp($type, 'shops/images') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
+				include 'shops/images.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -212,6 +216,8 @@
 				include 'session/islogin.php';
 			}elseif((strcasecmp($type, 'session/cookie') == 0) && (count($data) == 2) && (isset($data['email'],$data['password']) != 0)){
 				include 'session/cookie.php';
+			}elseif((strcasecmp($type, 'session/type') == 0) && (count($data) == 0)){
+				include 'session/type.php';
 			}else{
 				echo $error;
 				http_response_code(400);

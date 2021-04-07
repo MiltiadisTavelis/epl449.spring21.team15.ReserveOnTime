@@ -110,7 +110,7 @@ function createShopCard(shop) {
 
     let cardImg = document.createElement("img")
     cardImg.classList.add('card-img-top')
-    cardImg.src = "../images/shop_thumbnails/" + shop.id
+    cardImg.src = "../images/shop_logos/" + shop.id
     shopCard.appendChild(cardImg)
 
     let cardBody = document.createElement("div")
@@ -138,7 +138,7 @@ function createShopCard(shop) {
 
     let cardListRating = document.createElement('li')
     cardListRating.classList.add('list-group-item')
-    cardListRating.innerHTML = '<i class="fas fa-star"></i>   ' + shop.rating
+    cardListRating.innerHTML = '<i class="fas fa-star"></i>   ' + shop.rating + "/5"
     cardList.appendChild(cardListRating)
 
     let cardFooter = document.createElement('div')
