@@ -1,6 +1,7 @@
 var shop_id = null
 var reservations = null
 
+checkSession("m", true)
 loadPage()
 
 function createManagerReservationEntry(reservation, sectionId) {

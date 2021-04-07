@@ -1,3 +1,5 @@
+removeDoubleSession()
+
 function submit() {
     var email = document.getElementById('email-input');
     var pass = document.getElementById('password-input');

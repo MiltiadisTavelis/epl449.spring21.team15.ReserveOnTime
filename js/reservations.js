@@ -1,3 +1,4 @@
+checkSession("u", true)
 loadPage()
 
 function createReservationEntry(reservation, sectionId) {

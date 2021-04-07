@@ -1,3 +1,5 @@
+checkSession("u", false)
+
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
@@ -29,11 +31,11 @@ function isfull() {
             var response = JSON.parse(xhr.responseText);
             var av = document.getElementById("available-status");
 
-            if(response.status === "Available"){
-                av.classList.add("badge","badge-success");
+            if (response.status === "Available") {
+                av.classList.add("badge", "badge-success");
                 av.innerText = "Available";
-            }else if(response.status === "Full"){
-                av.classList.add("badge","badge-danger");
+            } else if (response.status === "Full") {
+                av.classList.add("badge", "badge-danger");
                 av.innerText = "Full";
             }
 

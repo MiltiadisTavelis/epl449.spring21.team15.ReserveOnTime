@@ -1,3 +1,55 @@
+function checkSession(type, redir) {
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "session/type"
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty("type")) {
+                if (response["type"] !== type) {
+                    logout()
+                }
+            } else {
+                if (redir) {
+                    window.location = "signin.html"
+                }
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
+function removeDoubleSession() {
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "session/type"
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty("type")) {
+                logout()
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
 function popUpMessage(textContent, type) {
     let message = document.createElement('div')
     message.setAttribute("class", "alert alert-" + type + " textContent-center popup")

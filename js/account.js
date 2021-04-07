@@ -1,3 +1,5 @@
+checkSession("u", true)
+
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
@@ -8,7 +10,7 @@ $('.datepicker').datepicker({
 loadDet();
 
 function submit() {
-	var name = document.getElementById('firstname-input');
+    var name = document.getElementById('firstname-input');
     var surname = document.getElementById('lastname-input');
     var gender = document.getElementById('gender-input');
     var birthday = document.getElementById('date-input');
@@ -31,9 +33,9 @@ function submit() {
 
             if (response.hasOwnProperty('status')) {
                 popUpMessage(response["status"], "success");
-            }else{
-	            popUpMessage("There was an unexpected error", "danger");
-        	}
+            } else {
+                popUpMessage("There was an unexpected error", "danger");
+            }
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
@@ -54,7 +56,7 @@ function loadDet() {
 
     var xhr = new XMLHttpRequest();
     var data = {
-        "type": "users/user", 
+        "type": "users/user",
     };
 
     xhr.onload = function() {
@@ -64,17 +66,17 @@ function loadDet() {
             if (response.hasOwnProperty('status')) {
                 popUpMessage(response["status"], "danger");
                 window.setTimeout(function() {
-                	window.location = "signin.html";
+                    window.location = "signin.html";
                 }, 1000);
-            }else{
-	            name.value = response.fname;
-	            surname.value = response.lname;
-	            gender.value = response.gender;
-	            $("#date-input").datepicker('setDate',response.birth);
-	            code.value = response.phone_code;
-	            number.value = response.pnum;
-	            email.value = response.email;
-        	}
+            } else {
+                name.value = response.fname;
+                surname.value = response.lname;
+                gender.value = response.gender;
+                $("#date-input").datepicker('setDate', response.birth);
+                code.value = response.phone_code;
+                number.value = response.pnum;
+                email.value = response.email;
+            }
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
