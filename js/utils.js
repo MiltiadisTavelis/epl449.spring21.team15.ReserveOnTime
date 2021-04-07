@@ -104,7 +104,8 @@ function createBootstrapTable(sectionId, tableTitles) {
 }
 
 function createShopCard(shop) {
-    let shopCard = document.createElement("div")
+    let shopCard = document.createElement("a")
+    shopCard.href = "shop.html?" + shop.id
     shopCard.classList.add('card')
     shopCard.classList.add('shop-card')
 
@@ -140,16 +141,6 @@ function createShopCard(shop) {
     cardListRating.classList.add('list-group-item')
     cardListRating.innerHTML = '<i class="fas fa-star"></i>   ' + shop.rating + "/5"
     cardList.appendChild(cardListRating)
-
-    let cardFooter = document.createElement('div')
-    cardFooter.classList.add('card-body')
-    shopCard.appendChild(cardFooter)
-
-    let cardFooterLink = document.createElement('a')
-    cardFooterLink.classList.add('card-link', 'btn', 'btn-lg', 'btn-dark')
-    cardFooterLink.href = "shop.html?" + shop.id
-    cardFooterLink.textContent = "Book Now"
-    cardFooter.appendChild(cardFooterLink)
 
     return shopCard
 }
