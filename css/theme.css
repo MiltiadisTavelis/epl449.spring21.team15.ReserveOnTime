@@ -39,6 +39,10 @@ a:hover {
     text-decoration: none;
 }
 
+.day-text {
+    font-family: monospace;
+}
+
 .shop-display {
     padding: 0px;
     margin-bottom: 80px;
