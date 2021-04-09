@@ -14,12 +14,17 @@ $('.clockpicker').clockpicker({
 });
 
 var shopname;
+var url = window.location.href;
+let id = url ? url.split('?').pop() : window.location.search.slice(1);
 
 isfull();
+loadShopContent();
+loadShopPhotos();
+loadLogo();
+loadReviews();
+loadEvents();
 
 function isfull() {
-    var url = window.location.href;
-    let id = url ? url.split('?').pop() : window.location.search.slice(1);
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "shops/isfull",
@@ -50,8 +55,6 @@ function isfull() {
 }
 
 function submit() {
-    var url = window.location.href;
-    let id = url ? url.split('?').pop() : window.location.search.slice(1);
     var people = document.getElementById('people-input');
     var day = document.getElementById('date-req-input');
     var time = document.getElementById('time-req-input');
@@ -90,11 +93,8 @@ function submit() {
     xhr.send(JSON.stringify(data));
 }
 
-loadShopContent();
 
 function loadShopContent() {
-    var url = window.location.href;
-    let id = url ? url.split('?').pop() : window.location.search.slice(1);
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "shops/shop",
@@ -129,11 +129,8 @@ function loadShopContent() {
     xhr.send(JSON.stringify(data));
 }
 
-loadShopPhotos();
 
 function loadShopPhotos() {
-    var url = window.location.href;
-    let id = url ? url.split('?').pop() : window.location.search.slice(1);
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "shops/images",
@@ -232,12 +229,6 @@ function loadShopPhotos() {
             carousel.appendChild(a);
             pictures.appendChild(carousel);
 
-            shopname = response.sname;
-            name.innerText = response.sname;
-            document.getElementById('type').innerText = response.stype;
-            document.getElementById('description').innerText = response.description;
-            document.getElementById('rating').innerText = response.rating;
-
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
@@ -247,28 +238,20 @@ function loadShopPhotos() {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
     var pictures = document.getElementById("photos");
-
     
-
 }
-loadLogo();
 
 function loadLogo(){
 
     var logo = document.getElementById("shop-image");
-    var url = window.location.href;
-    let id = url ? url.split('?').pop() : window.location.search.slice(1);
 
     str1 = "../images/shop_logos/";
     str2 = id;
     logo.setAttribute("src", str1.concat(str2));
 }
 
-loadReviews();
 
 function loadReviews() {
-    var url = window.location.href;
-    let id = url ? url.split('?').pop() : window.location.search.slice(1);
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "reviews/shop",
@@ -362,11 +345,7 @@ function checkTime(i) {
     return i;
 }
 
-loadEvents();
-
 function loadEvents() {
-    var url = window.location.href;
-    let id = url ? url.split('?').pop() : window.location.search.slice(1);
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "events/shop",
