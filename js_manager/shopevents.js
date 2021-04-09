@@ -51,12 +51,12 @@ function submit() {
             var response = JSON.parse(xhr.responseText);
 
             if (response.hasOwnProperty("status")) {
-                popUpMessage(response["status"], "success");
+                popUpMessage(response["status"], "danger");
+            } else {
+                popUpMessage(response["message"], "success");
                 window.setTimeout(function() {
                     window.location = "shopevents.html";
                 }, 1000);
-            } else {
-                popUpMessage("Unexpected error", "danger");
             }
         } else {
             popUpMessage("Unexpected error", "danger");
