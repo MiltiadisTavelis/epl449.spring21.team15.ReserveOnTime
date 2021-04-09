@@ -286,6 +286,41 @@
 			return false;
 		}
 
+		//UPDATE SHOP DETAILS BY ID
+		public function update_shopdetails(){
+			$this->id = htmlspecialchars(strip_tags($this->id));
+			$this->sname = htmlspecialchars(strip_tags($this->sname));
+			$this->stype = htmlspecialchars(strip_tags($this->stype));
+			$this->email = htmlspecialchars(strip_tags($this->email));
+			$this->pnum = htmlspecialchars(strip_tags($this->pnum));
+			$this->city = htmlspecialchars(strip_tags($this->city));
+			$this->area = htmlspecialchars(strip_tags($this->area));
+			$this->street = htmlspecialchars(strip_tags($this->street));
+			$this->postcode = htmlspecialchars(strip_tags($this->postcode));
+			$this->streetnum = htmlspecialchars(strip_tags($this->streetnum));
+
+			$sql = 'UPDATE SHOPS SET
+							SHOPS.sname = "'.$this->sname.'",
+							SHOPS.stype = "'.$this->stype.'",
+							SHOPS.email = "'.$this->email.'",
+							SHOPS.pnum = "'.$this->pnum.'",
+							SHOPS.city = "'.$this->city.'",
+							SHOPS.area = "'.$this->area.'",
+							SHOPS.street = "'.$this->street.'",
+							SHOPS.pc = "'.$this->postcode.'",
+							SHOPS.streetnum = "'.$this->streetnum.'"
+							WHERE SHOPS.id = '.$this->id.';';
+			$stmt = $this->conn->prepare($sql);
+			
+			if($stmt->execute()){
+				return true;
+			}
+
+			printf("Error: %s.\n",$stmt->error);
+
+			return false;
+		}
+
 		//VERIFY IF THE SHOP IS OWNED THE USER
 		public function shop_verify($u,$s){
 			$sql = 'SELECT * FROM SHOPS WHERE mngid = '.$u.' AND SHOPS.id = '.$s;

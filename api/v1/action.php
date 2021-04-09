@@ -37,10 +37,6 @@
 			}elseif((strcasecmp($type, 'shops/cshop') == 0) && (count($data) == 8) && (isset($data['sname'],$data['stype'],$data['email'],$data['pnum'],$data['description'],$data['mngid'],$data['capacity'],$data['tables']) != 0)){
 				include 'shops/cshop.php';
 
-			//ADD OPEN HOURS TO SHOP
-			}elseif((strcasecmp($type, 'shops/addhour') == 0)){
-				include 'shops/addhour.php';
-
 			//GET ALL SHOP TYPES
 			}elseif((strcasecmp($type, 'shops/types') == 0)){
 				include 'shops/types.php';
@@ -160,6 +156,7 @@
 			//CREATE EVENT
 			}elseif((strcasecmp($type, 'events/create') == 0) && (count($data) == 7) && (isset($data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date'],$data['shop_id']) != 0)){
 				include 'events/create.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -244,6 +241,13 @@
 			//UPDATE SHOP
 			if((strcasecmp($type, 'shops/update') == 0) && (count($data) == 8) && (isset($data['sname'],$data['stype'],$data['email'],$data['pnum'],$data['description'],$data['id'],$data['capacity'],$data['tables']) != 0)){
 				include 'shops/update.php';
+			//UPDATE SHOP
+			}elseif((strcasecmp($type, 'shops/shopdetails') == 0) && (count($data) == 10) && (isset($data['shop_id'],$data['sname'],$data['stype'],$data['email'],$data['pnum'],$data['city'],$data['area'],$data['street'],$data['postcode'],$data['streetnum']) != 0)){
+				include 'shops/shopdetails.php';
+			//ADD OPEN HOURS TO SHOP
+			}elseif((strcasecmp($type, 'shops/addhour') == 0)){
+				include 'shops/addhour.php';
+				
 			}else{
 				echo $error;
 				http_response_code(400);
