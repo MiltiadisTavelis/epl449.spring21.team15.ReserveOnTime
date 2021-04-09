@@ -10,17 +10,10 @@ form * {
     margin-bottom: 30px;
 }
 
-h1 {
-    font-family: 'Lobster Two', cursive;
-    font-size: 48px;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
 .btn-lg {
     margin-bottom: 20px;
 }
 
-.rememberme {
-    padding-left: 450px;
+.form-text {
+    margin: 0;
 }
