@@ -57,6 +57,7 @@
 				'id' => $id,
 				'sname' => $sname,
 				'stype' => $type,
+				'stype_id' => $type_id,
 				'email' => $email,
 				'pnum' => $pnum,
 				'description' => $description,
@@ -67,6 +68,7 @@
 				'streetnum' => $streetnum,
 				'area' => $area,
 				'city' => $name,
+				'city_id' => $city_id,
 				'postal_code' => $pc,
 				'rating' => number_format($avg_rating,1)
 			);

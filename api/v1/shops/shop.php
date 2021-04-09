@@ -17,6 +17,7 @@
 			'id' => $shops->id,
 			'sname' => $shops->sname,
 			'stype' => $shops->stype,
+			'stype_id' => $shops->type_id,
 			'email' => $shops->email,
 			'pnum' => $shops->pnum,
 			'description' => $shops->description,
@@ -27,6 +28,7 @@
 			'streetnum' => $shops->streetnum,
 			'area' => $shops->area,
 			'city' => $shops->city,
+			'city_id' => $shops->city_id,
 			'postal_code' => $shops->pc,
 			'rating' => number_format($shops->avg_rating, 1)
 		);

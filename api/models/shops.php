@@ -26,24 +26,22 @@
 		public $checkTime;
 		public $checkDay;
 		public $postcode;
+		public $type_id;
+		public $active;
 
 		public function __construct($db)
 		{
 			$this->conn = $db;
 		}
 
-		//SHOW ALL
+		//SHOW ALL (TEMP)
 		public function shops(){
 			$where = array();
 			$sql = '
-			SELECT DISTINCT SHOPS.id,SHOPS.sname,SHOP_TYPE.type,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, STREETS.street, SHOPS.streetnum, AREAS.area,CITIES.name, ADDRESS.pc, SHOPS.avg_rating 
-			FROM AREAS,SHOPS,CITIES,ADDRESS,STREETS,SHOP_TYPE,SHOP_HOURS 
-			WHERE SHOPS.address = ADDRESS.id
-			AND ADDRESS.street = STREETS.id 
-			AND ADDRESS.area = AREAS.id 
-			AND ADDRESS.city = CITIES.id 
-			AND SHOPS.stype = SHOP_TYPE.id
-			AND SHOPS.id = SHOP_HOURS.shopid';
+			SELECT DISTINCT SHOPS.id,SHOPS.sname,SHOP_TYPE.type, SHOP_TYPE.type, SHOP_TYPE.id AS type_id ,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, SHOPS.street, SHOPS.streetnum, SHOPS.area,CITIES.name, SHOPS.pc, SHOPS.avg_rating, CITIES.id AS city_id
+			FROM SHOPS,CITIES,SHOP_TYPE,SHOP_HOURS 
+			WHERE SHOPS.stype = SHOP_TYPE.id
+			AND SHOPS.city = CITIES.id';
 
 			$order = '';
 			$open = "";
@@ -73,20 +71,95 @@
 			if(isset($this->open) && $this->open == 1){
 				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
 				$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
-				$where[] = 'SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'"';
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'"';
 			}else if(isset($this->open) && $this->open == 0){
 				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
 				$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
-				$where[] = 'NOT (SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'") AND SHOPS.id NOT IN (SELECT DISTINCT shopid FROM SHOPS,SHOP_HOURS WHERE SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'")';
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND NOT (SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'") AND SHOPS.id NOT IN (SELECT DISTINCT shopid FROM SHOPS,SHOP_HOURS WHERE SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'")';
 			}else if(isset($this->checkTime) && !isset($this->checkDay)){
 				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
-				$where[] = 'SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
 			}else if(isset($this->checkTime) && isset($this->checkDay)){
 				$day = date('N', strtotime($this->checkDay)); //DAY NUMBER MON=1 .. 
-				$where[] = 'SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
 			}else if(!isset($this->checkTime) && isset($this->checkDay)){
 				$day = date('N', strtotime($this->checkDay)); //DAY NUMBER MON=1 .. 
-				$where[] = 'SHOP_HOURS.day = '.$day;
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day;
+			}
+
+			$where_string = implode(' AND ' , $where);
+
+			if($where){
+				$sql .= ' AND ' . $where_string;
+			}
+			if(isset($this->sort)){
+				$sql .= ' '.$order;
+			}
+		
+			$stmt = $this->conn->prepare($sql);
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                echo "Error";
+                exit();
+            }else{
+            	mysqli_stmt_execute($stmt);
+            	$result = mysqli_stmt_get_result($stmt);
+            	return $result;
+        	}
+		}
+
+		//SHOW ALL (ORIGINAL)
+		public function shops2(){
+			$where = array();
+			$sql = '
+			SELECT DISTINCT SHOPS.id,SHOPS.sname,SHOP_TYPE.type,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, STREETS.street, SHOPS.streetnum, AREAS.area,CITIES.name, ADDRESS.pc, SHOPS.avg_rating 
+			FROM AREAS,SHOPS,CITIES,ADDRESS,STREETS,SHOP_TYPE,SHOP_HOURS 
+			WHERE SHOPS.address = ADDRESS.id
+			AND ADDRESS.street = STREETS.id 
+			AND ADDRESS.area = AREAS.id 
+			AND ADDRESS.city = CITIES.id';
+
+			$order = '';
+			$open = "";
+			if(isset($this->sname)){
+			    $where[] = 'sname LIKE \'%'.$this->sname.'%\'';
+			}
+			if(isset($this->stype)){
+			    $where[] = 'stype = '.$this->stype;
+			}
+			if(isset($this->city)){
+			    $where[] = 'CITIES.id = '.$this->city;
+			}
+
+			if(isset($this->sort) && (strcasecmp($this->sort, 'oldest') == 0)){
+			    $order = 'ORDER BY reg_date';
+			}elseif(isset($this->sort) && (strcasecmp($this->sort, 'newest') == 0)){
+			    $order = 'ORDER BY reg_date DESC';
+			}elseif(isset($this->sort) && (strcasecmp($this->sort, 'rating') == 0)){
+			    $order = 'ORDER BY avg_rating DESC LIMIT 10';
+			}
+			// elseif(isset($sort) && (strcasecmp($sort, 'A to Z') == 0)){
+			//     $where[] = 'ORDER BY sname';
+			// }elseif(isset($sort) && (strcasecmp($sort, 'Z to A') == 0)){
+			//     $where[] = 'ORDER BY reg_date DESC';
+			// }
+
+			if(isset($this->open) && $this->open == 1){
+				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
+				$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'"';
+			}else if(isset($this->open) && $this->open == 0){
+				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
+				$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND NOT (SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'") AND SHOPS.id NOT IN (SELECT DISTINCT shopid FROM SHOPS,SHOP_HOURS WHERE SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'")';
+			}else if(isset($this->checkTime) && !isset($this->checkDay)){
+				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
+			}else if(isset($this->checkTime) && isset($this->checkDay)){
+				$day = date('N', strtotime($this->checkDay)); //DAY NUMBER MON=1 .. 
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
+			}else if(!isset($this->checkTime) && isset($this->checkDay)){
+				$day = date('N', strtotime($this->checkDay)); //DAY NUMBER MON=1 .. 
+				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day;
 			}
 
 			$where_string = implode(' AND ' , $where);
@@ -109,8 +182,39 @@
         	}
 		}
 
-		//SHOW SHOP BY ID
+		//SHOW SHOP BY ID (TEMP)
 		public function shop(){
+			$sql = '
+			SELECT SHOPS.id,SHOPS.sname,SHOP_TYPE.type, SHOP_TYPE.id AS type_id,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, SHOPS.street, SHOPS.streetnum, SHOPS.area,CITIES.name, SHOPS.pc, SHOPS.avg_rating, CITIES.id AS city_id
+			FROM SHOPS,CITIES,SHOP_TYPE,SHOP_HOURS 
+			WHERE SHOPS.city = CITIES.id 
+			AND SHOPS.stype = SHOP_TYPE.id
+			AND SHOPS.id = ?';
+			$stmt = $this->conn->prepare($sql);
+			$stmt->bind_param('i',$this->id);
+			$stmt->execute();
+			$row = $stmt->get_result();
+			$row = $row->fetch_array(MYSQLI_ASSOC);
+            $this->sname = $row["sname"];
+            $this->stype = $row["type"];
+            $this->email = $row["email"];
+            $this->pnum = $row["pnum"];
+            $this->description = $row["description"];
+            $this->capacity = $row["capacity"];
+            $this->tables = $row["tables"];
+            $this->reg_date = $row["reg_date"];
+            $this->street = $row["street"];
+            $this->streetnum = $row["streetnum"];
+            $this->area = $row["area"];
+            $this->city = $row["name"];
+            $this->pc = $row["pc"];
+            $this->avg_rating = $row["avg_rating"];
+            $this->city_id = $row['city_id'];
+            $this->type_id = $row['type_id'];
+		}
+
+		//SHOW SHOP BY ID (ORIGINAL)
+		public function shop2(){
 			$sql = '
 			SELECT SHOPS.id,SHOPS.sname,SHOP_TYPE.type,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, STREETS.street, SHOPS.streetnum, AREAS.area,CITIES.name, ADDRESS.pc, SHOPS.avg_rating  
 			FROM AREAS,SHOPS,CITIES,ADDRESS,STREETS,SHOP_TYPE,SHOP_HOURS 
@@ -119,7 +223,6 @@
 			AND ADDRESS.area = AREAS.id 
 			AND ADDRESS.city = CITIES.id 
 			AND SHOPS.stype = SHOP_TYPE.id 
-			AND SHOPS.id = SHOP_HOURS.shopid
 			AND SHOPS.id = ?';
 			$stmt = $this->conn->prepare($sql);
 			$stmt->bind_param('i',$this->id);
@@ -260,7 +363,23 @@
 
 		//ADD NEW HOUR
 		public function addhour($arr){
-		   	$sql = 'DELETE FROM SHOP_HOURS WHERE SHOP_HOURS.shopid = '.$arr['shop_id'].' AND SHOP_HOURS.day = '.$arr['day'].'; INSERT INTO SHOP_HOURS (`shopid`, `open`, `close`, `day`) VALUES ('.$arr['shop_id'].',"'.$arr['open'].'","'.$arr['close'].'",'.$arr['day'].');';
+		   	$sql = 'DELETE FROM SHOP_HOURS WHERE SHOP_HOURS.shopid = '.$arr['shop_id'].'; INSERT INTO SHOP_HOURS (`shopid`, `open`, `close`, `day`,`split`,`active`) VALUES ';
+
+		   	for($j=0; $j < count($arr['data']) ; $j++){
+		   		$data = $arr['data'][$j];
+			   	for ($i=0; $i < count($data['hours']) ; $i++) { 
+			   		$open = $data['hours'][$i]['open'];
+			   		$close = $data['hours'][$i]['close'];
+			   		$split = $data['hours'][$i]['split'];
+			   		$active = $data['active'];
+			   		if($i == (count($data['hours'])-1) && $j == (count($arr['data'])-1)){
+			   			$sql .= '('.$arr['shop_id'].',"'.$open.'","'.$close.'",'.$data['day'].',"'.$split.'","'.$active.'");';
+			   		}else{
+			   			$sql .= '('.$arr['shop_id'].',"'.$open.'","'.$close.'",'.$data['day'].',"'.$split.'","'.$active.'"), ';
+			   		}
+			   	}
+		   	}
+		   	
 			if($this->conn->multi_query($sql)){
 				return true;
 			}else{
@@ -271,7 +390,7 @@
 
 		//DISPLAY HOURS BY SHOP ID
 		public function showhours($s){
-		    $sql = 'SELECT open,close,day FROM SHOP_HOURS WHERE SHOP_HOURS.shopid = '.$s.' ORDER BY day';
+		    $sql = 'SELECT open,close,day,split,active FROM SHOP_HOURS WHERE SHOP_HOURS.shopid = '.$s.' ORDER BY day';
 		    $stmt = $this->conn->prepare($sql);
             if(!mysqli_stmt_prepare($stmt,$sql)){
                 echo "Error";

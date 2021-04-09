@@ -16,15 +16,24 @@
 	$cnt = mysqli_num_rows($results);
 	$json = array();
 	$json['Hours'] = array();
+	for ($i=0; $i < 7; $i++) { 
+		$day[$i] = array();
+		array_push($day[$i], array('active' => 0));
+		array_push($json['Hours'], $day[$i]);
+	}
 	if($cnt > 0 ){
 		while($row = mysqli_fetch_array($results)){
 			extract($row);
-			$shop = array(
-				'open' => $open,
-				'close' => $close,
-				'day' => $day
+			if($active == "1"){
+				$json['Hours'][$day-1][0]['active'] = $active;
+			}
+			$hours = array(
+				'open' => date("H:i", strtotime($open)),
+				'close' => date("H:i", strtotime($close)),
+				'day' => $day,
+				'split' => $split
 			);
-			array_push($json['Hours'], $shop);
+			array_push($json['Hours'][$day-1], $hours);
 		}
 		echo json_encode($json);
 	}else{

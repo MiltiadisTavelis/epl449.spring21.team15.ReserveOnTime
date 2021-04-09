@@ -17,7 +17,7 @@
 	$hours = new Shops($db);
 	if($hours->shop_verify($_SESSION['user_id'],$data['shop_id'])){
 		if($hours->addhour($data)){
-			$msg['status'] = 'Successfully added';
+			$msg['message'] = 'Successfully added';
 			echo json_encode($msg);
 		}else{
 			$msg['status'] = 'Server error';
