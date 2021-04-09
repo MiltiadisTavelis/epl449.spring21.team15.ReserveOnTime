@@ -144,3 +144,18 @@ function createShopCard(shop) {
 
     return shopCard
 }
+
+function addButtonTo(element, text, callback) {
+    if (element.id === null) {
+        throw new Error("Parent element has no id.")
+    }
+
+    let cancelBtn = document.createElement("button")
+    cancelBtn.textContent = text
+    cancelBtn.setAttribute("class", "btn btn-sm btn-dark textContent-center")
+    cancelBtn.setAttribute("id", "btn-action-" + element.id)
+    cancelBtn.setAttribute("type", "button")
+    cancelBtn.onclick = callback
+
+    element.appendChild(cancelBtn)
+}
