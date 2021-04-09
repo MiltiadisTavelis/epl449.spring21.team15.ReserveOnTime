@@ -8,3 +8,9 @@ $('.datepicker').datepicker({
     todayBtn: "linked",
     todayHighlight: true
 });
+
+$('.clockpicker').clockpicker({
+    default: 'now',
+    autoclose: true,
+    donetext: ''
+});

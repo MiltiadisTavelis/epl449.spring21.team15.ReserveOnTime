@@ -46,55 +46,6 @@ a:hover {
     text-decoration: none;
 }
 
-.day-text {
-    font-family: monospace;
-}
-
-.shop-display {
-    padding: 0px;
-    margin-bottom: 80px;
-    white-space: nowrap;
-    overflow-y: hidden;
-    overflow-x: auto;
-}
-
-.shop-card {
-    color: black;
-    height: 620px;
-    white-space: normal;
-    display: inline-block;
-    height: 480px;
-    width: 15rem;
-    margin: 15px;
-}
-
-.shop-card:hover {
-    color: #E86100;
-}
-
-.shop-card .card-title {
-    font-weight: bold;
-}
-
-.shop-card * {
-    margin: 0;
-}
-
-.shop-card .card-textContent {
-    height: 25px;
-    overflow-y: auto;
-}
-
-.reservation-table {
-    padding: 0px;
-    margin-bottom: 50px;
-}
-
-.reservation-table a {
-    color: black;
-    font-weight: bold;
-}
-
 .navbar-brand {
     font-family: 'Lobster Two', cursive;
     font-size: 26px;
@@ -116,6 +67,51 @@ a:hover {
     justify-content: center;
     overflow: auto;
     overflow-x: hidden;
+}
+
+.day-text {
+    font-family: monospace;
+}
+
+.shop-display {
+    padding: 0px;
+    margin-bottom: 80px;
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.shop-card {
+    color: black;
+    display: inline-block;
+    height: 24rem;
+    width: 15rem;
+    margin: 15px;
+}
+
+.shop-card:hover {
+    color: #E86100;
+}
+
+.shop-card * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.shop-card .card-title {
+    font-weight: bold;
+}
+
+.reservation-table {
+    padding: 0px;
+    margin-bottom: 50px;
+}
+
+.reservation-table a {
+    color: black;
+    font-weight: bold;
 }
 
 .input-group-text .fas {

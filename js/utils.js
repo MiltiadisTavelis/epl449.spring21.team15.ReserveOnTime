@@ -123,23 +123,23 @@ function createShopCard(shop) {
     cardBodyTitle.innerHTML = shop.sname
     cardBody.appendChild(cardBodyTitle)
 
-    let cardBodyText = document.createElement('p')
-    cardBodyText.classList.add('card-textContent')
-    cardBodyText.innerHTML = shop.description
-    cardBody.appendChild(cardBodyText)
+    //let cardBodyText = document.createElement('p')
+    //cardBodyText.classList.add('card-textContent')
+    //cardBodyText.innerHTML = shop.description
+    //cardBody.appendChild(cardBodyText)
 
     let cardList = document.createElement('ul')
     cardList.classList.add('list-group', 'list-group-flush')
-    shopCard.appendChild(cardList)
+    cardBody.appendChild(cardList)
 
     let cardListType = document.createElement('li')
     cardListType.classList.add('list-group-item')
-    cardListType.innerHTML = '<i class="fas fa-store"></i>   ' + shop.stype
+    cardListType.innerHTML = '<i class="fas fa-store"></i> ' + shop.stype
     cardList.appendChild(cardListType)
 
     let cardListRating = document.createElement('li')
     cardListRating.classList.add('list-group-item')
-    cardListRating.innerHTML = '<i class="fas fa-star"></i>   ' + shop.rating + "/5"
+    cardListRating.innerHTML = '<i class="fas fa-star"></i> ' + shop.rating + "/5"
     cardList.appendChild(cardListRating)
 
     return shopCard

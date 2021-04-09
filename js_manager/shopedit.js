@@ -1,6 +1,6 @@
 checkSession("m", true)
 
-window.addEventListener("load", function() {
+function setDisableCheckboxes() {
     var checkboxes = document.getElementsByClassName("check");
     for (let i = 0; i < checkboxes.length; i++) {
         checkboxes[i].addEventListener("change", function() {
@@ -8,7 +8,7 @@ window.addEventListener("load", function() {
             document.getElementById("time-" + day).disabled = !this.checked
         })
     }
-});
+}
 
 var shop_id;
 $(document).ready(function() {
@@ -24,6 +24,7 @@ $(document).ready(function() {
                 popUpMessage(response["status"], "danger");
             } else {
                 shop_id = response.shop_id;
+                setDisableCheckboxes()
                 loadShopTypes();
                 loadHours();
             }
@@ -38,20 +39,20 @@ $(document).ready(function() {
 });
 
 function submit() {
-    var days = ["Monday","Tuesday","Wednsday","Thursday","Friday","Saturday","Sunday"];
-    var calls = ["time-monday","time-tuesday","time-wednesday","time-thursday", "time-friday", "time-saturday", "time-sunday"];
-    var checkcalls = ["check-monday","check-tuesday","check-wednesday","check-thursday", "check-friday", "check-saturday", "check-sunday"];
+    var days = ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"];
+    var calls = ["time-monday", "time-tuesday", "time-wednesday", "time-thursday", "time-friday", "time-saturday", "time-sunday"];
+    var checkcalls = ["check-monday", "check-tuesday", "check-wednesday", "check-thursday", "check-friday", "check-saturday", "check-sunday"];
     var hourData = [];
     var pattern = /[0-9]{2}:[0-9]{2}\s*-\s*[0-9]{2}:[0-9]{2}(,\s*[0-9]{2}:[0-9]{2}\s*-\s*[0-9]{2}:[0-9]{2})*/;
-    for (var i=0; i<7; i++) {
+    for (var i = 0; i < 7; i++) {
 
         var day = document.getElementById(calls[i]);
-        if(day.value){
-            if(pattern.test(day.value)){
+        if (day.value) {
+            if (pattern.test(day.value)) {
                 day = day.value.split(",");
                 var leng = document.getElementById(calls[i]).value.split("-").length;
                 var allhours = [];
-                for(var j=0; j<(leng-1); j++){
+                for (var j = 0; j < (leng - 1); j++) {
                     var hours = day[j].split("-");
                     var open = hours[0];
                     var close = hours[1];
@@ -62,23 +63,23 @@ function submit() {
                         "active": 1
                     };
                 }
-                if(leng > 1){
+                if (leng > 1) {
                     var active = 0;
-                    if(document.getElementById(checkcalls[i]).checked){
+                    if (document.getElementById(checkcalls[i]).checked) {
                         active = 1
                     }
                     hourData.push({
-                        "day": i+1,
+                        "day": i + 1,
                         "active": active,
                         "hours": allhours
                     });
                 }
-            }else{
+            } else {
                 popUpMessage(days[i] + ' ' + "has not valid pattern", "danger");
                 day.setAttribute('novalidate', true);
                 return;
             }
-        }else{
+        } else {
             continue;
         }
 
@@ -100,7 +101,7 @@ function submit() {
 
             popUpMessage(response["message"], "success");
             submitDet();
-            
+
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
@@ -169,25 +170,27 @@ function loadHours() {
             var response = JSON.parse(xhr.responseText);
             if (response.hasOwnProperty('status')) {
                 popUpMessage(response["status"], "danger");
-            }else{
+            } else {
                 var hours = response["Hours"];
-                var calls = ["time-monday","time-tuesday","time-wednesday","time-thursday", "time-friday", "time-saturday", "time-sunday"];
-                var checkcalls = ["check-monday","check-tuesday","check-wednesday","check-thursday", "check-friday", "check-saturday", "check-sunday"];
-                for (var i=0; i<7; i++) {
-                    for (var j=0; j<hours[i].length; j++) {
+                var calls = ["time-monday", "time-tuesday", "time-wednesday", "time-thursday", "time-friday", "time-saturday", "time-sunday"];
+                var checkcalls = ["check-monday", "check-tuesday", "check-wednesday", "check-thursday", "check-friday", "check-saturday", "check-sunday"];
+                for (var i = 0; i < 7; i++) {
+                    for (var j = 0; j < hours[i].length; j++) {
                         var day = hours[i];
                         var val = '';
-                        for(var l=1; l<day.length; l++){
-                            if(l === (day.length-1)){
+                        for (var l = 1; l < day.length; l++) {
+                            if (l === (day.length - 1)) {
                                 val += day[l]['open'] + ' - ' + day[l]['close'];
-                            }else{
+                            } else {
                                 val += day[l]['open'] + ' - ' + day[l]['close'] + ', ';
                             }
                         }
-                        if(day[0]['active'] === 1){
+                        if (day[0]['active'] === 1) {
                             document.getElementById(checkcalls[i]).checked = true;
-                        }else{
+                            document.getElementById(calls[i]).disabled = false;
+                        } else {
                             document.getElementById(checkcalls[i]).checked = false;
+                            document.getElementById(calls[i]).disabled = true;
                         }
                         document.getElementById(calls[i]).value = val;
                     }
