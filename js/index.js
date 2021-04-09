@@ -3,6 +3,7 @@ checkSession("u", false)
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
+    maxViewMode: 2,
     startDate: "today",
     todayBtn: "linked",
     todayHighlight: true
