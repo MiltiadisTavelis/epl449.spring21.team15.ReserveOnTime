@@ -154,13 +154,13 @@
 				include 'events/shop.php';
 			
 			//CREATE EVENT
-			}elseif((strcasecmp($type, 'events/create') == 0) && (count($data) == 7) && (isset($data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date'],$data['shop_id']) != 0)){
+			}elseif((strcasecmp($type, 'events/create') == 0) && (count($data) == 9) && (isset($data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date'],$data['start_time'],$data['stop_time'],$data['shop_id']) != 0)){
 				include 'events/create.php';
-
 			}else{
 				echo $error;
 				http_response_code(400);
 			}
+
 
 		}elseif((strcasecmp(explode("/", $data['type'])[0],'reservations')) == 0){
 			include_once '../config/config.php';
