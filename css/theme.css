@@ -10,6 +10,13 @@ h1, h2, h3, h4, h5, small, .form-text {
     color: white;
 }
 
+h1 {
+    font-family: 'Lobster Two', cursive;
+    font-size: 48px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 h3 {
     font-size: 26px;
     font-weight: bold;

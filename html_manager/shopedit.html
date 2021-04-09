@@ -37,6 +37,9 @@
                     <a id="shopedit-btn" class="nav-link" href="shopedit.html"><b>Shop</b></a>
                 </li>
                 <li class="nav-item">
+                    <a id="shopevents-btn" class="nav-link" href="shopevents.html">Events</a>
+                </li>
+                <li class="nav-item">
                     <a id="account-btn" class="nav-link" href="account.html">Account</a>
                 </li>
                 <li class="nav-item">
@@ -47,13 +50,15 @@
     </nav>
     <div class="container-fluid h-100">
         <div id="contents" class="container w-75">
-            <h1>Shop Settings</h1>
+            <div id="heading">
+                <h1>Shop Settings</h1>
+            </div>
             <form class="main-form needs-validation" novalidate>
                 <div class="form-row">
                     <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-store"></i></div>
+                                <div class="input-group-text"><i class="fas fa-store-alt"></i></div>
                             </div>
                             <input required type="text" id="shop-name-input" class="form-control" placeholder="Shop Name">
                         </div>
@@ -61,7 +66,7 @@
                     <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-align-center"></i></div>
+                                <div class="input-group-text"><i class="fas fa-store"></i></div>
                             </div>
                             <select id="shop-type-input" class="custom-select">
                                 <option value="" disabled selected>Shop Type</option>

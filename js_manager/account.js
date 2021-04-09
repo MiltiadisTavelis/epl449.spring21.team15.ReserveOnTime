@@ -3,6 +3,7 @@ checkSession("m", true)
 $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
+    maxViewMode: 2,
     endDate: "today",
     startView: 2
 });
