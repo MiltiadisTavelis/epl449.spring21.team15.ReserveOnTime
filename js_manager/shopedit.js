@@ -5,7 +5,7 @@ window.addEventListener("load", function() {
     for (let i = 0; i < checkboxes.length; i++) {
         checkboxes[i].addEventListener("change", function() {
             let day = this.id.split("-")[1]
-            document.getElementById("time-" + day).disabled = this.checked
+            document.getElementById("time-" + day).disabled = !this.checked
         })
     }
 })
