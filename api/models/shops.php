@@ -298,6 +298,7 @@
 			$this->street = htmlspecialchars(strip_tags($this->street));
 			$this->postcode = htmlspecialchars(strip_tags($this->postcode));
 			$this->streetnum = htmlspecialchars(strip_tags($this->streetnum));
+			$this->description = htmlspecialchars(strip_tags($this->description));
 
 			$sql = 'UPDATE SHOPS SET
 							SHOPS.sname = "'.$this->sname.'",
@@ -308,7 +309,8 @@
 							SHOPS.area = "'.$this->area.'",
 							SHOPS.street = "'.$this->street.'",
 							SHOPS.pc = "'.$this->postcode.'",
-							SHOPS.streetnum = "'.$this->streetnum.'"
+							SHOPS.streetnum = "'.$this->streetnum.'",
+							SHOPS.description = "'.$this->description.'"
 							WHERE SHOPS.id = '.$this->id.';';
 			$stmt = $this->conn->prepare($sql);
 			

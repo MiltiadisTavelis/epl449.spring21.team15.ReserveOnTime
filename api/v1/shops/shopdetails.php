@@ -25,6 +25,7 @@
 	$shop->street = $data->street;
 	$shop->postcode = $data->postcode;
 	$shop->streetnum = $data->streetnum;
+	$shop->description = $data->description;
 
 	if($shop->update_shopdetails()){
 		$msg['message'] = 'Successfully Updated Details';

@@ -242,7 +242,7 @@
 			if((strcasecmp($type, 'shops/update') == 0) && (count($data) == 8) && (isset($data['sname'],$data['stype'],$data['email'],$data['pnum'],$data['description'],$data['id'],$data['capacity'],$data['tables']) != 0)){
 				include 'shops/update.php';
 			//UPDATE SHOP
-			}elseif((strcasecmp($type, 'shops/shopdetails') == 0) && (count($data) == 10) && (isset($data['shop_id'],$data['sname'],$data['stype'],$data['email'],$data['pnum'],$data['city'],$data['area'],$data['street'],$data['postcode'],$data['streetnum']) != 0)){
+			}elseif((strcasecmp($type, 'shops/shopdetails') == 0) && (count($data) == 11) && (isset($data['description'],$data['shop_id'],$data['sname'],$data['stype'],$data['email'],$data['pnum'],$data['city'],$data['area'],$data['street'],$data['postcode'],$data['streetnum']) != 0)){
 				include 'shops/shopdetails.php';
 			//ADD OPEN HOURS TO SHOP
 			}elseif((strcasecmp($type, 'shops/addhour') == 0)){

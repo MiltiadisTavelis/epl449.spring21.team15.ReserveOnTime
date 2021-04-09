@@ -123,6 +123,7 @@ function submitDet() {
     var number = document.getElementById('shop-number-input');
     var tel = document.getElementById('shop-tel-input');
     var email = document.getElementById('shop-email-input');
+    var description = document.getElementById('shop-description-input');
 
     var xhr = new XMLHttpRequest();
     var data = {
@@ -136,7 +137,8 @@ function submitDet() {
         "street": street.value,
         "postcode": zipcode.value,
         "streetnum": number.value,
-        "shop_id": shop_id
+        "shop_id": shop_id,
+        "description": description.value
     };
 
     xhr.onload = function() {
@@ -247,6 +249,7 @@ function loadDet() {
     var number = document.getElementById('shop-number-input');
     var tel = document.getElementById('shop-tel-input');
     var email = document.getElementById('shop-email-input');
+    var description = document.getElementById('shop-description-input');
 
     var xhr = new XMLHttpRequest();
     var data = {
@@ -272,6 +275,7 @@ function loadDet() {
                 number.value = response.streetnum;
                 tel.value = response.pnum;
                 email.value = response.email;
+                description.value = response.description;
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");
