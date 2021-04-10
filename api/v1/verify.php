@@ -23,7 +23,7 @@
 	$user->hash = $_GET['hash'];
 	$result = $user->verify_user();
 	if($result == 1){
-		readfile("verifyPage.html");
+		include 'verifyPage.html';
 	}elseif($result == 0){
 		$msg['status'] = 'Already Verified';
 		echo $msg['status'];
