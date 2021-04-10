@@ -38,19 +38,19 @@ function loadHours() {
             var d = new Date();
             var main = document.getElementById("dateTime");
             var response = JSON.parse(xhr.responseText);
-            for (day in response.Hours) {
-                var hour = response.Hours[day];
+            for (var j=0; j<7; j++) {
+                var hour = response.Hours[j];
                 var divDayTime = document.createElement("div");
-                divDayTime.setAttribute("id", days[day]);
-                if((d.getDay()-1) == day){
+                divDayTime.setAttribute("id", days[j]);
+                if((d.getDay()-1) == j){
                     divDayTime.classList.add("today");
                 }
                 var divDay = document.createElement("span");
                 divDay.classList.add("float-left");
-                divDay.innerText = days[day];
+                divDay.innerText = days[j];
                 divDayTime.appendChild(divDay);
-                console.log(hour.length);
-                if(hour.length === 1){
+                
+                if(hour.length === 1 || hour[0].active === 0){
                     var divTime = document.createElement("span");
                     divTime.classList.add("float-right");
                     divTime.innerText = "Closed";
