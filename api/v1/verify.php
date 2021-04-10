@@ -2,7 +2,7 @@
     header("Access-Control-Allow-Headers: Authorization, Content-Type");
     header("Access-Control-Allow-Origin: *");
     header('content-type: application/json; charset=utf-8');
-
+	
 	if(!preg_match('/^[a-f0-9]{32}$/', $_GET['hash'])){
 		echo json_encode(array('HashError' => 'Please make sure you are using the right URL'));
 		return;
@@ -22,6 +22,7 @@
 	$user->email = $_GET['email'];
 	$user->hash = $_GET['hash'];
 	$result = $user->verify_user();
+
 	if($result == 1){
 		header('Location: verifyPage.html');
 	}elseif($result == 0){
