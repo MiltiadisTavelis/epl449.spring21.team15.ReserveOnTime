@@ -42,6 +42,10 @@ hr {
     background-color: white;
 }
 
+a {
+    transition: all 0.3s;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -90,7 +94,7 @@ a:hover {
 }
 
 .shop-card:hover {
-    color: #E86100;
+    color: #FF5A00;
 }
 
 .shop-card * {
