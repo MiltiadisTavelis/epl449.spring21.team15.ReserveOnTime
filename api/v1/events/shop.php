@@ -23,6 +23,7 @@
 		while($row = mysqli_fetch_array($results)){
 			extract($row);
 			$rev = array(
+				'id' => $id,
 				'title' => $title,
 				'content' => $content,
 				'pic' => $pic,
