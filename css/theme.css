@@ -144,3 +144,25 @@ input[readonly] {
     left: 50%;
     transform: translateX(-50%);
 }
+
+#heading {
+    margin-bottom: 30px;
+}
+
+#contents {
+    padding: 50px;
+}
+
+#footer a {
+    color: grey;
+}
+
+#footer a:hover {
+    color: white;
+}
+
+#privacy-text {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    word-wrap: break-word;
+}
