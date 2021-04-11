@@ -7,5 +7,6 @@ form * {
 }
 
 .form-text {
+    text-align: center;
     margin: 0;
 }
