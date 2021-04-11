@@ -10,3 +10,8 @@ form * {
     text-align: center;
     margin: 0;
 }
+
+.input-info {
+    color: white;
+    text-align: left;
+}
