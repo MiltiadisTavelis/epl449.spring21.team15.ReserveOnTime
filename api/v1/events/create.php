@@ -25,7 +25,7 @@
 
 	$data = json_decode(file_get_contents("php://input"));
 
-	if ($data->start_date > $data->stop_date){
+	if (strtotime($data->start_date) > strtotime($data->stop_date)){
 		$msg['status'] = 'Conflict dates!';
 		echo json_encode($msg);
 		return;
