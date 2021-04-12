@@ -30,8 +30,8 @@
     <script type="text/javascript" src="../js_manager/shopevents.js" defer></script>
 </head>
 <body>
-    <nav class="navbar fixed-top navbar-expand-md navbar-dark">
-        <a href="index.html"><p class="navbar-brand animate__animated animate__fadeIn">Reserve On Time <span class="badge badge-light">Manager</span></p></a>
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark animate__animated animate__fadeIn animate__slow">
+        <a href="index.html"><p class="navbar-brand">Reserve On Time <span class="badge badge-light">Manager</span></p></a>
         <button class="navbar-toggler">
             <span class="navbar-toggler-icon" data-toggle="collapse" data-target="#nav-list"></span>
         </button>
@@ -125,9 +125,97 @@
                     </div>
                 </div>
                 <button id="submit-button" type="submit" class="btn btn-lg btn-light">Create Event</button>
-                <hr>
             </form>
-            <div id="existing-events" class="animate__animated animate__fadeIn animate__delay-1s">
+            <hr>
+            <!-- Modal -->
+<div id="edit-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <form class="main-form needs-validation" novalidate>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-heading"></i></div>
+                            </div>
+                            <input required type="text" class="form-control" id="modal-title-input" placeholder="Event Title">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-paragraph"></i></div>
+                            </div>
+                            <textarea required type="text" class="form-control" id="modal-content-input" placeholder="Event Content"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-calendar-day"></i></div>
+                            </div>
+                            <input required readonly type="text" id="modal-datefrom-input" class="form-control datepicker" placeholder="From Date" value="">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-calendar-week"></i></div>
+                            </div>
+                            <input required readonly type="text" id="modal-dateto-input" class="form-control datepicker" placeholder="To Date" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            </div>
+                            <input required readonly type="text" id="modal-timefrom-input" class="form-control clockpicker" value="" placeholder="From Time">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            </div>
+                            <input required readonly type="text" id="modal-timeto-input" class="form-control clockpicker" value="" placeholder="Until Time">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-link"></i></div>
+                            </div>
+                            <input type="url" class="form-control" id="modal-link-input" placeholder="Event Link">
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+      </div>
+      <div class="modal-footer">
+      	<button id="submit-button-update" type="submit" class="btn btn-default">Update Event</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+            <div id="existing-events"> 
                 <h4> My existing Events<br></h4>
                 <div id="events" class="tab-pane"></div>
             </div>
