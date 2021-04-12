@@ -17,6 +17,29 @@ $('.clockpicker').clockpicker({
     donetext: ''
 });
 
+var currEventId = null;
+
+$(document).on("click", "#submit-button-update", function () {
+     updateEvent();
+});
+
+$(document).on("click", ".event-card", function () {
+     var eventId = $(this).attr('card-event-id');
+     currEventId = eventId;
+     loadEventDet(eventId);
+});
+
+$('#edit-modal').on('hidden.bs.modal', function () {
+    document.getElementById('modal-title-input').value="";
+    document.getElementById('modal-content-input').value="";
+    document.getElementById('modal-datefrom-input').value="";
+    document.getElementById('modal-dateto-input').value="";
+    document.getElementById('modal-timefrom-input').value="";
+    document.getElementById('modal-timeto-input').value="";
+    document.getElementById('modal-link-input').value="";
+});
+
+
 var shopname;
 var link="";
 //var pic="";
@@ -67,6 +90,54 @@ function submit() {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
+
+function updateEvent() {
+    
+    var title = document.getElementById('modal-title-input');
+    var content = document.getElementById('modal-content-input');
+    var start_date = document.getElementById('modal-datefrom-input');
+    var stop_date = document.getElementById('modal-dateto-input');
+    var start_time = document.getElementById('modal-timefrom-input');
+    var stop_time = document.getElementById('modal-timeto-input');
+    link = document.getElementById('modal-link-input');
+
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "events/update",
+        "id": currEventId,
+        "title": title.value,
+        "content": content.value,
+        "pic": "https://reserveontime.com/html/index.html",
+        "link": link.value,
+        "start_date": start_date.value,
+        "stop_date": stop_date.value,
+        "start_time": start_time.value,
+        "stop_time": stop_time.value
+    };
+    console.log(data);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.hasOwnProperty("status")) {
+                popUpMessage(response["status"], "danger");
+            } else {
+                popUpMessage(response["message"], "success");
+                window.setTimeout(function() {
+                    window.location = "shopevents.html";
+                }, 1000);
+            }
+        } else {
+            popUpMessage("Unexpected error", "danger");
+        }
+    }
+    xhr.withCredentials = true;
+    xhr.open('PUT', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
 const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
     "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
 ];
@@ -112,6 +183,9 @@ function loadEvents() {
 
                 var card = document.createElement("article");
                 card.classList.add("event-card", "fl");
+                card.setAttribute("card-event-id",event.id);
+                card.setAttribute("data-toggle", "modal");
+                card.setAttribute("data-target", "#edit-modal");
 
                 var date = document.createElement('section');
                 date.classList.add("date");
@@ -155,13 +229,6 @@ function loadEvents() {
                     button.innerText = "Link";
                     cont.appendChild(button);
                 }
-
-                // start.getDate();
-                // det.innerText = monthNames[start.getMonth()];
-                // det.innerText = start.getFullYear();
-                // var h = start.getHours();
-                // var m = checkTime(start.getMinutes());
-                // det.innerText = h + ":" + m;
 
                 card.appendChild(cont);
                 list.appendChild(card);
@@ -221,5 +288,49 @@ function loadPage() {
     xhr.open('POST', api)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send(JSON.stringify(data))
+}
+
+function loadEventDet(eventId) {
+
+    var title = document.getElementById('modal-title-input');
+    var content = document.getElementById('modal-content-input');
+    var start_date = document.getElementById('modal-datefrom-input');
+    var stop_date = document.getElementById('modal-dateto-input');
+    var start_time = document.getElementById('modal-timefrom-input');
+    var stop_time = document.getElementById('modal-timeto-input');
+    link = document.getElementById('modal-link-input');
+
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "events/event",
+        "id": eventId
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response["status"], "danger");
+                window.setTimeout(function() {
+                    window.location = "shopevents.html";
+                }, 1000);
+            } else {
+                title.value = response.title;
+                content.value = response.content;
+                link.value = response.link;
+                $("#modal-datefrom-input").datepicker('setDate', response.start_date);
+                $("#modal-dateto-input").datepicker('setDate', response.stop_date);
+                $("#modal-timefrom-input").clockpicker('setTime', response.start_time);
+                $("#modal-timeto-input").clockpicker('setTime', response.stop_time);
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
 }
 
