@@ -14,7 +14,8 @@ $('.datepicker').datepicker({
 $('.clockpicker').clockpicker({
     default: 'now',
     autoclose: true,
-    donetext: ''
+    donetext: '',
+    placement: 'bottom'
 });
 
 var currEventId = null;
@@ -321,8 +322,8 @@ function loadEventDet(eventId) {
                 link.value = response.link;
                 $("#modal-datefrom-input").datepicker('setDate', response.start_date);
                 $("#modal-dateto-input").datepicker('setDate', response.stop_date);
-                $("#modal-timefrom-input").clockpicker('setTime', response.start_time);
-                $("#modal-timeto-input").clockpicker('setTime', response.stop_time);
+                document.getElementById("modal-timefrom-input").value = response.start_time;
+                document.getElementById("modal-timeto-input").value = response.stop_time;
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");
