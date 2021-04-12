@@ -30,6 +30,13 @@ $(document).on("click", ".event-card", function () {
      loadEventDet(eventId);
 });
 
+$(document).on("click", "#delete-event", function () {
+    var r = confirm("Delete Event confirmation");
+    if (r == true) {
+        deleteEvent();
+    } 
+});
+
 $('#edit-modal').on('hidden.bs.modal', function () {
     document.getElementById('modal-title-input').value="";
     document.getElementById('modal-content-input').value="";
@@ -335,3 +342,32 @@ function loadEventDet(eventId) {
     xhr.send(JSON.stringify(data));
 }
 
+function deleteEvent() {
+
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "events/delete",
+        "id": currEventId
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response["status"], "danger");
+            } else {
+                popUpMessage(response["message"], "success");
+                window.setTimeout(function() {
+                    window.location = "shopevents.html";
+                }, 1000);
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+    xhr.withCredentials = true;
+    xhr.open('DELETE', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
