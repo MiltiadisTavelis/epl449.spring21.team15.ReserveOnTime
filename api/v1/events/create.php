@@ -25,22 +25,14 @@
 
 	$data = json_decode(file_get_contents("php://input"));
 
-	if (strtotime($data->start_date) > strtotime($data->stop_date)){
-		$msg['status'] = 'Conflict dates!';
-		echo json_encode($msg);
-		return;
-	}
-	else if ($data->start_date == $data->stop_date) {
-		if (strtotime($data->start_time) > strtotime($data->stop_time)) {
-			$msg['status'] = 'Conflict hours!';
-			echo json_encode($msg);
-			return;
-		}
-	}
-
 	if(isset($data->start_time)){
 		if(preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/", $data->start_time)){
 			$event->start_time = $data->start_time;
+		}
+		else{
+			$msg['status'] = 'Wrong time format!';
+			echo json_encode($msg);
+			exit();
 		}
 	}else{
 		$msg['status'] = 'Please set the time!';
@@ -50,6 +42,11 @@
 	if(isset($data->stop_time)){
 		if(preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/", $data->stop_time)){
 			$event->stop_time = $data->stop_time;
+		}
+		else{
+			$msg['status'] = 'Wrong time format!';
+			echo json_encode($msg);
+			exit();
 		}
 	}else{
 		$msg['status'] = 'Please set the time!';
@@ -84,6 +81,20 @@
 		$msg['status'] = 'Please set the date!';
 		echo json_encode($msg);
 		exit();
+	}
+
+	if (strtotime($event->start_date) > strtotime($event->stop_date)){
+		$msg['status'] = 'Conflict dates!';
+		echo json_encode($msg);
+		return;
+	}
+
+	if ($event->start_date == $event->stop_date) {
+		if (strtotime($data->start_time) > strtotime($data->stop_time)) {
+			$msg['status'] = 'Conflict hours!';
+			echo json_encode($msg);
+			return;
+		}
 	}
 
 	$event->title = $data->title;
