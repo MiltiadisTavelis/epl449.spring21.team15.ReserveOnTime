@@ -156,6 +156,10 @@
 			//CREATE EVENT
 			}elseif((strcasecmp($type, 'events/create') == 0) && (count($data) == 9) && (isset($data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date'],$data['start_time'],$data['stop_time'],$data['shop_id']) != 0)){
 				include 'events/create.php';
+			}
+			//GET EVENT DETAILS BY ID
+			elseif((strcasecmp($type, 'events/event') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'events/event.php';
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -278,7 +282,7 @@
 			unset($data['type']);
 
 			//UPDATE EVENT
-			if((strcasecmp($type, 'events/update') == 0) && (count($data) == 7) && (isset($data['id'],$data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date']) != 0)){
+			if((strcasecmp($type, 'events/update') == 0) && (count($data) == 9) && (isset($data['id'],$data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date'],$data['start_time'],$data['stop_time']) != 0)){
 				include 'events/update.php';
 			}else{
 				echo $error;
