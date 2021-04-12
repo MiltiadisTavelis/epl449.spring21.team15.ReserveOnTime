@@ -6,3 +6,9 @@ h2 {
 	color: #FF5A00;
 	cursor: pointer;
 }
+
+.modal-title{
+	color: black;
+	text-align: center;
+	margin-left: 320px;
+}
