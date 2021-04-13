@@ -15,3 +15,7 @@ h2 {
 #delete-event:hover{
 	background-color: #F76B6B;
 }
+#delete-event{
+	margin-right: 385px;
+	text-align: left;
+}
