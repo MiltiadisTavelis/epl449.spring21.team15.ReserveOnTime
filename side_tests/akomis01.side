@@ -1,11 +1,11 @@
 {
   "id": "b78f41d4-35f5-46e3-966d-e7f3bbafa293",
   "version": "2.0",
-  "name": "Reserve On Time",
+  "name": "akomis01",
   "url": "https://reserveontime.com",
   "tests": [{
     "id": "1838e1ac-a891-41a5-b5e3-43dbd15428bb",
-    "name": "index-shop_display",
+    "name": "index-open_and_closed_shops_display",
     "commands": [{
       "id": "ae43d21f-793f-4415-864b-d336e12750bd",
       "comment": "As a user, I want to see open and closed shops seperately",
@@ -31,7 +31,7 @@
         ["xpath=//div[2]/div/h4", "xpath:position"],
         ["xpath=//h4[contains(.,'Open')]", "xpath:innerText"]
       ],
-      "value": "30000"
+      "value": "3000"
     }, {
       "id": "33083d2e-4a03-4cba-8624-047fa9abf152",
       "comment": "",
@@ -108,6 +108,824 @@
       ],
       "value": "85.13333129882812,468.5999755859375"
     }]
+  }, {
+    "id": "2ce30880-dcf1-4697-b9dc-8ac5256f3c80",
+    "name": "index-search_shop",
+    "commands": [{
+      "id": "86f4ec6a-3b62-4add-8ab6-8aa77715cf86",
+      "comment": "As a user, I want to search based on date, time, location, shop type and shop name criteria.",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "66a820f7-bf93-4b5e-827d-36a1a35605d4",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4a3b9290-e2a5-4eb0-919a-3358ff49bcb9",
+      "comment": "",
+      "command": "click",
+      "target": "id=date-input",
+      "targets": [
+        ["id=date-input", "id"],
+        ["css=#date-input", "css:finder"],
+        ["xpath=//input[@id='date-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5b33a3f1-072b-486d-9dcc-d5d5b8798bce",
+      "comment": "",
+      "command": "click",
+      "target": "css=.datepicker-days tfoot .today",
+      "targets": [
+        ["css=.datepicker-days tfoot .today", "css:finder"],
+        ["xpath=//tfoot/tr/th", "xpath:position"],
+        ["xpath=//th[contains(.,'Today')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f6e7e112-b157-47a8-bae5-b4a31f03c463",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa",
+      "targets": [
+        ["css=.fa", "css:finder"],
+        ["xpath=//button[@id='search-button']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a262416c-1630-4235-84f0-61da265cd1c7",
+      "comment": "",
+      "command": "click",
+      "target": "id=keyword-input",
+      "targets": [
+        ["id=keyword-input", "id"],
+        ["css=#keyword-input", "css:finder"],
+        ["xpath=//input[@id='keyword-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[5]/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8e71aa87-bdf3-4717-b1f8-6c330a8a4fe2",
+      "comment": "",
+      "command": "type",
+      "target": "id=keyword-input",
+      "targets": [
+        ["id=keyword-input", "id"],
+        ["css=#keyword-input", "css:finder"],
+        ["xpath=//input[@id='keyword-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[5]/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/input", "xpath:position"]
+      ],
+      "value": "Fridays"
+    }, {
+      "id": "a39759c1-dcb0-4624-acb3-d1f274d6d666",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa",
+      "targets": [
+        ["css=.fa", "css:finder"],
+        ["xpath=//button[@id='search-button']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8ff3c419-3a15-42ba-925c-d16fd62752d3",
+      "comment": "",
+      "command": "click",
+      "target": "id=keyword-input",
+      "targets": [
+        ["id=keyword-input", "id"],
+        ["css=#keyword-input", "css:finder"],
+        ["xpath=//input[@id='keyword-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[5]/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4604ee98-8bc4-4fb7-9ea1-64db97132a82",
+      "comment": "",
+      "command": "click",
+      "target": "id=keyword-input",
+      "targets": [
+        ["id=keyword-input", "id"],
+        ["css=#keyword-input", "css:finder"],
+        ["xpath=//input[@id='keyword-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[5]/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "11e99be0-2e1b-4464-af21-35e2083438ae",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "id=keyword-input",
+      "targets": [
+        ["id=keyword-input", "id"],
+        ["css=#keyword-input", "css:finder"],
+        ["xpath=//input[@id='keyword-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[5]/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a4a4365d-0fa6-490f-9df1-9911cd3a72e1",
+      "comment": "",
+      "command": "type",
+      "target": "id=keyword-input",
+      "targets": [
+        ["id=keyword-input", "id"],
+        ["css=#keyword-input", "css:finder"],
+        ["xpath=//input[@id='keyword-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[5]/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "164106ae-d798-4b20-8fb6-f2adc68b4cbb",
+      "comment": "",
+      "command": "click",
+      "target": "id=shop-type-input",
+      "targets": [
+        ["id=shop-type-input", "id"],
+        ["css=#shop-type-input", "css:finder"],
+        ["xpath=//select[@id='shop-type-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[4]/div/select", "xpath:idRelative"],
+        ["xpath=//div[4]/div/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7cd49bdf-c4d9-4f8a-baca-fa8f3b3d260e",
+      "comment": "",
+      "command": "select",
+      "target": "id=shop-type-input",
+      "targets": [],
+      "value": "label=Bar"
+    }, {
+      "id": "3fc51dfb-2d75-4bb4-b146-2ee38e60a3d5",
+      "comment": "",
+      "command": "click",
+      "target": "css=#shop-type-input > option:nth-child(3)",
+      "targets": [
+        ["css=#shop-type-input > option:nth-child(3)", "css:finder"],
+        ["xpath=//option[@value='1']", "xpath:attributes"],
+        ["xpath=//select[@id='shop-type-input']/option[3]", "xpath:idRelative"],
+        ["xpath=//div[4]/div/select/option[3]", "xpath:position"],
+        ["xpath=//option[contains(.,'Bar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cbab1400-b034-4654-be97-285572b2f800",
+      "comment": "",
+      "command": "click",
+      "target": "id=search-button",
+      "targets": [
+        ["id=search-button", "id"],
+        ["css=#search-button", "css:finder"],
+        ["xpath=//button[@id='search-button']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[5]/div/div/button", "xpath:idRelative"],
+        ["xpath=//div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "93f5e643-131a-4b4b-9961-f335f70630e0",
+      "comment": "",
+      "command": "click",
+      "target": "id=shop-type-input",
+      "targets": [
+        ["id=shop-type-input", "id"],
+        ["css=#shop-type-input", "css:finder"],
+        ["xpath=//select[@id='shop-type-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[4]/div/select", "xpath:idRelative"],
+        ["xpath=//div[4]/div/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8e04339-2309-49fa-ba6b-1d8caf31a152",
+      "comment": "",
+      "command": "select",
+      "target": "id=shop-type-input",
+      "targets": [],
+      "value": "label=Any"
+    }, {
+      "id": "91ff45b6-1c37-489b-bea2-0618f1273a6c",
+      "comment": "",
+      "command": "click",
+      "target": "css=#shop-type-input > option:nth-child(2)",
+      "targets": [
+        ["css=#shop-type-input > option:nth-child(2)", "css:finder"],
+        ["xpath=(//option[@value=''])[3]", "xpath:attributes"],
+        ["xpath=//select[@id='shop-type-input']/option[2]", "xpath:idRelative"],
+        ["xpath=//div[4]/div/select/option[2]", "xpath:position"],
+        ["xpath=//option[contains(.,'Any')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b8b7aa8-7aa6-4997-bae8-88d0938e9ca8",
+      "comment": "",
+      "command": "click",
+      "target": "id=shop-city-input",
+      "targets": [
+        ["id=shop-city-input", "id"],
+        ["css=#shop-city-input", "css:finder"],
+        ["xpath=//select[@id='shop-city-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[3]/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2f7c3c0b-fed7-4a6c-8f77-72944afcbde8",
+      "comment": "",
+      "command": "select",
+      "target": "id=shop-city-input",
+      "targets": [],
+      "value": "label=Nicosia"
+    }, {
+      "id": "60d4c9ac-5cf2-4f5f-88a6-b6c70cea5b2c",
+      "comment": "",
+      "command": "click",
+      "target": "css=#shop-city-input > option:nth-child(2)",
+      "targets": [
+        ["css=#shop-city-input > option:nth-child(2)", "css:finder"],
+        ["xpath=//option[@value='Nicosia']", "xpath:attributes"],
+        ["xpath=//select[@id='shop-city-input']/option[2]", "xpath:idRelative"],
+        ["xpath=//option[2]", "xpath:position"],
+        ["xpath=//option[contains(.,'Nicosia')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "56710ee0-40ba-4c20-a971-f8122db53ec6",
+      "comment": "",
+      "command": "click",
+      "target": "id=search-button",
+      "targets": [
+        ["id=search-button", "id"],
+        ["css=#search-button", "css:finder"],
+        ["xpath=//button[@id='search-button']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[5]/div/div/button", "xpath:idRelative"],
+        ["xpath=//div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a568aaab-690b-478d-8830-6094f3d95a35",
+      "comment": "",
+      "command": "click",
+      "target": "id=time-input",
+      "targets": [
+        ["id=time-input", "id"],
+        ["css=#time-input", "css:finder"],
+        ["xpath=//input[@id='time-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fb8fcb13-b65f-4f77-8aad-1b0b30dbdeb2",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.clockpicker-tick:nth-child(19)",
+      "targets": [
+        ["css=.clockpicker-tick:nth-child(19)", "css:finder"],
+        ["xpath=//div[19]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4b77e64c-3f2e-44b0-bfa7-2e801c404fbb",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=.clockpicker-canvas-bg",
+      "targets": [
+        ["css=.clockpicker-canvas-bg", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "28265c6c-70c1-41a4-b674-e740fccaaa28",
+      "comment": "",
+      "command": "click",
+      "target": "css=.clockpicker-plate",
+      "targets": [
+        ["css=.clockpicker-plate", "css:finder"],
+        ["xpath=//div[2]/div[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e0eabedc-a8a6-4255-8711-64ebc264c728",
+      "comment": "",
+      "command": "mouseDown",
+      "target": "css=.clockpicker-minutes > .clockpicker-tick:nth-child(1)",
+      "targets": [
+        ["css=.clockpicker-minutes > .clockpicker-tick:nth-child(1)", "css:finder"],
+        ["xpath=//div[3]/div/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40ebba18-5f36-4f3b-ac74-0bfafab938ff",
+      "comment": "",
+      "command": "mouseUp",
+      "target": "css=.clockpicker-canvas-bg",
+      "targets": [
+        ["css=.clockpicker-canvas-bg", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "05e95dea-8e6b-4bb6-aa6c-b3ac4700c8a4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa",
+      "targets": [
+        ["css=.fa", "css:finder"],
+        ["xpath=//button[@id='search-button']/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "d5d28260-7e24-42c5-a77a-e368c94b5ca5",
+    "name": "index-top_shops_display",
+    "commands": [{
+      "id": "0666c467-8ba7-45b6-8a25-372661c6882f",
+      "comment": "As a user, I want to see the top rated shops on the frontpage",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8f2f430e-07a9-4438-840e-df7c914fe20b",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1cca0684-d418-4366-947e-314981fef689",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=#top-header > h4",
+      "targets": [
+        ["css=#top-header > h4", "css:finder"],
+        ["xpath=//div[@id='top-header']/h4", "xpath:idRelative"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Top')]", "xpath:innerText"]
+      ],
+      "value": "3000"
+    }, {
+      "id": "3c97d5a7-0510-482b-b8e2-a1b0dd17c5a0",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "id=top-display",
+      "targets": [
+        ["id=top-display", "id"],
+        ["css=#top-display", "css:finder"],
+        ["xpath=//div[@id='top-display']", "xpath:attributes"],
+        ["xpath=//div[@id='top']/div[2]", "xpath:idRelative"],
+        ["xpath=//div/div/div[2]", "xpath:position"]
+      ],
+      "value": "214.25,458.3999938964844"
+    }, {
+      "id": "52bce42c-9ff7-441b-8fc4-a67a773664ba",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "id=top-display",
+      "targets": [
+        ["id=top-display", "id"],
+        ["css=#top-display", "css:finder"],
+        ["xpath=//div[@id='top-display']", "xpath:attributes"],
+        ["xpath=//div[@id='top']/div[2]", "xpath:idRelative"],
+        ["xpath=//div/div/div[2]", "xpath:position"]
+      ],
+      "value": "214.25,458.3999938964844"
+    }, {
+      "id": "057d797a-4b23-43d5-a14f-fbebc22e57e6",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "id=top-display",
+      "targets": [
+        ["id=top-display", "id"],
+        ["css=#top-display", "css:finder"],
+        ["xpath=//div[@id='top-display']", "xpath:attributes"],
+        ["xpath=//div[@id='top']/div[2]", "xpath:idRelative"],
+        ["xpath=//div/div/div[2]", "xpath:position"]
+      ],
+      "value": "214.25,458.3999938964844"
+    }]
+  }, {
+    "id": "6301d78c-6bd3-454f-8b69-9f855892db56",
+    "name": "reservations-display_reservations",
+    "commands": [{
+      "id": "bf97cbe4-476d-4da3-99a9-99b8e7ada9ea",
+      "comment": "As a user, I want to view all my reservations and details about them at any moment.",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3c9e3a75-1090-4451-bd0c-2d764fe19e74",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0c6a05c4-5b83-4d29-b1a4-8a658bccbc7a",
+      "comment": "",
+      "command": "click",
+      "target": "id=signin-btn",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "afe56bf1-3b73-4212-b4fc-0a9a5714c520",
+      "comment": "",
+      "command": "type",
+      "target": "id=email-input",
+      "targets": [
+        ["id=email-input", "id"],
+        ["css=#email-input", "css:finder"],
+        ["xpath=//input[@id='email-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "akomis@pm.com"
+    }, {
+      "id": "d3fa7dfa-94e3-4eb1-95d8-e1ab11bb7b99",
+      "comment": "",
+      "command": "click",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d9edc76-250a-42a3-aabf-03b51fa291b2",
+      "comment": "",
+      "command": "click",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3dbecb92-5d83-4211-a4ab-ed31adbeab85",
+      "comment": "",
+      "command": "type",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "12345678"
+    }, {
+      "id": "1be8ce60-46cf-48b4-9fa1-aac9af155b20",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit-button",
+      "targets": [
+        ["id=submit-button", "id"],
+        ["css=#submit-button", "css:finder"],
+        ["xpath=//button[@id='submit-button']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e8bb08fd-97f0-40e6-84a9-e07393b7d3e3",
+      "comment": "",
+      "command": "click",
+      "target": "id=reservations-btn",
+      "targets": [
+        ["id=reservations-btn", "id"],
+        ["linkText=Reservations", "linkText"],
+        ["css=#reservations-btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Reservations')]", "xpath:link"],
+        ["xpath=//a[@id='reservations-btn']", "xpath:attributes"],
+        ["xpath=//div[@id='nav-list']/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'reservations.html')]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Reservations')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "6d4f28f9-bfd5-44a2-b0e8-9065db720003",
+    "name": "reservations-display_pending_reservations",
+    "commands": [{
+      "id": "e8bed898-f293-4fd1-a7ac-240f0135ff10",
+      "comment": "As a user I want to see pending reservations and their current status",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "55d545e0-2efd-45c7-844a-68b862eab88e",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "277d0f7d-adc3-40f7-856a-1332a496b252",
+      "comment": "",
+      "command": "click",
+      "target": "id=signin-btn",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "797b1434-a002-49ff-ad0e-87b2b33ea39d",
+      "comment": "",
+      "command": "type",
+      "target": "id=email-input",
+      "targets": [
+        ["id=email-input", "id"],
+        ["css=#email-input", "css:finder"],
+        ["xpath=//input[@id='email-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "akomis@pm.com"
+    }, {
+      "id": "4ec8718e-2ddf-446b-99cf-9f82e9b4b3b2",
+      "comment": "",
+      "command": "click",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ec256e3-b743-40b8-8f5c-1808442be55c",
+      "comment": "",
+      "command": "click",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "84c5c4f0-b9fc-4285-8a78-f4511cda6bca",
+      "comment": "",
+      "command": "type",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "12345678"
+    }, {
+      "id": "7fb50558-7814-4aee-8b75-85e1eeea7101",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit-button",
+      "targets": [
+        ["id=submit-button", "id"],
+        ["css=#submit-button", "css:finder"],
+        ["xpath=//button[@id='submit-button']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "827ff924-c1d3-4b1e-89ee-73dcb2b19449",
+      "comment": "",
+      "command": "click",
+      "target": "id=reservations-btn",
+      "targets": [
+        ["id=reservations-btn", "id"],
+        ["linkText=Reservations", "linkText"],
+        ["css=#reservations-btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Reservations')]", "xpath:link"],
+        ["xpath=//a[@id='reservations-btn']", "xpath:attributes"],
+        ["xpath=//div[@id='nav-list']/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'reservations.html')]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Reservations')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "08af6a1a-ef47-423e-a925-a15d4d7d0b0b",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=#pending-header > h4",
+      "targets": [
+        ["css=#pending-header > h4", "css:finder"],
+        ["xpath=//div[@id='pending-header']/h4", "xpath:idRelative"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Pending')]", "xpath:innerText"]
+      ],
+      "value": "3000"
+    }]
+  }, {
+    "id": "97919fbd-d788-4a00-910a-df4ff4502406",
+    "name": "manager_index-display_main",
+    "commands": [{
+      "id": "d0c5ab17-92e9-4542-af1a-4aa11dab0dcf",
+      "comment": "As a manager, I want to be able view my reservations list (including the reservation history) in an organized manner for better management.",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b899209f-df6f-4334-997a-dfd393ef7e66",
+      "comment": "",
+      "command": "open",
+      "target": "https://reserveontime.com/html_manager/signin.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fe39817a-8c7c-471f-809d-9289dfd0279d",
+      "comment": "",
+      "command": "click",
+      "target": "id=email-input",
+      "targets": [
+        ["id=email-input", "id"],
+        ["css=#email-input", "css:finder"],
+        ["xpath=//input[@id='email-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "30661383-293c-429c-8a5b-284bc7d903b2",
+      "comment": "",
+      "command": "type",
+      "target": "id=email-input",
+      "targets": [
+        ["id=email-input", "id"],
+        ["css=#email-input", "css:finder"],
+        ["xpath=//input[@id='email-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "akomis@pm.com"
+    }, {
+      "id": "7733356b-2dde-4a37-ae0e-e16840cc44ee",
+      "comment": "",
+      "command": "click",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4644b93f-c015-4080-b395-133870327d9c",
+      "comment": "",
+      "command": "type",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "12345678"
+    }, {
+      "id": "2bbcd464-c37e-40c9-b3e2-d4dd34c9f09b",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit-button",
+      "targets": [
+        ["id=submit-button", "id"],
+        ["css=#submit-button", "css:finder"],
+        ["xpath=//button[@id='submit-button']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fe63fad8-6fcc-450d-8f10-f1c1563a1a04",
+    "name": "manager_index-display_stats",
+    "commands": [{
+      "id": "16607f35-72d5-4058-96d7-8186294a1ca1",
+      "comment": "As a reservation manager, I want to be able to view my statistics of my shop regarding reservations.",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3a8eeeb1-0f4a-4389-8a36-d6d88608d1ba",
+      "comment": "",
+      "command": "open",
+      "target": "https://reserveontime.com/html_manager/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5e3441bc-af71-49d3-8518-921d828a861a",
+      "comment": "",
+      "command": "click",
+      "target": "id=email-input",
+      "targets": [
+        ["id=email-input", "id"],
+        ["css=#email-input", "css:finder"],
+        ["xpath=//input[@id='email-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fbfbfcbf-71f7-43b1-addc-a2c245cd2b0f",
+      "comment": "",
+      "command": "type",
+      "target": "id=email-input",
+      "targets": [
+        ["id=email-input", "id"],
+        ["css=#email-input", "css:finder"],
+        ["xpath=//input[@id='email-input']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "akomis@pm.com"
+    }, {
+      "id": "d9b57dcf-34b4-423c-98e6-39223e31eaa0",
+      "comment": "",
+      "command": "click",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8366bbb0-8182-4a35-a30a-d71935d426b0",
+      "comment": "",
+      "command": "type",
+      "target": "id=password-input",
+      "targets": [
+        ["id=password-input", "id"],
+        ["css=#password-input", "css:finder"],
+        ["xpath=//input[@id='password-input']", "xpath:attributes"],
+        ["xpath=//div[@id='pass']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "12345678"
+    }, {
+      "id": "fe31d418-6062-49b4-9b59-77028df771e4",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit-button",
+      "targets": [
+        ["id=submit-button", "id"],
+        ["css=#submit-button", "css:finder"],
+        ["xpath=//button[@id='submit-button']", "xpath:attributes"],
+        ["xpath=//div[@id='contents']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "22827383-511e-4df8-b293-594c4b3ef361",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=stats-shopname",
+      "targets": [
+        ["id=stats-shopname", "id"],
+        ["css=#stats-shopname", "css:finder"],
+        ["xpath=//th[@id='stats-shopname']", "xpath:attributes"],
+        ["xpath=//div[@id='stats']/table/thead/tr/th", "xpath:idRelative"],
+        ["xpath=//th", "xpath:position"],
+        ["xpath=//th[contains(.,'Realcube Reservation Statistics')]", "xpath:innerText"]
+      ],
+      "value": "5000"
+    }]
   }],
   "suites": [{
     "id": "296fe0d5-7a69-41aa-92c2-f67308a3388a",
@@ -117,6 +935,6 @@
     "timeout": 300,
     "tests": []
   }],
-  "urls": ["https://reserveontime.com/"],
+  "urls": ["https://reserveontime.com/", "https://reserveontime.com/html_manager"],
   "plugins": []
 }

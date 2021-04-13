@@ -143,6 +143,9 @@ function submit() {
                 }, 1000);
             } else if (response.hasOwnProperty('message')) {
                 popUpMessage(response['message'], "success");
+                setTimeout(function() {
+                    window.location = "reservations.html"
+                }, 2000);
             } else {
                 popUpMessage(response['status'], "danger");
             }
