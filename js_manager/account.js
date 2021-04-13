@@ -6,6 +6,7 @@ $('.datepicker').datepicker({
     maxViewMode: 2,
     endDate: "today",
     autoclose: true,
+    clearBtn: true,
     startView: 2
 });
 

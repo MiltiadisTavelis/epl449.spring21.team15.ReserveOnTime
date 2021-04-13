@@ -5,6 +5,7 @@ $('.datepicker').datepicker({
     weekStart: 1,
     maxViewMode: 2,
     autoclose: true,
+    clearBtn: true,
     endDate: "today",
     startView: 2
 });

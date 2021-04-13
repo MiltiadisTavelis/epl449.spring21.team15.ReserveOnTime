@@ -7,6 +7,7 @@ $('.datepicker').datepicker({
     autoclose: true,
     startDate: "today",
     todayBtn: "linked",
+    clearBtn: true,
     todayHighlight: true
 });
 
