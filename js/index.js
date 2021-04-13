@@ -4,6 +4,7 @@ $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
     maxViewMode: 2,
+    autoclose: true,
     startDate: "today",
     todayBtn: "linked",
     todayHighlight: true
@@ -64,7 +65,11 @@ function loadShopSection(xhr, sectionId) {
         let shops = response["Shops"]
 
         if (response.hasOwnProperty('NoShopsFound')) {
-            popUpMessage("No " + sectionId + "shops were found", "danger")
+            if (sectionId === "results") {
+                popUpMessage("No shops meet the above criteria", "danger")
+            } else {
+                popUpMessage("No " + sectionId + " shops were found", "danger")
+            }
         } else {
             section = document.getElementById(sectionId)
             if (section === null) {

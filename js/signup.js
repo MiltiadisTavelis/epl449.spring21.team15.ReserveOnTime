@@ -3,6 +3,7 @@ $('.datepicker').datepicker({
     weekStart: 1,
     maxViewMode: 2,
     endDate: "today",
+    autoclose: true,
     startView: 2
 });
 

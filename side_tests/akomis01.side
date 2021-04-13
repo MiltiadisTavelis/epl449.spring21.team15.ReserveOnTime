@@ -4,323 +4,109 @@
   "name": "Reserve On Time",
   "url": "https://reserveontime.com",
   "tests": [{
-    "id": "525ea5dc-7488-4168-8831-24cfa31abc3b",
-    "name": "index-submit()",
+    "id": "1838e1ac-a891-41a5-b5e3-43dbd15428bb",
+    "name": "index-shop_display",
     "commands": [{
-      "id": "fcf20b1b-ae45-48db-9a8f-510efb92a489",
+      "id": "ae43d21f-793f-4415-864b-d336e12750bd",
+      "comment": "As a user, I want to see open and closed shops seperately",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "081d1f5d-fb03-46de-8124-94a9d8702a7d",
       "comment": "",
       "command": "open",
       "target": "/",
       "targets": [],
       "value": ""
     }, {
-      "id": "4c0189f4-4b82-4a52-a966-0f92ad26d6a2",
+      "id": "955140ba-a0e6-4b5e-809a-8f3c53d2f3cf",
       "comment": "",
-      "command": "setWindowSize",
-      "target": "1250x1374",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "c6980598-d8f1-46ef-b918-0a203dc4bc39",
-      "comment": "",
-      "command": "mouseOver",
-      "target": "css=.card:nth-child(1) .list-group-item:nth-child(1)",
+      "command": "waitForElementVisible",
+      "target": "css=#open-header > h4",
       "targets": [
-        ["css=.card:nth-child(1) .list-group-item:nth-child(1)", "css:finder"],
-        ["xpath=//div[@id='top-display']/a/div/ul/li", "xpath:idRelative"],
-        ["xpath=//a/div/ul/li", "xpath:position"],
-        ["xpath=//li[contains(.,' Restaurant')]", "xpath:innerText"]
+        ["css=#open-header > h4", "css:finder"],
+        ["xpath=//div[@id='open-header']/h4", "xpath:idRelative"],
+        ["xpath=//div[2]/div/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Open')]", "xpath:innerText"]
       ],
-      "value": ""
+      "value": "30000"
     }, {
-      "id": "a8444d04-b94a-4e1e-bd82-9a4304d32ebe",
+      "id": "33083d2e-4a03-4cba-8624-047fa9abf152",
       "comment": "",
-      "command": "click",
-      "target": "id=shop-city-input",
+      "command": "waitForElementVisible",
+      "target": "css=#closed-header > h4",
       "targets": [
-        ["id=shop-city-input", "id"],
-        ["css=#shop-city-input", "css:finder"],
-        ["xpath=//select[@id='shop-city-input']", "xpath:attributes"],
-        ["xpath=//div[@id='contents']/form/div/div[3]/div/select", "xpath:idRelative"],
-        ["xpath=//select", "xpath:position"]
+        ["css=#closed-header > h4", "css:finder"],
+        ["xpath=//div[@id='closed-header']/h4", "xpath:idRelative"],
+        ["xpath=//div[3]/div/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Closed')]", "xpath:innerText"]
       ],
-      "value": ""
+      "value": "3000"
     }, {
-      "id": "784845b6-6db3-4447-88d4-a259e1907cb3",
-      "comment": "",
-      "command": "select",
-      "target": "id=shop-city-input",
-      "targets": [],
-      "value": "label=Nicosia"
-    }, {
-      "id": "ff941eaa-f37c-436f-bea4-0b96e72000dc",
-      "comment": "",
-      "command": "click",
-      "target": "css=#shop-city-input > option:nth-child(2)",
-      "targets": [
-        ["css=#shop-city-input > option:nth-child(2)", "css:finder"],
-        ["xpath=//option[@value='Nicosia']", "xpath:attributes"],
-        ["xpath=//select[@id='shop-city-input']/option[2]", "xpath:idRelative"],
-        ["xpath=//option[2]", "xpath:position"],
-        ["xpath=//option[contains(.,'Nicosia')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "33d0e877-ee6a-47c4-aecd-64bb50b05813",
-      "comment": "",
-      "command": "click",
-      "target": "id=date-input",
-      "targets": [
-        ["id=date-input", "id"],
-        ["css=#date-input", "css:finder"],
-        ["xpath=//input[@id='date-input']", "xpath:attributes"],
-        ["xpath=//div[@id='contents']/form/div/div/div/input", "xpath:idRelative"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "e5f1a27c-6f86-4e3a-a1af-5f7d17d092da",
-      "comment": "",
-      "command": "click",
-      "target": "css=.datepicker-days tfoot .today",
-      "targets": [
-        ["css=.datepicker-days tfoot .today", "css:finder"],
-        ["xpath=//tfoot/tr/th", "xpath:position"],
-        ["xpath=//th[contains(.,'Today')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "d0fed17a-161c-4a54-815f-065aedf1e447",
-      "comment": "",
-      "command": "click",
-      "target": "id=time-input",
-      "targets": [
-        ["id=time-input", "id"],
-        ["css=#time-input", "css:finder"],
-        ["xpath=//input[@id='time-input']", "xpath:attributes"],
-        ["xpath=//div[@id='contents']/form/div/div[2]/div/input", "xpath:idRelative"],
-        ["xpath=//div[2]/div/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "e8d5f8e5-fdbf-4a83-9633-4a30f0a8b16d",
-      "comment": "",
-      "command": "mouseDown",
-      "target": "css=.clockpicker-tick:nth-child(14)",
-      "targets": [
-        ["css=.clockpicker-tick:nth-child(14)", "css:finder"],
-        ["xpath=//div[14]", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "dc13a7fa-707e-40f8-a101-f453f1d877ca",
-      "comment": "",
-      "command": "mouseUp",
-      "target": "css=.clockpicker-canvas-fg",
-      "targets": [
-        ["css=.clockpicker-canvas-fg", "css:finder"]
-      ],
-      "value": ""
-    }, {
-      "id": "cc081900-bb55-4f17-9446-732c482e5415",
-      "comment": "",
-      "command": "click",
-      "target": "css=.clockpicker-plate",
-      "targets": [
-        ["css=.clockpicker-plate", "css:finder"],
-        ["xpath=//div[2]/div[3]/div", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "8a9e0c01-bf29-4e7b-b43b-c1098b436dd6",
-      "comment": "",
-      "command": "mouseDown",
-      "target": "css=.clockpicker-minutes > .clockpicker-tick:nth-child(7)",
-      "targets": [
-        ["css=.clockpicker-minutes > .clockpicker-tick:nth-child(7)", "css:finder"],
-        ["xpath=//div[2]/div[7]", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "ed10e98b-4b7b-436d-ad1d-0c9e918b8c27",
-      "comment": "",
-      "command": "mouseUp",
-      "target": "css=.clockpicker-canvas-fg",
-      "targets": [
-        ["css=.clockpicker-canvas-fg", "css:finder"]
-      ],
-      "value": ""
-    }, {
-      "id": "bad82409-be60-42e1-a2df-937b105cd2bc",
-      "comment": "",
-      "command": "click",
-      "target": "css=.clockpicker-plate",
-      "targets": [
-        ["css=.clockpicker-plate", "css:finder"],
-        ["xpath=//div[2]/div[3]/div", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "2e9e1bad-ac3c-4241-951c-2f4d273d8789",
-      "comment": "",
-      "command": "click",
-      "target": "id=shop-type-input",
-      "targets": [
-        ["id=shop-type-input", "id"],
-        ["css=#shop-type-input", "css:finder"],
-        ["xpath=//select[@id='shop-type-input']", "xpath:attributes"],
-        ["xpath=//div[@id='contents']/form/div/div[4]/div/select", "xpath:idRelative"],
-        ["xpath=//div[4]/div/select", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "64ec6ed5-51ae-456f-b2b6-3f33c3fa7e5b",
-      "comment": "",
-      "command": "select",
-      "target": "id=shop-type-input",
-      "targets": [],
-      "value": "label=Any"
-    }, {
-      "id": "dba522c6-9917-40a2-8796-d3f440560d9d",
-      "comment": "",
-      "command": "click",
-      "target": "css=#shop-type-input > option:nth-child(2)",
-      "targets": [
-        ["css=#shop-type-input > option:nth-child(2)", "css:finder"],
-        ["xpath=(//option[@value=''])[3]", "xpath:attributes"],
-        ["xpath=//select[@id='shop-type-input']/option[2]", "xpath:idRelative"],
-        ["xpath=//div[4]/div/select/option[2]", "xpath:position"],
-        ["xpath=//option[contains(.,'Any')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "6326af98-0ca4-4fb9-bdc5-d4777acf5c95",
-      "comment": "",
-      "command": "click",
-      "target": "id=search-button",
-      "targets": [
-        ["id=search-button", "id"],
-        ["css=#search-button", "css:finder"],
-        ["xpath=//button[@id='search-button']", "xpath:attributes"],
-        ["xpath=//div[@id='contents']/form/div/div[5]/div/div/button", "xpath:idRelative"],
-        ["xpath=//div/button", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "28f764e1-1934-4fde-a8d6-6426fbf9eb36",
+      "id": "3b727711-a0c1-40bc-9f53-705192112e9a",
       "comment": "",
       "command": "verifyElementPresent",
-      "target": "css=#results-header > h4",
+      "target": "css=#open-header > h4",
       "targets": [
-        ["css=#results-header > h4", "css:finder"],
-        ["xpath=//div[@id='results-header']/h4", "xpath:idRelative"],
-        ["xpath=//h4", "xpath:position"],
-        ["xpath=//h4[contains(.,'Results')]", "xpath:innerText"]
+        ["css=#open-header > h4", "css:finder"],
+        ["xpath=//div[@id='open-header']/h4", "xpath:idRelative"],
+        ["xpath=//div[2]/div/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Open')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
-      "id": "e83489ac-6ad4-43cd-9497-4a2850203c86",
+      "id": "39cc36ad-3627-42d5-9c21-d1943710ea23",
       "comment": "",
       "command": "verifyElementPresent",
-      "target": "css=h5",
+      "target": "css=#closed-header > h4",
       "targets": [
-        ["css=h5", "css:finder"],
-        ["xpath=//div[@id='results-header']/h5", "xpath:idRelative"],
-        ["xpath=//h5", "xpath:position"],
-        ["xpath=//h5[contains(.,'3 spots meet the above criteria')]", "xpath:innerText"]
+        ["css=#closed-header > h4", "css:finder"],
+        ["xpath=//div[@id='closed-header']/h4", "xpath:idRelative"],
+        ["xpath=//div[3]/div/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Closed')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
-      "id": "d37a3438-92d5-4719-902d-3f343cff2d79",
+      "id": "d5d65834-0065-40df-a22d-5fc3fb6c1185",
       "comment": "",
-      "command": "click",
-      "target": "id=shop-city-input",
+      "command": "mouseDownAt",
+      "target": "id=closed-display",
       "targets": [
-        ["id=shop-city-input", "id"],
-        ["css=#shop-city-input", "css:finder"],
-        ["xpath=//select[@id='shop-city-input']", "xpath:attributes"],
-        ["xpath=//div[@id='contents']/form/div/div[3]/div/select", "xpath:idRelative"],
-        ["xpath=//select", "xpath:position"]
+        ["id=closed-display", "id"],
+        ["css=#closed-display", "css:finder"],
+        ["xpath=//div[@id='closed-display']", "xpath:attributes"],
+        ["xpath=//div[@id='closed']/div[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]", "xpath:position"]
       ],
-      "value": ""
+      "value": "85.13333129882812,468.5999755859375"
     }, {
-      "id": "43966014-c2fb-49c5-9fbd-158b2feb86d6",
+      "id": "f7f883ac-2668-4ad3-a84b-2b5068672c85",
       "comment": "",
-      "command": "select",
-      "target": "id=shop-city-input",
-      "targets": [],
-      "value": "label=Larnaca"
-    }, {
-      "id": "b89866c7-2400-4ffe-884c-b5043e523540",
-      "comment": "",
-      "command": "click",
-      "target": "css=#shop-city-input > option:nth-child(4)",
+      "command": "mouseMoveAt",
+      "target": "id=closed-display",
       "targets": [
-        ["css=#shop-city-input > option:nth-child(4)", "css:finder"],
-        ["xpath=//option[@value='Larnaca']", "xpath:attributes"],
-        ["xpath=//select[@id='shop-city-input']/option[4]", "xpath:idRelative"],
-        ["xpath=//option[4]", "xpath:position"],
-        ["xpath=//option[contains(.,'Larnaca')]", "xpath:innerText"]
+        ["id=closed-display", "id"],
+        ["css=#closed-display", "css:finder"],
+        ["xpath=//div[@id='closed-display']", "xpath:attributes"],
+        ["xpath=//div[@id='closed']/div[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]", "xpath:position"]
       ],
-      "value": ""
+      "value": "85.13333129882812,468.5999755859375"
     }, {
-      "id": "fad1f470-382d-4996-8306-c0c4f2515c77",
+      "id": "b089f812-ee00-494b-87b5-b98f2a27d201",
       "comment": "",
-      "command": "click",
-      "target": "id=shop-type-input",
+      "command": "mouseUpAt",
+      "target": "id=closed-display",
       "targets": [
-        ["id=shop-type-input", "id"],
-        ["css=#shop-type-input", "css:finder"],
-        ["xpath=//select[@id='shop-type-input']", "xpath:attributes"],
-        ["xpath=//div[@id='contents']/form/div/div[4]/div/select", "xpath:idRelative"],
-        ["xpath=//div[4]/div/select", "xpath:position"]
+        ["id=closed-display", "id"],
+        ["css=#closed-display", "css:finder"],
+        ["xpath=//div[@id='closed-display']", "xpath:attributes"],
+        ["xpath=//div[@id='closed']/div[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]", "xpath:position"]
       ],
-      "value": ""
-    }, {
-      "id": "f225536e-60fe-4dfa-8c3b-64b6f363bdf1",
-      "comment": "",
-      "command": "select",
-      "target": "id=shop-type-input",
-      "targets": [],
-      "value": "label=Gym"
-    }, {
-      "id": "7bad970c-7953-4241-8081-ad336105482e",
-      "comment": "",
-      "command": "click",
-      "target": "css=option:nth-child(8)",
-      "targets": [
-        ["css=option:nth-child(8)", "css:finder"],
-        ["xpath=//option[@value='6']", "xpath:attributes"],
-        ["xpath=//select[@id='shop-type-input']/option[8]", "xpath:idRelative"],
-        ["xpath=//option[8]", "xpath:position"],
-        ["xpath=//option[contains(.,'Gym')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "ec7ed063-51c0-487f-a984-c093bea3347b",
-      "comment": "",
-      "command": "click",
-      "target": "id=search-button",
-      "targets": [
-        ["id=search-button", "id"],
-        ["css=#search-button", "css:finder"],
-        ["xpath=//button[@id='search-button']", "xpath:attributes"],
-        ["xpath=//div[@id='contents']/form/div/div[5]/div/div/button", "xpath:idRelative"],
-        ["xpath=//div/button", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "c7a2fe82-5f75-47a4-9f03-8f31de481083",
-      "comment": "",
-      "command": "verifyElementPresent",
-      "target": "css=#results-header > h4",
-      "targets": [
-        ["css=#results-header > h4", "css:finder"],
-        ["xpath=//div[@id='results-header']/h4", "xpath:idRelative"],
-        ["xpath=//h4", "xpath:position"],
-        ["xpath=//h4[contains(.,'Results')]", "xpath:innerText"]
-      ],
-      "value": ""
+      "value": "85.13333129882812,468.5999755859375"
     }]
   }],
   "suites": [{

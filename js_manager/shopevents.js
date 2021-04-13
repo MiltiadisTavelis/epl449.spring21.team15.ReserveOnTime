@@ -8,6 +8,7 @@ $('.datepicker').datepicker({
     weekStart: 1,
     startDate: "today",
     todayBtn: "linked",
+    autoclose: true,
     todayHighlight: true
 });
 
@@ -20,40 +21,40 @@ $('.clockpicker').clockpicker({
 
 var currEventId = null;
 
-$(document).on("click", "#submit-button-update", function () {
-     updateEvent();
+$(document).on("click", "#submit-button-update", function() {
+    updateEvent();
 });
 
-$(document).on("click", ".event-card", function () {
-     var eventId = $(this).attr('card-event-id');
-     currEventId = eventId;
-     loadEventDet(eventId);
+$(document).on("click", ".event-card", function() {
+    var eventId = $(this).attr('card-event-id');
+    currEventId = eventId;
+    loadEventDet(eventId);
 });
 
-$(document).on("click", "#delete-event", function () {
+$(document).on("click", "#delete-event", function() {
     var r = confirm("Delete Event confirmation");
     if (r == true) {
         deleteEvent();
-    } 
+    }
 });
 
-$('#edit-modal').on('hidden.bs.modal', function () {
-    document.getElementById('modal-title-input').value="";
-    document.getElementById('modal-content-input').value="";
-    document.getElementById('modal-datefrom-input').value="";
-    document.getElementById('modal-dateto-input').value="";
-    document.getElementById('modal-timefrom-input').value="";
-    document.getElementById('modal-timeto-input').value="";
-    document.getElementById('modal-link-input').value="";
+$('#edit-modal').on('hidden.bs.modal', function() {
+    document.getElementById('modal-title-input').value = "";
+    document.getElementById('modal-content-input').value = "";
+    document.getElementById('modal-datefrom-input').value = "";
+    document.getElementById('modal-dateto-input').value = "";
+    document.getElementById('modal-timefrom-input').value = "";
+    document.getElementById('modal-timeto-input').value = "";
+    document.getElementById('modal-link-input').value = "";
 });
 
 
 var shopname;
-var link="";
+var link = "";
 //var pic="";
 
 function submit() {
-    
+
     var title = document.getElementById('title-input');
     var content = document.getElementById('content-input');
     var start_date = document.getElementById('datefrom-input');
@@ -100,7 +101,7 @@ function submit() {
 }
 
 function updateEvent() {
-    
+
     var title = document.getElementById('modal-title-input');
     var content = document.getElementById('modal-content-input');
     var start_date = document.getElementById('modal-datefrom-input');
@@ -191,7 +192,7 @@ function loadEvents() {
 
                 var card = document.createElement("article");
                 card.classList.add("event-card", "fl");
-                card.setAttribute("card-event-id",event.id);
+                card.setAttribute("card-event-id", event.id);
                 card.setAttribute("data-toggle", "modal");
                 card.setAttribute("data-target", "#edit-modal");
 
