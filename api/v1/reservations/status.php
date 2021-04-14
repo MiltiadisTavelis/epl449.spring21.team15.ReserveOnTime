@@ -21,13 +21,14 @@
 	$data = json_decode(file_get_contents("php://input"));
 
 	$rsrv->id = $data->id;
-	
+	$rsrv->status = $data->status;
 	if($data->status == "0" || $data->status == "1" || $data->status == "3"){
-		$rsrv->status = $data->status;
-
-		if($rsrv->status()){
+		$results = $rsrv->status();
+		$results = mysqli_fetch_array($results);
+		if($rsrv->status() != false){
 			$msg['status'] = 'Successfully Updated';
 			echo json_encode($msg);
+			require_once($_SERVER['DOCUMENT_ROOT']."/api/v1/users/notifystatus.php");
 		}else{
 			$msg['status'] = 'Invalid command';
 			echo json_encode($msg);
