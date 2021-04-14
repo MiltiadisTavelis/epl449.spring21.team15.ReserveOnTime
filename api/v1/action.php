@@ -77,7 +77,7 @@
 				include 'reviews/shop.php';
 
 			//CREATE REVIEW
-			}elseif((strcasecmp($type, 'reviews/creview') == 0) && (count($data) == 4) && (isset($data['shop_id'],$data['uid'],$data['content'],$data['rating']) != 0)){
+			}elseif((strcasecmp($type, 'reviews/creview') == 0) && (count($data) == 3) && (isset($data['shop_id'],$data['content'],$data['rating']) != 0)){
 				include 'reviews/creview.php';
 
 			}else{
