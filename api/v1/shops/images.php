@@ -12,6 +12,7 @@
 
 	$shops = new Shops($db);
 	$shops->id = $data['shop_id'];
+	$shops->image_type = $data['image_type'];
 	$results = $shops->images();
 	$cnt = mysqli_num_rows($results);
 	$json = array();
