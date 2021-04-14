@@ -1,5 +1,18 @@
 checkSession("m", true)
 
+var image_type, image_length, w, h = null;
+var cnt = 0;
+
+var loadercount = {
+  value: 0,
+  set plus(value) {
+    this.value += value;
+    if(this.value == 7){
+		$('#loading').fadeOut( "slow" );
+    }
+  }
+}
+
 function setDisableCheckboxes() {
     var checkboxes = document.getElementsByClassName("check");
     for (let i = 0; i < checkboxes.length; i++) {
@@ -8,10 +21,8 @@ function setDisableCheckboxes() {
             document.getElementById("time-" + day).disabled = !this.checked
         })
     }
+    loadercount.plus = 1;
 }
-
-var image_type, image_length, w, h = null;
-var cnt = 0;
 
 $(document).on('click', '.deletePreview', function() {
     if($(this).attr('image').localeCompare("loaded") == 0){
@@ -493,6 +504,7 @@ function loadHours() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
 
     xhr.withCredentials = true;
@@ -523,6 +535,7 @@ function loadShopTypes() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
 
     xhr.withCredentials = true;
@@ -572,6 +585,7 @@ function loadDet() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);
@@ -601,6 +615,7 @@ function loadLogo(){
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
 
     xhr.withCredentials = true;
@@ -632,6 +647,7 @@ function loadImages(){
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
 
     xhr.withCredentials = true;
@@ -708,6 +724,7 @@ function loadThumbnail(){
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
 
     xhr.withCredentials = true;
