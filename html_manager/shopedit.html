@@ -6,7 +6,7 @@
     <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="../plugins/clockpicker/src/clockpicker.css">
     <link rel="stylesheet" href="../plugins/clockpicker/src/standalone.css">
     <script src="../plugins/clockpicker/src/clockpicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.css" integrity="sha512-vmXqikRa5kmI3gOQygzml5nV+5NGxG8rt8KWHKj8JYYK12JUl2L8RBfWinFGTzvpwwsIRcINy9mhLyodnmzjig==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.js" integrity="sha512-E+gDQcIvNXE60SjCS38ysf1mGh4ObBpKcUOp0oEaHQHQAdaN2p7GelOpgEdpTuCLoIJyLkNXiqFZbyD9Ak/Ygw==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/theme.css"/>
     <link rel="stylesheet" href="../css/forms.css"/>
     <link rel="stylesheet" href="../css/manager.css"/>
@@ -56,7 +60,7 @@
             <div id="heading" class="animate__animated animate__fadeIn animate__slow">
                 <h1>Shop Settings</h1>
             </div>
-            <form class="main-form needs-validation animate__animated animate__fadeIn animate__delay-1s" novalidate>
+            <form id="main-form" class="main-form needs-validation animate__animated animate__fadeIn animate__delay-1s" enctype="multipart/form-data" novalidate>
                 <div class="form-row">
                     <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                         <div class="input-group">
@@ -133,33 +137,36 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-file-image"></i></div>
                         </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="logo">
-                            <label class="custom-file-label" for="logo">Upload a logo</label>
+                        <div class="custom-file" id="custom-logo-file">
+                            <label class="custom-file-label" id="label-logo" for="logo">Upload a logo</label>
+                            <input type="file" name="logo" class="custom-file-input" id="logo" accept="image/*">
                         </div>
                     </div>
+                    <div id="preview-logo-image" hidden></div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-image"></i></div>
                         </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="thumbnail">
-                            <label class="custom-file-label" for="thumbnail">Upload a thumbnail</label>
+                        <div class="custom-file" id="custom-thumbnail-file">
+                            <label class="custom-file-label" id="label-thumbnail" for="thumbnail">Upload a thumbnail</label>
+                            <input type="file" class="custom-file-input" name="thumbnail" id="thumbnail" accept="image/*">
                         </div>
                     </div>
+                    <div id="preview-thumbnail-image" hidden></div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-images"></i></div>
                         </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="photo">
-                            <label class="custom-file-label" for="photo">Upload a photo</label>
+                        <div class="custom-file" id="custom-photo-file">
+                            <label class="custom-file-label" id="label-photo" for="photo[]">Upload a photo</label>
+                            <input type="file" class="custom-file-input" name="photo[]" id="photo" accept="image/*" multiple>
                         </div>
                     </div>
+                    <div id="preview-photo-image" hidden></div>
                 </div>
                 <hr>
                 <div class="form-group">
@@ -262,8 +269,27 @@
                 </div>
                 <button type="submit" class="btn btn-lg btn-light">Update Shop</button>
             </form>
-            <div id="footer" class="mb-2 mt-1 animate__animated animate__fadeIn animate__delay-2s">
-                <a href="privacy.html">Privacy Policy</a>
+             <div id="footer" class="mb-2 mt-1 animate__animated animate__fadeIn animate__delay-2s">
+                 <a href="privacy.html">Privacy Policy</a>
+                 
+            <!-- Modal -->
+            <div class="modal fade" data-backdrop="static" data-keyboard="false" id="cropImagePop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">
+                                <?=multiLanguage( "Edit Foto" , "Edit Photo" )?>
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="upload-demo" class="center-block"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="cancelCropBtn" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
