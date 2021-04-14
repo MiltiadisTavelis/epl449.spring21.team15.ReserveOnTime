@@ -104,6 +104,43 @@ function createManagerReservationEntry(reservation, sectionId) {
         decision.appendChild(acceptBtn)
         decision.appendChild(declineBtn)
         tr.appendChild(decision)
+    } else {
+        let cancellation = document.createElement("td")
+        let cancelBtn = document.createElement("button")
+        cancelBtn.textContent = "Cancel"
+        cancelBtn.setAttribute("class", "btn btn-sm btn-dark btn-cancel")
+        cancelBtn.setAttribute("id", "cancel-" + reservation.id)
+        cancelBtn.setAttribute("type", "button")
+        cancelBtn.onclick = function() {
+            let xhr = new XMLHttpRequest()
+
+            let reservationId = this.id.split("-")[1]
+            let data = {
+                "type": "reservations/status",
+                "id": reservationId,
+                "status": "3"
+            }
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+
+                    popUpMessage("Succesfully cancelled reservation!", "success")
+                    setTimeout(function() {
+                        window.location.reload()
+                    }, 2000);
+                } else {
+                    popUpMessage("Couldn't cancel reservation", "danger")
+                }
+            }
+
+            xhr.withCredentials = true
+            xhr.open('PUT', api)
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.send(JSON.stringify(data))
+        }
+
+        cancellation.appendChild(cancelBtn)
+        tr.appendChild(cancellation)
     }
 
     return tr
