@@ -173,13 +173,16 @@ input[readonly] {
     left:0;
     right:0;
     bottom:0;
-    background-color: black;
+    background-image: url(../images/wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
     z-index:99;
 }
 
 #loading-image {
-    -webkit-filter: invert(1);
-    filter: invert(1);
+/*    -webkit-filter: invert(1);
+    filter: invert(1);*/
     width:80px;
     height:80px;
     position:absolute;
