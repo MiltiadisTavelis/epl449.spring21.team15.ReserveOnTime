@@ -1,14 +1,18 @@
 <?php
-	session_start();
+	session_start();	
     $http_origin = $_SERVER['HTTP_ORIGIN'];
     header("Access-Control-Allow-Headers: Authorization, Content-Type");
     header("Access-Control-Allow-Origin: $http_origin");
     header("Access-Control-Allow-Credentials: true");
     header('content-type: application/json; charset=utf-8');
-	
+
  	$error = json_encode(array('status' => 'Bad Request'));
-	if((strcasecmp($_SERVER['REQUEST_METHOD'], 'POST')) == 0 && (strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0){
+	if((strcasecmp($_SERVER['REQUEST_METHOD'], 'POST')) == 0 && (((strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0) || ((isset($_POST['json']) != 0) && (strpos($_SERVER["CONTENT_TYPE"], 'multipart/form-data') !== false)))){
+
 		$data = json_decode(file_get_contents("php://input"),true);
+		if(isset($_POST['json']) != 0){
+			$data = json_decode($_POST['json'],true);
+		}
 
 		if(json_last_error() !== JSON_ERROR_NONE || empty($data) || !isset($data['type'])){
 			echo $error;
@@ -58,9 +62,13 @@
 				include 'shops/postcode.php';
 
 			//GET ALL IMAGES
-			}elseif((strcasecmp($type, 'shops/images') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
+			}elseif((strcasecmp($type, 'shops/images') == 0) && count($data) == 2 && (isset($data['shop_id'],$data['image_type']) != 0)){
 				include 'shops/images.php';
-
+			
+			//ADD SHOP IMAGES
+			}elseif((strcasecmp($type, 'shops/addimages') == 0) && (count($data) == 1) && (isset($data['shop_id']) != 0)){
+				include 'shops/addimages.php';
+			
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -150,21 +158,20 @@
 
 			//GET EVENTS BY SHOP ID
 			if((strcasecmp($type, 'events/shop') == 0) && count($data) == 1 && (isset($data['shop_id']) != 0)){
-				//$_GET['id'] = $data['shop_id'];
 				include 'events/shop.php';
 			
 			//CREATE EVENT
 			}elseif((strcasecmp($type, 'events/create') == 0) && (count($data) == 9) && (isset($data['title'],$data['content'],$data['pic'],$data['link'],$data['start_date'],$data['stop_date'],$data['start_time'],$data['stop_time'],$data['shop_id']) != 0)){
 				include 'events/create.php';
-			}
+
 			//GET EVENT DETAILS BY ID
-			elseif((strcasecmp($type, 'events/event') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+			}elseif((strcasecmp($type, 'events/event') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
 				include 'events/event.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);
 			}
-
 
 		}elseif((strcasecmp(explode("/", $data['type'])[0],'reservations')) == 0){
 			include_once '../config/config.php';
@@ -228,9 +235,12 @@
 			http_response_code(400);
 		}
 
-	}elseif((strcasecmp($_SERVER['REQUEST_METHOD'], 'PUT')) == 0 && (strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0){
-
+	}elseif((strcasecmp($_SERVER['REQUEST_METHOD'], 'PUT')) == 0 && (((strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0) || ((isset($_POST['json']) != 0) && (strpos($_SERVER["CONTENT_TYPE"], 'multipart/form-data') !== false)))){
+		
 		$data = json_decode(file_get_contents("php://input"),true);
+		if(isset($_POST['json']) != 0){
+			$data = json_decode($_POST['json'],true);
+		}
 
 		if(json_last_error() !== JSON_ERROR_NONE || empty($data) || !isset($data['type'])){
 			echo $error;
@@ -251,7 +261,7 @@
 			//ADD OPEN HOURS TO SHOP
 			}elseif((strcasecmp($type, 'shops/addhour') == 0)){
 				include 'shops/addhour.php';
-				
+
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -309,10 +319,13 @@
 			echo $error;
 			http_response_code(400);
 		}
-	}elseif((strcasecmp($_SERVER['REQUEST_METHOD'], 'DELETE')) == 0 && (strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0){
-
+	}elseif((strcasecmp($_SERVER['REQUEST_METHOD'], 'DELETE')) == 0 && (((strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0) || ((isset($_POST['json']) != 0) && (strpos($_SERVER["CONTENT_TYPE"], 'multipart/form-data') !== false)))){
+		
 		$data = json_decode(file_get_contents("php://input"),true);
-
+		if(isset($_POST['json']) != 0){
+			$data = json_decode($_POST['json'],true);
+		}
+		
 		if(json_last_error() !== JSON_ERROR_NONE || empty($data) || !isset($data['type'])){
 			echo $error;
 			http_response_code(400);
@@ -330,8 +343,7 @@
 				echo $error;
 				http_response_code(400);
 			}
-		}
-		elseif((strcasecmp(explode("/", $data['type'])[0],'reviews')) == 0){
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'reviews')) == 0){
 			include_once '../config/config.php';
 			include_once '../models/reviews.php';
 			$type = $data['type'];
@@ -368,6 +380,20 @@
 			//DELETE EVENT
 			if((strcasecmp($type, 'pendingShops/delete') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
 				include 'pendingShops/delete.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'shops')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/shops.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//DELETE SHOP IMAGE
+			if((strcasecmp($type, 'shops/deleteimage') == 0) && (count($data) == 3) && (isset($data['image_type'],$data['image_url'],$data['shop_id']) != 0)){
+				include 'shops/deleteimage.php';
 			}else{
 				echo $error;
 				http_response_code(400);
