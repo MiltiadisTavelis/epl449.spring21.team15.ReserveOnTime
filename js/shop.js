@@ -15,9 +15,11 @@ $('.clockpicker').clockpicker({
     donetext: ''
 });
 
+var myRating = 1;
 var shopname;
 var url = window.location.href;
 let id = url ? url.split('?').pop() : window.location.search.slice(1);
+
 
 isfull();
 loadShopContent();
@@ -331,6 +333,28 @@ function loadReviews() {
 
             var main = document.getElementById("reviews");
 
+            var padding = document.createElement('p');
+
+            var newreview = document.createElement("div");
+            newreview.classList.add('newreview');
+            /*newreview.appendChild(padding);
+            newreview.appendChild(padding);
+            newreview.appendChild(padding);
+            newreview.appendChild(padding);*/
+
+            var button = document.createElement("a");
+            button.classList.add('newrevbutton', 'btn', 'btn-default');
+            button.setAttribute("data-toggle", "modal");
+            button.setAttribute("data-target", "#review-modal");
+            button.setAttribute("href", "modal");
+            button.innerText = "Create new Review";
+            newreview.appendChild(button);
+            main.appendChild(newreview);
+            /*newreview.appendChild(padding);
+            newreview.appendChild(padding);
+            newreview.appendChild(padding);
+            newreview.appendChild(padding);*/
+
             if (response.hasOwnProperty('NoReviewsFound')) {
                 var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
@@ -505,6 +529,64 @@ function loadEvents() {
         line.classList.add('rate-hr');
         main.appendChild(line);
     }
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
+$(document).on("click", "#star1", function() {
+    myRating = document.getElementById("star1").value;
+    console.log(myRating);
+});
+$(document).on("click", "#star2", function() {
+    myRating = document.getElementById("star2").value;
+});
+$(document).on("click", "#star3", function() {
+    myRating = document.getElementById("star3").value;
+});
+$(document).on("click", "#star4", function() {
+    myRating = document.getElementById("star4").value;
+});
+$(document).on("click", "#star5", function() {
+    myRating = document.getElementById("star5").value;
+});
+
+$(document).on("click", "#submit-review", function() {
+    addReview();
+});
+
+function addReview() {
+    var content = document.getElementById('modal-content-input');
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "reviews/creview",
+        "shop_id": id,
+        "content": content.value,
+        "rating": myRating
+    };
+    console.log(data);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response['status'], "danger");
+                window.setTimeout(function() {
+                    window.location = "signin.html";
+                }, 1000);
+            } else if (response.hasOwnProperty('message')) {
+                popUpMessage(response['message'], "success");
+                setTimeout(function() {
+                  location.reload();
+                }, 2000);
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+
     xhr.withCredentials = true;
     xhr.open('POST', api);
     xhr.setRequestHeader('Content-Type', 'application/json');

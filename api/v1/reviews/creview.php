@@ -6,6 +6,12 @@
 		return;
 	};
 
+	if(!isset($_SESSION['user_id'])){
+		$msg['status'] = 'Not logged in';
+		echo json_encode($msg);
+		return;
+	};
+
 	//include_once '../../config/config.php';
 	//include_once '../../models/shops.php';
 
@@ -16,12 +22,12 @@
 	$data = json_decode(file_get_contents("php://input"));
 
 	$review->shop_id = $data->shop_id;
-	$review->uid = $data->uid;
+	$review->uid = $_SESSION['user_id'];
 	$review->content = $data->content;
 	$review->rating = $data->rating;
 
 	if($review->create_review()){
-		$msg['status'] = 'Successfully Created';
+		$msg['message'] = ' Review Successfully Created';
 		echo json_encode($msg);
 	}
 ?>
