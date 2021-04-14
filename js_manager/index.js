@@ -324,15 +324,21 @@ function loadStats() {
         "id": shop_id
     }
 
+    var xhr2 = new XMLHttpRequest();
+    var data2 = {
+        "type": "reviews/shop",
+        "shop_id": shop_id
+    };
+
     xhr.onload = function() {
         if (xhr.status === 200) {
             let response = JSON.parse(xhr.responseText)
-            document.getElementById("stats-shopname").textContent = response.sname + " Reservation Statistics"
+            document.getElementById("stats-shopname").textContent = response.sname + " Statistics"
 
-            let totalDisplay = document.getElementById("stats-total")
-            let acceptedDisplay = document.getElementById("stats-accepted")
-            let declinedDisplay = document.getElementById("stats-declined")
-            let cancelledDisplay = document.getElementById("stats-cancelled")
+            let totalDisplay = document.getElementById("stats-res-total")
+            let acceptedDisplay = document.getElementById("stats-res-accepted")
+            let declinedDisplay = document.getElementById("stats-res-declined")
+            let cancelledDisplay = document.getElementById("stats-res-cancelled")
 
             let total = reservations["Reservations"].length
             let acceptedCounter = 0
@@ -355,9 +361,40 @@ function loadStats() {
             acceptedDisplay.textContent = acceptedCounter + " (" + Math.trunc(acceptedCounter * 100 / total) + "%)"
             declinedDisplay.textContent = declinedCounter + " (" + Math.trunc(declinedCounter * 100 / total) + "%)"
             cancelledDisplay.textContent = cancelledCounter + " (" + Math.trunc(cancelledCounter * 100 / total) + "%)"
+            document.getElementById("stats-rating").textContent = "★ " + response.rating
             document.getElementById("stats").classList.remove('d-none')
         } else {
             popUpMessage("There was an unexpected error", "danger")
+        }
+    }
+
+    xhr2.onload = function() {
+        if (xhr2.status === 200) {
+            var response = JSON.parse(xhr2.responseText);
+
+            let totalReviews = document.getElementById("stats-rev-total");
+            let posReviews = document.getElementById("stats-rev-pos");
+            let negReviews = document.getElementById("stats-rev-neg");
+
+            var reviews = response["Reviews"];
+            let total = reviews.length
+            let posCounter = 0;
+            let negCounter = 0;
+            for (entry in reviews) {
+                var review = reviews[entry]
+
+                if (review.rating >= 3) {
+                    posCounter++
+                } else {
+                    negCounter++
+                }
+            }
+
+            totalReviews.textContent = total
+            posReviews.textContent = posCounter + " (" + Math.trunc(posCounter * 100 / total) + "%)"
+            negReviews.textContent = negCounter + " (" + Math.trunc(negCounter * 100 / total) + "%)"
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
         }
     }
 
@@ -365,4 +402,9 @@ function loadStats() {
     xhr.open('POST', api)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send(JSON.stringify(data))
+
+    xhr2.withCredentials = true;
+    xhr2.open('POST', api);
+    xhr2.setRequestHeader('Content-Type', 'application/json');
+    xhr2.send(JSON.stringify(data2));
 }
