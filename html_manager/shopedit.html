@@ -274,15 +274,16 @@
 
             <!-- Modal -->
             <div class="modal fade" data-backdrop="false" data-keyboard="false" id="cropImagePop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content" style="resize: horizontal; overflow: auto; min-width: 650px">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="myModalLabel">
                                 <?=multiLanguage( "Edit Foto" , "Edit Photo" )?>
                             </h4>
                         </div>
                         <div class="modal-body">
-                            <div id="upload-demo" class="center-block"></div>
+                            <div id="upload-demo" class="embed-responsive z-depth-1-half">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="cancelCropBtn" class="btn btn-default" data-dismiss="modal">Close</button>
