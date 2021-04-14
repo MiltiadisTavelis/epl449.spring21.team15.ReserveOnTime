@@ -64,3 +64,52 @@ form * {
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
+
+.photo-area {
+      position: relative;
+      width: 50%;
+      padding: 5px;
+}
+.photo-area img{
+      max-width: 100%;
+      height: auto;
+}
+
+.logo-area {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+.logo-area img{
+    height: auto;
+}
+
+.thumbnail-area {
+    margin: 0 auto;
+    position: relative;
+    width: 50%;
+    padding: 5px;
+}
+.thumbnail-area img{
+    max-width: 100%;
+    height: auto;
+}
+
+.deletePreview {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 4px;
+    -webkit-transition: background 0.5s;
+    transition: background 0.5s;
+}
+.deletePreview:hover {
+      padding: 5px;
+      top: 14px;
+    right: 14px;
+}
+.deletePreview:active {
+      top: 15px;
+    right: 14px;
+}
