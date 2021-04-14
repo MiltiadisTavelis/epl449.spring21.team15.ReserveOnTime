@@ -24,7 +24,7 @@
 	$result = $user->verify_user();
 
 	if($result == 1){
-		header('Location: verifyPage.html');
+		echo "<script>location='verifyPage.html'</script>";
 	}elseif($result == 0){
 		$msg['status'] = 'Already Verified';
 		echo $msg['status'];
