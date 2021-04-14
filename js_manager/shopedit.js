@@ -194,7 +194,7 @@ $('#cropImageBtn').on('click', function(ev) {
         }
 
         var img = document.createElement("img");
-        img.classList.add("gambar","img-responsive","img-thumbnail");
+        img.classList.add("gambar","img-responsive","img-thumbnail","embed-responsive-item");
         id = "image-preview-" + image_type;
         img.setAttribute("id",id);
         img.setAttribute("src",resp);
@@ -659,7 +659,7 @@ function showimage(a,b,c,d,e){
     }
 
     var img = document.createElement("img");
-    img.classList.add("gambar","img-responsive","img-thumbnail");
+    img.classList.add("gambar","img-responsive","img-thumbnail","embed-responsive-item");
     id = "image-preview-" + image_type;
     img.setAttribute("id",id);
     img.setAttribute("src",url);
