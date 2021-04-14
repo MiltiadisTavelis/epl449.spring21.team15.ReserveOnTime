@@ -26,6 +26,7 @@ var loadercount = {
     this.value += value;
     if(this.value == 3){
         $('#loading').fadeOut( "slow" );
+        $('#contents').removeAttr('hidden');
     }
   }
 }

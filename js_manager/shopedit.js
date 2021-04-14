@@ -9,6 +9,7 @@ var loadercount = {
     this.value += value;
     if(this.value == 7){
 		$('#loading').fadeOut( "slow" );
+		$('#contents').removeAttr('hidden');
     }
   }
 }
