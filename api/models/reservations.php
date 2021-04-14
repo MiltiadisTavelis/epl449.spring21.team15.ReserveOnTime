@@ -217,16 +217,30 @@
 			}
 		}
 
+		public function update_status(){
+			$sql = 'UPDATE RESERVATIONS SET status = '.$this->status.' WHERE id = '.$this->id.';';
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				return true;				
+			}else{
+				return false;
+			}
+		}
+
 		//UPDATE RESERVATION STATUS
 		public function status(){
 			if($this->check_status()){
-				$sql = 'UPDATE RESERVATIONS SET status = '.$this->status.' WHERE id = '.$this->id;
+				$sql = 'SELECT day,sname,userid FROM RESERVATIONS,SHOPS WHERE RESERVATIONS.id = '.$this->id.' AND RESERVATIONS.shopid = SHOPS.id;';
 				$stmt = $this->conn->prepare($sql);
-
 				if($stmt->execute()){
-					return true;
+					$result = $stmt->get_result();
+					if($this->update_status()){
+						return $result;
+					}else{
+						return false;
+					}
 				}else{
-					printf("Error: %s.\n",$stmt->error);
+					return false;
 				}
 			}
 			return false;
