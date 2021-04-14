@@ -118,7 +118,7 @@ var allfiles;
 function readFile(input) {
     if(image_type.localeCompare("thumbnail") == 0){
         $("preview-thumbnail-image").empty();
-        createCroppie(830,320,true);
+        createCroppie(690,265,true);
     }else if(image_type.localeCompare("logo") == 0){
         $("preview-logo-image").empty();
         createCroppie(200,200,false);
@@ -702,8 +702,8 @@ function loadThumbnail(){
                 return;
             }
             var image = response.Images[0];
-            createCroppie(830,320,false); 
-            showimage(830,320,"thumbnail",1,image.image_url)
+            createCroppie(690,265,false); 
+            showimage(690,265,"thumbnail",1,image.image_url)
 
         } else {
             popUpMessage("There was an unexpected error", "danger");

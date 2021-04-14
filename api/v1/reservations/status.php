@@ -28,7 +28,7 @@
 		if($rsrv->status() != false){
 			$msg['status'] = 'Successfully Updated';
 			echo json_encode($msg);
-			if($data->status != "3"){
+			if($_SESSION['page_type'] == "m"){
 				require_once($_SERVER['DOCUMENT_ROOT']."/api/v1/users/notifystatus.php");
 			}
 		}else{
