@@ -20,11 +20,11 @@ var shopname;
 var url = window.location.href;
 let id = url ? url.split('?').pop() : window.location.search.slice(1);
 
-
 isfull();
 loadShopContent();
 loadShopPhotos();
 loadLogo();
+loadThumbnail();
 loadReviews();
 loadEvents();
 loadHours();
@@ -42,19 +42,19 @@ function loadHours() {
             var d = new Date();
             var main = document.getElementById("dateTime");
             var response = JSON.parse(xhr.responseText);
-            for (var j = 0; j < 7; j++) {
+            for (var j=0; j<7; j++) {
                 var hour = response.Hours[j];
                 var divDayTime = document.createElement("div");
                 divDayTime.setAttribute("id", days[j]);
-                if ((d.getDay() - 1) == j) {
+                if((d.getDay()-1) == j){
                     divDayTime.classList.add("today");
                 }
                 var divDay = document.createElement("span");
                 divDay.classList.add("float-left");
                 divDay.innerText = days[j];
                 divDayTime.appendChild(divDay);
-
-                if (hour.length === 1 || hour[0].active === 0) {
+                
+                if(hour.length === 1 || hour[0].active === 0){
                     var divTime = document.createElement("span");
                     divTime.classList.add("float-right");
                     divTime.innerText = "Closed";
@@ -66,8 +66,8 @@ function loadHours() {
 
                     main.appendChild(divDayTime);
                 }
-                for (var i = 1; i < hour.length; i++) {
-                    if (hour[0].active === 1) {
+                for(var i=1; i<hour.length; i++){
+                    if(hour[0].active === 1){
                         var divTime = document.createElement("span");
                         divTime.classList.add("float-right");
                         divTime.innerText = hour[i].open + ' - ' + hour[i].close;
@@ -204,7 +204,8 @@ function loadShopPhotos() {
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "shops/images",
-        "shop_id": id
+        "shop_id": id,
+        "image_type": 3
     };
 
     xhr.onload = function() {
@@ -233,7 +234,7 @@ function loadShopPhotos() {
                 var li = document.createElement("li");
                 li.setAttribute("data-slide-to", entry);
                 li.setAttribute("data-target", "#carousel");
-                if (entry == 0) {
+                if (entry==0) {
                     li.classList.add("active");
                 }
                 ol.appendChild(li);
@@ -248,14 +249,14 @@ function loadShopPhotos() {
             for (entry in images) {
                 var image = images[entry];
                 var p = document.createElement("div");
-                if (entry == 0) {
+                if (entry==0) {
                     p.classList.add("carousel-item", "active");
-                } else {
+                }else{
                     p.classList.add("carousel-item");
                 }
                 var pi = document.createElement("img");
                 pi.classList.add("d-block", "w-100");
-                pi.setAttribute("src", image["image_url"]);
+                pi.setAttribute("src",image["image_url"]);
                 p.appendChild(pi);
                 photos.appendChild(p);
 
@@ -307,16 +308,25 @@ function loadShopPhotos() {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
     var pictures = document.getElementById("photos");
-
+    
 }
 
-function loadLogo() {
+function loadLogo(){
 
     var logo = document.getElementById("shop-image");
 
     str1 = "../images/shop_logos/";
     str2 = id;
     logo.setAttribute("src", str1.concat(str2));
+}
+
+function loadThumbnail(){
+
+    var thumbnail = document.getElementById("cover-img");
+
+    str1 = "../images/shop_thumbnails/";
+    str2 = id;
+    thumbnail.setAttribute("src", str1.concat(str2));
 }
 
 
@@ -333,14 +343,8 @@ function loadReviews() {
 
             var main = document.getElementById("reviews");
 
-            var padding = document.createElement('p');
-
             var newreview = document.createElement("div");
             newreview.classList.add('newreview');
-            /*newreview.appendChild(padding);
-            newreview.appendChild(padding);
-            newreview.appendChild(padding);
-            newreview.appendChild(padding);*/
 
             var button = document.createElement("a");
             button.classList.add('newrevbutton', 'btn', 'btn-default');
@@ -350,10 +354,6 @@ function loadReviews() {
             button.innerText = "Create new Review";
             newreview.appendChild(button);
             main.appendChild(newreview);
-            /*newreview.appendChild(padding);
-            newreview.appendChild(padding);
-            newreview.appendChild(padding);
-            newreview.appendChild(padding);*/
 
             if (response.hasOwnProperty('NoReviewsFound')) {
                 var displayMessage = document.createElement("div");
