@@ -1,4 +1,5 @@
 <?php
+	ob_start();
     header("Access-Control-Allow-Headers: Authorization, Content-Type");
     header("Access-Control-Allow-Origin: *");
     header('content-type: application/json; charset=utf-8');
@@ -24,7 +25,7 @@
 	$result = $user->verify_user();
 
 	if($result == 1){
-		echo "<script>location='verifyPage.html'</script>";
+		header('Location: verifyPage.html');
 	}elseif($result == 0){
 		$msg['status'] = 'Already Verified';
 		echo $msg['status'];
@@ -35,4 +36,5 @@
 		$msg['status'] = 'Server Error! Please try again';
 		echo $msg['status'];
 	}
+	ob_end_flush();
 ?>
