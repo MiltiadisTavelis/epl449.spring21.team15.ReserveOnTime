@@ -28,7 +28,9 @@
 		if($rsrv->status() != false){
 			$msg['status'] = 'Successfully Updated';
 			echo json_encode($msg);
-			require_once($_SERVER['DOCUMENT_ROOT']."/api/v1/users/notifystatus.php");
+			if($data->status != "3"){
+				require_once($_SERVER['DOCUMENT_ROOT']."/api/v1/users/notifystatus.php");
+			}
 		}else{
 			$msg['status'] = 'Invalid command';
 			echo json_encode($msg);
