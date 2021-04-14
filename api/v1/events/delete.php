@@ -27,7 +27,7 @@
 	$event->id = $data->id;
 
 	if($event->delete_event()){
-		$msg['message'] = 'Successfully Deleted';
+		$msg['message'] = 'Event has been successfully deleted';
 		echo json_encode($msg);
 	}
 ?>
