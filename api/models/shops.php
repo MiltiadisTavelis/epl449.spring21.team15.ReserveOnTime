@@ -28,6 +28,8 @@
 		public $postcode;
 		public $type_id;
 		public $active;
+		public $image_type;
+		public $image_url;
 
 		public function __construct($db)
 		{
@@ -570,16 +572,101 @@
 		
 		//GET ALL IMAGES
 		public function images(){
-		    $sql = 'SELECT image_url FROM IMAGES WHERE shop_id = '.$this->id;
+		    $sql = 'SELECT image_url FROM IMAGES WHERE type = '.$this->image_type.' AND shop_id = '.$this->id;
 		    $stmt = $this->conn->prepare($sql);
 		    if(!mysqli_stmt_prepare($stmt,$sql)){
-			echo "Error";
-			exit();
+				echo "Error";
+				exit();
 		    }else{
-			mysqli_stmt_execute($stmt);
-			$result = mysqli_stmt_get_result($stmt);
-			return $result;
+				mysqli_stmt_execute($stmt);
+				$result = mysqli_stmt_get_result($stmt);
+				return $result;
 		    }
 		}
+
+		//COUNT ALL IMAGES
+		private function count_images(){
+		    $sql = 'SELECT count(image_url) as count FROM IMAGES WHERE type = '.$this->image_type.' AND shop_id = '.$this->id;
+		    $stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$row = $stmt->get_result();
+				return mysqli_fetch_array($row)['count'];
+			}else{
+				return -1;
+			}
+		}
+
+		//DELETE IMAGES
+		public function delete_images(){
+		    $sql = 'DELETE FROM IMAGES WHERE type = '.$this->image_type.' AND image_url = "'.$this->image_url.'" AND shop_id = '.$this->id;
+		    $stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		//ADD IMAGES
+		public function add_images(){
+			$types = array("1" => "logo", "2" => "thumbnail", "3" => "photo");
+		    $del = 'DELETE FROM IMAGES WHERE shop_id = '.$this->id.' AND type = '; 
+		    $insert = 'INSERT INTO IMAGES (`shop_id`, `image_url`, `size`, `type`) VALUES ';
+		    $sql = "";
+		    $files = $_POST;
+		    for($j=0; $j<count($files)-1; $j++){
+		    	$this->image_type = ($j+1);
+		    	$image_count = $this->count_images();
+		    	if($image_count == -1){
+		    		return false;
+		    	}
+		    	$type = $types[$j+1];
+
+		    	if(is_array($files[$type])){
+		    		if(count($files[$type]) == 0){
+		    			continue;
+		    		}
+		    		$sql .= $insert;
+		    		for ($i=0; $i < count($files[$type]); $i++) { 
+		    			$data = $files[$type][$i];
+						$data = explode(',', $data);
+						$data = base64_decode($data[1]);
+						$filepath = '../../images/shop_images/'.$this->id.'/'.rand() . '.jpeg';
+						if($i == (count($files[$type])-1)){
+			        		$sql .= '('.$this->id.', "'.$filepath.'", '.strlen($data).', '.($j+1).');';
+			        	}else{
+			        		$sql .= '('.$this->id.', "'.$filepath.'", '.strlen($data).', '.($j+1).'),';
+			        	}
+						file_put_contents($filepath,$data);
+		    		}
+		    	}else if(empty($files[$type])){
+		    		continue;
+		    	}else{
+		    		$data = $files[$type];
+					$data = explode(',', $data);
+					$data = base64_decode($data[1]);
+					if($type == "logo"){
+						$sql .= $del.($j+1).'; '.$insert;
+						$filepath = '../../images/shop_logos/'.$this->id.'.jpeg';
+						$sql .= '('.$this->id.', "'.$filepath.'", '.strlen($data).', '.($j+1).');';
+					}else if($type == "thumbnail"){
+						$sql .= $del.($j+1).'; '.$insert;
+						$filepath = '../../images/shop_thumbnails/'.$this->id.'.jpeg';
+						$sql .= '('.$this->id.', "'.$filepath.'", '.strlen($data).', '.($j+1).');';
+					}
+					file_put_contents($filepath,$data);
+		    	}
+		    }
+
+		    if($sql != ""){
+				if($this->conn->multi_query($sql)){
+					return true;
+				}else{
+					printf("Error: %s.\n",$stmt->error);
+					return false;
+				}
+			}
+		}
+
 	}
 ?>
