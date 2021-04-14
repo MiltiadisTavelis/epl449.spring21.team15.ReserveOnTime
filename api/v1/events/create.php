@@ -84,14 +84,14 @@
 	}
 
 	if (strtotime($event->start_date) > strtotime($event->stop_date)){
-		$msg['status'] = 'Conflict dates!';
+		$msg['status'] = 'Your input is invalid. Conflict dates error has been detected';
 		echo json_encode($msg);
 		return;
 	}
 
 	if ($event->start_date == $event->stop_date) {
 		if (strtotime($data->start_time) > strtotime($data->stop_time)) {
-			$msg['status'] = 'Conflict hours!';
+			$msg['status'] = 'Your input is invalid. Conflict hours error has been detected';
 			echo json_encode($msg);
 			return;
 		}
@@ -104,7 +104,7 @@
 	$event->shop_id = $data->shop_id;
 
 	if($event->create_event()){
-		$msg['message'] = 'Successfully Created';
+		$msg['message'] = 'You have successfully created the event!';
 		echo json_encode($msg);
 	}
 ?>
