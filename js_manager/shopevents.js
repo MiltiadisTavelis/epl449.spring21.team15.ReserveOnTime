@@ -20,6 +20,16 @@ $('.clockpicker').clockpicker({
     placement: 'bottom'
 });
 
+var loadercount = {
+  value: 0,
+  set plus(value) {
+    this.value += value;
+    if(this.value == 3){
+        $('#loading').fadeOut( "slow" );
+    }
+  }
+}
+
 var currEventId = null;
 
 $(document).on("click", "#submit-button-update", function() {
@@ -77,7 +87,6 @@ function submit() {
         "stop_time": stop_time.value,
         "shop_id": shop_id
     };
-    console.log(data);
 
     xhr.onload = function() {
         if (xhr.status === 200) {
@@ -176,6 +185,7 @@ function loadEvents() {
             var main = document.getElementById("events");
 
             if (response.hasOwnProperty('NoEventsFound')) {
+                loadercount.plus = 1;
                 var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
                 displayMessage.innerHTML = "There are no Events on the Shop.";
@@ -247,6 +257,7 @@ function loadEvents() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
         var line = document.createElement('hr');
         line.classList.add('rate-hr');
         main.appendChild(line);
@@ -283,6 +294,7 @@ function loadPage() {
                 } else {
                     popUpMessage("Can't load events. There was an unexpected error", "danger")
                 }
+                loadercount.plus = 1;
             }
 
             x.withCredentials = true
@@ -292,6 +304,7 @@ function loadPage() {
         } else {
             popUpMessage("Can't load events. There was an unexpected error", "danger")
         }
+        loadercount.plus = 1;
     }
 
     xhr.withCredentials = true
@@ -337,6 +350,7 @@ function loadEventDet(eventId) {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);

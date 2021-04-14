@@ -10,6 +10,16 @@ $('.datepicker').datepicker({
     startView: 2
 });
 
+var loadercount = {
+  value: 0,
+  set plus(value) {
+    this.value += value;
+    if(this.value == 1){
+        $('#loading').fadeOut( "slow" );
+    }
+  }
+}
+
 loadDet();
 
 function submit() {
@@ -83,6 +93,7 @@ function loadDet() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);
