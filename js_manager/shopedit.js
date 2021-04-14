@@ -18,7 +18,7 @@ $(document).on('click', '.deletePreview', function() {
         var type = $(this).attr('imagetype');
         var num = $(this).attr('num');
         var id = '#preview-' + type + num;
-        var src = $(id).children('iframe').attr('src');
+        var src = $(id).children('img').attr('src');
         if(type.localeCompare("logo") == 0){
             deleteimage(1,src);
         }else if(type.localeCompare("thumbnail") == 0){
@@ -118,7 +118,7 @@ var allfiles;
 function readFile(input) {
     if(image_type.localeCompare("thumbnail") == 0){
         $("preview-thumbnail-image").empty();
-        createCroppie(830,320,true);
+        createCroppie(690,265,true);
     }else if(image_type.localeCompare("logo") == 0){
         $("preview-logo-image").empty();
         createCroppie(200,200,false);
@@ -193,7 +193,7 @@ $('#cropImageBtn').on('click', function(ev) {
             divin.classList.add("thumbnail-area");
         }
 
-        var img = document.createElement("iframe");
+        var img = document.createElement("img");
         img.classList.add("gambar","img-responsive","img-thumbnail","embed-responsive-item");
         id = "image-preview-" + image_type;
         img.setAttribute("id",id);
@@ -395,7 +395,7 @@ function submitImages() {
     if(logo.childElementCount+thumbnail.childElementCount+images.childElementCount === 0){return;}
     var formData = new FormData();
     var upload = false;
-    var img = $("#preview-logo-image").find("iframe"),len = img.length;
+    var img = $("#preview-logo-image").find("img"),len = img.length;
     formData.append("logo",[]);
     if( len > 0 && img.attr('image').localeCompare("submited") == 0){
         upload = true;
@@ -403,7 +403,7 @@ function submitImages() {
         formData.append("logo",src);
     }
 
-    var img = $("#preview-thumbnail-image").find("iframe"),len = img.length;
+    var img = $("#preview-thumbnail-image").find("img"),len = img.length;
     formData.append("thumbnail",[]);
     if( len > 0 && img.attr('image').localeCompare("submited") == 0){
         upload = true;
@@ -413,10 +413,10 @@ function submitImages() {
     var img = document.getElementById("preview-photo-image");
     var divs = img.getElementsByTagName('div');
     for (var i = 0; i < divs.length; i ++) {
-        var check = divs[i].getElementsByTagName('iframe')[0].getAttribute("image");
+        var check = divs[i].getElementsByTagName('img')[0].getAttribute("image");
         if(check.localeCompare("submited") == 0){
             upload = true;
-            var src = divs[i].getElementsByTagName('iframe')[0].src;
+            var src = divs[i].getElementsByTagName('img')[0].src;
             formData.append("photo[]",src);
         }
     }
@@ -658,7 +658,7 @@ function showimage(a,b,c,d,e){
         divin.classList.add("thumbnail-area");
     }
 
-    var img = document.createElement("iframe");
+    var img = document.createElement("img");
     img.classList.add("gambar","img-responsive","img-thumbnail","embed-responsive-item");
     id = "image-preview-" + image_type;
     img.setAttribute("id",id);
@@ -702,8 +702,8 @@ function loadThumbnail(){
                 return;
             }
             var image = response.Images[0];
-            createCroppie(830,320,false); 
-            showimage(830,320,"thumbnail",1,image.image_url)
+            createCroppie(690,265,false); 
+            showimage(690,265,"thumbnail",1,image.image_url)
 
         } else {
             popUpMessage("There was an unexpected error", "danger");
