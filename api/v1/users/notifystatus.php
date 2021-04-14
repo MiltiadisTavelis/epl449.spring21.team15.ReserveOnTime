@@ -33,6 +33,8 @@
       $status = "Declined";
    }elseif($data->status == "1"){
       $status = "Accepted";
+   }elseif($data->status == "3"){
+      $status = "Canceled";
    }
 
 	$name = $user->name();
