@@ -153,6 +153,47 @@ input[readonly] {
     padding: 50px;
 }
 
+@media (max-width : 500px) {
+    #contents{
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0px;
+    }
+    .container-fluid {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .shop-card {
+        color: black;
+        display: inline-block;
+        height: 12rem;
+        width: 7rem;
+        margin: 5px;
+    }
+
+    .card-body{
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 2px;
+    }
+
+    .list-group-item{
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0px;
+    }
+
+    .shop-display {
+        margin: 0 auto;
+    }
+}
+
 #footer a {
     color: grey;
 }
