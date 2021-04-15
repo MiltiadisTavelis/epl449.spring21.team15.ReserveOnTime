@@ -1,7 +1,7 @@
 {
   "id": "b78f41d4-35f5-46e3-966d-e7f3bbafa293",
   "version": "2.0",
-  "name": "akomis01",
+  "name": "akomis",
   "url": "https://reserveontime.com",
   "tests": [{
     "id": "1838e1ac-a891-41a5-b5e3-43dbd15428bb",
@@ -20,6 +20,13 @@
       "target": "/",
       "targets": [],
       "value": ""
+    }, {
+      "id": "46900c5e-8439-4c13-abdf-c6d94e67915d",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=contents",
+      "targets": [],
+      "value": "5000"
     }, {
       "id": "955140ba-a0e6-4b5e-809a-8f3c53d2f3cf",
       "comment": "",
@@ -125,6 +132,13 @@
       "target": "/",
       "targets": [],
       "value": ""
+    }, {
+      "id": "80992d82-b448-4778-bd4c-3f06597abaa2",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=contents",
+      "targets": [],
+      "value": "5000"
     }, {
       "id": "4a3b9290-e2a5-4eb0-919a-3358ff49bcb9",
       "comment": "",
@@ -465,6 +479,13 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "fe38a659-4406-4a9c-8b79-618a9f61d141",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=contents",
+      "targets": [],
+      "value": "5000"
+    }, {
       "id": "1cca0684-d418-4366-947e-314981fef689",
       "comment": "",
       "command": "waitForElementVisible",
@@ -533,6 +554,13 @@
       "target": "/",
       "targets": [],
       "value": ""
+    }, {
+      "id": "75acdcdb-d09f-4a7c-bf7b-7ad885459c11",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=contents",
+      "targets": [],
+      "value": "5000"
     }, {
       "id": "0c6a05c4-5b83-4d29-b1a4-8a658bccbc7a",
       "comment": "",
@@ -641,6 +669,13 @@
       "target": "/",
       "targets": [],
       "value": ""
+    }, {
+      "id": "6f2150d8-c2c9-4fe0-a804-49b32f9389cb",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=contents",
+      "targets": [],
+      "value": "5000"
     }, {
       "id": "277d0f7d-adc3-40f7-856a-1332a496b252",
       "comment": "",
@@ -762,6 +797,13 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "3e117900-7634-4389-8358-5a42c077df06",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=contents",
+      "targets": [],
+      "value": "5000"
+    }, {
       "id": "fe39817a-8c7c-471f-809d-9289dfd0279d",
       "comment": "",
       "command": "click",
@@ -845,6 +887,13 @@
       "target": "https://reserveontime.com/html_manager/",
       "targets": [],
       "value": ""
+    }, {
+      "id": "fce05159-6c67-422b-b6c9-78c7c4460df2",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "id=contents",
+      "targets": [],
+      "value": "5000"
     }, {
       "id": "5e3441bc-af71-49d3-8518-921d828a861a",
       "comment": "",
