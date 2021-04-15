@@ -18,14 +18,14 @@ $('.clockpicker').clockpicker({
 });
 
 var loadercount = {
-  value: 0,
-  set plus(value) {
-    this.value += value;
-    if(this.value == 4){
-        $('#loading').fadeOut( "slow" );
-        $('#contents').removeAttr('hidden');
+    value: 0,
+    set plus(value) {
+        this.value += value;
+        if (this.value == 4) {
+            $('#loading').fadeOut("slow");
+            $('#contents').removeAttr('hidden');
+        }
     }
-  }
 }
 
 const submitButton = document.getElementById('search-button');
