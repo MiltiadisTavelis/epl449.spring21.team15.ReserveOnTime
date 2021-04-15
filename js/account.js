@@ -4,11 +4,22 @@ $('.datepicker').datepicker({
     format: 'dd/mm/yyyy',
     weekStart: 1,
     maxViewMode: 2,
+    endDate: "today",
     autoclose: true,
     clearBtn: true,
-    endDate: "today",
     startView: 2
 });
+
+var loadercount = {
+  value: 0,
+  set plus(value) {
+    this.value += value;
+    if(this.value == 1){
+        $('#loading').fadeOut( "slow" );
+        $('#contents').removeAttr('hidden');
+    }
+  }
+}
 
 loadDet();
 
@@ -83,6 +94,7 @@ function loadDet() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);

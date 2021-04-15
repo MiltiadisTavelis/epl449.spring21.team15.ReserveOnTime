@@ -17,6 +17,17 @@ $('.clockpicker').clockpicker({
     donetext: ''
 });
 
+var loadercount = {
+  value: 0,
+  set plus(value) {
+    this.value += value;
+    if(this.value == 4){
+        $('#loading').fadeOut( "slow" );
+        $('#contents').removeAttr('hidden');
+    }
+  }
+}
+
 const submitButton = document.getElementById('search-button');
 submitButton.onclick = search;
 
@@ -103,6 +114,7 @@ function loadShopSection(xhr, sectionId) {
     } else {
         popUpMessage("There was an unexpected error when loading the shops", "danger")
     }
+    loadercount.plus = 1;
 }
 
 function loadShopTypes() {
@@ -126,6 +138,7 @@ function loadShopTypes() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
 
     xhr.withCredentials = true;

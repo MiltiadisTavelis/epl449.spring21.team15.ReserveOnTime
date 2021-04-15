@@ -25,6 +25,9 @@
     <script type="text/javascript" src="../js/account.js" defer></script>
 </head>
 <body>
+    <div id="loading" class="animate__fadeIn">
+        <img id="loading-image" src="../images/loading.gif" alt="Loading..." />
+    </div>
     <nav class="navbar fixed-top navbar-expand-md navbar-dark">
         <a href="index.html"><p class="navbar-brand animate__animated animate__fadeIn">Reserve On Time</p></a>
         <button class="navbar-toggler">
@@ -51,7 +54,7 @@
         </div>
     </nav>
     <div class="container-fluid h-100">
-        <div id="contents" class="container w-75">
+        <div id="contents" class="container w-75" hidden>
             <div id="heading" class="animate__animated animate__fadeIn animate__slow">
                 <h1>Account Settings</h1>
             </div>

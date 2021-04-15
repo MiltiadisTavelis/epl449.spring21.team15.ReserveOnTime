@@ -15,6 +15,17 @@ $('.clockpicker').clockpicker({
     donetext: ''
 });
 
+var loadercount = {
+  value: 0,
+  set plus(value) {
+    this.value += value;
+    if(this.value == 8){
+        $('#loading').fadeOut( "slow" );
+        $('#contents').removeAttr('hidden');
+    }
+  }
+}
+
 var myRating = 1;
 var shopname;
 var url = window.location.href;
@@ -84,6 +95,7 @@ function loadHours() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);
@@ -114,6 +126,7 @@ function isfull() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);
@@ -177,6 +190,7 @@ function loadShopContent() {
 
             var name = document.getElementById("shop-name");
             if (response.hasOwnProperty('NoShopsFound')) {
+                loadercount.plus = 1;
                 var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
                 displayMessage.innerHTML = "Null Shop";
@@ -192,6 +206,7 @@ function loadShopContent() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);
@@ -213,6 +228,7 @@ function loadShopPhotos() {
             var response = JSON.parse(xhr.responseText);
 
             if (response.hasOwnProperty('status')) {
+                loadercount.plus = 1;
                 /*var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
                 displayMessage.innerHTML = "Null Shop";
@@ -302,6 +318,7 @@ function loadShopPhotos() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);
@@ -318,6 +335,7 @@ function loadLogo(){
     str1 = "../images/shop_logos/";
     str2 = id;
     logo.setAttribute("src", str1.concat(str2));
+    loadercount.plus = 1;
 }
 
 function loadThumbnail(){
@@ -327,6 +345,7 @@ function loadThumbnail(){
     str1 = "../images/shop_thumbnails/";
     str2 = id;
     thumbnail.setAttribute("src", str1.concat(str2));
+    loadercount.plus = 1;
 }
 
 
@@ -356,6 +375,7 @@ function loadReviews() {
             main.appendChild(newreview);
 
             if (response.hasOwnProperty('NoReviewsFound')) {
+                loadercount.plus = 1;
                 var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
                 displayMessage.innerHTML = "There are no Reviews on the Shop.";
@@ -415,6 +435,7 @@ function loadReviews() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
         var line = document.createElement('hr');
         line.classList.add('rate-hr');
         main.appendChild(line);
@@ -450,6 +471,7 @@ function loadEvents() {
             var main = document.getElementById("events");
 
             if (response.hasOwnProperty('NoEventsFound')) {
+                loadercount.plus = 1;
                 var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
                 displayMessage.innerHTML = "There are no Events on the Shop.";
@@ -525,6 +547,7 @@ function loadEvents() {
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
         var line = document.createElement('hr');
         line.classList.add('rate-hr');
         main.appendChild(line);
