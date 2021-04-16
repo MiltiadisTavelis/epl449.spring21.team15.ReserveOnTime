@@ -37,10 +37,11 @@
 				return -1;
 			}
 			
-			date_default_timezone_set('GMT');
-			$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
-			$time = date("Y-m-d H:m:s",time()+(2*60*60)); //GMT+2 (CYPRUS)
-			$time2 = date("Y-m-d",time()+(2*60*60)); //GMT+2 (CYPRUS)
+			date_default_timezone_set('Europe/Athens');
+			$now = new DateTime("now", new DateTimeZone('Europe/Athens'));
+			$day = $now->format('N');
+			$time = $now->format('Y-m-d H:i:s');
+			$time2 = $now->format('Y-m-d');
 
 			if($this->today == "1"){
 				$sql .= 'AND RESERVATIONS.day >= "'.$time.'" AND DATE(RESERVATIONS.day) = "'.$time2.'" ';
@@ -147,8 +148,26 @@
 			return false;
 		}
 
+		private function check_nextday($d,$t){
+			$sql = 'SELECT SHOP_HOURS.open,SHOP_HOURS.close FROM SHOP_HOURS WHERE SHOP_HOURS.day = "'.$d.'" AND SHOP_HOURS.shopid = '.$this->shopid;
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				$result = $stmt->get_result();
+				while($row = $result->fetch_assoc()) {
+    				if(strtotime($row["open"])>strtotime($row["close"]) && strtotime($row["close"])>strtotime($t)){
+    					return true;
+    				}
+  				}
+  				return false;
+			}
+		}
+
 		public function check_time($t,$d){
-			$sql = 'SELECT * FROM SHOP_HOURS WHERE SHOP_HOURS.open <= "'.$t.'" AND SHOP_HOURS.close > "'.$t.'" AND SHOP_HOURS.day = "'.$d.'" AND SHOP_HOURS.shopid = '.$this->shopid;
+			if($this->check_nextday($d,$t)){
+				return true;
+			}else{
+				$sql = 'SELECT * FROM SHOP_HOURS WHERE SHOP_HOURS.open <= "'.$t.'" AND SHOP_HOURS.close > "'.$t.'" AND SHOP_HOURS.day = "'.$d.'" AND SHOP_HOURS.shopid = '.$this->shopid;
+			}
 			$stmt = $this->conn->prepare($sql);
 			if($stmt->execute()){
 				$result = $stmt->get_result();
@@ -182,7 +201,7 @@
 
 		//CREATE NEW RESERVATION
 		public function create_rsrv(){
-			date_default_timezone_set('GMT');
+			date_default_timezone_set('Europe/Athens');
 			$day = date('N', strtotime(date($this->day))); //DAY NUMBER MON=1 .. 
 			if($this->check_time($this->res_time,$day)){
 				//if($this->check_available($this->res_time,$day,ceil($this->people/4))){

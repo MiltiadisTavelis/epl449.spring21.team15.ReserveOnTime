@@ -70,16 +70,19 @@
 			//     $where[] = 'ORDER BY reg_date DESC';
 			// }
 
+			date_default_timezone_set('Europe/Athens');
+			$now = new DateTime("now", new DateTimeZone('Europe/Athens'));
+
 			if(isset($this->open) && $this->open == 1){
-				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
-				$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
+				$day = $now->format('N');
+				$time = $now->format('H:i:s');
 				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'"';
 			}else if(isset($this->open) && $this->open == 0){
-				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
-				$time = gmdate("H:i:s", time()+(2*60*60)); //GMT+2 (CYPRUS)
+				$day = $now->format('N');
+				$time = $now->format('H:i:s');
 				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND NOT (SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'") AND SHOPS.id NOT IN (SELECT DISTINCT shopid FROM SHOPS,SHOP_HOURS WHERE SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$time.'" AND SHOP_HOURS.close>= "'.$time.'")';
 			}else if(isset($this->checkTime) && !isset($this->checkDay)){
-				$day = date('N', strtotime(date('l'))); //DAY NUMBER MON=1 .. 
+				$day = $now->format('N');
 				$where[] = 'SHOPS.id = SHOP_HOURS.shopid AND SHOP_HOURS.day = '.$day.' AND SHOP_HOURS.open<= "'.$this->checkTime.'" AND SHOP_HOURS.close>= "'.$this->checkTime.'"';
 			}else if(isset($this->checkTime) && isset($this->checkDay)){
 				$day = date('N', strtotime($this->checkDay)); //DAY NUMBER MON=1 .. 
@@ -400,12 +403,56 @@
 			}
 		}
 
+		//CHECK HOURS FOR CONFLICTS
+		private function check_range($range){
+			$midnight = false;
+			for ($i=0; $i < count($range); $i++) { 
+				$open = $range[$i]['open'];
+				$close = $range[$i]['close'];
+				for ($j=0; $j < count($range); $j++) {
+					if($j == $i){
+						continue;
+					}
+					$open2 = $range[$j]['open'];
+					$close2 = $range[$j]['close'];
+					if(strtotime($open)<=strtotime($close) && strtotime($open2)<=strtotime($close2)){
+						if((strtotime($open)<strtotime($close2) && strtotime($open2)<strtotime($close)||(strtotime($open2)<strtotime($close) && strtotime($open)<strtotime($close2)))){
+							return "2";
+						}
+					}else if(strtotime($open)>strtotime($close) && strtotime($open2)<=strtotime($close2)){
+						if(strtotime($close) <= strtotime("06:00:00")){
+							if(strtotime($close2) > strtotime($open)){
+								return "2";
+							}
+						}else{
+							return "3";
+						}
+					}else if(strtotime($open)<=strtotime($close) && strtotime($open2)>strtotime($close2)){
+						if(strtotime($close2) <= strtotime("06:00:00")){
+							if(strtotime($close) > strtotime($open2)){
+								return "2";
+							}
+						}else{
+							return "3";
+						}
+					}else{
+						return "4";
+					}
+				}
+			}
+			return true;
+		}
+
 		//ADD NEW HOUR
 		public function addhour($arr){
 		   	$sql = 'DELETE FROM SHOP_HOURS WHERE SHOP_HOURS.shopid = '.$arr['shop_id'].'; INSERT INTO SHOP_HOURS (`shopid`, `open`, `close`, `day`,`split`,`active`) VALUES ';
 
 		   	for($j=0; $j < count($arr['data']) ; $j++){
 		   		$data = $arr['data'][$j];
+		   		$results = $this->check_range($data['hours']);
+		   		if($results != "1"){
+		   			return array($results,$data['day']);
+		   		}
 			   	for ($i=0; $i < count($data['hours']) ; $i++) { 
 			   		$open = $data['hours'][$i]['open'];
 			   		$close = $data['hours'][$i]['close'];
