@@ -10,6 +10,7 @@ $('.datepicker').datepicker({
     startView: 2
 });
 
+$('#loading').hide().fadeIn();
 var loadercount = {
   value: 0,
   set plus(value) {

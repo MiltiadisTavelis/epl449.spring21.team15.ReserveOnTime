@@ -20,6 +20,7 @@ $('.clockpicker').clockpicker({
     placement: 'bottom'
 });
 
+$('#loading').hide().fadeIn();
 var loadercount = {
   value: 0,
   set plus(value) {

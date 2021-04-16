@@ -3,6 +3,7 @@ checkSession("m", true)
 var image_type, image_length, w, h = null;
 var cnt = 0;
 
+$('#loading').hide().fadeIn();
 var loadercount = {
   value: 0,
   set plus(value) {
