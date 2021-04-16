@@ -154,31 +154,35 @@
 			if($stmt->execute()){
 				$result = $stmt->get_result();
 				while($row = $result->fetch_assoc()) {
-    				if(strtotime($row["open"])>strtotime($row["close"]) && strtotime($row["close"])>strtotime($t)){
-    					return true;
+    				if(strtotime($row["open"])>strtotime($row["close"])){
+    					if(strtotime($row["close"])>strtotime($t)){
+    						return true;
+    					}else if(strtotime($row["open"]) <= strtotime($t)){
+							return true;
+						}
     				}
   				}
   				return false;
 			}
+			return false;
 		}
 
 		public function check_time($t,$d){
 			if($this->check_nextday($d,$t)){
 				return true;
 			}else{
-				$sql = 'SELECT * FROM SHOP_HOURS WHERE SHOP_HOURS.open <= "'.$t.'" AND SHOP_HOURS.close > "'.$t.'" AND SHOP_HOURS.day = "'.$d.'" AND SHOP_HOURS.shopid = '.$this->shopid;
-			}
-			$stmt = $this->conn->prepare($sql);
-			if($stmt->execute()){
-				$result = $stmt->get_result();
-				$count = mysqli_num_rows($result);
-				if($count == "1"){					
-					return true;
-				}else{
-					return false;
+				$sql = 'SELECT SHOP_HOURS.open,SHOP_HOURS.close FROM SHOP_HOURS WHERE SHOP_HOURS.day = "'.$d.'" AND SHOP_HOURS.shopid = '.$this->shopid;
+				$stmt = $this->conn->prepare($sql);
+				if($stmt->execute()){
+					$result = $stmt->get_result();
+					while($row = $result->fetch_assoc()) {
+	    				if(strtotime($row["open"])<=strtotime($row["close"]) && strtotime($row["close"])>strtotime($t) && strtotime($row["open"])<=strtotime($t)){
+	    					return true;
+	    				}
+	  				}
+	  				return false;
 				}
-			}else{
-				printf("Error: %s.\n",$stmt->error);
+				return false;
 			}
 		}
 
