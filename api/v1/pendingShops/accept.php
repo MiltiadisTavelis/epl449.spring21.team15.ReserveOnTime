@@ -1,6 +1,4 @@
 <?php
-	header('Access-Control-Allow-Methods: PUT');
-
 	if(count(get_included_files()) == 1){
 		echo json_encode(array('status' => 'Bad Request'));
 		return;
@@ -17,8 +15,8 @@
 
 	$pshop->id = $data->id;
 
-	if($pshop->delete_pendingShop()){
-		$msg['message'] = 'Successfully Deleted';
+	if($pshop->accept_pendingShop()){
+		$msg['message'] = 'Successfully Accepted';
 		echo json_encode($msg);
 	}else{
 		$msg['status'] = 'Server Error. Please try again.';

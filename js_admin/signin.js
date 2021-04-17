@@ -6,7 +6,7 @@ function submit() {
     //var remember = document.getElementById('remember-me');
     var xhr = new XMLHttpRequest();
     var data = {
-        "type": "session/manager",
+        "type": "session/admin",
         "email": email.value,
         "password": pass.value
     };
@@ -23,6 +23,7 @@ function submit() {
                     window.location = "index.html";
                 }, 1000);
             }
+            
         } else {
             popUpMessage("Unexpected error", "danger");
         }

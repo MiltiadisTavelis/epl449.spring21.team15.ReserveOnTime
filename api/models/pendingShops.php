@@ -63,7 +63,6 @@
 			if($stmt->execute()){
 				return true;
 			}else{
-				printf("Error: %s.\n",$stmt->error);
 				return false;
 			}
 		}
@@ -80,6 +79,17 @@
 	           	$result = mysqli_stmt_get_result($stmt);
 	          	return $result;
 	        }
+		}
+
+		//GET ALL PENDING SHOPS
+		public function accept_pendingShop(){
+			$sql = "UPDATE PENDING_SHOPS SET accepted = 1 WHERE PENDING_SHOPS.id = ".$this->id;
+			$stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				return true;
+			}else{
+				return false;
+			}
 		}
 	}	
 ?>

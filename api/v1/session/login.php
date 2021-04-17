@@ -21,19 +21,18 @@
 
 	if(!$session->islogin()){
 		$result = $session->login();
-        $msg['status'] = $result;
         if($result == "1") {
             $msg['message'] = 'Welcome '.$_SESSION['user_name']. '!';
             echo json_encode($msg);
         } else {
             if($result == "0"){
-                $msg['message'] = 'Wrong email or password';
+                $msg['status'] = 'Wrong email or password';
                 echo json_encode($msg);
             }elseif($result == "3"){
-                $msg['message'] = 'Please verify your account';
+                $msg['status'] = 'Please verify your account';
                 echo json_encode($msg);
             }else{
-                $msg['message'] = 'Server Error! Please try again';
+                $msg['status'] = 'Server Error! Please try again';
                 echo json_encode($msg);
             }
         }

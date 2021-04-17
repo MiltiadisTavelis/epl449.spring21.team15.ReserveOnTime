@@ -20,7 +20,7 @@
 	$session->password = hash("sha256", $data['password']);
 
 	if(!$session->islogin()){
-		$result = $session->mlogin();
+		$result = $session->alogin();
         if($result == "1") {
             $msg['message'] = 'Welcome '.$_SESSION['user_name']. '!';
             echo json_encode($msg);
@@ -32,7 +32,7 @@
                 $msg['status'] = 'Please verify your account';
                 echo json_encode($msg);
             }elseif($result == "4"){
-                $msg['status'] = 'No manager account found!';
+                $msg['status'] = 'Not Authorised!';
                 echo json_encode($msg);
             }else{
                 $msg['status'] = 'Server Error! Please try again';

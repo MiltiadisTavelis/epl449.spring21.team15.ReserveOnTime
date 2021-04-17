@@ -218,6 +218,8 @@
 				include 'session/login.php';
 			}elseif((strcasecmp($type, 'session/manager') == 0) && (count($data) == 2) && (isset($data['email'],$data['password']) != 0)){
 				include 'session/manager.php';
+			}elseif((strcasecmp($type, 'session/admin') == 0) && (count($data) == 2) && (isset($data['email'],$data['password']) != 0)){
+				include 'session/admin.php';
 			}elseif((strcasecmp($type, 'session/logout') == 0) && (count($data) == 0)){
 				include 'session/logout.php';
 			}elseif((strcasecmp($type, 'session/islogin') == 0) && (count($data) == 0)){
@@ -310,6 +312,20 @@
 				include 'reservations/update.php';
 			}elseif((strcasecmp($type, 'reservations/status') == 0) && (count($data) == 2) && (isset($data['id'],$data['status']) != 0)){
 				include 'reservations/status.php';
+			}else{
+				echo $error;
+				http_response_code(400);
+			}
+
+		}elseif((strcasecmp(explode("/", $data['type'])[0],'pendingShops')) == 0){
+			include_once '../config/config.php';
+			include_once '../models/pendingShops.php';
+			$type = $data['type'];
+			unset($data['type']);
+
+			//UPDATE RESERVATION
+			if((strcasecmp($type, 'pendingShops/accept') == 0) && (count($data) == 1) && (isset($data['id']) != 0)){
+				include 'pendingShops/accept.php';
 			}else{
 				echo $error;
 				http_response_code(400);

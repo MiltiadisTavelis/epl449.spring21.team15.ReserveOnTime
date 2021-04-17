@@ -34,7 +34,9 @@
 				'postcode' => $postcode,
 				'shop_pcode' => $phone_code2,
 				'shop_number' => $shop_number,
-				'shop_email' => $shop_email
+				'shop_email' => $shop_email,
+				'id' => $id,
+				'accepted' => $accepted
 			);
 			array_push($json['Shops'], $shop);
 		}
