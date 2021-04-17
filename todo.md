@@ -85,7 +85,7 @@ REVIEWS 5
 - [x] Delete review (type: reviews/delete) DELETE 
 
 
-EVENTS 4
+EVENTS 5
 - [x] Display events by shop id (type: events/shop) POST 
 - [x] Add event (type: events/create) POST 
 - [x] Display event details by event id (type: events/event) POST 

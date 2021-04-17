@@ -290,6 +290,7 @@ function loadPage() {
             let response = JSON.parse(xhr.responseText)
 
             if (response.hasOwnProperty("NoShopsFound")) {
+                loadercount.plus = 1;
                 let div = document.createElement("div")
                 div.setAttribute("class", "alert alert-dark text-center")
                 div.textContent = "There are no pending Shops."
