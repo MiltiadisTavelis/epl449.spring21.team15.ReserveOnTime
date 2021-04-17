@@ -290,19 +290,18 @@ function loadPage() {
             let response = JSON.parse(xhr.responseText)
 
             if (response.hasOwnProperty("NoShopsFound")) {
-                loadercount.plus = 1;
                 let div = document.createElement("div")
                 div.setAttribute("class", "alert alert-dark text-center")
                 div.textContent = "There are no pending Shops."
                 let contents = document.getElementById("contents")
                 contents.appendChild(div)
-            } else {
-                loadercount.plus = 1;
+            } else { 
                 loadAdminPendingShopsSection(response["Shops"]);
             }
         } else {
             popUpMessage("Can't load pending Shops. There was an unexpected error", "danger")
         }
+        loadercount.plus = 1;
     }
 
     xhr.withCredentials = true
