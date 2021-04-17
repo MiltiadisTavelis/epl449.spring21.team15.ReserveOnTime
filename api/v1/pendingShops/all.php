@@ -11,7 +11,9 @@
 	$database = new Connection();
 	$db = $database->connect();
 	$pshop = new Pending_Shop($db);
-
+	if(isset($data['id'])){
+		$pshop->id = $data['id'];
+	}
 	$results = $pshop->pendingShops();
 	$cnt = mysqli_num_rows($results);
 	$json = array();

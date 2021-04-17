@@ -25,13 +25,6 @@ function createManagerReservationEntry() {
         tr.setAttribute("id", "request-" + pendingShop.id)
     }
 
-    let customerName = document.createElement("td")
-    customerName.textContent = pendingShop.fname + " " + pendingShop.lname
-    tr.appendChild(customerName)
-
-    let customerGender = document.createElement("td")
-    customerGender.textContent = pendingShop.gender
-    tr.appendChild(customerGender)
 
     let customerPcode = document.createElement("td")
     customerPcode.textContent = pendingShop.pcode
@@ -53,121 +46,199 @@ function createManagerReservationEntry() {
     shopType.textContent = pendingShop.stype
     tr.appendChild(shopType)
 
-    let shopCity = document.createElement("td")
-    shopCity.textContent = pendingShop.city
-    tr.appendChild(shopCity)
+    let info = document.createElement("td")
+    let infoBtn = document.createElement("button")
+    infoBtn.textContent = "Info"
+    infoBtn.classList.add("btn","btn-primary")
+    infoBtn.setAttribute("data-toggle","modal")
+    infoBtn.setAttribute("data-target","#shop-info")
+    infoBtn.setAttribute("id","info-" + pendingShop.id)
 
-    let shopProvince = document.createElement("td")
-    shopProvince.textContent = pendingShop.province
-    tr.appendChild(shopProvince)
-
-    let shopAddress = document.createElement("td")
-    shopAddress.textContent = pendingShop.address
-    tr.appendChild(shopAddress)
-
-    let shopPostal = document.createElement("td")
-    shopPostal.textContent = pendingShop.postcode
-    tr.appendChild(shopPostal)
-
-    let shopPhonecode = document.createElement("td")
-    shopPhonecode.textContent = pendingShop.shop_pcode
-    tr.appendChild(shopPhonecode)
-
-    let shopPhone = document.createElement("td")
-    shopPhone.textContent = pendingShop.shop_number
-    tr.appendChild(shopPhone)
-
-    let shopEmail = document.createElement("td")
-    shopEmail.textContent = pendingShop.shop_email
-    tr.appendChild(shopEmail)
-
-
-    if (pendingShop.accepted === 0) {
-        let decision = document.createElement("td")
-        let acceptBtn = document.createElement("button")
-        acceptBtn.textContent = "Accept"
-        acceptBtn.setAttribute("class", "btn btn-sm btn-success btn-accept")
-        acceptBtn.setAttribute("id", "accept-" + pendingShop.id)
-        acceptBtn.setAttribute("type", "button")
-        acceptBtn.onclick = function() {
+    infoBtn.onclick = function() {
 
             let xhr = new XMLHttpRequest()
             let pendingShopId = this.id.split("-")[1]
 
             let data = {
-                "type": "pendingShops/accept",
+                "type": "pendingShops/all",
                 "id": pendingShopId
             }
 
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     let response = JSON.parse(xhr.responseText)
-                    if (response.hasOwnProperty("status")) {
-                        popUpMessage(response['status'], "danger")
+                    if (response.hasOwnProperty("Shops")) {
+                        let shop = response['Shops'][0];
+
+                        let body = document.getElementById("modal-body")
+
+                        let p = document.createElement("p")
+                        p.textContent = "First name: " + shop['fname']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Last name: " + shop['lname']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Gender: " + shop['gender']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Phone code: " + shop['phone_code']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Number: " + shop['number']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Personal Email: " + shop['personal_email']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Shop name: " + shop['sname']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Shop type: " + shop['stype']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Shop city: " + shop['city']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Shop province: " + shop['province']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Shop address: " + shop['address']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Shop zipcode: " + shop['postcode']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Shop phone code: " + shop['phone_code2']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Shop number: " + shop['shop_number']
+                        body.appendChild(p)
+
+                        p = document.createElement("p")
+                        p.textContent = "Shop email: " + shop['shop_email']
+                        body.appendChild(p)
+
+                        let options = document.getElementById("options")
+
+                    if (shop['accepted'] === 0) {
+                        let acceptBtn = document.createElement("button")
+                        acceptBtn.textContent = "Accept"
+                        acceptBtn.setAttribute("class", "btn btn-sm btn-success btn-accept")
+                        acceptBtn.setAttribute("id", "accept-" + pendingShop.id)
+                        acceptBtn.setAttribute("type", "button")
+                        acceptBtn.onclick = function() {
+
+                            let xhr = new XMLHttpRequest()
+                            let pendingShopId = this.id.split("-")[1]
+
+                            let data = {
+                                "type": "pendingShops/accept",
+                                "id": pendingShopId
+                            }
+
+                            xhr.onload = function() {
+                                if (xhr.status === 200) {
+                                    let response = JSON.parse(xhr.responseText)
+                                    if (response.hasOwnProperty("status")) {
+                                        popUpMessage(response['status'], "danger")
+                                    }else{
+                                        popUpMessage(response['message'], "success")
+                                        setTimeout(function() {
+                                            window.location.reload()
+                                        }, 2000);
+                                    }
+                                } else {
+                                    popUpMessage("Couldn't accept pending Shop", "danger")
+                                }
+                            }
+
+                            xhr.withCredentials = true
+                            xhr.open('PUT', api)
+                            xhr.setRequestHeader('Content-Type', 'application/json')
+                            xhr.send(JSON.stringify(data))
+                        }
+                        options.appendChild(acceptBtn);
+
+                    } else {
+                        let cancelBtn = document.createElement("button")
+                        cancelBtn.textContent = "Delete"
+                        cancelBtn.setAttribute("class", "btn btn-sm btn-dark btn-cancel")
+                        cancelBtn.setAttribute("id", "request-" + pendingShop.id)
+                        cancelBtn.setAttribute("type", "button")
+                        cancelBtn.onclick = function() {
+                            let xhr = new XMLHttpRequest()
+
+                            let pendingShopId = this.id.split("-")[1]
+
+                            let data = {
+                                "type": "pendingShops/delete",
+                                "id": pendingShopId
+                            }
+
+                            xhr.onload = function() {
+                                if (xhr.status === 200) {
+                                    let response = JSON.parse(xhr.responseText)
+                                    if (response.hasOwnProperty("status")) {
+                                        popUpMessage(response['status'], "danger")
+                                    }else{
+                                        popUpMessage(response['message'], "success")
+                                        setTimeout(function() {
+                                            window.location.reload()
+                                        }, 2000);
+                                    }
+                                } else {
+                                    popUpMessage("Couldn't delete pending Shop", "danger")
+                                }
+                            }
+
+                            xhr.withCredentials = true
+                            xhr.open('DELETE', api)
+                            xhr.setRequestHeader('Content-Type', 'application/json')
+                            xhr.send(JSON.stringify(data))
+                        }
+                        options.appendChild(cancelBtn);
+                    }
+
                     }else{
-                        popUpMessage(response['message'], "success")
-                        setTimeout(function() {
-                            window.location.reload()
-                        }, 2000);
+                        popUpMessage("No info found", "danger")
                     }
                 } else {
-                    popUpMessage("Couldn't accept pending Shop", "danger")
+                    popUpMessage("Couldn't load pending Shop info", "danger")
                 }
             }
 
             xhr.withCredentials = true
-            xhr.open('PUT', api)
+            xhr.open('POST', api)
             xhr.setRequestHeader('Content-Type', 'application/json')
             xhr.send(JSON.stringify(data))
         }
 
-        decision.appendChild(acceptBtn)
-        tr.appendChild(decision)
-    } else {
-        let cancellation = document.createElement("td")
-        let cancelBtn = document.createElement("button")
-        cancelBtn.textContent = "Delete"
-        cancelBtn.setAttribute("class", "btn btn-sm btn-dark btn-cancel")
-        cancelBtn.setAttribute("id", "request-" + pendingShop.id)
-        cancelBtn.setAttribute("type", "button")
-        cancelBtn.onclick = function() {
-            let xhr = new XMLHttpRequest()
-
-            let pendingShopId = this.id.split("-")[1]
-
-            let data = {
-                "type": "pendingShops/delete",
-                "id": pendingShopId
-            }
-
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    let response = JSON.parse(xhr.responseText)
-                    if (response.hasOwnProperty("status")) {
-                        popUpMessage(response['status'], "danger")
-                    }else{
-                        popUpMessage(response['message'], "success")
-                        setTimeout(function() {
-                            window.location.reload()
-                        }, 2000);
-                    }
-                } else {
-                    popUpMessage("Couldn't delete pending Shop", "danger")
-                }
-            }
-
-            xhr.withCredentials = true
-            xhr.open('DELETE', api)
-            xhr.setRequestHeader('Content-Type', 'application/json')
-            xhr.send(JSON.stringify(data))
-        }
-
-        cancellation.appendChild(cancelBtn)
-        tr.appendChild(cancellation)
-    }
+    info.appendChild(infoBtn)
+    tr.appendChild(info)
 
     return tr
 }
+
+$('#shop-info').on('hidden.bs.modal', function() {
+    let body = document.getElementById("modal-body")
+    body.innerHTML = '';
+    let options = document.getElementById("options")
+    options.innerHTML = '';
+});
 
 function loadAdminPendingShopsSection(s) {
     section = document.getElementById("accepted")
@@ -177,7 +248,7 @@ function loadAdminPendingShopsSection(s) {
     let headerTitle = document.createElement("h4")
     headerTitle.textContent = "Accepted";
     header.appendChild(headerTitle)
-    let table = createBootstrapTable("Accepted", ["Name", "Gender", "Phone Code", "Phone #", "Personal Email", "Shop name", "Shop type", "City", "Province", "Address", "Zipcode", "Shop Phone Code", "Shop number", "Shop email"])
+    let table = createBootstrapTable("Accepted", ["Phone Code", "Phone #", "Personal Email", "Shop name", "Shop type"])
     for (entry in s) {
        if(s[entry].accepted == 1){
             table.tBodies[0].appendChild(createManagerReservationEntry(s[entry],true))
@@ -196,7 +267,7 @@ function loadAdminPendingShopsSection(s) {
     headerTitle.textContent = "Requests";
     header.appendChild(headerTitle)
 
-    table = createBootstrapTable("Requests", ["Name", "Gender", "Phone Code", "Phone #", "Personal Email", "Shop name", "Shop type", "City", "Province", "Address", "Zipcode", "Shop Phone Code", "Shop number", "Shop email"])
+    table = createBootstrapTable("Requests", ["Phone Code", "Phone #", "Personal Email", "Shop name", "Shop type"])
     for (entry in s) {
         if(s[entry].accepted == 0){
             table.tBodies[0].appendChild(createManagerReservationEntry(s[entry]),false)

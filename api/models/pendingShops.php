@@ -69,7 +69,12 @@
 
 		//GET ALL PENDING SHOPS
 		public function pendingShops(){
-			$sql = "SELECT * FROM PENDING_SHOPS";
+			if(isset($this->id)){
+				$sql = "SELECT PENDING_SHOPS.id,PENDING_SHOPS.fname,PENDING_SHOPS.lname,PENDING_SHOPS.gender, PENDING_SHOPS.phone_code, PENDING_SHOPS.number, PENDING_SHOPS.personal_email, PENDING_SHOPS.sname, PENDING_SHOPS.stype, CITIES.name as city, PENDING_SHOPS.province, PENDING_SHOPS.address, PENDING_SHOPS.postcode, PENDING_SHOPS.phone_code2, PENDING_SHOPS.shop_number, PENDING_SHOPS.shop_email, PENDING_SHOPS.accepted FROM PENDING_SHOPS,CITIES WHERE CITIES.id = PENDING_SHOPS.city AND PENDING_SHOPS.id = ".$this->id;	
+			}else{
+				$sql = "SELECT PENDING_SHOPS.id,PENDING_SHOPS.fname,PENDING_SHOPS.lname,PENDING_SHOPS.gender, PENDING_SHOPS.phone_code, PENDING_SHOPS.number, PENDING_SHOPS.personal_email, PENDING_SHOPS.sname, PENDING_SHOPS.stype, CITIES.name as city, PENDING_SHOPS.province, PENDING_SHOPS.address, PENDING_SHOPS.postcode, PENDING_SHOPS.phone_code2, PENDING_SHOPS.shop_number, PENDING_SHOPS.shop_email, PENDING_SHOPS.accepted FROM PENDING_SHOPS,CITIES WHERE CITIES.id = PENDING_SHOPS.city";
+			}
+			
 			$stmt = $this->conn->prepare($sql);
 	        if(!mysqli_stmt_prepare($stmt,$sql)){
 	            echo "Error";
