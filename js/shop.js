@@ -29,7 +29,7 @@ var loadercount = {
 
 var myRating = 1;
 var shopname;
-var location = "";
+var address = "";
 var url = window.location.href;
 let id = url ? url.split('?').pop() : window.location.search.slice(1);
 
@@ -200,12 +200,12 @@ function loadShopContent() {
                 return;
             }
             shopname = response.sname;
-            location = location.concat(response.street,", ",response.streetnum,", ",response.postal_code,", ",response.city);
+            address = address.concat(response.street,", ",response.streetnum,", ",response.postal_code,", ",response.city);
             name.innerText = response.sname;
             document.getElementById('type').innerText = response.stype;
             document.getElementById('description').innerText = response.description;
             document.getElementById('rating').innerText = response.rating;
-            document.getElementById('location').innerText = location;
+            document.getElementById('address').innerText = address;
 
         } else {
             popUpMessage("There was an unexpected error", "danger");
