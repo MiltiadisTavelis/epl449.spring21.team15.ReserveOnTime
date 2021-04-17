@@ -1,3 +1,9 @@
 h2 {
     font-weight: bold;
 }
+
+.has-table {
+    overflow: auto;
+    margin-bottom: 50px;
+    padding: 0;
+}
