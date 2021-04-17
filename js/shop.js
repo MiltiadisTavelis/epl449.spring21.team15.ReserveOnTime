@@ -200,7 +200,7 @@ function loadShopContent() {
                 return;
             }
             shopname = response.sname;
-            address = address.concat(response.street,", ",response.streetnum,", ",response.postal_code,", ",response.city);
+            address = address.concat(response.street," ",response.streetnum,", ",response.postal_code,", ",response.city);
             name.innerText = response.sname;
             document.getElementById('type').innerText = response.stype;
             document.getElementById('description').innerText = response.description;
