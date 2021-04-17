@@ -598,11 +598,13 @@ function addReview() {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
 
-            if (response.hasOwnProperty('status')) {
-                popUpMessage(response['status'], "danger");
+            if (response.hasOwnProperty('NotOnline')) {
+                popUpMessage(response['NotOnline'], "danger");
                 window.setTimeout(function() {
                     window.location = "signin.html";
-                }, 1000);
+                }, 2000);
+            }else if (response.hasOwnProperty('status')) {
+                popUpMessage(response['status'], "danger");
             } else if (response.hasOwnProperty('message')) {
                 popUpMessage(response['message'], "success");
                 setTimeout(function() {
