@@ -233,10 +233,6 @@ function loadShopPhotos() {
 
             if (response.hasOwnProperty('status')) {
                 loadercount.plus = 1;
-                /*var displayMessage = document.createElement("div");
-                displayMessage.classList.add('alert', 'alert-dark');
-                displayMessage.innerHTML = "Null Shop";
-                name.appendChild(displayMessage);*/
                 return;
             }
             var carousel = document.createElement("div");
