@@ -148,7 +148,13 @@ download.addEventListener('click', function() {
                 popUpMessage(response['status'], "danger");
                 return;
             }
-            window.open(response['message'], '_blank');
+            var link = document.createElement("a");
+            link.download = "data.zip";
+            link.href = response['message'];
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            delete link;
         } else {
             popUpMessage("Unexpected error", "danger");
         }
