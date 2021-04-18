@@ -148,7 +148,7 @@ download.addEventListener('click', function() {
                 popUpMessage(response['status'], "danger");
                 return;
             }
-            popUpMessage(response['message'], "success");
+            window.open(response['message'], '_blank');
         } else {
             popUpMessage("Unexpected error", "danger");
         }
@@ -156,6 +156,6 @@ download.addEventListener('click', function() {
 
     xhr.withCredentials = true;
     xhr.open('POST', api);
-    xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }, false);

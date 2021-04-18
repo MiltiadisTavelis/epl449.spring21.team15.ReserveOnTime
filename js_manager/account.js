@@ -131,3 +131,30 @@ reset.addEventListener('click', function() {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }, false);
+
+var download = document.getElementById('download-data');
+
+download.addEventListener('click', function() {
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "users/data"
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response['status'], "danger");
+                return;
+            }
+            window.open(response['message'], '_blank');
+        } else {
+            popUpMessage("Unexpected error", "danger");
+        }
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}, false);

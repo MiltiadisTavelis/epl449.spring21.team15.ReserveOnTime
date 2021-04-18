@@ -7,7 +7,7 @@
     header('content-type: application/json; charset=utf-8');
 
  	$error = json_encode(array('status' => 'Bad Request'));
-	if((strcasecmp($_SERVER['REQUEST_METHOD'], 'POST')) == 0 && (((strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0) || ((isset($_POST['json']) != 0) && (strpos($_SERVER["CONTENT_TYPE"], 'multipart/form-data') !== false)) || (strpos($_SERVER["CONTENT_TYPE"], 'application/octet-stream') !== false))){
+	if((strcasecmp($_SERVER['REQUEST_METHOD'], 'POST')) == 0 && (((strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0) || ((isset($_POST['json']) != 0) && (strpos($_SERVER["CONTENT_TYPE"], 'multipart/form-data') !== false)))){
 
 		$data = json_decode(file_get_contents("php://input"),true);
 

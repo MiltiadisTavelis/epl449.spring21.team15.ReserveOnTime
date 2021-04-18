@@ -10,8 +10,9 @@
 
 	$user->id = $_SESSION['user_id'];
 	$user->page_type = $_SESSION['page_type'];
-	if($user->download_data()){
-		$msg['message'] = 'Downloading...';
+	$results = $user->download_data();
+	if($results != false){
+		$msg['message'] = $results;
 		echo json_encode($msg);
 	}else{
 		$msg['status'] = 'Something went wrong while downloading your data';
