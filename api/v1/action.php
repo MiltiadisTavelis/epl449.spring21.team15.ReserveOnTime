@@ -7,9 +7,10 @@
     header('content-type: application/json; charset=utf-8');
 
  	$error = json_encode(array('status' => 'Bad Request'));
-	if((strcasecmp($_SERVER['REQUEST_METHOD'], 'POST')) == 0 && (((strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0) || ((isset($_POST['json']) != 0) && (strpos($_SERVER["CONTENT_TYPE"], 'multipart/form-data') !== false)))){
+	if((strcasecmp($_SERVER['REQUEST_METHOD'], 'POST')) == 0 && (((strcasecmp($_SERVER["CONTENT_TYPE"], 'application/json')) == 0) || ((isset($_POST['json']) != 0) && (strpos($_SERVER["CONTENT_TYPE"], 'multipart/form-data') !== false)) || (strpos($_SERVER["CONTENT_TYPE"], 'application/octet-stream') !== false))){
 
 		$data = json_decode(file_get_contents("php://input"),true);
+
 		if(isset($_POST['json']) != 0){
 			$data = json_decode($_POST['json'],true);
 		}
@@ -144,6 +145,10 @@
 			//GET SHOP BY USER
 			}elseif((strcasecmp($type, 'users/shop') == 0) && count($data) == 0){
 				include 'users/shop.php';
+
+			//DOWNLOAD USER DATA
+			}elseif((strcasecmp($type, 'users/data') == 0) && count($data) == 0){
+				include 'users/data.php';
 
 			}else{
 				echo $error;

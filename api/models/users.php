@@ -18,6 +18,8 @@
 		public $verify;
 		public $url;
 		public $shop_id;
+		public $page_type;
+		public $data;
 
 		public function __construct($db)
 		{
@@ -32,6 +34,7 @@
 			$stmt->execute();
 			$row = $stmt->get_result();
 			$row = $row->fetch_array(MYSQLI_ASSOC);
+			$this->data = $row;
             $this->fname = $row["fname"];
             $this->lname = $row["lname"];
             $this->phone_code = $row["phone_code"];
@@ -411,6 +414,130 @@
 				printf("Error: %s.\n",$stmt->error);
 				return false;
 			}
+		}
+
+		//DOWNLOAD USER DATA
+		public function download_data(){
+			$this->user();
+			$json['Data'] = array(["User_ID","First_Name","Last_Name","Phone_Code","Phone_#","Email","User_Type","Verify","Gender","Birthday"],$this->data);
+			$res = $this->getReservations();
+			if(isset($res[0])){
+				$array = array(["Day/Time","Num_of_People","Shop_Name","Status"]);
+				foreach($res as $input){
+					array_push($array, $input);
+				}
+				$json['Reservations'] = $array;
+			}
+
+			$reviews = $this->getReviews();
+			if(isset($reviews[0])){
+				$array = array(["Shop_Name","Content","Rating","Submitted"]);
+				foreach($reviews as $input){
+					array_push($array, $input);
+				}
+				$json['Reviews'] = $array;
+			}
+
+			if($this->page_type == "m"){
+			}
+
+			date_default_timezone_set('Europe/Athens');
+			$now = new DateTime("now", new DateTimeZone('Europe/Athens'));
+			$day = $now->format('Ymd');
+			$time = $now->format('His');
+
+			$folder = '../../data/'.$this->id."/";
+
+			if (!file_exists($folder)) {
+    			mkdir($folder, 0777, true);
+			}else{
+				$files = glob($folder.'*'); 
+				foreach($files as $file) {
+				    if(is_file($file)) 
+				        unlink($file); 
+				}
+			}
+
+			$url1 = $folder.$day."_".$time."_userData.csv";
+			$url2 = $folder.$day."_".$time."_reservationData.csv";
+			$url3 = $folder.$day."_".$time."_reviewsData.csv";
+
+			$this->array_to_csv_download($json['Data'],$url1);
+			$this->array_to_csv_download($json['Reservations'],$url2);
+			$this->array_to_csv_download($json['Reviews'],$url3);
+
+			$rootPath = realpath($folder);
+			$zip = new ZipArchive();
+			$zip->open($folder.'data.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE);
+			$files = new RecursiveIteratorIterator(
+			    new RecursiveDirectoryIterator($rootPath),
+			    RecursiveIteratorIterator::LEAVES_ONLY
+			);
+			$filesToDelete = array();
+			foreach ($files as $name => $file){
+			    if (!$file->isDir()){
+			        $filePath = $file->getRealPath();
+			        $relativePath = substr($filePath, strlen($rootPath) + 1);
+			        $zip->addFile($filePath, $relativePath);
+			        $filesToDelete[] = $filePath;
+			    }
+			}
+			$zip->close();
+			chmod($folder."data.zip", 0777);
+
+			foreach ($filesToDelete as $file){
+			    unlink($file);
+			}
+			
+			$file = $folder."data.zip";
+
+			if (file_exists($file)) {
+			    header('Content-Description: File Transfer');
+			    header('Content-Type: application/octet-stream');
+			    header('Content-Disposition: attachment; filename="'.basename($file).'"');
+			    header('Expires: 0');
+			    header('Cache-Control: must-revalidate');
+			    header('Pragma: public');
+			    header('Content-Length: ' . filesize($file));
+			    readfile($file);
+			    exit;
+			}
+
+			return false;
+		}
+
+		private function array_to_csv_download($array,$file) {
+			$output = fopen($file, "wb");
+		  	foreach ($array as $row){
+		   		fputcsv($output, $row, ";");
+		  	}
+		  	fclose($output);
+		} 
+
+		private function getReservations(){
+			$sql = "SELECT RESERVATIONS.day,RESERVATIONS.people,SHOPS.sname,STATUS.status FROM RESERVATIONS,SHOPS,STATUS WHERE RESERVATIONS.shopid = SHOPS.id AND RESERVATIONS.status = STATUS.sid AND RESERVATIONS.userid = ?";
+			$stmt = $this->conn->prepare($sql);
+			$stmt->bind_param('i',$this->id);
+			$stmt->execute();
+			$res = $stmt->get_result();
+			$ret = array();
+			while($row = $res->fetch_array(MYSQLI_ASSOC)){
+				array_push($ret, $row);
+			}
+			return $ret;
+		}
+
+		private function getReviews(){
+			$sql = "SELECT SHOPS.sname,REVIEWS.content, REVIEWS.rating, REVIEWS.sub_date FROM REVIEWS,SHOPS WHERE REVIEWS.shop_id = SHOPS.id AND REVIEWS.uid = ?";
+			$stmt = $this->conn->prepare($sql);
+			$stmt->bind_param('i',$this->id);
+			$stmt->execute();
+			$res = $stmt->get_result();
+			$ret = array();
+			while($row = $res->fetch_array(MYSQLI_ASSOC)){
+				array_push($ret, $row);
+			}
+			return $ret;
 		}
 
 	}
