@@ -1,20 +1,39 @@
 checkSession("u", false)
 
-$('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    weekStart: 1,
-    maxViewMode: 2,
-    autoclose: true,
-    startDate: "today",
-    todayBtn: "linked",
-    clearBtn: true,
-    todayHighlight: true
-});
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
-$('.clockpicker').clockpicker({
-    default: 'now',
-    autoclose: true,
-    donetext: ''
+$('[data-bss-hover-animate]')
+        .mouseenter( function(){ var elem = $(this); elem.addClass('animated ' + elem.attr('data-bss-hover-animate')) })
+        .mouseleave( function(){ var elem = $(this); elem.removeClass('animated ' + elem.attr('data-bss-hover-animate')) });
+
+const picker = new Litepicker({ 
+    element: document.getElementById('date-input'), 
+    format: "DD/MM/YYYY",
+    singleMode: true,
+    minDate: today,
+  });
+
+var time = document.getElementById("time-input");
+var quarter = ["00", "15", "30", "45"];
+for(var i=0; i<24; i++){
+    for(var j=0; j<4; j++){
+        var option = document.createElement("option");
+        if(i<10){
+            option.value = "0"+i+":"+quarter[j];
+        }else{
+            option.value = i+":"+quarter[j];
+        }
+        option.innerText = option.value;
+        time.appendChild(option);
+    }
+}
+
+$(".select2").select2({
+    minimumResultsForSearch: -1,
+    closeOnSelect : true,
+    allowClear: false,
+    tags: true
 });
 
 $('#loading').hide().fadeIn();
@@ -23,8 +42,8 @@ var loadercount = {
   set plus(value) {
     this.value += value;
     if(this.value == 4){
-        $('#loading').fadeOut( "slow" );
-        $('#contents').removeAttr('hidden');
+        $('#loading').fadeOut();
+        $('#contents').removeAttr('hidden').fadeIn("slow");
     }
   }
 }
@@ -91,7 +110,8 @@ function loadShopSection(xhr, sectionId) {
 
             let header = document.createElement("div")
             header.setAttribute("id", sectionId + "-header")
-            let headerTitle = document.createElement("h4")
+            header.classList.add("bottom-border");
+            let headerTitle = document.createElement("h1")
             headerTitle.textContent = title
             header.appendChild(headerTitle)
             if (sectionId === "results") {
@@ -99,11 +119,10 @@ function loadShopSection(xhr, sectionId) {
                 subtextContent.textContent = shops.length + " spots meet the above criteria"
                 header.appendChild(subtextContent)
             }
-            header.appendChild(document.createElement("hr"))
 
             let display = document.createElement("div")
             display.setAttribute("id", sectionId + "-display")
-            display.setAttribute("class", "shop-display")
+            display.setAttribute("class", "shop-card-display")
             for (entry in shops) {
                 display.appendChild(createShopCard(shops[entry]))
             }

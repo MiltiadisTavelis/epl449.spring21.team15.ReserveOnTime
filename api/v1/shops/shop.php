@@ -30,7 +30,8 @@
 			'city' => $shops->city,
 			'city_id' => $shops->city_id,
 			'postal_code' => $shops->pc,
-			'rating' => number_format($shops->avg_rating, 1)
+			'rating' => number_format($shops->avg_rating, 1),
+			'reviewscount' => $shops->reviewscount
 		);
 		echo json_encode($json);
 	}else{

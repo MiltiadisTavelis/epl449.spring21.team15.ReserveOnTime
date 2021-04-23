@@ -27,7 +27,7 @@
 	if(isset($data['open']) && $data['open'] == 1 || $data['open'] == 0){
 		$shops->open = $data['open'];
 	}
-	if(isset($data['city']) && $data['city'] == 1){
+	if(isset($data['city'])){
 		$shops->city = $data['city'];
 	}	
 
@@ -70,7 +70,8 @@
 				'city' => $name,
 				'city_id' => $city_id,
 				'postal_code' => $pc,
-				'rating' => number_format($avg_rating,1)
+				'rating' => number_format($avg_rating,1),
+				'reviewscount' => $reviewscount
 			);
 			array_push($json['Shops'], $shop);
 		}

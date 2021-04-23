@@ -30,6 +30,7 @@
 		public $active;
 		public $image_type;
 		public $image_url;
+		public $reviewscount;
 
 		public function __construct($db)
 		{
@@ -40,7 +41,7 @@
 		public function shops(){
 			$where = array();
 			$sql = '
-			SELECT DISTINCT SHOPS.id,SHOPS.sname,SHOP_TYPE.type, SHOP_TYPE.type, SHOP_TYPE.id AS type_id ,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, SHOPS.street, SHOPS.streetnum, SHOPS.area,CITIES.name, SHOPS.pc, SHOPS.avg_rating, CITIES.id AS city_id
+			SELECT DISTINCT SHOPS.id,SHOPS.sname,SHOP_TYPE.type, SHOP_TYPE.type, SHOP_TYPE.id AS type_id ,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, SHOPS.street, SHOPS.streetnum, SHOPS.area,CITIES.name, SHOPS.pc, SHOPS.avg_rating, CITIES.id AS city_id, (SELECT COUNT(*) FROM REVIEWS WHERE REVIEWS.shop_id = SHOPS.id) AS reviewscount
 			FROM SHOPS,CITIES,SHOP_TYPE,SHOP_HOURS 
 			WHERE SHOPS.stype = SHOP_TYPE.id
 			AND SHOPS.city = CITIES.id';
@@ -53,7 +54,7 @@
 			if(isset($this->stype)){
 			    $where[] = 'stype = '.$this->stype;
 			}
-			if(isset($this->city)){
+			if(isset($this->city) && $this->city != ""){
 			    $where[] = 'CITIES.id = '.$this->city;
 			}
 
@@ -100,7 +101,7 @@
 			if(isset($this->sort)){
 				$sql .= ' '.$order;
 			}
-		
+
 			$stmt = $this->conn->prepare($sql);
             if(!mysqli_stmt_prepare($stmt,$sql)){
                 echo "Error";
@@ -190,11 +191,12 @@
 		//SHOW SHOP BY ID (TEMP)
 		public function shop(){
 			$sql = '
-			SELECT SHOPS.id,SHOPS.sname,SHOP_TYPE.type, SHOP_TYPE.id AS type_id,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, SHOPS.street, SHOPS.streetnum, SHOPS.area,CITIES.name, SHOPS.pc, SHOPS.avg_rating, CITIES.id AS city_id
+			SELECT DISTINCT SHOPS.id,SHOPS.sname,SHOP_TYPE.type, SHOP_TYPE.id AS type_id,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, SHOPS.street, SHOPS.streetnum, SHOPS.area,CITIES.name, SHOPS.pc, SHOPS.avg_rating, CITIES.id AS city_id, (SELECT COUNT(*) FROM REVIEWS WHERE REVIEWS.shop_id = SHOPS.id) AS reviewscount
 			FROM SHOPS,CITIES,SHOP_TYPE,SHOP_HOURS 
 			WHERE SHOPS.city = CITIES.id 
 			AND SHOPS.stype = SHOP_TYPE.id
 			AND SHOPS.id = ?';
+
 			$stmt = $this->conn->prepare($sql);
 			$stmt->bind_param('i',$this->id);
 			$stmt->execute();
@@ -216,6 +218,8 @@
             $this->avg_rating = $row["avg_rating"];
             $this->city_id = $row['city_id'];
             $this->type_id = $row['type_id'];
+            $this->reviewscount = $row['reviewscount'];
+            $this->reviewscount;
 		}
 
 		//SHOW SHOP BY ID (ORIGINAL)

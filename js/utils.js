@@ -104,46 +104,128 @@ function createBootstrapTable(sectionId, tableTitles) {
 }
 
 function createShopCard(shop) {
-    let shopCard = document.createElement("a")
-    shopCard.href = "shop.html?" + shop.id
-    shopCard.classList.add('card')
-    shopCard.classList.add('shop-card')
+    let shopCard = document.createElement("div")
+    shopCard.classList.add('card','shop-card')
 
-    let cardImg = document.createElement("img")
-    cardImg.classList.add('card-img-top')
-    cardImg.src = "../images/shop_logos/" + shop.id
+    let cardImg = document.createElement("div")
+    cardImg.classList.add('shop-card-image')
+    var imgurl = "background: url(../images/shop_logos/" + shop.id + ") center / cover;";
+    cardImg.setAttribute("style",imgurl);
     shopCard.appendChild(cardImg)
 
+    let favorite = document.createElement("div")
+    favorite.classList.add("shop-card-favorite")
+    cardImg.appendChild(favorite)
+
+    let favoriteBtn = document.createElement("button")
+    favoriteBtn.classList.add("btn","btn-primary","shop-card-favorite-button")
+    favoriteBtn.setAttribute("data-bss-hover-animate","pulse")
+    favoriteBtn.setAttribute("type","button")
+    favorite.appendChild(favoriteBtn)
+
+    let favoriteBtnImg = document.createElement("i")
+    favoriteBtnImg.classList.add("far","fa-heart","shop-card-favorite-icon")
+    favoriteBtn.appendChild(favoriteBtnImg)
+
     let cardBody = document.createElement("div")
-    cardBody.classList.add('card-body')
+    cardBody.classList.add('card-body','shop-card-body')
     shopCard.appendChild(cardBody)
 
-    let cardBodyTitle = document.createElement('p')
-    cardBodyTitle.classList.add('card-title')
-    cardBodyTitle.innerHTML = shop.sname
-    cardBody.appendChild(cardBodyTitle)
+    let shopCardDetails = document.createElement("div")
+    shopCardDetails.classList.add("shop-card-details")
+    cardBody.appendChild(shopCardDetails)
 
-    //let cardBodyText = document.createElement('p')
-    //cardBodyText.classList.add('card-textContent')
-    //cardBodyText.innerHTML = shop.description
-    //cardBody.appendChild(cardBodyText)
+    let shopType = document.createElement("span")
+    shopType.classList.add("shop-card-type")
+    shopCardDetails.appendChild(shopType)
 
-    let cardList = document.createElement('ul')
-    cardList.classList.add('list-group', 'list-group-flush')
-    cardBody.appendChild(cardList)
+    let iconStore = document.createElement("i")
+    iconStore.classList.add("fas","fa-store")
+    shopType.appendChild(iconStore)
+    shopType.append(' ' + shop.stype)
 
-    let cardListType = document.createElement('li')
-    cardListType.classList.add('list-group-item')
-    cardListType.innerHTML = '<i class="fas fa-store"></i> ' + shop.stype
-    cardList.appendChild(cardListType)
+    let shopName = document.createElement('h3')
+    shopName.classList.add('shop-card-name')
+    shopName.innerHTML = shop.sname
+    shopCardDetails.appendChild(shopName)
 
-    let cardListRating = document.createElement('li')
-    cardListRating.classList.add('list-group-item')
-    cardListRating.innerHTML = '<i class="fas fa-star"></i> ' + shop.rating + "/5"
-    cardList.appendChild(cardListRating)
+    let shopRating = document.createElement('p')
+    shopRating.classList.add('text-truncate','shop-card-rating')
+    for (var i = 0; i < 5; i++) {
+        if(shop.rating >= i){
+            let iconStore = document.createElement("i")
+            iconStore.classList.add("fa","fa-star")
+            shopRating.appendChild(iconStore)
+        }else{
+            let iconStore = document.createElement("i")
+            iconStore.classList.add("fa","fa-star-o")
+            shopRating.appendChild(iconStore)
+        }
+    }
+    shopCardDetails.appendChild(shopRating)
+
+    let shopAddress = document.createElement('p')
+    shopAddress.classList.add('text-truncate')
+    shopAddress.setAttribute("id","shop-card-location")
+    shopCardDetails.appendChild(shopAddress)
+
+    let shopAddressIcon = document.createElement('i')
+    shopAddressIcon.classList.add("fas","fa-map-marker-alt")
+    shopAddress.appendChild(shopAddressIcon)
+    shopAddress.append(' ' + shop.street + ', ' + shop.streetnum + ', ' + shop.city)
+
+    let shopReserveBtn = document.createElement('a')
+    shopReserveBtn.classList.add("btn","btn-primary","shop-card-button")
+    shopReserveBtn.setAttribute("role","button")
+    shopReserveBtn.setAttribute("data-bss-hover-animate","pulse")
+    shopReserveBtn.href = "shop.html?" + shop.id
+    shopReserveBtn.innerHTML = "Reserve Now"
+    cardBody.appendChild(shopReserveBtn)
 
     return shopCard
 }
+
+// function createShopCard(shop) {
+//     let shopCard = document.createElement("a")
+//     shopCard.href = "shop.html?" + shop.id
+//     shopCard.classList.add('card')
+//     shopCard.classList.add('shop-card')
+
+//     let cardImg = document.createElement("img")
+//     cardImg.classList.add('card-img-top')
+//     cardImg.src = "../images/shop_logos/" + shop.id
+//     shopCard.appendChild(cardImg)
+
+//     let cardBody = document.createElement("div")
+//     cardBody.classList.add('card-body')
+//     shopCard.appendChild(cardBody)
+
+//     let cardBodyTitle = document.createElement('p')
+//     cardBodyTitle.classList.add('card-title')
+//     cardBodyTitle.innerHTML = shop.sname
+//     cardBody.appendChild(cardBodyTitle)
+
+//     //let cardBodyText = document.createElement('p')
+//     //cardBodyText.classList.add('card-textContent')
+//     //cardBodyText.innerHTML = shop.description
+//     //cardBody.appendChild(cardBodyText)
+
+//     let cardList = document.createElement('ul')
+//     cardList.classList.add('list-group', 'list-group-flush')
+//     cardBody.appendChild(cardList)
+
+//     let cardListType = document.createElement('li')
+//     cardListType.classList.add('list-group-item')
+//     cardListType.innerHTML = '<i class="fas fa-store"></i> ' + shop.stype
+//     cardList.appendChild(cardListType)
+
+//     let cardListRating = document.createElement('li')
+//     cardListRating.classList.add('list-group-item')
+//     cardListRating.innerHTML = '<i class="fas fa-star"></i> ' + shop.rating + "/5"
+//     cardList.appendChild(cardListRating)
+
+//     return shopCard
+// }
 
 function addButtonTo(element, text, callback) {
     if (element.id === null) {
