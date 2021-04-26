@@ -207,16 +207,22 @@
 
 @media (max-width: 420px) {
   .shop-card-display {
-    display: initial;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     padding: 25px;
+    justify-content: center;
   }
 }
+
+
 
 .card.shop-card {
   border-radius: 20px;
   box-shadow: 2px 2px 16px 8px rgba(0,0,0,0.1);
   border-style: none;
   min-width: 250px;
+  max-width: 250px;
   height: 360px;
   margin: 15px;
 }
@@ -230,6 +236,8 @@
     margin: 15px;
   }
 }
+
+
 
 .shop-card-button {
   display: flex;
@@ -256,12 +264,17 @@
 
 .shop-card-name {
   height: 33px;
-  overflow: hidden;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 700;
   margin-bottom: -9px;
   margin-top: 8px;
   color: #ec9b3b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+
+
 }
 
 .shop-card-type {
@@ -448,4 +461,62 @@ h1 {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300;
 }
+
+@media (min-width: 768px) {
+  #popup-alert {
+    justify-content: start;
+    align-items: center;
+    justify-content: flex-start;
+    position: fixed;
+    border-radius: 23px;
+    background: #262626;
+    z-index: 1000;
+    padding-left: 17px;
+    top: 65px;
+    right: 0;
+    margin: 15px;
+    margin-bottom: 20px;
+    width: 90%;
+    height: 70px;
+    box-shadow: 0px 0px 20px 0px rgba(33,37,41,0.67);
+    border-style: none;
+    color: white;
+    padding: 17px;
+  }
+}
+
+@media (max-width: 767px) {
+  #popup-alert {
+    align-items: center;
+    justify-content: flex-start;
+    position: fixed;
+    border-radius: 23px;
+    background: #262626;
+    z-index: 1000;
+    padding-left: 17px;
+    bottom: 0;
+    margin-bottom: 20px;
+    width: 90%;
+    height: 70px;
+    box-shadow: 0px 0px 20px 0px rgba(33,37,41,0.67);
+    border-style: none;
+    color: white;
+    padding: 17px;
+  }
+}
+
+#danger-popup {
+  font-size: 45px;
+  color: var(--danger);
+}
+
+#success-popup {
+  font-size: 45px;
+  color: #9dd57c;
+}
+
+
+
+
+
 

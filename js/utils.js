@@ -51,16 +51,40 @@ function removeDoubleSession() {
 }
 
 function popUpMessage(textContent, type) {
-    let message = document.createElement('div')
-    message.setAttribute("class", "alert alert-" + type + " textContent-center popup")
-    message.setAttribute("role", "alert")
-    message.textContent = textContent
-    let container = document.getElementById("contents")
-    container.appendChild(message)
 
-    $(".popup").delay(4000).fadeOut(function() {
-        $(this).remove()
-    })
+    let div = document.createElement('div')
+    div.classList.add("d-flex","justify-content-center")
+    div.setAttribute('id','popup')
+
+
+    let popup = document.createElement('div')
+    popup.classList.add("toast","fade", "hide", "d-flex")
+    popup.setAttribute("role", "alert")
+    popup.setAttribute("data-delay","4000")
+    popup.setAttribute("id","popup-alert")
+    div.appendChild(popup)
+
+    let statusIcon = document.createElement('i')
+    if(type.localeCompare("success") == 0){
+        statusIcon.classList.add('fa','fa-check-circle')
+        statusIcon.setAttribute('id','success-popup')
+    }else{
+        statusIcon.classList.add('fa','fa-times-circle')
+        statusIcon.setAttribute('id','danger-popup')
+    }
+    popup.appendChild(statusIcon)
+
+    let message = document.createElement('span')
+    message.setAttribute("style","margin-left: 10px;")
+    message.textContent = textContent
+    popup.appendChild(message)
+
+    let container = document.getElementById("contents")
+    container.appendChild(div)
+
+    $('.toast').toast('show').delay(4000).fadeOut(function() {
+        $("#popup").remove()
+    });
 }
 
 function removeAllChildNodes(parent) {

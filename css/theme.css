@@ -62,6 +62,7 @@ a:hover {
 .container-fluid {
     padding-top: 100px;
     padding-bottom: 100px;
+    background: white;
     background-image: url(../images/wallpaper.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -75,37 +76,6 @@ a:hover {
 
 .day-text {
     font-family: monospace;
-}
-
-.shop-display {
-    padding: 0px;
-    margin-bottom: 80px;
-    white-space: nowrap;
-    overflow-y: hidden;
-    overflow-x: auto;
-}
-
-.shop-card {
-    color: black;
-    display: inline-block;
-    height: 24rem;
-    width: 15rem;
-    margin: 15px;
-}
-
-.shop-card:hover {
-    color: #FF5A00;
-}
-
-.shop-card * {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin: 0;
-}
-
-.shop-card .card-title {
-    font-weight: bold;
 }
 
 .reservation-table {
@@ -126,24 +96,24 @@ a:hover {
     color: black;
 }
 
-.popover-title * {
+/*.popover-title * {
     color: grey;
 }
 
 .popover-title .text-primary {
     color: black!important;
-}
+}*/
 
 input[readonly] {
   background-color: white!important;
 }
 
-.popup {
+/*.popup {
     position: fixed;
     bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
-}
+}*/
 
 #heading {
     margin-bottom: 30px;
@@ -153,7 +123,144 @@ input[readonly] {
     padding: 50px;
 }
 
-@media (max-width : 500px) {
+#footer a {
+    color: grey;
+}
+
+#footer a:hover {
+    color: white;
+}
+
+#privacy-text {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    word-wrap: break-word;
+}
+
+#loading {
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: white;
+    background-image: url(../images/wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+    z-index:99;
+}
+
+#loading-image {
+    width:80px;
+    height:80px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:-40 0 0 -40;
+
+}
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
+
+:root {
+  --border-radius-size: 14px;
+}
+
+.shop-display {
+	padding: 15px;
+    margin-bottom: 40px;
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+
+	font: 14px/20px "Lato", Arial, sans-serif;
+	color: #9E9E9E;
+	text-align: center;
+}
+
+.shop-card{
+  box-sizing: border-box;
+  background: white;
+  width: 250px;
+  display: inline-block;
+  margin: auto;
+  border-radius: 19px;
+  position: relative;
+  text-align: center;
+  box-shadow: -1px 15px 20px -12px black;
+  z-index: 9999;
+  margin: 15px;
+
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.shop-type{
+	color: grey;
+}
+
+.shop-card:hover {
+    color: #FF5A00;
+}
+
+.shop-image{
+	position: relative;
+	min-width: 100%;
+	min-height: 100%;
+	max-width: 250px;
+    max-height: 250px;
+	border-top-left-radius: var(--border-radius-size);
+	border-top-right-radius: var(--border-radius-size);
+}
+
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  border-left:1em solid transparent;
+  border-right:1em solid transparent;
+  text-overflow: ellipsis;
+  padding: 10px;
+  font-size: 25px;
+  color: black;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.shop-all-details {
+  box-shadow: -1px -2px 20px -12px black;
+  background: #EC9B3B;
+  color: white;
+  font-weight: 900;
+  border-bottom-left-radius: var(--border-radius-size);
+  border-bottom-right-radius: var(--border-radius-size);
+  padding: 10px;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+.shop-details {
+  font-size: 15px;
+  padding: 10px 15px;
+}
+
+.half{
+	width: 50%;
+	float: left;
+}
+
+/*@media (max-width : 500px) {
     #contents{
         width: 100%;
         max-width: 500px;
@@ -192,45 +299,62 @@ input[readonly] {
     .shop-display {
         margin: 0 auto;
     }
-}
+}*/
 
-#footer a {
-    color: grey;
-}
-
-#footer a:hover {
-    color: white;
-}
-
-#privacy-text {
-    background-color: rgba(0, 0, 0, 0.9);
-    color: white;
-    word-wrap: break-word;
-}
-
-#loading {
+@media (min-width: 768px) {
+  #popup-alert {
+    justify-content: start;
+    align-items: center;
+    justify-content: flex-start;
     position: fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background-image: url(../images/wallpaper.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: scroll;
-    z-index:99;
+    border-radius: 23px;
+    background: #262626;
+    z-index: 1000;
+    padding-left: 17px;
+    top: 65px;
+    right: 0;
+    margin: 15px;
+    margin-bottom: 20px;
+    width: 90%;
+    height: 70px;
+    box-shadow: 0px 0px 20px 0px rgba(33,37,41,0.67);
+    border-style: none;
+    color: white;
+    padding: 17px;
+  }
 }
 
-#loading-image {
-/*    -webkit-filter: invert(1);
-    filter: invert(1);*/
-    width:80px;
-    height:80px;
-    position:absolute;
-    left:50%;
-    top:50%;
-    background-repeat:no-repeat;
-    background-position:center;
-    margin:-40 0 0 -40;
-
+@media (max-width: 767px) {
+  #popup-alert {
+    align-items: center;
+    justify-content: flex-start;
+    position: fixed;
+    border-radius: 23px;
+    background: #262626;
+    z-index: 1000;
+    padding-left: 17px;
+    bottom: 0;
+    margin-bottom: 20px;
+    width: 90%;
+    height: 70px;
+    box-shadow: 0px 0px 20px 0px rgba(33,37,41,0.67);
+    border-style: none;
+    color: white;
+    padding: 17px;
+  }
 }
+
+#danger-popup {
+  font-size: 45px;
+  color: var(--danger);
+}
+
+#success-popup {
+  font-size: 45px;
+  color: #9dd57c;
+}
+
+
+
+
+
