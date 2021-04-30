@@ -1,5 +1,13 @@
-body {
+html,body {
     height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#contents {
+  flex: 1 0 auto;
 }
 
 #signup-btn {
@@ -161,4 +169,5 @@ mng-header {
 #div-form-group {
   min-width: 250px;
 }
+
 

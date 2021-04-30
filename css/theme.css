@@ -9,6 +9,7 @@
 }
 
 #footer {
+  flex-shrink: 0;
   display: flex;
   background: #343a40;
   align-items: center;
