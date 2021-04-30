@@ -1,3 +1,7 @@
+body {
+    height: 100%;
+}
+
 #signup-btn {
   background-color: #ec9b3b;
 }
