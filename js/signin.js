@@ -3,14 +3,12 @@ removeDoubleSession()
 function submit() {
     var email = document.getElementById('email-input');
     var pass = document.getElementById('password-input');
-    //var remember = document.getElementById('remember-me');
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "session/login",
         "email": email.value,
         "password": pass.value
     };
-    //console.log(remember.value);
 
     xhr.onload = function() {
         if (xhr.status === 200) {
