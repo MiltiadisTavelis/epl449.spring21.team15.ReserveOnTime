@@ -1,11 +1,13 @@
-$('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    weekStart: 1,
-    maxViewMode: 2,
-    endDate: "today",
-    clearBtn: true,
-    autoclose: true,
-    startView: 2
+
+$(function(){
+    
+    let datePicker = document.getElementById('date-input');
+    let picker = new Lightpick({
+        field: datePicker,
+        onSelect: function(date){
+            datePicker.value = date.format('Do MMMM YYYY');
+        }
+    });
 });
 
 function submit() {
@@ -38,7 +40,7 @@ function submit() {
                 popUpMessage(response["status"], "success");
                 window.setTimeout(function() {
                     window.location = "signin.html";
-                }, 1000);
+                }, 2000);
             } else {
                 popUpMessage("Unexpected error", "danger");
             }

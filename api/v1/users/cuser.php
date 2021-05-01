@@ -26,14 +26,10 @@
 
 	if(isset($data->birth)){
 		$date = $data->birth;
-		$date = str_replace('/', '-', $date);
-		if(false !== strtotime($date)){
+		$date = str_replace(' ', '-', $date);
 			list($day, $month, $year) = explode('-', $date);
-			if(validateDate($data->birth, 'd/m/Y')){
-				$date = str_replace('/', '-', $data->birth);
-				$user->birth = date('Y-m-d', strtotime($date));
-			}
-		}
+			$day = substr($day,0,strlen($day)-2);
+			$user->birth = date('Y-m-d', strtotime($date));
 	}
 	
 	$user->gender = $data->gender;
@@ -46,7 +42,7 @@
 
 	if(!empty($results)){
 		$json = array();
-		$json['status'] = 'Successfully Created';
+		$json['status'] = 'Successfully Created. Check your inbox for a verification email.';
 		echo json_encode($json);
 		require 'sendemail.php';
 		//$json['verify'] = 'Click here to verify: '.$results;
