@@ -722,7 +722,7 @@ header {
   .event-card {
     justify-content: center;
     width: 200px;
-    height: 250px;
+    height: 100%;
     flex-wrap: wrap;
   }
 }
@@ -785,8 +785,8 @@ h1, h2, h3, h4 {
   text-overflow: ellipsis;
   word-wrap: break-word;
   overflow: hidden;
-  max-height: 5.2em;
-  line-height: 1.3em;
+  height: 40%;
+  line-height: 1.4em;
 }
 
 .event-info {
@@ -810,7 +810,8 @@ h1, h2, h3, h4 {
   .event-info {
     padding-left: 0;
     margin: 0;
-    height: 65px;
+    margin-top: 15px;
+	height: 100%;
   }
 }
 
