@@ -215,35 +215,36 @@ function submit() {
         "people": people
 
     };
-
-    if(people === '' || day.value === '' || people === ''){
+   
+    if(people.length === 0 || day.value.length === 0 || time.length === 0){
         popUpMessage("Please fill in all the required fields.", "danger");
-    }
+        return;
+    }else{
+	    xhr.onload = function() {
+	        if (xhr.status === 200) {
+	            var response = JSON.parse(xhr.responseText);
 
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
+	            if (response.hasOwnProperty('NotOnline')) {
+	                window.setTimeout(function() {
+	                    window.location = "signin.html";
+	                }, 1000);
+	            } else if (response.hasOwnProperty('message')) {
+	                popUpMessage(response['message'], "success");
+	                $("#reservation-btn").contents().filter(isTextNode).fadeOut('slow').remove();
+	                $("#reservation-btn").addClass('success');
+	                $("#reservation-btn").prop('disabled', true);
+	                setTimeout(function() {
+	                    window.location = "reservations.html"
+	                }, 2000);
+	            } else {
+	                popUpMessage(response['status'], "danger");
+	            }
 
-            if (response.hasOwnProperty('NotOnline')) {
-                window.setTimeout(function() {
-                    window.location = "signin.html";
-                }, 1000);
-            } else if (response.hasOwnProperty('message')) {
-                popUpMessage(response['message'], "success");
-                $("#reservation-btn").contents().filter(isTextNode).fadeOut('slow').remove();
-                $("#reservation-btn").addClass('success');
-                $("#reservation-btn").prop('disabled', true);
-                setTimeout(function() {
-                    window.location = "reservations.html"
-                }, 2000);
-            } else {
-                popUpMessage(response['status'], "danger");
-            }
-
-        } else {
-            popUpMessage("There was an unexpected error", "danger");
-        }
-    }
+	        } else {
+	            popUpMessage("There was an unexpected error", "danger");
+	        }
+	    }
+	}
 
     xhr.withCredentials = true;
     xhr.open('POST', api);
