@@ -555,7 +555,7 @@ function loadEventDet(eventId) {
                 stop_date.prepend(response.stop_date);
                 start_time.prepend(response.start_time);
                 stop_time.prepend(response.stop_time);
-
+                
                 if(response.link.length === 0){
                     link.hidden = true;
                 }else{
