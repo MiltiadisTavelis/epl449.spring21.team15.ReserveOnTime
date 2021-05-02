@@ -131,6 +131,10 @@ function createShopCard(shop) {
     let shopCard = document.createElement("div")
     shopCard.classList.add('card','shop-card')
 
+    let link = document.createElement("a")
+    link.href = "shop.html?" + shop.id;
+    shopCard.appendChild(link)
+
     let cardImg = document.createElement("div")
     cardImg.classList.add('shop-card-image')
     var imgurl = "background: url(../images/shop_logos/" + shop.id + ") center / cover;";
@@ -139,7 +143,7 @@ function createShopCard(shop) {
 
     let favorite = document.createElement("div")
     favorite.classList.add("shop-card-favorite")
-    cardImg.appendChild(favorite)
+    shopCard.appendChild(favorite)
 
     let favoriteBtn = document.createElement("button")
     favoriteBtn.classList.add("btn","btn-primary","shop-card-favorite-button")
@@ -189,8 +193,7 @@ function createShopCard(shop) {
     shopCardDetails.appendChild(shopRating)
 
     let shopAddress = document.createElement('p')
-    shopAddress.classList.add('text-truncate')
-    shopAddress.setAttribute("id","shop-card-location")
+    shopAddress.classList.add('text-truncate', "shop-card-location")
     shopCardDetails.appendChild(shopAddress)
 
     let shopAddressIcon = document.createElement('i')
@@ -198,11 +201,8 @@ function createShopCard(shop) {
     shopAddress.appendChild(shopAddressIcon)
     shopAddress.append(' ' + shop.street + ', ' + shop.streetnum + ', ' + shop.city)
 
-    let shopReserveBtn = document.createElement('a')
+    let shopReserveBtn = document.createElement('span')
     shopReserveBtn.classList.add("btn","btn-primary","shop-card-button")
-    shopReserveBtn.setAttribute("role","button")
-    shopReserveBtn.setAttribute("data-bss-hover-animate","pulse")
-    shopReserveBtn.href = "shop.html?" + shop.id
     shopReserveBtn.innerHTML = "Reserve Now"
     cardBody.appendChild(shopReserveBtn)
 

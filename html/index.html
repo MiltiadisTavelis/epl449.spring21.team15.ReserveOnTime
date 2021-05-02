@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/theme2.css">
 </head>
 
 <body>
@@ -35,50 +36,42 @@
         <img id="loading-image" src="../images/loading.gif" alt="Loading..." />
     </div>
     <div id="contents" hidden>
-        <header class="color-background"><strong id="header-title">Reserve your spot on time.</strong>
-            <div class="all-inputs">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card m-auto input-section">
-                                <div class="card-body text-center row" id="select-filters">
-                                    <div class="col-sm select-border center-input"><input id="date-input" placeholder="Pick a day"></div>
-                                    <div class="col-sm select-border center-input"><select id="time-input" class="select2" style="width: 100%;">
-                                            <option value="" selected="" disabled="">Pick a time</option>
-                                            <option value="">Any</option>
-                                        </select></div>
-                                    <div class="col-sm select-border center-input"><select id="shop-type-input" class="select2" style="width: 100%">
-                                            <option value="" selected="" disabled="">Shop Type</option>
-                                            <option value="">Any</option>
-                                        </select></div>
-                                    <div class="col-sm center-input"><select id="shop-city-input" class="select2" style="width: 100%;">
-                                            <option value="" selected="" disabled="">City</option>
-                                            <option value="">Any</option>
-                                            <option value="1">Nicosia</option>
-                                            <option value="2">Limassol</option>
-                                            <option value="3">Famagusta</option>
-                                            <option value="4">Larnaca</option>
-                                            <option value="5">Paphos</option>
-                                            <option value="6">Keryneia</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="card m-auto search-section">
-                                <div class="card-body row search-section-row">
-                                    <div class="d-xl-flex align-items-xl-center" style="width: 90%;"><input type="search" id="keyword-input" placeholder="Shop Name"></div>
-                                    <div style="width: 10%;"><button id="search-button" class="btn btn-primary btn-sm submit-icon" type="submit"><i class="fa fa-search" style="color: rgb(0,0,0);"></i></button></div>
-                                </div>
-                            </div>
+<header class="color-background"><strong id="header-title">Reserve your spot on time.</strong>
+    <div class="all-inputs">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card m-auto input-section">
+                        <div class="card-body text-center row" id="select-filters">
+                            <div class="col-sm select-border center-input"><input id="date-input" placeholder="Pick a day" /></div>
+                            <div class="col-sm select-border center-input"><select id="time-input" class="select2" style="width: 100%;">
+                                    <option value selected disabled>Pick a time</option>
+                                    <option value>Any</option>
+                                </select></div>
+                            <div class="col-sm select-border center-input"><select id="shop-type-input" class="select2" style="width: 100%">
+                                    <option value selected disabled>Shop Type</option>
+                                    <option value>Any</option>
+                                </select></div>
+                            <div class="col-sm center-input"><select id="shop-city-input" class="select2" style="width: 100%;">
+                                    <option value selected disabled>City</option>
+                                    <option value>Any</option>
+                                    <option value="1">Nicosia</option>
+                                    <option value="2">Limassol</option>
+                                    <option value="3">Famagusta</option>
+                                    <option value="4">Larnaca</option>
+                                    <option value="5">Paphos</option>
+                                    <option value="6">Keryneia</option>
+                                </select></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+            <div class="search-section">
+                <div class="search-input"><input type="search" id="keyword-input" placeholder="Shop Name" /><button class="btn btn-primary btn-sm submit-icon" id="search-button" type="submit"><i class="fa fa-search"></i></button></div>
+            </div>
+        </div>
+    </div>
+</header>
         <main class="main-1">
             <div id="results" class="d-none"></div>
             <div id="top" class="d-none"></div>

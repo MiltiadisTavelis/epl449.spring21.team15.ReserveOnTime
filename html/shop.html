@@ -1,182 +1,288 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Reserve On Time</title>
-    <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <script src="https://kit.fontawesome.com/31e7767d7b.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ReserveOnTime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Coda+Caption:">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster+Two">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" />
-    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
-    <link rel="stylesheet" href="../plugins/clockpicker/src/clockpicker.css">
-    <link rel="stylesheet" href="../plugins/clockpicker/src/standalone.css">
-    <script src="../plugins/clockpicker/src/clockpicker.js"></script>
-    <link rel="stylesheet" href="../css/theme.css"/>
-    <link rel="stylesheet" href="../css/shop.css"/>
-    <link rel="stylesheet" href="../css/forms.css"/>
-    <link rel="stylesheet" href="../css/modal.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../css/shop.css">
+    <link rel="stylesheet" href="../css/shop.compiled.css">
+    <link rel="stylesheet" href="../css/theme2.css">
+</head>
+
+<body>
+    <div id="loading">
+        <img id="loading-image" src="../images/loading.gif" alt="Loading..." />
+    </div>
+    <nav class="navbar navbar-light navbar-expand-md" style="border-style: none;">
+        <div class="container-fluid">
+            <a class="navbar-brand nav-logo" href="/html/index.html">ReserveOnTime</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#nav-list">
+                <span class="sr-only">Toggle navigation</span>
+                <div class="main-content">
+                    <div class="menu__wrapper">
+                        <div class="menu__item--meatball" tabindex="5">
+                          <div class="circle"></div>
+                          <div class="circle"></div>
+                          <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse text-center flex-row-reverse" id="nav-list">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active d-none" id="reservations-btn" href="reservations.html">Reservations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active d-none" id="account-btn" href="account.html">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active d-none" id="signin-btn" href="signin.html">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-light nav-button-border d-none" role="button" id="signup-btn" href="signup.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-light nav-button-border d-none" role="button" id="signout-btn" href="#">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="contents" hidden>
+        <header id="shop-header">
+            <div id="shop-image-content">
+                <div id="shop-thumbnail">
+                    <div id="blur-cover-img"></div>
+                    <div id="cover-img"></div>
+                    <div class="under-thumb">
+                        <div class="under-thumb-content">
+                            <div class="shop-profile">
+                                <img class="rounded-circle" id="shop-image">
+                            </div>
+                            <div class="req-inputs">
+                                <div class="col">
+                                    <input id="date-req-input" placeholder="Pick a day" readonly="" autocomplete="off"></div>
+                                <div class="col">
+                                    <select id="time-req-input">
+                                        <option value="">Any</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <select id="people-input">
+                                        <option value="" selected="" disabled="">People</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-primary button-hold rsrv-btn" type="submit" id="reservation-btn">    
+                                        <div class="tick-icon" >
+                                            <svg class="tick" viewBox="0 0 24 24">
+                                                <polyline points="18,7 11,16 6,12" />
+                                            </svg>
+                                        </div>
+                                        Make Reservasion
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="information">
+                <div class="intro">
+                    <h5 id="ratetype">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-star-fill">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                        </svg>
+                    </h5>
+                    <h2 class="text-center">Description</h2>
+                    <p class="text-center" id="description"></p>
+                </div>
+            </div>
+            <hr class="line-border">
+            <div class="navigation-bar">
+                <div class="navigation">
+                    <ul class="navigation__list">
+                        <li class="navigation__item">
+                            <a class="navigation__link active show" href="#locationHours" data-toggle="tab">
+                                <i class="fas fa-info-circle navigation__icon" data-feather="location"></i>
+                                <span class="navigation__text">Info</span>
+                            </a>
+                        </li>
+                        <li class="navigation__item">
+                            <a class="navigation__link" href="#events" data-toggle="tab">
+                                <i class="far fa-list-alt navigation__icon" data-feather="events"></i>
+                                <span class="navigation__text">Events</span>
+                            </a>
+                        </li>
+                        <li class="navigation__item">
+                            <a class="navigation__link" href="#reviews" data-toggle="tab">
+                                <i class="fas fa-user-edit navigation__icon" data-feather="reviews"></i>
+                                <span class="navigation__text">Reviews</span>
+                            </a>
+                        </li>
+                        <li class="navigation__item">
+                            <a class="navigation__link" href="#photoSlider" data-toggle="tab">
+                                <i class="fas fa-camera-retro navigation__icon" data-feather="location"></i>
+                                <span class="navigation__text">Photos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="events" class="tab-pane" role="tabpanel">
+                    <div class="cards">
+                        <div class="cards-w" id="event-card-section"></div>
+                    </div>
+                    <div id="event-info-modal" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <span id="modal-event-title">
+                                    <button class="btn btn-primary modal-exit" type="button" data-dismiss="modal"><i class="fas fa-times"></i>
+                                    </button>
+                                </span>
+                                <div class="modal-event-range">
+                                    <div class="s-around">
+                                        <code>Start</code>
+                                        <code>End </code>
+                                    </div>
+                                    <div class="s-around">
+                                        <div class="modal-event-date">
+                                            <span id="modal-event-startdate">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                            <small id="modal-event-starttime">
+                                                <i class="far fa-clock"></i>
+                                            </small>
+                                        </div>
+                                        <div class="modal-event-date">
+                                            <span id="modal-event-enddate">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                            <small id="modal-event-endtime">
+                                                <i class="far fa-clock"></i>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-info-border">
+                                    <span id="modal-event-description"></span>
+                                </div>
+                                <a id="modal-event-link">Join</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="reviews" class="tab-pane" role="tabpanel">
+                    <div class="d-center">
+                        <button class="btn btn-primary review-create-btn" type="button" data-toggle="modal" data-target="#review-modal">Create new Review</button>
+                    </div>
+                    <div class="cards">
+                        <div class="reviews-section"></div>
+                    </div>
+                    <div id="review-modal" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <button class="btn btn-primary modal-exit" type="button" data-dismiss="modal">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <h2>Create Review</h2>
+                                <div class="reviews-rate d-center modal-rate">
+                                    <input type="radio" id="star5" value="5" name="rate" class="star">
+                                    <label for="star5"></label>
+                                    <input type="radio" id="star4" value="4" name="rate" class="star">
+                                    <label for="star4"></label>
+                                    <input type="radio" id="star3" value="3" name="rate" class="star">
+                                    <label for="star3"></label>
+                                    <input type="radio" id="star2" value="2" name="rate" class="star">
+                                    <label for="star2"></label>
+                                    <input type="radio" id="star1" value="1" name="rate" class="star">
+                                    <label for="star1"></label>
+                                </div>
+                                <textarea id="modal-content-input" placeholder="Let us know what you think ..."></textarea>
+                                <button class="btn btn-primary button-hold review-btn" type="submit" id="submit-review">    
+                                <div class="tick-icon" >
+                                    <svg class="tick" viewBox="0 0 24 24">
+                                        <polyline points="18,7 11,16 6,12" />
+                                    </svg>
+                                </div>
+                                Create Review
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="locationHours" class="tab-pane active" role="tabpanel">
+                    <div id="location-hours">
+                        <div class="row w-75">
+                            <div class="col align-self-start">
+                                <h2 class="text-center">Opening Hours</h2>
+                                <div class="d-center">
+                                    <div id="dateTime"></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h6 id="address">
+                                    <i class="fas fa-map-marker-alt">
+                                    </i>
+                                </h6>
+                                <section class="map-clean">
+                                    <iframe id="googleloc" allowfullscreen="" frameborder="0" loading="lazy" src="" class="frame" width="100%" height="100%"></iframe>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="photoSlider" class="tab-pane" role="tabpanel">
+                    <div class="col slider">
+                        <div id="photos"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center" style="padding: 10px;"><a class="justify-content-lg-center" id="footer-privacy" href="privacy.html">Privacy Policy</a></div>
+                </div>
+                <div class="row top-border">
+                    <div class="col text-left"><span id="footer-copyright">© ReserveOnTime. All rights reserved</span></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script type="text/javascript" src="../js/globals.js" defer></script>
     <script type="text/javascript" src="../js/utils.js" defer></script>
     <script type="text/javascript" src="../js/validation.js" defer></script>
     <script type="text/javascript" src="../js/nav.js" defer></script>
     <script type="text/javascript" src="../js/shop.js" defer></script>
-</head>
-<body>
-    <div id="loading">
-        <img id="loading-image" src="../images/loading.gif" alt="Loading..." />
-    </div>
-    <nav class="navbar fixed-top navbar-expand-md navbar-dark">
-        <a href="index.html"><p class="navbar-brand animate__animated animate__fadeIn">Reserve On Time</p></a>
-        <button class="navbar-toggler">
-            <span class="navbar-toggler-icon" data-toggle="collapse" data-target="#nav-list"></span>
-        </button>
-        <div id="nav-list" class="collapse navbar-collapse">
-            <ul class="navbar-nav nav-fill ml-auto">
-                <li class="nav-item">
-                    <a id="reservations-btn" class="nav-link d-none" href="reservations.html">Reservations</a>
-                </li>
-                <li class="nav-item">
-                    <a id="account-btn" class="nav-link d-none" href="account.html">Account</a>
-                </li>
-                <li class="nav-item">
-                    <button id="signout-btn" type="button" class="btn btn-md btn-dark d-none">Sign out</button>
-                </li>
-                <li class="nav-item">
-                    <a id="signin-btn" class="btn btn-md btn-dark d-none" href="signin.html">Sign in</a>
-                </li>
-                <li class="nav-item">
-                    <a id="signup-btn" class="btn btn-md btn-light d-none" href="signup.html">Sign up</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container-fluid h-100">
-        <div id="contents" class="container w-75 animate__animated animate__fadeIn animate__slow" hidden>
-            <h1 id="shop-name">Shop Name</h1>
-            <span id="available-status"></span>
-            <div id="heading" class="row">
-                <div id="heading-left" class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-5">
-                    <img alt="" id="shop-image">
-                </div>
-                <div id="heading-right" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-7">
-                    <form class="needs-validation" novalidate>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                </div>
-                                <input required type="text" id="date-req-input" class="form-control datepicker" value="" placeholder="Pick a date">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-clock"></i></span>
-                                </div>
-                                <input required type="text" id="time-req-input" class="form-control clockpicker" value="" placeholder="Pick a time">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                    </div>
-                                    <input required type="number" id="people-input" class="form-control" value="1" min="1" maxlength="2">
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
-                                <button type="submit" class="btn btn-light w-100">Make Reservation</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <hr/>
-            <nav class="nav justify-content-center nav-pills flex-column flex-md-row">
-                <a href="#overview" class="nav-link active" data-toggle="tab">Overview</a>
-                <a href="#photos" class="nav-link" data-toggle="tab">Photos</a>
-                <a href="#events" class="nav-link" data-toggle="tab">Events</a>
-                <a href="#reviews" class="nav-link" data-toggle="tab">Reviews</a>
-            </nav>
-            <div class="tab-content">
-                <div id="overview" class="tab-pane active">
-                    <div class="card">
-                        <img id="cover-img" class="card-img-top" src="" alt="Card image cap">
-                        <div class="card-body">
-                            <h6 class="card-title"><i class="fas fa-star"></i><span id="rating">5</span> | <span id="type">Restaurant</span></h6>
-                            <h6><i class="fas fa-map-marker-alt"></i><span id="address">Location...</span></h6>
-                            <p id="description" class="card-text">Description content..</p>
-                            <h1>Opening Hours</h1>
-                            <div id="dateTime" class="col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-4 mx-auto">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div id="photos" class="tab-pane"></div>
-                <div id="events" class="tab-pane"></div>
-                <div id="reviews" class="tab-pane"></div>
-            </div>
-
-            <div id="review-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title mx-auto">Fill in your review</h4>
-      </div>
-      <div class="modal-body">
-        <form class="main-form needs-validation" novalidate>
-            <label class="rating-seg">Rating</label>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div class="rate">
-                            <input type="radio" id="star5" name="rate" value="5" />
-                            <label for="star5" title="5 stars">5 stars</label>
-                            <input type="radio" id="star4" name="rate" value="4" />
-                            <label for="star4" title="4 stars">4 stars</label>
-                            <input type="radio" id="star3" name="rate" value="3" />
-                            <label for="star3" title="3 stars">3 stars</label>
-                            <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="2 stars">2 stars</label>
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="1 star">1 star</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-paragraph"></i></div>
-                            </div>
-                            <textarea required type="text" class="form-control" id="modal-content-input" placeholder="Start typing..."></textarea>
-                        </div>
-                    </div>
-                </div>
-            </form>
-      </div>
-      <div class="modal-footer">
-        <button id="submit-review" type="submit" class="btn btn-default">Add review</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-            <div id="footer" class="mb-2 mt-4 animate__animated animate__fadeIn animate__delay-2s">
-                <a href="privacy.html">Privacy Policy</a>
-            </div>
-        </div>
-    </div>
 </body>
+
+</html>
