@@ -1,3 +1,14 @@
+$(function(){
+    
+    let datePicker = document.getElementById('date-input');
+    let picker = new Lightpick({
+        field: datePicker,
+        onSelect: function(date){
+            datePicker.value = date.format('Do MMMM YYYY');
+        }
+    });
+});
+
 function submit() {
     var fname = document.getElementById('firstname-input');
     var surname = document.getElementById('lastname-input');
