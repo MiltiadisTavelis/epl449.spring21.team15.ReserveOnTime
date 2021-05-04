@@ -1,69 +1,39 @@
 checkSession("u", true)
 loadPage()
 
-$('#loading').hide().fadeIn();
-var loadercount = {
-  value: 0,
-  set plus(value) {
-    this.value += value;
-    if(this.value == 4){
-        $('#loading').fadeOut();
-        $('#contents').removeAttr('hidden').fadeIn("slow");
-    }
-  }
-}
-
 function createReservationEntry(reservation, sectionId) {
-    let line = document.createElement("div")
-    line.classList.add("reservation-line")
-    line.setAttribute("id", "reservation-" + reservation.id)
+    let tr = document.createElement("tr")
+    tr.setAttribute("id", "reservation-" + reservation.id)
 
-    let shopName = document.createElement("span")
-    shopName.classList.add("reservation-shop")
+    let shopName = document.createElement("td")
     let shopLink = document.createElement("a")
-    shopLink.classList.add("shop-name")
     shopLink.href = "shop.html?" + reservation.shopid
     shopLink.textContent = reservation.sname
     shopName.appendChild(shopLink)
-    line.appendChild(shopName)
+    tr.appendChild(shopName)
 
-    let dateTime = document.createElement("span")
-    dateTime.classList.add("reservation-datetime")
-
+    let dateTime = document.createElement("td")
     let stringTime = reservation.time.split(":")
     if (sectionId === "today") {
         dateTime.textContent = stringTime[0] + ":" + stringTime[1]
     } else {
-        var date = new Date(reservation.day);
-        dateTime.textContent = date.toLocaleString("en-us", {day: 'numeric'}) + " " + date.toLocaleString("en-us", {month: 'short'}) + " " + date.toLocaleString("en-us", {year: 'numeric'}) + ", " + stringTime[0] + ":" + stringTime[1]
+        dateTime.textContent = reservation.day + " " + stringTime[0] + ":" + stringTime[1]
     }
-    line.appendChild(dateTime)
+    tr.appendChild(dateTime)
 
-    let people = document.createElement("span")
-    people.classList.add("reservation-people")
+    let people = document.createElement("td")
     people.textContent = reservation.people
-    line.appendChild(people)
-
-    let status = document.createElement("span")
-    status.classList.add("reservation-status")
-    line.appendChild(status)
-
-    let visualStatus = document.createElement("div")
-    if(reservation.status === "Canceled" || reservation.status === "Declined"){
-        visualStatus.classList.add("visual-status","red-status")
-    }else if(reservation.status === "Accepted"){
-        visualStatus.classList.add("visual-status","green-status")
-    }else{
-        visualStatus.classList.add("visual-status")
-    }
-    line.appendChild(visualStatus)
+    tr.appendChild(people)
 
     if (sectionId === "history") {
+        let status = document.createElement("td")
         status.textContent = reservation.status
+        tr.appendChild(status)
     } else {
+        let cancellation = document.createElement("td")
         let cancelBtn = document.createElement("button")
         cancelBtn.textContent = "Cancel"
-        cancelBtn.setAttribute("class", "btn btn-primary option-btn")
+        cancelBtn.setAttribute("class", "btn btn-sm btn-dark btn-cancel")
         cancelBtn.setAttribute("id", "cancel-" + reservation.id)
         cancelBtn.setAttribute("type", "button")
         cancelBtn.onclick = function() {
@@ -93,10 +63,11 @@ function createReservationEntry(reservation, sectionId) {
             xhr.send(JSON.stringify(data))
         }
 
-        status.appendChild(cancelBtn)
+        cancellation.appendChild(cancelBtn)
+        tr.appendChild(cancellation)
     }
 
-    return line
+    return tr
 }
 
 function loadReservationSection(xhr, sectionId) {
@@ -112,50 +83,24 @@ function loadReservationSection(xhr, sectionId) {
             }
 
             let header = document.createElement("div")
-            header.classList.add("section-top")
-
-            let headerTitle = document.createElement("span")
-            headerTitle.classList.add("section-title")
-            headerTitle.innerText = title
+            header.setAttribute("id", sectionId + "-header")
+            let headerTitle = document.createElement("h4")
+            headerTitle.textContent = title
             header.appendChild(headerTitle)
 
-            let sectionHeader = document.createElement("div")
-            sectionHeader.classList.add("section-header")
-
-
-            let table = ["Shop", "Date/Time", "People", "Options"]
-            let tableClass= ["shop", "datetime", "people", "status"]
-
-            if(title === "Today"){
-                table = ["Shop", "Time", "People", "Options"];
-            }else if(title === "History"){
-                table = ["Shop", "Date/Time", "People", "Status"];
-            }
-
-            for(entry in table){
-                let span = document.createElement("span")
-                span.classList.add("reservation-"+tableClass[entry])
-                span.innerText = table[entry]
-                sectionHeader.appendChild(span)
-            }
-
-            let sectionContent = document.createElement("section-content")
-
-            section.appendChild(header)
-            section.appendChild(sectionHeader)
-            section.appendChild(sectionContent)
-
+            let table = createBootstrapTable(sectionId, ["Shop", "Date/Time", "People"])
             let reservations = response["Reservations"]
             for (entry in reservations) {
-                sectionContent.appendChild(createReservationEntry(reservations[entry], sectionId))
+                table.tBodies[0].appendChild(createReservationEntry(reservations[entry], sectionId))
             }
 
+            section.appendChild(header)
+            section.appendChild(table)
             section.classList.remove('d-none')
         }
     } else {
         popUpMessage("Can't load reservations. There was an unexpected error", "danger")
     }
-    loadercount.plus = 1;
 }
 
 function loadPage() {
@@ -174,8 +119,6 @@ function loadPage() {
                 div.textContent = "You don't have any reservations."
                 let contents = document.getElementById("contents")
                 contents.appendChild(div)
-                $('#loading').fadeOut();
-                $('#contents').removeAttr('hidden').fadeIn("slow");
             } else {
                 loadTodayReservations()
                 loadPendingReservations()

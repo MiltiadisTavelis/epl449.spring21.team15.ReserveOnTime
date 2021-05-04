@@ -1,0 +1,281 @@
+body {
+  min-height: 100vh;
+  position: relative;
+  margin: 0;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+}
+
+#contents {
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.navbar.navbar-light.navbar-expand-md {
+  background: white;
+  box-shadow: none !important;
+  z-index: 1000;
+  width: 100%;
+}
+
+@media (min-width: 1350px) {
+  .navbar.navbar-light.navbar-expand-md {
+    background: transparent !important;
+  }
+}
+
+#nav-list.show {
+  background: transparent;
+}
+
+#signup-btn {
+  background-color: transparent;
+  border-color: #ec9b3b;
+}
+
+.nav-item a {
+  color: rgb(0,0,0) !important;
+  margin: 5px;
+}
+
+.navbar-brand.nav-logo {
+  color: #000000 !important;
+}
+
+.navbar-brand.nav-logo {
+  color: #000000 !important;
+}
+
+.navbar-toggler {
+  border-style: none;
+}
+
+#signout-btn {
+  background-color: transparent;
+  border-color: #ec9b3b;
+}
+
+.content-tables {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+#today, #pending, #upcoming, #history {
+  margin: 40px;
+  width: 1440px;
+}
+
+@media (max-width: 576px) {
+  #today, #pending, #upcoming, #history {
+    margin: 10px;
+  }
+}
+
+.section-top {
+  display: flex;
+  align-items: center;
+}
+
+.section-filter {
+  width: 100%;
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.section-filter .filter {
+  margin: 0;
+  padding: 5px 15px;
+  color: black;
+  background: #ebebeb;
+}
+
+.section-title {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.section-header {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  display: inline-flex;
+  border-radius: 10px;
+  background: #f5f5f5;
+  color: #848484;
+  width: 100%;
+  padding: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 830px) {
+  .section-header {
+    display: none;
+  }
+}
+
+.reservation-line {
+  margin-bottom: 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+  line-height: 20px;
+}
+
+@media (max-width: 830px) {
+  .reservation-line {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,9,61,0.2) !important;
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+}
+
+.shop-name {
+  color: black;
+}
+
+.shop-name:hover {
+  text-decoration: none;
+  color: #ec9b3b;
+}
+
+.reservation-shop {
+  display: flex;
+  justify-content: flex-start;
+  width: 25%;
+  height: 1.2em;
+  line-height: 1.2em;
+  overflow: auto;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 830px) {
+  .reservation-shop {
+    width: 100%;
+    justify-content: flex-start;
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .reservation-shop {
+    font-size: 15px;
+  }
+}
+
+.reservation-datetime {
+  justify-content: center;
+  display: flex;
+  width: 25%;
+  white-space: pre;
+}
+
+@media (max-width: 830px) {
+  .reservation-datetime {
+    width: initial;
+    color: #818181;
+  }
+}
+
+@media (max-width: 830px) {
+  .reservation-datetime:before {
+    content: "Day/Time: ";
+  }
+}
+
+@media (max-width: 830px) {
+  #today .reservation-datetime:before {
+    content: "Time: ";
+  }
+}
+
+.reservation-people {
+  justify-content: center;
+  display: flex;
+  width: 25%;
+  white-space: pre;
+}
+
+@media (max-width: 830px) {
+  .reservation-people {
+    width: 100%;
+    justify-content: flex-start;
+    color: #818181;
+  }
+}
+
+@media (max-width: 830px) {
+  .reservation-people:before {
+    content: "People: ";
+  }
+}
+
+.reservation-status {
+  justify-content: center;
+  display: flex;
+  width: 25%;
+}
+
+@media (max-width: 830px) {
+  .reservation-status {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+.option-btn {
+  padding: 2px 10px;
+  color: black !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  background-color: #ededed !important;
+  font-weight: 600;
+}
+
+.visual-status {
+  position: absolute;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  margin-right: 30px;
+  background: #ededed;
+  border-radius: 50%;
+  display: block;
+}
+
+@media (max-width: 830px) {
+  .visual-status {
+    top: 0;
+    margin: 10px;
+  }
+}
+
+#today .visual-status, #upcoming .visual-status {
+  background: #81ff76;
+}
+
+.green-status {
+  background: #81ff76 !important;
+}
+
+.red-status {
+  background: #ff7676 !important;
+}
+
+
+
