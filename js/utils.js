@@ -182,11 +182,11 @@ function createShopCard(shop) {
     for (var i = 0; i < 5; i++) {
         if(shop.rating >= i){
             let iconStore = document.createElement("i")
-            iconStore.classList.add("fa","fa-star")
+            iconStore.classList.add('fas', 'fa-star');
             shopRating.appendChild(iconStore)
         }else{
             let iconStore = document.createElement("i")
-            iconStore.classList.add("fa","fa-star-o")
+            iconStore.classList.add('far', 'fa-star');
             shopRating.appendChild(iconStore)
         }
     }

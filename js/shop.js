@@ -457,9 +457,9 @@ function loadReviews() {
                         for (var i = 1; i <= 5; i++) {
                             var star = document.createElement('i');
                             if (i <= parseInt(review.rating)) {
-                                star.classList.add('fa', 'fa-star');
+                                star.classList.add('fas', 'fa-star');
                             } else {
-                                star.classList.add('fa', 'fa-star-o');
+                                star.classList.add('far', 'fa-star');
                             }
                             rating.appendChild(star);
                         }
