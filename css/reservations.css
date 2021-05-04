@@ -102,6 +102,12 @@ body {
   font-size: 35px;
 }
 
+@media (max-width: 576px) {
+  .section-title {
+    font-size: 25px;
+  }
+}
+
 .section-header {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
