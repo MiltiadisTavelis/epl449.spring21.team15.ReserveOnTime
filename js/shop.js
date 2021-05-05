@@ -202,6 +202,7 @@ function loadHours() {
 // }
 
 function submit() {
+    $("#reservation-btn").prop('disabled', true);
     console.log()
     var people = $('#people-input').find(':selected').val();
     var day = document.getElementById('date-req-input');
@@ -218,6 +219,7 @@ function submit() {
    
     if(people.length === 0 || day.value.length === 0 || time.length === 0){
         popUpMessage("Please fill in all the required fields.", "danger");
+        $("#reservation-btn").prop('disabled', false);
         return;
     }else{
 	    xhr.onload = function() {
@@ -232,16 +234,17 @@ function submit() {
 	                popUpMessage(response['message'], "success");
 	                $("#reservation-btn").contents().filter(isTextNode).fadeOut('slow').remove();
 	                $("#reservation-btn").addClass('success');
-	                $("#reservation-btn").prop('disabled', true);
 	                setTimeout(function() {
 	                    window.location = "reservations.html"
 	                }, 2000);
 	            } else {
 	                popUpMessage(response['status'], "danger");
+                    $("#reservation-btn").prop('disabled', false);
 	            }
 
 	        } else {
 	            popUpMessage("There was an unexpected error", "danger");
+                $("#reservation-btn").prop('disabled', false);
 	        }
 	    }
 	}
@@ -691,6 +694,7 @@ $('.button-hold').click(function (){
 });
 
 function addReview() {
+    $("#submit-review").prop('disabled', true);
     var content = document.getElementById('modal-content-input');
     var xhr = new XMLHttpRequest();
     var data = {
@@ -711,17 +715,18 @@ function addReview() {
                 }, 2000);
             }else if (response.hasOwnProperty('status')) {
                 popUpMessage(response['status'], "danger");
+                $("#submit-review").prop('disabled', false);
             } else if (response.hasOwnProperty('message')) {
                 popUpMessage(response['message'], "success");
                 $("#submit-review").contents().filter(isTextNode).fadeOut('slow').remove();
                 $("#submit-review").addClass('success');
-                $("#submit-review").prop('disabled', true);
                 setTimeout(function() {
                   location.reload();
                 }, 2000);
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");
+            $("#submit-review").prop('disabled', false);
         }
     }
 
