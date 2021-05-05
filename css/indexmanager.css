@@ -1,0 +1,523 @@
+body {
+  min-height: 100vh;
+  position: relative;
+  margin: 0;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.navbar.navbar-light.navbar-expand-md {
+  background: white;
+  box-shadow: none !important;
+  z-index: 1000;
+  width: 100%;
+}
+
+@media (min-width: 1350px) {
+  .navbar.navbar-light.navbar-expand-md {
+    background: transparent !important;
+  }
+}
+
+#nav-list.show {
+  background: transparent;
+}
+
+#signup-btn {
+  background-color: transparent;
+  border-color: #ec9b3b;
+}
+
+.nav-item a {
+  color: rgb(0,0,0) !important;
+  margin: 5px;
+}
+
+.navbar-brand.nav-logo {
+  color: #000000 !important;
+}
+
+.navbar-brand.nav-logo {
+  color: #000000 !important;
+}
+
+.navbar-toggler {
+  border-style: none;
+}
+
+#signout-btn {
+  background-color: transparent;
+  border-color: #ec9b3b;
+}
+
+.content-tables {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.section-stats {
+  margin-bottom: 0;
+  margin: 20px;
+  width: 1440px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#stats-shopname {
+  width: 100%;
+  font-size: 50px;
+  text-align: center;
+}
+
+@media (max-width: 540px) {
+  #stats-shopname {
+    font-size: 30px;
+  }
+}
+
+#shop-rating {
+  font-size: 20px;
+  margin: -12px;
+}
+
+.stats-table {
+  margin: 20px 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-radius: 10px;
+}
+
+@media (max-width: 450px) {
+  .stats-table {
+    margin: 0;
+  }
+}
+
+.stats-reservations {
+  margin: 10px;
+  background-color: #f6f8ff;
+  border-radius: 10px;
+  padding: 5px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 650px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,9,61,0.08) !important;
+}
+
+@media (max-width:450px) {
+  .stats-reservations {
+    margin: 0;
+    margin-top: 20px;
+  }
+}
+
+.stats-res-title {
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+#today, #requests, #upcoming, #history {
+  margin: 40px;
+  width: 1440px;
+}
+
+@media (max-width: 576px) {
+  #today, #requests, #upcoming, #history {
+    margin: 10px;
+  }
+}
+
+.section-top {
+  display: flex;
+  align-items: center;
+}
+
+.section-filter {
+  width: 100%;
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.section-filter .filter {
+  margin: 0;
+  padding: 5px 15px;
+  color: black;
+  background: #ebebeb;
+}
+
+.section-title {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+@media (max-width: 576px) {
+  .section-title {
+    font-size: 25px;
+  }
+}
+
+.section-header {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  display: inline-flex;
+  border-radius: 10px;
+  background: #f5f5f5;
+  color: #848484;
+  width: 100%;
+  padding: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 830px) {
+  .section-header {
+    display: none;
+  }
+}
+
+.reservation-line {
+  margin-bottom: 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+  line-height: 20px;
+}
+
+@media (max-width: 830px) {
+  .reservation-line {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,9,61,0.2) !important;
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+}
+
+.shop-name {
+  color: black;
+}
+
+.shop-name:hover {
+  text-decoration: none;
+  color: #ec9b3b;
+}
+
+@media (max-width: 830px) {
+  .reservation-name {
+    width: 100% !important;
+    justify-content: flex-start;
+  }
+}
+
+.reservation-name {
+  display: flex;
+  justify-content: flex-start;
+  width: 20%;
+  height: 1.2em;
+  line-height: 1.2em;
+  overflow: auto;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 830px) {
+  .reservation-phone {
+    white-space: pre;
+    width: 100% !important;
+    justify-content: flex-start !important;
+    display: flex;
+    color: #818181;
+  }
+}
+
+.reservation-phone {
+  width: 20%;
+  justify-content: center;
+  display: flex;
+}
+
+@media (max-width: 830px) {
+  .reservation-shop {
+    width: 100%;
+    justify-content: flex-start;
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .reservation-shop {
+    font-size: 15px;
+  }
+}
+
+.reservation-datetime {
+  justify-content: center;
+  display: flex;
+  width: 20%;
+  white-space: pre;
+}
+
+@media (max-width: 830px) {
+  .reservation-datetime {
+    width: initial;
+    color: #818181;
+  }
+}
+
+@media (max-width: 830px) {
+  .reservation-phone:before {
+    content: "Phone: ";
+  }
+}
+
+@media (max-width: 830px) {
+  .reservation-datetime:before {
+    content: "Day/Time: ";
+  }
+}
+
+@media (max-width: 830px) {
+  #today .reservation-datetime:before {
+    content: "Time: ";
+  }
+}
+
+.reservation-people {
+  justify-content: center;
+  display: flex;
+  width: 20%;
+  white-space: pre;
+}
+
+@media (max-width: 830px) {
+  .reservation-people {
+    width: 100%;
+    justify-content: flex-start;
+    color: #818181;
+  }
+}
+
+@media (max-width: 830px) {
+  .reservation-people:before {
+    content: "People: ";
+  }
+}
+
+.reservation-status {
+  justify-content: center;
+  display: flex;
+  width: 20%;
+}
+
+@media (max-width: 830px) {
+  .reservation-status {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+.option-btn {
+  margin: 0px 3px;
+  padding: 2px 10px;
+  color: black !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  background-color: #ededed !important;
+  font-weight: 600;
+}
+
+@media (min-width: 1408px) {
+  .visual-status {
+    margin-right: 30px !important;
+  }
+}
+
+.visual-status {
+  position: absolute;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  background: #ededed;
+  border-radius: 50%;
+  display: block;
+}
+
+@media (max-width: 830px) {
+  .visual-status {
+    top: 0;
+    margin: 10px;
+  }
+}
+
+#today .visual-status, #upcoming .visual-status {
+  background: #81ff76;
+}
+
+.green-status {
+  background: #81ff76 !important;
+}
+
+.red-status {
+  background: #ff7676 !important;
+}
+
+.stats-reviews .progress-circle {
+  margin: 10px;
+  max-width: 70px;
+  min-width: 40px;
+  max-height: 70px;
+  min-height: 40px;
+  position: relative;
+}
+
+.progress-circle {
+  margin: 10px;
+  max-width: 100px;
+  min-width: 70px;
+  max-height: 100px;
+  min-height: 70px;
+  position: relative;
+}
+
+.stats-details {
+  margin: 10px 0px;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  font-size: 16px;
+  font-family: 'Source Sans Pro';
+  font-weight: 600;
+}
+
+.progress-circles {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.stats-reviews {
+  /*max-height: 154px;*/
+  /*min-height: 124px;*/
+  margin: 10px;
+  background-color: #f6f8ff;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 5px 10px;
+  display: flex;
+  max-width: 650px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,9,61,0.08) !important;
+}
+
+@media (max-width: 450px) {
+  .stats-reviews {
+    margin: 0;
+    margin-top: 10px;
+  }
+}
+
+.stats-reviews span {
+  width: 100%;
+  font-size: 16px;
+  font-family: 'Source Sans Pro';
+  font-weight: 600;
+}
+
+.inner-span {
+  color: #7b7b7b;
+  font-weight: 400 !important;
+}
+
+.total-reviews {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+@media (max-width: 450px) {
+  .total-reviews {
+    padding: 0;
+    height: 60px;
+  }
+}
+
+#total-number {
+  margin: 0;
+  font-size: 50px;
+  font-family: 'Coda Caption', sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 450px) {
+  #total-number {
+    margin-bottom: -40px;
+    font-size: 30px;
+  }
+}
+
+.total-reviews span {
+  margin-top: -20px;
+  font-size: 20px;
+  font-family: 'Coda Caption', sans-serif;
+  font-weight: 200;
+}
+
+@media (max-width: 450px) {
+  .total-reviews span {
+    font-size: 15px;
+    margin: 20px 0px 0px;
+  }
+}
+
+.stats-reviews .progress-circles {
+  flex-wrap: wrap;
+}
+
+.section-circles {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.section-circles .stats-details {
+  margin: 0 !important;
+  text-align: center;
+}
+
+.option-btn.accept {
+  border-radius: 40px;
+  background: rgb(224,255,222) !important;
+}
+
+.option-btn.decline {
+  border-radius: 40px;
+  background: rgba(255,179,179,0.28) !important;
+}
+
