@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -24,23 +23,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/managerlogin.css">
+    <link rel="stylesheet" href="../css/signin.css">
     <link rel="stylesheet" href="../css/theme2.css">
 </head>
 <body>
-    <nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand nav-logo" href="../html/index.html">ReserveOnTime</a><button data-toggle="collapse" class="navbar-toggler" data-target="#nav-list"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse text-center flex-row-reverse" id="nav-list">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link active d-none" id="reservations-btn" href="reservations.html">Reservations</a></li>
-                    <li class="nav-item"><a class="nav-link active d-none" id="account-btn" href="account.html">Account</a></li>
-                    <li class="nav-item"><a class="nav-link active d-none" id="signin-btn" href="signin.html">Sign In</a></li>
-                    <li class="nav-item"><a class="btn btn-light nav-button-border d-none" role="button" id="signup-btn" href="signup.html">Sign Up</a></li>
-                    <li class="nav-item"><a class="btn btn-light nav-button-border d-none" role="button" id="signout-btn" href="#">Sign Out</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     <div id="contents">
         <section id="form-section" class="login-clean">
             <form id="form-padding" class="needs-validation" method="post">
@@ -49,7 +35,8 @@
                 <header id="mng-header" class="mb-4"><label id="mng-label">Manager</label></header>
                 <div class="d-flex justify-content-center" id="div-form-group">
                     <div class="form-group"><input class="form-control form-input" type="email" id="email-input" placeholder="Email" name="email" required="" inputmode="email"><input class="form-control form-input" type="password" id="password-input" name="password" placeholder="Password" required="" style="margin-top: 20px;"></div>
-                </div><a class="forgot" href="requestreset.html">Forgot your password?</a><button class="btn btn-primary" id="login-btn" type="submit">Log In</button>
+                </div>
+                <a class="forgot" href="requestreset.html">Forgot your password?</a><button class="btn btn-primary" id="login-btn" type="submit">Log In</button>
                 <div id="div-after-login">
                     <p class="p-after-login">Don't have an account?&nbsp;<a href="../html/signup.html">Sign Up</a></p>
                     <p class="p-after-login">Sign in as a user?&nbsp;<a href="../html/signin.html">Click Here</a></p>
@@ -76,5 +63,4 @@
     <script type="text/javascript" src="../js/validation.js" defer></script>
     <script type="text/javascript" src="../js_manager/signin.js" defer></script>
 </body>
-
 </html>
