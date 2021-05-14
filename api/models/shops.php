@@ -665,7 +665,7 @@
 		    $insert = 'INSERT INTO IMAGES (`shop_id`, `image_url`, `size`, `type`) VALUES ';
 		    $sql = "";
 		    $files = $_POST;
-		    for($j=0; $j<count($files)-1; $j++){
+		    for($j=0; $j<count($files); $j++){
 		    	$this->image_type = ($j+1);
 		    	$image_count = $this->count_images();
 		    	if($image_count == -1){

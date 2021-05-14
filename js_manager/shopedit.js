@@ -1,252 +1,16 @@
 checkSession("m", true)
 
-var image_type, image_length, w, h = null;
-var cnt = 0;
-
 $('#loading').hide().fadeIn();
 var loadercount = {
   value: 0,
   set plus(value) {
     this.value += value;
-    if(this.value == 7){
-		$('#loading').fadeOut( "slow" );
-		$('#contents').removeAttr('hidden');
+    if(this.value == 6){
+        $('#loading').fadeOut( "slow" );
+        $('#contents').removeAttr('hidden');
     }
   }
 }
-
-function setDisableCheckboxes() {
-    var checkboxes = document.getElementsByClassName("check");
-    for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener("change", function() {
-            let day = this.id.split("-")[1]
-            document.getElementById("time-" + day).disabled = !this.checked
-        })
-    }
-    loadercount.plus = 1;
-}
-
-$(document).on('click', '.deletePreview', function() {
-    if($(this).attr('image').localeCompare("loaded") == 0){
-        var type = $(this).attr('imagetype');
-        var num = $(this).attr('num');
-        var id = '#preview-' + type + num;
-        var src = $(id).children('img').attr('src');
-        if(type.localeCompare("logo") == 0){
-            deleteimage(1,src);
-        }else if(type.localeCompare("thumbnail") == 0){
-            deleteimage(2,src);
-        }else{
-            deleteimage(3,src);
-        }
-        $(id).remove();
-    }else{
-        var type = $(this).attr('imagetype');
-        var num = $(this).attr('num');
-        var id = '#preview-' + type + num;
-        $(id).remove();
-        id = "label-" + type;
-        var l = document.getElementById(id).innerText;
-        var v = document.getElementById(type).files[num-1].name;
-        var removeValue = function(list, value, separator) {
-            separator = separator || ",";
-            var values = list.split(separator);
-            for(var i = 0 ; i < values.length ; i++) {
-                if(values[i] == value) {
-                    values.splice(i, 1);
-                    return values.join(separator);
-                }
-            }
-            return list;
-        }
-        var inner = document.getElementById(id).innerText = removeValue(l,v,",");
-        if(inner.length === 0){
-            document.getElementById(id).innerText = "Upload a photo";
-            document.getElementById(type).value = "";
-        }
-    }
-});
-
-$("#cancelCropBtn").click(function(){
-    if(image_type.localeCompare("photo") == 0){
-        var num = cnt;
-        var id = id = "label-" + image_type;
-        var l = document.getElementById(id).innerText;
-        var v = document.getElementById(image_type).files[num-1].name;
-        var removeValue = function(list, value, separator) {
-            separator = separator || ",";
-            var values = list.split(separator);
-            for(var i = 0 ; i < values.length ; i++) {
-                if(values[i] == value) {
-                    values.splice(i, 1);
-                    return values.join(separator);
-                }
-            }
-            return list;
-        }
-        var inner = document.getElementById(id).innerText = removeValue(l,v,",");
-        if(inner.length === 0){
-            document.getElementById(id).innerText = "Upload a photo";
-            document.getElementById(image_type).value = "";
-        }
-    }else{
-        document.getElementById(image_type).value = "";
-        var label = "label-" + image_type;
-        document.getElementById(label).innerText = "Upload a photo";
-    }
-});
-
-$('#logo').change(function() {
-    var i = $(this).prev('label').clone();
-    var file = $('#logo')[0].files[0].name;
-    $(this).prev('label').text(file);
-    image_length = 1;
-});
-
-$('#thumbnail').change(function() {
-    image_length = 1;
-    var i = $(this).prev('label').clone();
-    var file = $('#thumbnail')[0].files[0].name;
-    $(this).prev('label').text(file);
-});
-
-$('#photo').change(function() {
-    var p = $(this).prev('label').clone();
-    var images = $('#photo')[0].files
-    var allfiles = "";
-    for(var i=0; i<images.length; i++){
-        if(i === (images.length-1)){
-            allfiles += images[i].name;
-        }else{
-            allfiles += images[i].name + ',';
-        }
-    }
-    $(this).prev('label').text(allfiles);
-    image_length = images.length;
-});
-
-// Start upload preview image
-var $uploadCrop, tempFilename, rawImg, imageId;
-var allfiles;
-function readFile(input) {
-    if(image_type.localeCompare("thumbnail") == 0){
-        $("preview-thumbnail-image").empty();
-        createCroppie(690,265,true);
-    }else if(image_type.localeCompare("logo") == 0){
-        $("preview-logo-image").empty();
-        createCroppie(200,200,false);
-    }else{
-        createCroppie(500,500,false);
-    }
-
-    if (input) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('.upload-demo').addClass('ready');
-            $('#cropImagePop').modal('show');
-            rawImg = e.target.result;
-        }
-        reader.readAsDataURL(input);
-    }
-}
-
-function createCroppie(a,b,c) {
-    w = arguments[0];
-    h = arguments[1];
-    $('#upload-demo').croppie('destroy');
-    $uploadCrop = $('#upload-demo').croppie({
-                        viewport: {
-                            width: w,
-                            height: h,
-                        },
-                        boundary: {
-                            width: (w+100),
-                            height: (h+100),
-                        },
-                        enforceBoundary: arguments[2],
-                        enableExif: true
-                    });
-}
-
-$('#cropImagePop').on('shown.bs.modal', function() {
-    $uploadCrop.croppie('bind', {
-        url: rawImg
-    });
-});
-
-$('#cropImagePop').on('hidden.bs.modal', function() {
-    if(image_length != cnt ){
-        readFile(allfiles[cnt]);
-        cnt++;
-    }
-});
-
-$('#cropImageBtn').on('click', function(ev) {
-    $uploadCrop.croppie('result', {
-        type: 'base64',
-        format: 'jpeg',
-        size: {
-            width: w,
-            height: h
-        },
-        backgroundColor:'white'
-    }).then(function(resp) {
-        var id = 'preview-'+image_type+'-image'
-        var div = document.getElementById(id);
-        var div_count = div.childElementCount;
-
-        var divin = document.createElement("div");
-        id = "preview-" + image_type + (div_count + cnt);
-        divin.setAttribute("id",id);
-        if(image_type.localeCompare("photo") == 0){
-            divin.classList.add("photo-area","d-inline-block");
-        }else if(image_type.localeCompare("logo") == 0){
-            divin.classList.add("logo-area");
-        }else{
-            divin.classList.add("thumbnail-area");
-        }
-
-        var img = document.createElement("img");
-        img.classList.add("gambar","img-responsive","img-thumbnail","embed-responsive-item");
-        id = "image-preview-" + image_type;
-        img.setAttribute("id",id);
-        img.setAttribute("src",resp);
-        img.setAttribute("image","submited");
-
-        divin.appendChild(img);
-
-        id = "#preview-" +image_type+ "-image";
-        if(image_type.localeCompare("photo") != 0){
-            $(id).empty();
-        }else{
-            var btn = document.createElement("a");
-            btn.setAttribute("href","#");
-            btn.setAttribute("style","display: inline;");
-            btn.setAttribute("image","submited");
-            btn.classList.add("deletePreview","btn","btn-default","fas","fa-trash-alt");
-            btn.setAttribute("imagetype",image_type);
-            btn.setAttribute("num",(div_count + cnt));
-            divin.appendChild(btn);
-        }
-
-        div.appendChild(divin);
-        $('#cropImagePop').modal('hide');
-        var preview = "preview-" + image_type + "-image";
-        document.getElementById(preview).hidden = false;
-    });
-});
-
-$('.custom-file-input').on('change', function() {
-    image_type = $(this).attr('id');
-    imageId = $(this).data('id');
-    tempFilename = $(this).val();
-    $('#cancelCropBtn').data('id', imageId);        
-    readFile(this.files[0]);
-    cnt = 1;
-    allfiles = this.files;
-});
-
-// End upload preview image
 
 var shop_id;
 $(document).ready(function() {
@@ -262,12 +26,11 @@ $(document).ready(function() {
                 popUpMessage(response["status"], "danger");
             } else {
                 shop_id = response.shop_id;
-                setDisableCheckboxes();
-                loadShopTypes();
-                loadHours();
-                loadLogo();
-                loadThumbnail();
-                loadImages();
+                loadShopTypes()
+                loadHours() 
+                loadLogo()
+                loadImages()
+                loadThumbnail()
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");
@@ -279,190 +42,145 @@ $(document).ready(function() {
     xhr.send(JSON.stringify(data));
 });
 
-function submit() {
-    var days = ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"];
-    var calls = ["time-monday", "time-tuesday", "time-wednesday", "time-thursday", "time-friday", "time-saturday", "time-sunday"];
-    var checkcalls = ["check-monday", "check-tuesday", "check-wednesday", "check-thursday", "check-friday", "check-saturday", "check-sunday"];
-    var hourData = [];
-    var pattern = /[0-9]{2}:[0-9]{2}\s*-\s*[0-9]{2}:[0-9]{2}(,\s*[0-9]{2}:[0-9]{2}\s*-\s*[0-9]{2}:[0-9]{2})*/;
-    for (var i = 0; i < 7; i++) {
+function loadThumbnail(){
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/images",
+        "shop_id": shop_id,
+        "image_type": 2
+    };
 
-        var day = document.getElementById(calls[i]);
-        if (day.value) {
-            if (pattern.test(day.value)) {
-                day = day.value.split(",");
-                var leng = document.getElementById(calls[i]).value.split("-").length;
-                var allhours = [];
-                for (var j = 0; j < (leng - 1); j++) {
-                    var hours = day[j].split("-");
-                    var open = hours[0];
-                    var close = hours[1];
-                    allhours[j] = {
-                        "open": open,
-                        "close": close,
-                        "split": 0,
-                        "active": 1
-                    };
-                }
-                if (leng > 1) {
-                    var active = 0;
-                    if (document.getElementById(checkcalls[i]).checked) {
-                        active = 1
-                    }
-                    hourData.push({
-                        "day": i + 1,
-                        "active": active,
-                        "hours": allhours
-                    });
-                }
-            } else {
-                popUpMessage(days[i] + ' ' + "has not valid pattern", "danger");
-                day.setAttribute('novalidate', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response['status'],"danger");
                 return;
             }
-        } else {
-            continue;
-        }
-
-    }
-
-    var xhr = new XMLHttpRequest();
-    var data = {
-        "type": "shops/addhour",
-        "shop_id": shop_id,
-        "data": hourData
-    };
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            if (response.hasOwnProperty('status')) {
-                popUpMessage(response["status"], "danger");
-            }
-
-            popUpMessage(response["message"], "success");
-            submitDet();
+            var image = response.Images[0];
+            showimage(image.image_url,"thumbnail");
 
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
+        loadercount.plus = 1;
     }
 
-    xhr.withCredentials = true;
-    xhr.open('PUT', api);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
-}
-
-function submitDet() {
-    var name = document.getElementById('shop-name-input');
-    var type = document.getElementById('shop-type-input');
-    var city = document.getElementById('shop-city-input');
-    var area = document.getElementById('shop-area-input');
-    var street = document.getElementById('shop-street-input');
-    var zipcode = document.getElementById('shop-zipcode-input');
-    var number = document.getElementById('shop-number-input');
-    var tel = document.getElementById('shop-tel-input');
-    var email = document.getElementById('shop-email-input');
-    var description = document.getElementById('shop-description-input');
-
-    var xhr = new XMLHttpRequest();
-    var data = {
-        "type": "shops/shopdetails",
-        "sname": name.value,
-        "stype": type.value,
-        "email": email.value,
-        "pnum": tel.value,
-        "city": city.value,
-        "area": area.value,
-        "street": street.value,
-        "postcode": zipcode.value,
-        "streetnum": number.value,
-        "shop_id": shop_id,
-        "description": description.value
-    };
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            if (response.hasOwnProperty('status')) {
-                popUpMessage(response["status"], "danger");
-            } else {
-                popUpMessage(response["message"], "success");
-                submitImages();
-            }
-        } else {
-            popUpMessage("There was an unexpected error", "danger");
-        }
-    }
-    xhr.withCredentials = true;
-    xhr.open('PUT', api);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
-}
-
-function submitImages() {
-    var logo = document.getElementById("preview-logo-image");
-    var thumbnail = document.getElementById("preview-thumbnail-image");
-    var images = document.getElementById("preview-photo-image");
-    if(logo.childElementCount+thumbnail.childElementCount+images.childElementCount === 0){return;}
-    var formData = new FormData();
-    var upload = false;
-    var img = $("#preview-logo-image").find("img"),len = img.length;
-    formData.append("logo",[]);
-    if( len > 0 && img.attr('image').localeCompare("submited") == 0){
-        upload = true;
-        var src = img.first().attr("src");
-        formData.append("logo",src);
-    }
-
-    var img = $("#preview-thumbnail-image").find("img"),len = img.length;
-    formData.append("thumbnail",[]);
-    if( len > 0 && img.attr('image').localeCompare("submited") == 0){
-        upload = true;
-        var src = img.first().attr("src");
-        formData.append("thumbnail",src);
-    }
-    var img = document.getElementById("preview-photo-image");
-    var divs = img.getElementsByTagName('div');
-    for (var i = 0; i < divs.length; i ++) {
-        var check = divs[i].getElementsByTagName('img')[0].getAttribute("image");
-        if(check.localeCompare("submited") == 0){
-            upload = true;
-            var src = divs[i].getElementsByTagName('img')[0].src;
-            formData.append("photo[]",src);
-        }
-    }
-
-    if(upload == false){
-        return;
-    }
-
-    var xhr = new XMLHttpRequest();
-    var data =  {
-                    "type": "shops/addimages",
-                    "shop_id": shop_id
-                };
-    formData.append("json", JSON.stringify(data));
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            if (response.hasOwnProperty('status')) {
-                popUpMessage(response["status"], "danger");
-            } else {
-                popUpMessage(response["message"], "success");
-                setTimeout(function() {
-                    location.reload();
-                }, 2000);
-            }
-        } else {
-            popUpMessage("There was an unexpected error", "danger");
-        }
-    }
     xhr.withCredentials = true;
     xhr.open('POST', api);
-    xhr.send(formData);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
+function loadImages(){
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/images",
+        "shop_id": shop_id,
+        "image_type": 3
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.hasOwnProperty('status')) {
+                return;
+            }
+            for (var i = 0; i < response.Images.length; i++) {
+                var image = response.Images[i];
+                showimage(image.image_url,"photo");
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+        loadercount.plus = 1;
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
+function showimage(a,b){
+    image_type = arguments[1];
+    url = arguments[0];
+    if(image_type === 'photo'){
+        var imgpackage = document.createElement("div")
+        imgpackage.classList.add("image-package")
+        
+        var img = document.createElement("img")
+        img.classList.add("preview-sqr")
+        img.src = url;
+        img.setAttribute("image","loaded")
+        imgpackage.appendChild(img)
+        
+        var button = document.createElement("button")
+        button.classList.add("img-delete")
+        button.setAttribute("type","button")
+        button.innerHTML = '<i class="fas fa-times"></i>'
+        imgpackage.appendChild(button)
+        button.addEventListener('click', function() {
+            if($(this).parent().children('img').attr('image').localeCompare("loaded") == 0){
+                var src = $(this).parent().children('img').attr('src');
+                deleteimage(3,src);
+                // if(type.localeCompare("logo") == 0){
+                //     deleteimage(1,src);
+                // }else if(type.localeCompare("thumbnail") == 0){
+                //     deleteimage(2,src);
+                // }else{
+                //     deleteimage(3,src);
+                // }
+            }
+            $(this).parent().remove(); 
+        }, false);
+        
+        document.getElementById('preview-photo-section').appendChild(imgpackage)
+    }else{
+        var imgpackage = document.createElement("div")
+        imgpackage.classList.add("image-package")
+        
+        var img = document.createElement("img")
+        img.classList.add("preview-thumb")
+        img.src = url;
+        img.setAttribute("image","loaded")
+        img.setAttribute("id","preview-thumbnail")
+        imgpackage.appendChild(img)
+        
+        document.getElementById('preview-thumbnail-section').appendChild(imgpackage)
+    }
+}
+
+function loadLogo(){
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/images",
+        "shop_id": shop_id,
+        "image_type": 1
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.hasOwnProperty('status')) {
+                return;
+            }
+            var image = response.Images[0];
+            document.getElementById("preview-logo").src = image.image_url
+
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+        loadercount.plus = 1;
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
 }
 
 function loadHours() {
@@ -546,6 +264,199 @@ function loadShopTypes() {
     xhr.send(JSON.stringify(data));
 }
 
+const links = document.querySelectorAll('.navigation__modal')
+links.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const active = document.querySelector('.navigation__modal.active');
+        if(active !== null) {
+            active.classList.remove('active');
+        }
+    })
+})
+
+$("#shop-type-input").length && $("#shop-type-input").select2({
+        placeholder: "The type of the shop",
+        theme: "bootstrap4",
+        width: "100%",
+        minimumResultsForSearch: 1 / 0
+});
+
+$("#shop-city-input").length && $("#shop-city-input").select2({
+        placeholder: "City",
+        theme: "bootstrap4",
+        width: "100%",
+        minimumResultsForSearch: 1 / 0
+});
+var $image = $('#upload-image'),
+            cropBoxData,
+            canvasData;
+$(function(){
+    
+    FilePond.registerPlugin(
+        FilePondPluginFileValidateSize,
+        FilePondPluginFileValidateType
+    );
+    var $uploadCrop;
+    
+    let newImage;
+    var isLogo = false;
+    var isPhoto = false;
+    $('#cropImageBtn').on('click', function(ev) {
+        const contentType = 'image/jpeg';
+        var base64 = $image.cropper('getCroppedCanvas', { 
+              fillColor: '#fff' 
+        }).toDataURL("image/jpeg");
+        $('#cropImagePop').modal('hide');
+
+        if(isLogo){
+            $('#preview-logo').attr('image','submited');
+            $('#preview-logo').attr('src',base64);
+            pond.removeFile()   
+        }else if(isPhoto){
+            var imgpackage = document.createElement("div")
+            imgpackage.classList.add("image-package")
+            
+            var img = document.createElement("img")
+            img.classList.add("preview-sqr")
+            img.src = base64;
+            img.setAttribute("image","submited")
+            imgpackage.appendChild(img)
+            
+            var button = document.createElement("button")
+            button.classList.add("img-delete")
+            button.setAttribute("type","button")
+            button.innerHTML = '<i class="fas fa-times"></i>'
+            imgpackage.appendChild(button)
+            button.addEventListener('click', function() { $(this).parent().remove(); }, false);
+            
+            document.getElementById('preview-photo-section').appendChild(imgpackage)
+            pond2.removeFile()   
+        }else{
+            $('#preview-thumbnail').attr('image','submited');
+            $('#preview-thumbnail').attr('src',base64);
+            pond3.removeFile()  
+        }
+    });
+
+    const inputElement = document.getElementById('logo');
+    const inputElement2 = document.getElementById('photo');
+    const inputElement3 = document.getElementById('thumbnail');
+
+    const pond = FilePond.create(inputElement, {
+        allowReplace: true,
+        allowRevert: false,
+        instantUpload: false,
+        maxFileSize: '5MB',
+        acceptedFileTypes: ['image/png', 'image/jpeg']
+    });
+
+    const pond2 = FilePond.create(inputElement2, {
+        allowReplace: true,
+        allowRevert: false,
+        instantUpload: false,
+        maxFileSize: '5MB',
+        acceptedFileTypes: ['image/png', 'image/jpeg']
+    });
+
+    const pond3 = FilePond.create(inputElement3, {
+        allowReplace: true,
+        allowRevert: false,
+        instantUpload: false,
+        maxFileSize: '5MB',
+        acceptedFileTypes: ['image/png', 'image/jpeg']
+    });
+
+    document.querySelectorAll('.upload').forEach(item => {
+        item.addEventListener('FilePond:addfile', e => {
+            isLogo = false;
+            isPhoto = false;
+            if(e.srcElement.id === 'logo'){
+                isLogo = true;
+            }else if(e.srcElement.id === 'photo'){
+                isPhoto = true;
+                if($("#preview-photo-section").children().length == 4){
+                    popUpMessage("You can't post more than 4 images", "danger");
+                    pond2.removeFile()
+                    return;
+                }
+            }
+            if (e.detail && e.detail.error === null) {
+                if (e.detail.file && e.detail.file.file.name) {
+                    crop(e.detail.file.file)//, e.srcElement.id)
+                }
+            }
+        })
+    });
+    
+    function dataURLtoFile(dataurl, filename) {
+ 
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), 
+            n = bstr.length, 
+            u8arr = new Uint8Array(n);
+            
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        
+        return new File([u8arr], filename, {type:mime});
+    }
+    $("#cropImagePop").modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+    $('#cropImagePop').on('shown.bs.modal', function () {
+        if(isPhoto || isLogo){
+            $image.cropper({
+                dragMode: 'move',
+                aspectRatio: 1,
+                cropBoxResizable: false,
+                viewMode: 1
+            });
+        }else{
+            $image.cropper({
+                dragMode: 'move',
+                aspectRatio: 1440/550,
+                cropBoxResizable: false,
+                viewMode: 1,
+                autoCropArea: 1
+            });
+        }
+    }).on('hidden.bs.modal', function () {
+      cropBoxData = $image.cropper('getCropBoxData');
+      canvasData = $image.cropper('getCanvasData');
+      $image.cropper('destroy');
+    });
+    
+    function crop(file){
+        var fr = new FileReader();
+        fr.onload = function () {
+            $('#upload-image').attr("src",fr.result)
+        }
+        fr.readAsDataURL(file);
+        $('#cropImagePop').modal('show'); 
+    }
+
+    
+    $('#cancelCropBtn').on('click', function(ev) {
+        pond.removeFile()
+        pond2.removeFile()
+        pond3.removeFile()
+        $('#cropImagePop').modal('hide'); 
+    })
+
+});
+
+var checkboxes = document.getElementsByClassName("check-hours");
+for (let i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].addEventListener("change", function() {
+        let day = this.id.split("-")[1]
+        document.getElementById("time-" + day).disabled = !this.checked
+    })
+}
+
 function loadDet() {
     var name = document.getElementById('shop-name-input');
     var type = document.getElementById('shop-type-input');
@@ -574,8 +485,12 @@ function loadDet() {
                 }, 1000);
             } else {
                 name.value = response.sname;
-                type.value = response.stype_id;
-                city.value = response.city_id;
+                $('#shop-type-input').val(response.stype_id);
+                $('#shop-type-input').trigger('change');
+                //type.value = response.stype_id;
+                //city.value = response.city_id;
+                $('#shop-city-input').val(response.city_id);
+                $('#shop-city-input').trigger('change');
                 area.value = response.area;
                 street.value = response.street;
                 zipcode.value = response.postal_code;
@@ -589,146 +504,6 @@ function loadDet() {
         }
         loadercount.plus = 1;
     }
-    xhr.withCredentials = true;
-    xhr.open('POST', api);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
-}
-
-function loadLogo(){
-    var xhr = new XMLHttpRequest();
-    var data = {
-        "type": "shops/images",
-        "shop_id": shop_id,
-        "image_type": 1
-    };
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-
-            if (response.hasOwnProperty('status')) {
-                return;
-            }
-            var image = response.Images[0];
-            createCroppie(200,200,false); 
-            showimage(200,200,"logo",1,image.image_url)
-
-        } else {
-            popUpMessage("There was an unexpected error", "danger");
-        }
-        loadercount.plus = 1;
-    }
-
-    xhr.withCredentials = true;
-    xhr.open('POST', api);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
-}
-
-function loadImages(){
-    var xhr = new XMLHttpRequest();
-    var data = {
-        "type": "shops/images",
-        "shop_id": shop_id,
-        "image_type": 3
-    };
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-
-            if (response.hasOwnProperty('status')) {
-                return;
-            }
-            for (var i = 0; i < response.Images.length; i++) {
-                var image = response.Images[i];
-                createCroppie(500,500,false); 
-                showimage(500,500,"photo",(i+1),image.image_url);
-            }
-        } else {
-            popUpMessage("There was an unexpected error", "danger");
-        }
-        loadercount.plus = 1;
-    }
-
-    xhr.withCredentials = true;
-    xhr.open('POST', api);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
-}
-
-function showimage(a,b,c,d,e){
-    image_type = arguments[2];
-    cnt = arguments[3];
-    url = arguments[4];
-    var id = 'preview-'+image_type+'-image'
-    var div = document.getElementById(id);
-
-    var divin = document.createElement("div");
-    id = "preview-" + image_type + cnt
-    divin.setAttribute("id",id);
-    if(image_type.localeCompare("photo") == 0){
-        divin.classList.add("photo-area","d-inline-block");
-    }else if(image_type.localeCompare("logo") == 0){
-        divin.classList.add("logo-area");
-    }else{
-        divin.classList.add("thumbnail-area");
-    }
-
-    var img = document.createElement("img");
-    img.classList.add("gambar","img-responsive","img-thumbnail","embed-responsive-item");
-    id = "image-preview-" + image_type;
-    img.setAttribute("id",id);
-    img.setAttribute("src",url);
-    img.setAttribute("image","loaded");
-
-    divin.appendChild(img);
-
-    id = "#preview-" +image_type+ "-image";
-    if(image_type.localeCompare("photo") != 0){
-        $(id).empty();
-    }else{
-        var btn = document.createElement("a");
-        btn.setAttribute("href","#");
-        btn.setAttribute("style","display: inline;");
-        btn.setAttribute("image","loaded");
-        btn.classList.add("deletePreview","btn","btn-default","fas","fa-trash-alt");
-        btn.setAttribute("imagetype",image_type);
-        btn.setAttribute("num",cnt);
-        divin.appendChild(btn);
-    }
-    div.appendChild(divin);
-    var preview = "preview-" + image_type + "-image";
-    document.getElementById(preview).hidden = false;
-}
-
-function loadThumbnail(){
-    var xhr = new XMLHttpRequest();
-    var data = {
-        "type": "shops/images",
-        "shop_id": shop_id,
-        "image_type": 2
-    };
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-
-            if (response.hasOwnProperty('status')) {
-                popUpMessage(response['status'],"danger");
-                return;
-            }
-            var image = response.Images[0];
-            createCroppie(690,265,false); 
-            showimage(690,265,"thumbnail",1,image.image_url)
-
-        } else {
-            popUpMessage("There was an unexpected error", "danger");
-        }
-        loadercount.plus = 1;
-    }
-
     xhr.withCredentials = true;
     xhr.open('POST', api);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -763,3 +538,188 @@ function deleteimage(a,b){
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 }
+
+var submitImages = document.getElementById("photo-btn");
+submitImages.addEventListener("click", function() {
+    // var logo = document.getElementById("preview-logo-image");
+    // var thumbnail = document.getElementById("preview-thumbnail-image");
+    // var images = document.getElementById("preview-photo-image");
+    var formData = new FormData();
+    var upload = false;
+    formData.append("logo",[]);
+
+    if($('#preview-logo').attr('image') === "submited"){
+        upload = true;
+        formData.append("thumbnail",$(this).attr('src'));
+    }
+
+    if($('#preview-thumbnail').attr('image') === "submited"){
+        upload = true;
+        formData.append("thumbnail",$(this).attr('src'));
+    }
+
+    var images = $('#preview-photo-section').find('img').map(function(){
+        if($(this).attr('image') === "submited"){
+            return $(this).attr('src')
+        }
+    }).get()
+
+    for (var i = 0; i < images.length; i ++) {
+        upload = true;
+        var src = images[i];
+        formData.append("photo[]",src);
+    }
+    if(upload == false){
+        popUpMessage("No new image uploads", "danger");
+        return;
+    }
+
+    var xhr = new XMLHttpRequest();
+    var data =  {
+                    "type": "shops/addimages",
+                    "shop_id": shop_id
+                };
+    formData.append("json", JSON.stringify(data));
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response["status"], "danger");
+            } else {
+                popUpMessage(response["message"], "success");
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.send(formData);
+})
+
+var submitHours = document.getElementById("hours-btn");
+submitHours.addEventListener("click", function() {
+    var days = ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"];
+    var calls = ["time-monday", "time-tuesday", "time-wednesday", "time-thursday", "time-friday", "time-saturday", "time-sunday"];
+    var checkcalls = ["check-monday", "check-tuesday", "check-wednesday", "check-thursday", "check-friday", "check-saturday", "check-sunday"];
+    var hourData = [];
+    var pattern = /[0-9]{2}:[0-9]{2}\s*-\s*[0-9]{2}:[0-9]{2}(,\s*[0-9]{2}:[0-9]{2}\s*-\s*[0-9]{2}:[0-9]{2})*/;
+    for (var i = 0; i < 7; i++) {
+
+        var day = document.getElementById(calls[i]);
+        if (day.value) {
+            if (pattern.test(day.value)) {
+                console.log("here2")
+                day = day.value.split(",");
+                var leng = document.getElementById(calls[i]).value.split("-").length;
+                var allhours = [];
+                for (var j = 0; j < (leng - 1); j++) {
+                    var hours = day[j].split("-");
+                    var open = hours[0];
+                    var close = hours[1];
+                    allhours[j] = {
+                        "open": open,
+                        "close": close,
+                        "split": 0,
+                        "active": 1
+                    };
+                }
+                if (leng > 1) {
+                    var active = 0;
+                    if (document.getElementById(checkcalls[i]).checked) {
+                        active = 1
+                    }
+                    hourData.push({
+                        "day": i + 1,
+                        "active": active,
+                        "hours": allhours
+                    });
+                }
+            } else {
+                console.log("here12")
+                popUpMessage(days[i] + ' ' + "has not valid pattern", "danger");
+                return;
+            }
+        } else {
+            continue;
+        }
+
+    }
+
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/addhour",
+        "shop_id": shop_id,
+        "data": hourData
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response["status"], "danger");
+            }else{
+                popUpMessage(response["message"], "success");
+            }
+
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('PUT', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+})
+
+var submitDetails = document.getElementById("details-btn");
+submitDetails.addEventListener("click", function() {
+    var name = document.getElementById('shop-name-input');
+    var type = $("#shop-type-input").val();
+    var city = $("#shop-city-input").val();
+    var area = document.getElementById('shop-area-input');
+    var street = document.getElementById('shop-street-input');
+    var zipcode = document.getElementById('shop-zipcode-input');
+    var number = document.getElementById('shop-number-input');
+    var tel = document.getElementById('shop-tel-input');
+    var email = document.getElementById('shop-email-input');
+    var description = document.getElementById('shop-description-input');
+
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/shopdetails",
+        "sname": name.value,
+        "stype": type,
+        "email": email.value,
+        "pnum": tel.value,
+        "city": city,
+        "area": area.value,
+        "street": street.value,
+        "postcode": zipcode.value,
+        "streetnum": number.value,
+        "shop_id": shop_id,
+        "description": description.value
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty('status')) {
+                popUpMessage(response["status"], "danger");
+            } else {
+                popUpMessage(response["message"], "success");
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+    xhr.withCredentials = true;
+    xhr.open('PUT', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+})

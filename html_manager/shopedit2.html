@@ -1,0 +1,301 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shop Settings - Reserve On Time Manager</title>
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/31e7767d7b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" />
+    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+    <link rel="stylesheet" href="../plugins/clockpicker/src/clockpicker.css">
+    <link rel="stylesheet" href="../plugins/clockpicker/src/standalone.css">
+    <script src="../plugins/clockpicker/src/clockpicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.css" integrity="sha512-vmXqikRa5kmI3gOQygzml5nV+5NGxG8rt8KWHKj8JYYK12JUl2L8RBfWinFGTzvpwwsIRcINy9mhLyodnmzjig==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.js" integrity="sha512-E+gDQcIvNXE60SjCS38ysf1mGh4ObBpKcUOp0oEaHQHQAdaN2p7GelOpgEdpTuCLoIJyLkNXiqFZbyD9Ak/Ygw==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/theme.css"/>
+    <link rel="stylesheet" href="../css/forms.css"/>
+    <link rel="stylesheet" href="../css/manager.css"/>
+    <script type="text/javascript" src="../js/globals.js" defer></script>
+    <script type="text/javascript" src="../js/utils.js" defer></script>
+    <script type="text/javascript" src="../js/validation.js" defer></script>
+    <script type="text/javascript" src="../js_manager/nav.js" defer></script>
+    <script type="text/javascript" src="../js_manager/shopedit.js" defer></script>
+</head>
+<body>
+    <div id="loading">
+        <img id="loading-image" src="../images/loading.gif" alt="Loading..." />
+    </div>
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark">
+        <a href="index.html"><p class="navbar-brand animate__animated animate__fadeIn">Reserve On Time <span class="badge badge-light">Manager</span></p></a>
+        <button class="navbar-toggler">
+            <span class="navbar-toggler-icon" data-toggle="collapse" data-target="#nav-list"></span>
+        </button>
+        <div id="nav-list" class="collapse navbar-collapse">
+            <ul class="navbar-nav nav-fill ml-auto">
+                <li class="nav-item">
+                    <a id="shopedit-btn" class="nav-link" href="shopedit.html"><b>Shop</b></a>
+                </li>
+                <li class="nav-item">
+                    <a id="shopevents-btn" class="nav-link" href="shopevents.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a id="account-btn" class="nav-link" href="account.html">Account</a>
+                </li>
+                <li class="nav-item">
+                    <button id="signout-btn" type="button" class="btn btn-md btn-dark">Sign out</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid h-100">
+        <div id="contents" class="container w-75" hidden>
+            <div id="heading" class="animate__animated animate__fadeIn animate__slow">
+                <h1>Shop Settings</h1>
+            </div>
+            <form id="main-form" class="main-form needs-validation animate__animated animate__fadeIn animate__delay-1s" enctype="multipart/form-data" novalidate>
+                <div class="form-row">
+                    <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-store-alt"></i></div>
+                            </div>
+                            <input required type="text" id="shop-name-input" class="form-control" placeholder="Shop Name">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-store"></i></div>
+                            </div>
+                            <select id="shop-type-input" class="custom-select">
+                                <option value="" disabled selected>Shop Type</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                            </div>
+                            <select required class="custom-select col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="shop-city-input">
+                                <option value="" disabled selected>City</option>
+                                <option value="1">Nicosia</option>
+                                <option value="2">Limassol</option>
+                                <option value="3">Famagusta</option>
+                                <option value="4">Larnaca</option>
+                                <option value="5">Paphos</option>
+                                <option value="6">Keryneia</option>
+                            </select>
+                            <input required type="text" id="shop-area-input" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" placeholder="Area">
+                            <input required type="text" id="shop-street-input" class="form-control col-xs-5 col-sm-5 col-md-5 col-lg-6 col-xl-6" placeholder="Street">
+                            <input required type="text" id="shop-zipcode-input" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" placeholder="Postcode" minlength="4" maxlength="4">
+                            <input required type="text" id="shop-number-input" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-1" placeholder="Num">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-phone-alt"></i></div>
+                                <span class="input-group-text">+357</span>
+                            </div>
+                            <input required type="tel" id="shop-tel-input" class="form-control" placeholder="Shop's Telephone Number" minlength="8" maxlength="8">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-at"></i></div>
+                        </div>
+                        <input required type="email" id="shop-email-input" class="form-control" aria-describeby="emailHelp" placeholder="Shop's Email">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-paragraph"></i></div>
+                            </div>
+                            <textarea type="text" class="form-control" id="shop-description-input" placeholder="Shop Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-file-image"></i></div>
+                        </div>
+                        <div class="custom-file" id="custom-logo-file">
+                            <label class="custom-file-label" id="label-logo" for="logo">Upload a logo</label>
+                            <input type="file" name="logo" class="custom-file-input" id="logo" accept="image/*">
+                        </div>
+                    </div>
+                    <div id="preview-logo-image" hidden></div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-image"></i></div>
+                        </div>
+                        <div class="custom-file" id="custom-thumbnail-file">
+                            <label class="custom-file-label" id="label-thumbnail" for="thumbnail">Upload a thumbnail</label>
+                            <input type="file" class="custom-file-input" name="thumbnail" id="thumbnail" accept="image/*">
+                        </div>
+                    </div>
+                    <div id="preview-thumbnail-image" hidden></div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-images"></i></div>
+                        </div>
+                        <div class="custom-file" id="custom-photo-file">
+                            <label class="custom-file-label" id="label-photo" for="photo[]">Upload a photo</label>
+                            <input type="file" class="custom-file-input" name="photo[]" id="photo" accept="image/*" multiple>
+                        </div>
+                    </div>
+                    <div id="preview-photo-image" hidden></div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            <div class="input-group-text day-text">MON</div>
+                        </div>
+                        <input type="text" id="time-monday" class="form-control" placeholder="HH:MM - HH:MM, HH:MM - HH:MM, ..">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <input id="check-monday" class="check" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            <div class="input-group-text day-text">TUE</div>
+                        </div>
+                        <input type="text" id="time-tuesday" class="form-control" placeholder="HH:MM - HH:MM, HH:MM - HH:MM, ..">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <input id="check-tuesday" class="check" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            <div class="input-group-text day-text">WED</div>
+                        </div>
+                        <input type="text" id="time-wednesday" class="form-control" placeholder="HH:MM - HH:MM, HH:MM - HH:MM, ..">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <input id="check-wednesday" class="check" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            <div class="input-group-text day-text">THU</div>
+                        </div>
+                        <input type="text" id="time-thursday" class="form-control" placeholder="HH:MM - HH:MM, HH:MM - HH:MM, ..">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <input id="check-thursday" class="check" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            <div class="input-group-text day-text">FRI</div>
+                        </div>
+                        <input type="text" id="time-friday" class="form-control" placeholder="HH:MM - HH:MM, HH:MM - HH:MM, ..">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <input id="check-friday" class="check" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            <div class="input-group-text day-text">SAT</div>
+                        </div>
+                        <input type="text" id="time-saturday" class="form-control" placeholder="HH:MM - HH:MM, HH:MM - HH:MM, ..">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <input id="check-saturday" class="check" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            <div class="input-group-text day-text">SUN</div>
+                        </div>
+                        <input type="text" id="time-sunday" class="form-control" placeholder="HH:MM - HH:MM, HH:MM - HH:MM, ..">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <input id="check-sunday" class="check" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                    <small id="hourHelp" class="input-info">Format: HH:MM - HH:MM, HH:MM - HH:MM, ..</small>
+                </div>
+                <button type="submit" class="btn btn-lg btn-light">Update Shop</button>
+            </form>
+             <div id="footer" class="mb-2 mt-1 animate__animated animate__fadeIn animate__delay-2s">
+                 <a href="privacy.html">Privacy Policy</a>
+
+            <!-- Modal -->
+            <div class="modal fade" data-backdrop="false" data-keyboard="false" id="cropImagePop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content" style="overflow: auto">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">
+                                <?=multiLanguage( "Edit Foto" , "Edit Photo" )?>
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="upload-demo" class="embed-responsive z-depth-1-half">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="cancelCropBtn" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
