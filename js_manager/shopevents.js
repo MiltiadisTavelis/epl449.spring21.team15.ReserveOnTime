@@ -2,22 +2,17 @@ var shop_id = null
 checkSession("m", true)
 loadPage()
 
-$('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    maxViewMode: 2,
-    weekStart: 1,
-    startDate: "today",
-    todayBtn: "linked",
-    autoclose: true,
-    clearBtn: true,
-    todayHighlight: true
-});
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
-$('.clockpicker').clockpicker({
-    default: 'now',
-    autoclose: true,
-    donetext: '',
-    placement: 'bottom'
+$('.datefield').each(function(i, obj) {
+    const picker = new Litepicker({ 
+    element: this, 
+    format: "DD MMM YYYY",
+    singleMode: true,
+    minDate: today,
+
+  });
 });
 
 $('#loading').hide().fadeIn();
@@ -25,7 +20,7 @@ var loadercount = {
   value: 0,
   set plus(value) {
     this.value += value;
-    if(this.value == 3){
+    if(this.value == 1){
         $('#loading').fadeOut( "slow" );
         $('#contents').removeAttr('hidden');
     }
@@ -51,8 +46,8 @@ $(document).on("click", "#delete-event", function() {
     }
 });
 
-$('#edit-modal').on('hidden.bs.modal', function() {
-    document.getElementById('modal-title-input').value = "";
+$('#existing-events').on('hidden.bs.modal', function() {
+    document.getElementById('modal-event-input').value = "";
     document.getElementById('modal-content-input').value = "";
     document.getElementById('modal-datefrom-input').value = "";
     document.getElementById('modal-dateto-input').value = "";
@@ -60,7 +55,6 @@ $('#edit-modal').on('hidden.bs.modal', function() {
     document.getElementById('modal-timeto-input').value = "";
     document.getElementById('modal-link-input').value = "";
 });
-
 
 var shopname;
 var link = "";
@@ -114,7 +108,7 @@ function submit() {
 
 function updateEvent() {
 
-    var title = document.getElementById('modal-title-input');
+    var title = document.getElementById('modal-event-input');
     var content = document.getElementById('modal-content-input');
     var start_date = document.getElementById('modal-datefrom-input');
     var stop_date = document.getElementById('modal-dateto-input');
@@ -135,7 +129,6 @@ function updateEvent() {
         "start_time": start_time.value,
         "stop_time": stop_time.value
     };
-    console.log(data);
 
     xhr.onload = function() {
         if (xhr.status === 200) {
@@ -162,6 +155,9 @@ function updateEvent() {
 const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
     "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
 ];
+const monthNamesLower = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
 
 function checkTime(i) {
     if (i < 10) {
@@ -170,10 +166,33 @@ function checkTime(i) {
     return i;
 }
 
+function convertDate(sqlDate) {
+    var res = sqlDate.split("/");
+    var day_event = res[0];
+    var month_event = monthNamesLower[res[1]-1];
+    var year_event = res[2];
+    if (day_event<10) {
+        day_event = day_event.substring(1);
+    }
+    if (day_event === "1") {
+        day_event = day_event + "st";
+    }
+    else if(day_event === "2"){
+        day_event = day_event + "nd";
+    }
+    else if(day_event === "3"){
+        day_event = day_event + "rd";
+    }
+    else {
+        day_event = day_event + "th";
+    }
+
+    return day_event + " " + month_event + " " + year_event;
+}
+
 
 
 function loadEvents() {
-    var url = window.location.href;
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "events/shop",
@@ -184,85 +203,86 @@ function loadEvents() {
         if (xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
 
-            var main = document.getElementById("events");
+            var main = document.getElementById("event-card-section");
 
             if (response.hasOwnProperty('NoEventsFound')) {
-                loadercount.plus = 1;
                 var displayMessage = document.createElement("div");
                 displayMessage.classList.add('alert', 'alert-dark');
                 displayMessage.innerHTML = "There are no Events on the Shop.";
                 main.appendChild(displayMessage);
                 return;
             }
+
             var events = response["Events"];
 
             for (entry in events) {
                 var event = events[entry]
 
                 // CREATE ROW FOR EVERY EVENT
-                var list = document.createElement("div");
-                list.classList.add("row", "mx-auto", "d-flex", "justify-content-center", "col-12");
+                var card = document.createElement("div");
+                card.classList.add("event-card");
+                card.setAttribute("card-event-id",event.id);
+                main.appendChild(card);
 
-                var card = document.createElement("article");
-                card.classList.add("event-card", "fl");
-                card.setAttribute("card-event-id", event.id);
-                card.setAttribute("data-toggle", "modal");
-                card.setAttribute("data-target", "#edit-modal");
-
-                var date = document.createElement('section');
-                date.classList.add("date");
+                var modal = document.createElement("a");
+                modal.setAttribute("href","#event-info-modal");
+                modal.setAttribute("data-toggle","modal");
+                modal.setAttribute("data-target","#event-info-modal");
+                card.appendChild(modal);
 
                 var start = new Date(event.start_date.replace(/-/g, "/"));
 
-                var time = document.createElement("time");
-                time.setAttribute("datetime", start.getDate() + " " + monthNames[start.getMonth()]);
+                var date = document.createElement("div"); 
+                date.classList.add("event-date");
+                card.appendChild(date)
 
-                var day = document.createElement("span");
+                var day = document.createElement("h1");
                 day.innerText = start.getDate();
+                date.appendChild(day)
 
-                var month = document.createElement("span");
+                var month = document.createElement("h4");
                 month.innerText = monthNames[start.getMonth()];
+                date.appendChild(month)
 
-                time.appendChild(day);
-                time.appendChild(month);
-                date.appendChild(time);
-                card.appendChild(date);
+                var info = document.createElement("div"); 
+                info.classList.add("event-info");
+                card.appendChild(info)
 
-                var cont = document.createElement('section');
-                cont.classList.add("card-cont");
-
-                var name = document.createElement("small");
-                name.innerText = shopname;
-                cont.appendChild(name);
-
-                var title = document.createElement("p");
-                title.classList.add("title");
+                var title = document.createElement("h4");
+                title.classList.add("title")
                 title.innerText = event.title;
-                cont.appendChild(title);
+                info.appendChild(title)
 
-                var desc = document.createElement("p");
-                desc.classList.add("desc");
-                desc.innerText = event.content;
-                cont.appendChild(desc);
+                var eventcont = document.createElement("div"); 
+                eventcont.classList.add("event-det");
+                info.appendChild(eventcont)
+
+                var content = document.createElement("p");
+                content.innerText = event.content;
+                eventcont.appendChild(content);
 
                 if (event.link != "") {
-                    var button = document.createElement("a");
-                    button.setAttribute("href", event.link);
+                    var linkdiv = document.createElement("div");
+                    linkdiv.classList.add("event-link");
+                    card.appendChild(linkdiv);
+
+                    var button = document.createElement("button");
+                    button.setAttribute("type", "button");
+                    button.classList.add("btn","btn-primary","float-right","event-link-btn");
                     button.innerText = "Link";
-                    cont.appendChild(button);
+                    linkdiv.appendChild(button);
                 }
 
-                card.appendChild(cont);
-                list.appendChild(card);
-                main.appendChild(list);
+                // start.getDate();
+                // det.innerText = monthNames[start.getMonth()];
+                // det.innerText = start.getFullYear();
+                // var h = start.getHours();
+                // var m = checkTime(start.getMinutes());
+                // det.innerText = h + ":" + m;
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
-        loadercount.plus = 1;
-        var line = document.createElement('hr');
-        line.classList.add('rate-hr');
-        main.appendChild(line);
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);
@@ -292,11 +312,12 @@ function loadPage() {
                     events = JSON.parse(x.responseText)
 
                     loadEvents()
+                    loadercount.plus = 1;
 
                 } else {
+                    loadercount.plus = 1;
                     popUpMessage("Can't load events. There was an unexpected error", "danger")
                 }
-                loadercount.plus = 1;
             }
 
             x.withCredentials = true
@@ -306,7 +327,6 @@ function loadPage() {
         } else {
             popUpMessage("Can't load events. There was an unexpected error", "danger")
         }
-        loadercount.plus = 1;
     }
 
     xhr.withCredentials = true
@@ -317,7 +337,7 @@ function loadPage() {
 
 function loadEventDet(eventId) {
 
-    var title = document.getElementById('modal-title-input');
+    var title = document.getElementById('modal-event-input');
     var content = document.getElementById('modal-content-input');
     var start_date = document.getElementById('modal-datefrom-input');
     var stop_date = document.getElementById('modal-dateto-input');
@@ -337,22 +357,21 @@ function loadEventDet(eventId) {
 
             if (response.hasOwnProperty('status')) {
                 popUpMessage(response["status"], "danger");
-                window.setTimeout(function() {
-                    window.location = "shopevents.html";
-                }, 1000);
             } else {
                 title.value = response.title;
                 content.value = response.content;
-                link.value = response.link;
-                $("#modal-datefrom-input").datepicker('setDate', response.start_date);
-                $("#modal-dateto-input").datepicker('setDate', response.stop_date);
-                document.getElementById("modal-timefrom-input").value = response.start_time;
-                document.getElementById("modal-timeto-input").value = response.stop_time;
+                start_date.value = convertDate(response.start_date);
+                stop_date.value = convertDate(response.stop_date);
+                start_time.value = response.start_time;
+                stop_time.value = response.stop_time;
+                
+                if(response.link.length != 0){
+                    link.value = response.link;
+                }
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
-        loadercount.plus = 1;
     }
     xhr.withCredentials = true;
     xhr.open('POST', api);

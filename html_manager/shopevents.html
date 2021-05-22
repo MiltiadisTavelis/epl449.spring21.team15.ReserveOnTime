@@ -1,233 +1,160 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Events - Reserve On Time Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> Shop Events - Reserve On Time</title>
     <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://kit.fontawesome.com/31e7767d7b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="../plugins/clockpicker/src/clockpicker.css">
-    <link rel="stylesheet" href="../plugins/clockpicker/src/standalone.css">
-    <script src="../plugins/clockpicker/src/clockpicker.js"></script>
-    <link rel="stylesheet" href="../css/theme.css"/>
-    <link rel="stylesheet" href="../css/shop.css"/>
-    <link rel="stylesheet" href="../css/forms.css"/>
-    <link rel="stylesheet" href="../css/manager.css"/>
-    <link rel="stylesheet" href="../css/modal.css"/>
-    <script type="text/javascript" src="../js/globals.js" defer></script>
-    <script type="text/javascript" src="../js/utils.js" defer></script>
-    <script type="text/javascript" src="../js/validation.js" defer></script>
-    <script type="text/javascript" src="../js_manager/nav.js" defer></script>
-    <script type="text/javascript" src="../js_manager/shopevents.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+     <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster+Two">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.3.4/css/lightpick.min.css">
+    <link rel="stylesheet" href="../css/shopevents.css">
+    <link rel="stylesheet" href="../css/theme2.css">
+    <link rel="stylesheet" href="../css/theme.compiled.css">
 </head>
+
 <body>
     <div id="loading">
         <img id="loading-image" src="../images/loading.gif" alt="Loading..." />
     </div>
-    <nav class="navbar fixed-top navbar-expand-md navbar-dark">
-        <a href="index.html"><p class="navbar-brand animate__animated animate__fadeIn">Reserve On Time <span class="badge badge-light">Manager</span></p></a>
-        <button class="navbar-toggler">
-            <span class="navbar-toggler-icon" data-toggle="collapse" data-target="#nav-list"></span>
-        </button>
-        <div id="nav-list" class="collapse navbar-collapse">
-            <ul class="navbar-nav nav-fill ml-auto">
-                <li class="nav-item">
-                    <a id="shopedit-btn" class="nav-link" href="shopedit.html">Shop</a>
-                </li>
-                <li class="nav-item">
-                    <a id="shopevents-btn" class="nav-link" href="shopevents.html"><b>Events</b></a>
-                </li>
-                <li class="nav-item">
-                    <a id="account-btn" class="nav-link" href="account.html">Account</a>
-                </li>
-                <li class="nav-item">
-                    <button id="signout-btn" type="button" class="btn btn-md btn-dark">Sign out</button>
-                </li>
-            </ul>
+    <nav class="navbar navbar-light navbar-expand-md" style="border-style: none;">
+        <div class="container-fluid">
+            <a class="navbar-brand nav-logo" href="/html_manager/index.html">ReserveOnTime</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#nav-list">
+                <span class="sr-only">Toggle navigation</span>
+                <div class="main-content">
+                    <div class="menu__wrapper">
+                        <div class="menu__item--meatball" tabindex="5">
+                          <div class="circle"></div>
+                          <div class="circle"></div>
+                          <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse text-center flex-row-reverse" id="nav-list">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="shopedit-btn" href="shopedit.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="shopevents-btn" href="shopevents.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="account-btn" href="account.html">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-light nav-button-border" role="button" id="signout-btn" href="#">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-    <div class="container-fluid h-100">
-        <div id="contents" class="container w-75" hidden>
-            <div id="heading" class="animate__animated animate__fadeIn animate__slow">
-                <h1>Shop Events</h1>
+    <div id="contents" hidden>
+        <form class="needs-validation myform" method="post">
+            <div class="form-row-div">
+                <p class="header-paragraph">Create New Event</p>
             </div>
-            <form class="main-form needs-validation animate__animated animate__fadeIn animate__delay-1s" novalidate>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-heading"></i></div>
-                            </div>
-                            <input required type="text" class="form-control" id="title-input" placeholder="Event Title">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-paragraph"></i></div>
-                            </div>
-                            <textarea required type="text" class="form-control" id="content-input" placeholder="Event Content"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-calendar-day"></i></div>
-                            </div>
-                            <input required readonly type="text" id="datefrom-input" class="form-control datepicker" placeholder="From Date" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-calendar-week"></i></div>
-                            </div>
-                            <input required readonly type="text" id="dateto-input" class="form-control datepicker" placeholder="To Date" value="">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
-                            </div>
-                            <input required readonly type="text" id="timefrom-input" class="form-control clockpicker" value="" placeholder="From Time">
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
-                            </div>
-                            <input required readonly type="text" id="timeto-input" class="form-control clockpicker" value="" placeholder="Until Time">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-link"></i></div>
-                            </div>
-                            <input type="url" class="form-control" id="link-input" placeholder="Event Link">
-                        </div>
-                    </div>
-                </div>
-                <button id="submit-button" type="submit" class="btn btn-lg btn-light">Create Event</button>
-            </form>
-            <div id="existing-events" class="animate__animated animate__fadeIn animate__slow animate__delay-2s">
-                <hr>
-                <h4> My existing Events<br></h4>
-                <div id="events" class="tab-pane"></div>
+            <div class="form-row-div">
+                <div class="input-div title-div"><span class="input-span">Title</span><input class="form-control input-field" type="text" id="title-input" required="" min="01/01/1940" placeholder="Title" style="border-bottom-color: rgb(206, 212, 218);"></div>
             </div>
-            <div id="footer" class="mb-2 mt-1 animate__animated animate__fadeIn animate__delay-2s">
-                <a href="privacy.html">Privacy Policy</a>
+            <div class="form-row-div">
+                <div class="input-div descr-div"><span class="input-span">Description</span><textarea class="form-control input-field input-desc" id="content-input" placeholder="Description" required=""></textarea></div>
+            </div>
+            <div class="form-row-div">
+                <div class="input-div"><span class="input-span">Start Date</span><input class="form-control input-field datefield" type="text" id="datefrom-input" required="" min="01/01/1940" placeholder="Start Date" readonly=""></div>
+                <div class="input-div"><span class="input-span">End Date</span><input class="form-control input-field datefield" type="text" id="dateto-input" required="" min="01/01/1940" placeholder="End Date" readonly=""></div>
+            </div>
+            <div class="form-row-div">
+                <div class="input-div"><span class="input-span">Start Time</span>
+                    <div><input class="form-control input-field" id="timefrom-input" type="time" required="" placeholder="Start Time" min="01/01/1940"></div>
+                </div>
+                <div class="input-div"><span class="input-span">End Time</span><input class="form-control input-field" type="time" id="timeto-input" required="" min="01/01/1940" placeholder="End Time"></div>
+            </div>
+            <div class="form-row-div">
+                <div class="input-div title-div"><span class="input-span">Event Link</span><input class="form-control input-field" type="text" id="link-input" placeholder="Event Link" inputmode="url"></div>
+            </div>
+            <div class="form-row-div div-create"><button class="btn btn-primary" id="signup-btn2" type="submit">Create Event</button></div>
+        </form>
+        <div class="event-content">
+            <div class="existing-events" id="existing-events">
+                <p class="header-paragraph">Existing Events</p><div id="events" class="tab-pane" role="tabpanel">
+                    <div class="cards">
+                        <div class="cards-w" id="event-card-section"></div>
+                    </div>
+                    <div id="event-info-modal" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <span id="modal-event-title">Edit Event
+                                    <button class="btn btn-primary modal-exit" type="button" data-dismiss="modal"><i class="fas fa-times"></i>
+                                    </button>
+                                </span>
+                                <div class="form-row-div">
+                    <div class="input-div title-div"><span class="input-span">Title</span><input id="modal-event-input" class="form-control input-field" type="text" required="" placeholder="Title"></div>
+                </div>
+                                <div class="form-row-div">
+                    <div class="input-div descr-div"><span class="input-span">Description</span><textarea class="form-control input-field input-desc" id="modal-content-input" placeholder="Description"></textarea></div>
+                </div>
+                                <div class="form-row-div-modal">
+                    <div class="input-div-modal"><span class="input-span">Start Date</span><input class="form-control input-field datefield" type="text" id="modal-datefrom-input" required="" min="01/01/1940" placeholder="Start Date" readonly=""></div>
+                    <div class="input-div-modal"><span class="input-span">End Date</span><input class="form-control input-field datefield" type="text" id="modal-dateto-input" required="" min="01/01/1940" placeholder="End Date" readonly=""></div>
+                </div>
+                                <div class="form-row-div-modal">
+                    <div class="input-div-modal"><span class="input-span">Start Time</span><div>
+  <input type="time" id="modal-timefrom-input" required="" class="form-control input-field">
+</div></div>
+                    <div class="input-div-modal"><span class="input-span">End Time</span><div>
+  <input type="time" id="modal-timeto-input" required="" class="form-control input-field">
+</div></div>
+                </div>
+                <div class="form-row-div">
+                    <div class="input-div title-div"><span class="input-span">Event Link</span><input id="modal-link-input" class="form-control input-field" type="text" required=""placeholder="Event Link" inputmode="url"></div>
+                </div>
+                                <div class="d-flex justify-content-between"><button id="delete-event" class="btn btn-primary modal-buttons" type="button">Delete</button>
+    <div><button id="submit-button-update" class="btn btn-primary modal-buttons" type="submit">Update Event</button><button id="cancel-button" class="btn btn-primary modal-buttons" type="button" data-dismiss="modal">Cancel</button></div>
+</div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div><footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center" style="padding: 10px;"><a class="justify-content-lg-center" id="footer-privacy" href="privacy.html">Privacy Policy</a></div>
+        </div>
+        <div class="row top-border">
+            <div class="col text-left"><span id="footer-copyright">© ReserveOnTime. All rights reserved</span></div>
+        </div>
     </div>
+</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.3.4/lightpick.min.js"></script>
+    <script type="text/javascript" src="../js/globals.js" defer></script>
+    <script type="text/javascript" src="../js_manager/nav.js" defer></script>
+    <script type="text/javascript" src="../js/utils.js" defer></script>
+    <script type="text/javascript" src="../js/validation.js" defer></script>
+    <script type="text/javascript" src="../js_manager/shopevents.js" defer></script>
 </body>
-                            <!-- Modal -->
-<div id="edit-modal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title mx-auto">Edit Event</h4>
-      </div>
-      <div class="modal-body">
-        <form class="main-form needs-validation" novalidate>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-heading"></i></div>
-                            </div>
-                            <input required type="text" class="form-control" id="modal-title-input" placeholder="Event Title">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-paragraph"></i></div>
-                            </div>
-                            <textarea required type="text" class="form-control" id="modal-content-input" placeholder="Event Content"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-calendar-day"></i></div>
-                            </div>
-                            <input required readonly type="text" id="modal-datefrom-input" class="form-control datepicker" placeholder="From Date" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-calendar-week"></i></div>
-                            </div>
-                            <input required readonly type="text" id="modal-dateto-input" class="form-control datepicker" placeholder="To Date" value="">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
-                            </div>
-                            <input type="text" id="modal-timefrom-input" class="form-control " placeholder="From Time hh:mm">
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-clock"></i></div>
-                            </div>
-                            <input type="text" id="modal-timeto-input" class="form-control " placeholder="Until Time hh:mm">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-link"></i></div>
-                            </div>
-                            <input type="url" class="form-control" id="modal-link-input" placeholder="Event Link">
-                        </div>
-                    </div>
-                </div>
-
-            </form>
-      </div>
-      <div class="modal-footer">
-        <button id="delete-event" type="button" class="btn btn-default text-md-left">Delete Event</button>
-        <button id="submit-button-update" type="submit" class="btn btn-default">Update Event</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 </html>
