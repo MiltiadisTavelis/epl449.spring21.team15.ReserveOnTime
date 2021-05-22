@@ -546,11 +546,10 @@ submitImages.addEventListener("click", function() {
     // var images = document.getElementById("preview-photo-image");
     var formData = new FormData();
     var upload = false;
-    formData.append("logo",[]);
 
     if($('#preview-logo').attr('image') === "submited"){
         upload = true;
-        formData.append("thumbnail",$(this).attr('src'));
+        formData.append("logo",$(this).attr('src'));
     }
 
     if($('#preview-thumbnail').attr('image') === "submited"){
