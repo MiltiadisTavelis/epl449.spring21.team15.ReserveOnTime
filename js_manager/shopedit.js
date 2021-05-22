@@ -612,7 +612,6 @@ submitHours.addEventListener("click", function() {
         var day = document.getElementById(calls[i]);
         if (day.value) {
             if (pattern.test(day.value)) {
-                console.log("here2")
                 day = day.value.split(",");
                 var leng = document.getElementById(calls[i]).value.split("-").length;
                 var allhours = [];
@@ -639,7 +638,6 @@ submitHours.addEventListener("click", function() {
                     });
                 }
             } else {
-                console.log("here12")
                 popUpMessage(days[i] + ' ' + "has not valid pattern", "danger");
                 return;
             }
