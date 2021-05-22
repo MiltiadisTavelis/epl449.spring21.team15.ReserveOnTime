@@ -413,6 +413,15 @@
 			for ($i=0; $i < count($range); $i++) { 
 				$open = $range[$i]['open'];
 				$close = $range[$i]['close'];
+				if(count($range) == 1){
+			     	if(strtotime($open)>=strtotime($close)){
+						if(strtotime($close) > strtotime("06:00:00")){
+							return "3";
+						}
+					}else{
+						continue;
+					}
+				}
 				for ($j=0; $j < count($range); $j++) {
 					if($j == $i){
 						continue;
