@@ -668,7 +668,6 @@
 		    for($j=0; $j<count($types); $j++){
 			$this->image_type = ($j+1);
 			$image_count = $this->count_images();
-			echo $image_count;
 			if($image_count == -1){
 				return false;
 			}
