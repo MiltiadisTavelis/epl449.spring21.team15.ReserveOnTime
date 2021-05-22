@@ -549,12 +549,12 @@ submitImages.addEventListener("click", function() {
 
     if($('#preview-logo').attr('image') === "submited"){
         upload = true;
-        formData.append("logo",$(this).attr('src'));
+        formData.append("logo",$("#preview-logo").attr('src'));
     }
 
     if($('#preview-thumbnail').attr('image') === "submited"){
         upload = true;
-        formData.append("thumbnail",$(this).attr('src'));
+        formData.append("thumbnail",$("#preview-thumbnail").attr('src'));
     }
 
     var images = $('#preview-photo-section').find('img').map(function(){
