@@ -56,29 +56,23 @@
 
 	if(isset($data->start_date)){
 		$date1 = $data->start_date;
-		$date1 = str_replace('/', '-', $data->start_date);
-		if(false !== strtotime($date1)){
-			list($day, $month, $year) = explode('-', $date1); 
-			if(checkdate($month, $day, $year)){
-				$event->start_date = str_replace('/', '-', $data->start_date);
-			}
-		}
+		$date1 = str_replace(' ', '-', $date1);
+			list($day, $month, $year) = explode('-', $date1);
+			$day = substr($day,0,strlen($day)-2);
+				$event->start_date = date('Y-m-d', strtotime($date1));
 	}else{
-		$msg['status'] = 'Please set the date!';
+		$msg['status'] = 'Please set the start date!';
 		echo json_encode($msg);
 		exit();
 	}
 	if(isset($data->stop_date)){
 		$date2 = $data->stop_date;
-		$date2 = str_replace('/', '-', $data->stop_date);
-		if(false !== strtotime($date2)){
-			list($day, $month, $year) = explode('-', $date2); 
-			if(checkdate($month, $day, $year)){
-				$event->stop_date = str_replace('/', '-', $data->stop_date);
-			}
-		}
+		$date2 = str_replace(' ', '-', $date2);
+			list($day, $month, $year) = explode('-', $date2);
+			$day = substr($day,0,strlen($day)-2);
+				$event->stop_date = date('Y-m-d', strtotime($date2));
 	}else{
-		$msg['status'] = 'Please set the date!';
+		$msg['status'] = 'Please set the end date!';
 		echo json_encode($msg);
 		exit();
 	}
