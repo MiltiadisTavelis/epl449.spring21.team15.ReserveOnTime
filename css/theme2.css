@@ -114,6 +114,7 @@ input[type="search"]::-webkit-search-results-decoration {
   --litepicker-button-prev-month-color-hover: #ec9b3b !important;
   --litepicker-button-next-month-color-hover: #ec9b3b !important;
   --litepicker-day-color-hover: #ec9b3b !important;
+  --litepicker-is-today-color: #ec9b3b !important;
 }
 
 #loading {
