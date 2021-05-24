@@ -1,14 +1,52 @@
 checkSession("m", true)
 
-$('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    weekStart: 1,
-    maxViewMode: 2,
-    endDate: "today",
-    autoclose: true,
-    clearBtn: true,
-    startView: 2
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+$('.datefield').each(function(i, obj) {
+    const picker = new Litepicker({ 
+    element: this, 
+    format: "DD MMM YYYY",
+    singleMode: true,
+    minDate: "01/01/1940",
+    dropdowns: {
+        minYear: new Date().getFullYear() - 150,
+        maxYear: new Date().getFullYear(),
+        months: true,
+        years: true
+  }
+
+  });
 });
+
+const monthNamesLower = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+function convertDate(sqlDate) {
+    var res = sqlDate.split("/");
+    var day_event = res[0];
+    var month_event = monthNamesLower[res[1]-1];
+    var year_event = res[2];
+    if (day_event<10) {
+        day_event = day_event.substring(1);
+    }
+    if (day_event === "1") {
+        day_event = day_event + "st";
+    }
+    else if(day_event === "2"){
+        day_event = day_event + "nd";
+    }
+    else if(day_event === "3"){
+        day_event = day_event + "rd";
+    }
+    else {
+        day_event = day_event + "th";
+    }
+
+    return day_event + " " + month_event + " " + year_event;
+}
 
 $('#loading').hide().fadeIn();
 var loadercount = {
@@ -24,7 +62,7 @@ var loadercount = {
 
 loadDet();
 
-function submit() {
+$( "#save" ).click(function() {
     var name = document.getElementById('firstname-input');
     var surname = document.getElementById('lastname-input');
     var gender = document.getElementById('gender-input');
@@ -59,7 +97,7 @@ function submit() {
     xhr.open('PUT', api);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
-}
+    ;});
 
 function loadDet() {
     var name = document.getElementById('firstname-input');
@@ -68,6 +106,7 @@ function loadDet() {
     var code = document.getElementById('telcode-input');
     var number = document.getElementById('tel-input');
     var email = document.getElementById('email-input');
+    var birthday = document.getElementById('date-input');
 
     var xhr = new XMLHttpRequest();
     var data = {
@@ -84,10 +123,12 @@ function loadDet() {
                     window.location = "signin.html";
                 }, 1000);
             } else {
+                console.log(response);
                 name.value = response.fname;
                 surname.value = response.lname;
                 gender.value = response.gender;
-                $("#date-input").datepicker('setDate', response.birth);
+                birthday.value = convertDate(response.birth);
+                //$("#date-input").datepicker('setDate', response.birth);
                 code.value = response.phone_code;
                 number.value = response.pnum;
                 email.value = response.email;
