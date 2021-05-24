@@ -24,22 +24,16 @@
 		exit();
 	}
 
-	function validateDate($date, $format = 'Y-m-d H:i:s')
-	{
-    	$d = DateTime::createFromFormat($format, $date);
-    	return $d && $d->format($format) == $date;
-	}
-
 	if(isset($data->birth)){
-		$date = $data->birth;
-		$date = str_replace('/', '-', $date);
-		if(false !== strtotime($date)){
-			list($day, $month, $year) = explode('-', $date);
-			if(validateDate($data->birth, 'd/m/Y')){
-				$date = str_replace('/', '-', $data->birth);
-				$user->birth = date('Y-m-d', strtotime($date));
-			}
-		}
+		$date1 = $data->birth;
+		$date1 = str_replace(' ', '-', $date1);
+			list($day, $month, $year) = explode('-', $date1);
+			$day = substr($day,0,strlen($day)-2);
+				$user->birth = date('Y-m-d', strtotime($date1));
+	}else{
+		$msg['status'] = 'Please set birth date!';
+		echo json_encode($msg);
+		exit();
 	}
 
 	$user->gender = $data->gender;
