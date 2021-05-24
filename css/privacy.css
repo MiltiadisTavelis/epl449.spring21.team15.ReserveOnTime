@@ -1,117 +1,34 @@
-#form-logo {
-  width: 200px;
-  height: 200px;
-  background: url("../../assets/img/logo.png") center / contain no-repeat;
+.content {
+  margin: 1%;
 }
 
-@media (max-width: 420px) {
-  #form-logo {
-    width: 150px;
-    height: 150px;
-  }
-}
-
-#privacy-header {
-  display: flex;
-  justify-content: center;
-}
-
-.div-main {
-  margin: 30px;
-  margin-top: 0px;
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  /*max-width: 1200px;*/
-}
-
-.paragraph-header {
-  font-size: 20px;
-  text-align: center;
-  font-weight: 600;
-  /*padding-bottom: 10px;*/
-}
-
-#email-link {
-  text-align: center;
-  /*width: 60%;*/
-  justify-content: center;
-  display: flex;
-  justify-items: center;
-}
-
-.paragraph-header-top {
-  font-size: 30px;
-  text-align: center;
-  font-weight: 700;
-  /*padding-bottom: -10px;*/
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-}
-
-#email-icon {
-  /*width: 40%;*/
-  padding-right: 5px;
-  padding-top: 3px;
-  color: var(--litepicker-is-end-color-bg);
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.div-email {
-  margin-top: -10px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-}
-
-.description-text {
-  /*display: flex;*/
-  justify-content: center;
-  justify-items: center;
-  text-align: center;
-  /*max-width: 1200px;*/
-}
-
-.list-group-item {
-  margin-left: 150px;
-  flex-wrap: wrap;
+.nav-logo {
   width: 100%;
-  display: block;
-  justify-content: center;
-  padding: inherit;
-  justify-items: center;
-  position: sticky;
-}
-
-.list-item {
-  max-width: 500px;
-  max- width: 100%;
   display: flex;
   justify-content: center;
-  justify-items: center;
-  text-align: left;
 }
 
-.div-list {
-  max-width: 500px;
-  display: block;
-  justify-content: center;
-  justify-items: center;
+.title h1 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 30px;
 }
 
-.div-class {
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  /*max-width: 1200px;*/
+.description {
+  color: #2d2d2d;
+  font-family: 'Roboto';
 }
 
-.outer-list-div {
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  text-align: left;
+div.content > div {
+  border-radius: 10px;
+  background: #f7f7f7;
+  padding: 10px 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0,9,61,0.15) !important;
+}
+
+.email {
+  color: #ec9b3b;
+  text-decoration: none;
 }
 
