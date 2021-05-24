@@ -67,7 +67,7 @@ function createManagerReservationEntry() {
                     let shop = response['Shops'][0];
 
                     let informationListText = ["First name: ", "Last name: ", "Gender: ", "Phone code: ", "Number: ", "Personal Email: ", "Shop name: ", "Shop type: ", "Shop city: ", "Shop province: ", "Shop address: ", "Shop zipcode: ", "Shop phone code: ", "Shop number: ", "Shop email: "]
-                    let informationList = [shop['fname'], shop['lname'], shop['gender'], shop['phone_code'], shop['number'], shop['personal_email'], shop['sname'], shop['stype'], shop['city'], shop['province'], shop['address'], shop['postcode'], shop['phone_code2'], shop['shop_number'], shop['shop_email']]
+                    let informationList = [shop['fname'], shop['lname'], shop['gender'], shop['pcode'], shop['number'], shop['personal_email'], shop['sname'], shop['stype'], shop['city'], shop['province'], shop['address'], shop['postcode'], shop['shop_pcode'], shop['shop_number'], shop['shop_email']]
                     var close = document.createElement("button")
                     close.classList.add("btn", "btn-primary", "modal-exit")
                     close.setAttribute("type", "button")
