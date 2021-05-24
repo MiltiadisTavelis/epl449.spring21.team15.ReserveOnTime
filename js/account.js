@@ -1,4 +1,4 @@
-checkSession("m", true)
+checkSession("u", true)
 
 
 const today = new Date();
