@@ -1,0 +1,13 @@
+h2 {
+    font-weight: bold;
+}
+
+table * {
+    white-space: nowrap;
+}
+
+.has-table {
+    overflow: auto;
+    margin-bottom: 50px;
+    padding: 0;
+}
