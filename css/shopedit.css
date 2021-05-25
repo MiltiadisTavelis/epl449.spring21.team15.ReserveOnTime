@@ -46,11 +46,7 @@ body {
   margin: 5px;
 }
 
-.navbar-brand.nav-logo {
-  color: #000000 !important;
-}
-
-.navbar-brand.nav-logo {
+.navbar-brand {
   color: #000000 !important;
 }
 
