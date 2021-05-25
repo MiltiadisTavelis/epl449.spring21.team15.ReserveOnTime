@@ -696,6 +696,10 @@ $('.button-hold').click(function (){
 function addReview() {
     $("#submit-review").prop('disabled', true);
     var content = document.getElementById('modal-content-input');
+    if(content.value.length === 0){
+        popUpMessage("You can't submit an empty review.", "danger");
+        return;
+    }
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "reviews/creview",
