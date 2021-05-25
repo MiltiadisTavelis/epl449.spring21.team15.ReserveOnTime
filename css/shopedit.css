@@ -24,54 +24,6 @@ body {
   }
 }
 
-.navbar.navbar-light.navbar-expand-md {
-  background: white;
-  box-shadow: none !important;
-  z-index: 1000;
-  width: 100%;
-}
-
-@media (min-width: 1350px) {
-  .navbar.navbar-light.navbar-expand-md {
-    background: transparent !important;
-  }
-}
-
-#nav-list.show {
-  background: transparent;
-}
-
-#signup-btn {
-  background-color: transparent;
-  border-color: #ec9b3b;
-}
-
-.nav-item a {
-  color: rgb(0,0,0) !important;
-  margin: 5px;
-}
-
-.navbar-brand.nav-logo {
-  color: #000000 !important;
-}
-
-.navbar-brand.nav-logo {
-  color: #000000 !important;
-}
-
-.navbar-toggler {
-  border-style: none;
-}
-
-#signout-btn {
-  background-color: transparent;
-  border-color: #ec9b3b;
-}
-
-#contents {
-  /*height: calc(100vh - 220px);*/
-}
-
 @media (max-width: 575px) {
   #contents {
     /*position: absolute;*/

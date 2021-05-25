@@ -36,6 +36,7 @@ a {
   box-shadow: none !important;
   z-index: 1000;
   width: 100%;
+  box-shadow: 0px -20px 20px 11px;
 }
 
 @media (min-width: 1350px) {
@@ -53,26 +54,15 @@ a {
   border-color: #ec9b3b;
 }
 
-@media (max-width: 420px) {
-  .navbar {
-    display: none;
-    z-index: 1;
-  }
-}
-
 .nav-item a {
   color: rgb(0,0,0) !important;
   margin: 5px;
 }
 
 .navbar-brand.nav-logo {
-  color: #000000 !important;
-}
-
-@media (max-width: 420px) {
-  .navbar-brand.nav-logo {
-    color: #ec9b3b !important;
-  }
+  font-family: Lobster Two;
+  font-size: 26px;
+  color: #EC9B3B;
 }
 
 .navbar-toggler {
@@ -82,6 +72,19 @@ a {
 #signout-btn {
   background-color: transparent;
   border-color: #ec9b3b;
+}
+
+@media (max-width: 420px) {
+  .navbar {
+    display: none;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar-brand.nav-logo {
+    color: #ec9b3b !important;
+  }
 }
 
 #shop-header {
@@ -430,6 +433,7 @@ a {
 #shop-image {
   height: 150px;
   overflow: visible;
+  box-shadow: 0 0px 4px rgba(0,9,61,0.2) !important;
 }
 
 @media (max-width: 767px) {
