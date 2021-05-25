@@ -85,63 +85,67 @@
 
 		//CREATE NEW USER
 		public function create_user(){
-			$sql = 'INSERT INTO USERS (
-							fname,
-							lname,
-							birth,
-							gender,
-							phone_code,
-							pnum,
-							email,
-							password,
-							usertype) VALUES (?,?,?,?,?,?,?,?,?)';
-			$stmt = $this->conn->prepare($sql);
-			$this->fname = htmlspecialchars(strip_tags($this->fname));
-			$this->lname = htmlspecialchars(strip_tags($this->lname));
-			$this->birth = htmlspecialchars(strip_tags($this->birth));
-			$this->gender = htmlspecialchars(strip_tags($this->gender));
-			$this->phone_code = htmlspecialchars(strip_tags($this->phone_code));
-			$this->pnum = htmlspecialchars(strip_tags($this->pnum));
-			$this->email = htmlspecialchars(strip_tags($this->email));
-			$this->password = htmlspecialchars(strip_tags($this->password));
-			$this->password = hash("sha256", $this->password);
-			$this->usertype = 'u';
-
-			$stmt->bind_param('sssssssss',
-										$this->fname,
-										$this->lname,
-										$this->birth,
-										$this->gender,
-										$this->phone_code,
-										$this->pnum,
-										$this->email,
-										$this->password,
-										$this->usertype);
-
-
-			if($stmt->execute()){
-				$id = '"'.$this->getid($this->email).'"';
-				$hash = md5(rand(0,1000));
-				$sql = 'INSERT INTO PENDING_USER SET user_id = '.$id.', code = "'.$hash.'"';
+			if(exist($this->email) == false){
+				$sql = 'INSERT INTO USERS (
+								fname,
+								lname,
+								birth,
+								gender,
+								phone_code,
+								pnum,
+								email,
+								password,
+								usertype) VALUES (?,?,?,?,?,?,?,?,?)';
 				$stmt = $this->conn->prepare($sql);
+				$this->fname = htmlspecialchars(strip_tags($this->fname));
+				$this->lname = htmlspecialchars(strip_tags($this->lname));
+				$this->birth = htmlspecialchars(strip_tags($this->birth));
+				$this->gender = htmlspecialchars(strip_tags($this->gender));
+				$this->phone_code = htmlspecialchars(strip_tags($this->phone_code));
+				$this->pnum = htmlspecialchars(strip_tags($this->pnum));
+				$this->email = htmlspecialchars(strip_tags($this->email));
+				$this->password = htmlspecialchars(strip_tags($this->password));
+				$this->password = hash("sha256", $this->password);
+				$this->usertype = 'u';
 
-				if(!$stmt->execute()){
-					printf("Verify Error: %s.\n",$stmt->error);
-					return false;
+				$stmt->bind_param('sssssssss',
+											$this->fname,
+											$this->lname,
+											$this->birth,
+											$this->gender,
+											$this->phone_code,
+											$this->pnum,
+											$this->email,
+											$this->password,
+											$this->usertype);
+
+
+				if($stmt->execute()){
+					$id = '"'.$this->getid($this->email).'"';
+					$hash = md5(rand(0,1000));
+					$sql = 'INSERT INTO PENDING_USER SET user_id = '.$id.', code = "'.$hash.'"';
+					$stmt = $this->conn->prepare($sql);
+
+					if(!$stmt->execute()){
+						printf("Verify Error: %s.\n",$stmt->error);
+						return false;
+					}
+
+					$results = $this->geturl($this->email);
+					if(!empty($results)){
+						return $results;
+					}else{
+						printf("Verify Error: %s.\n",$stmt->error);
+						return false;
+					}
 				}
 
-				$results = $this->geturl($this->email);
-				if(!empty($results)){
-					return $results;
-				}else{
-					printf("Verify Error: %s.\n",$stmt->error);
-					return false;
-				}
+				printf("User Error: %s.\n",$stmt->error);
+
+				return -1;
+			}else{
+				return false;
 			}
-
-			printf("User Error: %s.\n",$stmt->error);
-
-			return false;
 		}
 
 		//UPDATE USER DETAILS BY ID
