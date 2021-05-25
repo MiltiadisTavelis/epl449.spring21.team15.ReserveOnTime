@@ -242,7 +242,7 @@
 
 .shop-card-favorite-button {
   border-style: none;
-  background: rgb(208,99,110);
+  background-color: rgb(208,99,110);
   width: 50px;
   height: 50px;
   border-radius: 25px;
@@ -250,6 +250,10 @@
 }
 
 .shop-card-favorite-button:hover {
+  background-color: #fa8072;
+}
+
+.shop-card-favorite-button:focus {
   background-color: #fa8072;
 }
 
