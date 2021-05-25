@@ -28,6 +28,11 @@ input[type="search"]::-webkit-search-results-decoration {
   margin: 5px;
 }
 
+.nav-item a:hover {
+  transition: 0.3;
+  color: orange!important;
+}
+
 .navbar-brand.nav-logo {
   font-family: Lobster Two;
   font-size: 26px;
@@ -55,6 +60,7 @@ input[type="search"]::-webkit-search-results-decoration {
 #signout-btn:hover, #signup-btn:hover {
   transition: 0.3;
   background-color: #ec9b3b;
+  color: black!important;
 }
 
 #footer {
