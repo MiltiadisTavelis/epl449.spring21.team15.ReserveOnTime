@@ -16,10 +16,31 @@
 	$results = $shops->favorites();
 
 	$json = array();
+	$json['Shops'] = array();
 	if($results != false){
 		while($row = mysqli_fetch_array($results)){
 			extract($row);
-			array_push($json, $shop_id);
+			$shop = array(
+				'id' => $id,
+				'sname' => $sname,
+				'stype' => $type,
+				'stype_id' => $type_id,
+				'email' => $email,
+				'pnum' => $pnum,
+				'description' => $description,
+				'capacity' => $capacity,
+				'tables' => $tables,
+				'reg_date' => $reg_date,
+				'street' => $street,
+				'streetnum' => $streetnum,
+				'area' => $area,
+				'city' => $name,
+				'city_id' => $city_id,
+				'postal_code' => $pc,
+				'rating' => number_format($avg_rating,1),
+				'reviewscount' => $reviewscount
+			);
+			array_push($json['Shops'], $shop);
 		}
 		echo json_encode($json);
 	}else{

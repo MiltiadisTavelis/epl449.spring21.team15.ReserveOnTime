@@ -140,8 +140,10 @@ function addfavorite(o,i){
             if (response.hasOwnProperty("status")) {
                 popUpMessage(response["status"], "danger");
             }else{
-                o.setAttribute("fav",1)
-                o.innerHTML = '<i class="fas fa-heart shop-card-favorite-icon"></i>'
+                $('button[shop="'+i+'"]').each(function() {
+                    this.setAttribute("fav",1)
+                    this.innerHTML = '<i class="fas fa-heart shop-card-favorite-icon"></i>'
+                });
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");
@@ -167,8 +169,10 @@ function deletefavorite(o,i){
             if (response.hasOwnProperty("status")) {
                 popUpMessage(response["status"], "danger");
             }else{
-                o.setAttribute("fav",0)
-                o.innerHTML = '<i class="far fa-heart shop-card-favorite-icon"></i>'
+                $('button[shop="'+i+'"]').each(function() {
+                    this.setAttribute("fav",0)
+                    this.innerHTML = '<i class="far fa-heart shop-card-favorite-icon"></i>'
+                });
             }
         } else {
             popUpMessage("There was an unexpected error", "danger");

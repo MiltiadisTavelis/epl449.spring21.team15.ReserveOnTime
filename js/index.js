@@ -208,7 +208,8 @@ function loadFavorites(){
             if (response.hasOwnProperty("status")) {
                 popUpMessage(response["status"], "danger");
             }else{
-                favorites = response;
+                favorites = response["Shops"].map(Shops => Shops.id);
+                loadShopSection(this, "favorites")
                 loadTopRatedShops()
                 loadOpenShops()
                 loadClosedShops()
