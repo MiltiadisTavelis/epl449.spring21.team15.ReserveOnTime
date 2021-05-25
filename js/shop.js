@@ -698,6 +698,7 @@ function addReview() {
     var content = document.getElementById('modal-content-input');
     if(content.value.length === 0){
         popUpMessage("You can't submit an empty review.", "danger");
+        $("#submit-review").prop('disabled', false);
         return;
     }
     var xhr = new XMLHttpRequest();
