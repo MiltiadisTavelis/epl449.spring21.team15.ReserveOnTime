@@ -173,6 +173,7 @@ input[type="search"]::-webkit-search-results-decoration {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 99999999;
 }
 
 #loading-image {
@@ -184,7 +185,6 @@ input[type="search"]::-webkit-search-results-decoration {
     top:0;
     bottom:0;
     position:fixed;
-    z-index: 99999999;
 /*    left:50%;
     top:50%;
     margin:-40 0 0 -40;*/
