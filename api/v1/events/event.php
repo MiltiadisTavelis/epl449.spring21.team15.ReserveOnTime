@@ -11,15 +11,6 @@
 	$db = $database->connect();
 	$event = new Event($db);
 
-	if(!isset($_SESSION['user_id'])){
-		echo json_encode(array('message' => 'Not logged in'));
-		return;
-	};
-	if(($_SESSION['user_type']!='m')){
-		echo json_encode(array('message' => 'Not authorized'));
-		return;
-	};
-
 	$event->id = $data['id'];
 	$event->event();
 
