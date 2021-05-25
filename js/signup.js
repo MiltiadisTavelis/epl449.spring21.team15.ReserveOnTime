@@ -15,6 +15,10 @@ function submit() {
     var surname = document.getElementById('lastname-input');
     var gender = document.getElementById('gender-input');
     var birthday = document.getElementById('date-input');
+    if(birthday.value.length === 0 ){
+        popUpMessage("Missing birthday information.", "danger");
+        return;
+    }
     var code = document.getElementById('telcode-input');
     var number = document.getElementById('tel-input');
     var email = document.getElementById('email-input');
