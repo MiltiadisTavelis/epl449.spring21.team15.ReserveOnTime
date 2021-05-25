@@ -51,10 +51,31 @@ var loadercount = {
 const submitButton = document.getElementById('search-button');
 submitButton.onclick = search;
 
-loadShopTypes();
-loadTopRatedShops()
-loadOpenShops()
-loadClosedShops()
+opensession()
+let session = -1;
+
+function opensession() {
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "session/islogin"
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            session = response.status;
+            loadShopTypes();
+            loadFavorites()
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
 
 function search() {
     event.preventDefault();
@@ -124,7 +145,7 @@ function loadShopSection(xhr, sectionId) {
             display.setAttribute("id", sectionId + "-display")
             display.setAttribute("class", "shop-card-display")
             for (entry in shops) {
-                display.appendChild(createShopCard(shops[entry]))
+                display.appendChild(createShopCard(shops[entry],session,favorites))
             }
 
             section.appendChild(header)
@@ -159,6 +180,36 @@ function loadShopTypes() {
             popUpMessage("There was an unexpected error", "danger");
         }
         loadercount.plus = 1;
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('POST', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
+let favorites;
+
+function loadFavorites(){
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/favorites"
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty("status")) {
+                popUpMessage(response["status"], "danger");
+            }else{
+                favorites = response;
+                loadTopRatedShops()
+                loadOpenShops()
+                loadClosedShops()
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
     }
 
     xhr.withCredentials = true;

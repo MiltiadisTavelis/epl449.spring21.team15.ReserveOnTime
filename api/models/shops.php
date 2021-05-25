@@ -726,5 +726,40 @@
 			}
 		}
 		}
+
+		//ADD FAVORITE
+		public function addfavorite(){
+		    $sql = 'INSERT INTO FAVORITES (`user_id`, `shop_id`) VALUES ('.$_SESSION['user_id'].','.$this->id.')';
+		    $stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		//DELETE FAVORITE
+		public function deletefavorite(){
+		    $sql = 'DELETE FROM FAVORITES WHERE user_id = '.$_SESSION['user_id'].' AND shop_id = '.$this->id;
+		    $stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		//GET FAVORITE
+		public function favorites(){
+		    $sql = 'SELECT shop_id FROM FAVORITES WHERE user_id = '.$_SESSION['user_id'];
+		    $stmt = $this->conn->prepare($sql);
+			if($stmt->execute()){
+				mysqli_stmt_execute($stmt);
+            	$result = mysqli_stmt_get_result($stmt);
+            	return $result;
+			}else{
+				return false;
+			}
+		}
 	}
 ?>

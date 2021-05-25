@@ -127,7 +127,61 @@ function createBootstrapTable(sectionId, tableTitles) {
     return table
 }
 
-function createShopCard(shop) {
+function addfavorite(o,i){
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/addfavorite",
+        "shop_id": i
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty("status")) {
+                popUpMessage(response["status"], "danger");
+            }else{
+                o.setAttribute("fav",1)
+                o.innerHTML = '<i class="fas fa-heart shop-card-favorite-icon"></i>'
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('PUT', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
+function deletefavorite(o,i){
+    var xhr = new XMLHttpRequest();
+    var data = {
+        "type": "shops/deletefavorite",
+        "shop_id": i
+    };
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.hasOwnProperty("status")) {
+                popUpMessage(response["status"], "danger");
+            }else{
+                o.setAttribute("fav",0)
+                o.innerHTML = '<i class="far fa-heart shop-card-favorite-icon"></i>'
+            }
+        } else {
+            popUpMessage("There was an unexpected error", "danger");
+        }
+    }
+
+    xhr.withCredentials = true;
+    xhr.open('DELETE', api);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
+
+function createShopCard(shop,s,f) {
     let shopCard = document.createElement("div")
     shopCard.classList.add('card','shop-card')
 
@@ -141,19 +195,35 @@ function createShopCard(shop) {
     cardImg.setAttribute("style",imgurl);
     shopCard.appendChild(cardImg)
 
-    let favorite = document.createElement("div")
-    favorite.classList.add("shop-card-favorite")
-    shopCard.appendChild(favorite)
+    if(s === '1'){
+        let favorite = document.createElement("div")
+        favorite.classList.add("shop-card-favorite")
+        shopCard.appendChild(favorite)
 
-    let favoriteBtn = document.createElement("button")
-    favoriteBtn.classList.add("btn","btn-primary","shop-card-favorite-button")
-    favoriteBtn.setAttribute("data-bss-hover-animate","pulse")
-    favoriteBtn.setAttribute("type","button")
-    favorite.appendChild(favoriteBtn)
+        let favoriteBtn = document.createElement("button")
+        favoriteBtn.classList.add("btn","btn-primary","shop-card-favorite-button")
+        favoriteBtn.setAttribute("shop",shop.id)
+        favoriteBtn.setAttribute("data-bss-hover-animate","pulse")
+        favoriteBtn.setAttribute("type","button")
+        favorite.appendChild(favoriteBtn)
+        favoriteBtn.onclick = function(){
+            if(this.getAttribute("fav") == 1){
+                deletefavorite(this,this.getAttribute("shop"))
+            }else{
+                addfavorite(this,this.getAttribute("shop"))
+            }
+        }
 
-    let favoriteBtnImg = document.createElement("i")
-    favoriteBtnImg.classList.add("far","fa-heart","shop-card-favorite-icon")
-    favoriteBtn.appendChild(favoriteBtnImg)
+        let favoriteBtnImg = document.createElement("i")
+        if(f.includes(shop.id)){
+            favoriteBtn.setAttribute("fav",1)
+            favoriteBtnImg.classList.add("fas","fa-heart","shop-card-favorite-icon")
+        }else{
+            favoriteBtn.setAttribute("fav",0)
+            favoriteBtnImg.classList.add("far","fa-heart","shop-card-favorite-icon")
+        }
+        favoriteBtn.appendChild(favoriteBtnImg)
+    }
 
     let cardBody = document.createElement("div")
     cardBody.classList.add('card-body','shop-card-body')

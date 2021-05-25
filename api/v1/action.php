@@ -70,6 +70,10 @@
 			}elseif((strcasecmp($type, 'shops/addimages') == 0) && (count($data) == 1) && (isset($data['shop_id']) != 0)){
 				include 'shops/addimages.php';
 			
+			//GET FAVORITES
+			}elseif((strcasecmp($type, 'shops/favorites') == 0) && (count($data) == 0)){
+				include 'shops/favorites.php';
+			
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -269,6 +273,10 @@
 			}elseif((strcasecmp($type, 'shops/addhour') == 0)){
 				include 'shops/addhour.php';
 
+			//ADD OPEN HOURS TO SHOP
+			}elseif((strcasecmp($type, 'shops/addfavorite') == 0) && (count($data) == 1) && (isset($data['shop_id']))){
+				include 'shops/addfavorite.php';
+
 			}else{
 				echo $error;
 				http_response_code(400);
@@ -415,6 +423,9 @@
 			//DELETE SHOP IMAGE
 			if((strcasecmp($type, 'shops/deleteimage') == 0) && (count($data) == 3) && (isset($data['image_type'],$data['image_url'],$data['shop_id']) != 0)){
 				include 'shops/deleteimage.php';
+			//DELETE FAVORITE
+			}if((strcasecmp($type, 'shops/deletefavorite') == 0) && (count($data) == 1) && (isset($data['shop_id']) != 0)){
+				include 'shops/deletefavorite.php';
 			}else{
 				echo $error;
 				http_response_code(400);

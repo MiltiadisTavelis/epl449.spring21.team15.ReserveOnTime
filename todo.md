@@ -29,7 +29,7 @@ SESSION 6
 - [x] Get session type (type: session/type) POST 
 
 
-SHOPS 20
+SHOPS 23
 - [x] Display open Shops (type: shops/all) POST 
 - [x] Sort shops by date added (Default) (type: shops/all) POST 
 - [x] Sort shops by name (type: shops/all) POST
@@ -50,7 +50,9 @@ SHOPS 20
 - [x] Remove shop hours (type: shops/addhour) PUT 
 - [x] Disable/Enable shop hours (type: shops/addhour) PUT 
 - [x] Delete shop image (type: shops/deleteimage) DELETE 
-
+- [x] Add favorites (type: shops/addfavorite) PUT
+- [x] Get favorites (type: shops/favorites) POST
+- [x] Delete favorites (type: shops/deletefavorite) DELETE
 
 PENDING_SHOPS 4
 - [x] Add a pending shop (type: pendingShops/create) POST 
