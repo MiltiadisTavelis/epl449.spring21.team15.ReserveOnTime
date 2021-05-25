@@ -40,11 +40,13 @@
 	$_SESSION['email'] = $data->email;
 	$results = $user->create_user();
 
-	if(!empty($results)){
+	if($results == false){
+		$json['status'] = 'This account already exists.';
+		echo json_encode($json);
+	}else if(!empty($results)){
 		$json = array();
-		$json['status'] = 'Successfully Created. Check your inbox for a verification email.';
+		$json['message'] = 'Successfully Created. Check your inbox for a verification email.';
 		echo json_encode($json);
 		require 'sendemail.php';
-		//$json['verify'] = 'Click here to verify: '.$results;
 	}
 ?>
