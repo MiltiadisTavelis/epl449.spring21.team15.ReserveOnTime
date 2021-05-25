@@ -64,11 +64,31 @@ loadDet();
 
 $( "#save" ).click(function() {
     var name = document.getElementById('firstname-input');
+    if(name.value.length === 0 ){
+        popUpMessage("Missing name information.", "danger");
+        return;
+    }
     var surname = document.getElementById('lastname-input');
+    if(surname.value.length === 0 ){
+        popUpMessage("Missing surname information.", "danger");
+        return;
+    }
     var gender = document.getElementById('gender-input');
     var birthday = document.getElementById('date-input');
+    if(birthday.value.length === 0 ){
+        popUpMessage("Missing birthday information.", "danger");
+        return;
+    }
     var code = document.getElementById('telcode-input');
+    if(code.value.length === 0 ){
+        popUpMessage("Missing code information.", "danger");
+        return;
+    }
     var number = document.getElementById('tel-input');
+    if(number.value.length === 0 ){
+        popUpMessage("Missing number information.", "danger");
+        return;
+    }
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "users/update",

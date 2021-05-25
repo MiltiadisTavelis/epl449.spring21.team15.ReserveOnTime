@@ -119,7 +119,15 @@ function updateEvent() {
     var title = document.getElementById('modal-event-input');
     var content = document.getElementById('modal-content-input');
     var start_date = document.getElementById('modal-datefrom-input');
+    if(start_date.value.length === 0 ){
+        popUpMessage("Missing start date information.", "danger");
+        return;
+    }
     var stop_date = document.getElementById('modal-dateto-input');
+    if(stop_date.value.length === 0 ){
+        popUpMessage("Missing start date information.", "danger");
+        return;
+    }
     var start_time = document.getElementById('modal-timefrom-input');
     var stop_time = document.getElementById('modal-timeto-input');
     link = document.getElementById('modal-link-input');
