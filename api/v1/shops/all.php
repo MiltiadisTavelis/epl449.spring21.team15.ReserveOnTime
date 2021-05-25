@@ -35,13 +35,13 @@
 		$shops->checkTime = $data['time'];
 	}	
 
-	if(isset($data['day'])){
-		$date = $data['day'];
-		$date = str_replace('/', '-', $data['day']);
+	if(isset($data['date'])){
+		$date = $data['date'];
+		$date = str_replace('/', '-', $data['date']);
 		if(false !== strtotime($date)){
 			list($day, $month, $year) = explode('-', $date); 
 			if(checkdate($month, $day, $year)){
-				$shops->checkDay = str_replace('/', '-', $data['day']);
+				$shops->checkDay = str_replace('/', '-', $data['date']);
 			}
 		}
 	}	
