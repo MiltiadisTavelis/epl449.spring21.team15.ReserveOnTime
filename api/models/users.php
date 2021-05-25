@@ -85,7 +85,7 @@
 
 		//CREATE NEW USER
 		public function create_user(){
-			if(exist($this->email) == false){
+			if($this->exist($this->email) == false){
 				$sql = 'INSERT INTO USERS (
 								fname,
 								lname,
