@@ -751,7 +751,12 @@
 
 		//GET FAVORITE
 		public function favorites(){
-		    $sql = 'SELECT shop_id FROM FAVORITES WHERE user_id = '.$_SESSION['user_id'];
+		    $sql = 'SELECT DISTINCT SHOPS.id,SHOPS.sname,SHOP_TYPE.type, SHOP_TYPE.type, SHOP_TYPE.id AS type_id ,SHOPS.email,SHOPS.pnum,SHOPS.description,SHOPS.capacity,SHOPS.tables,SHOPS.reg_date, SHOPS.street, SHOPS.streetnum, SHOPS.area,CITIES.name, SHOPS.pc, SHOPS.avg_rating, CITIES.id AS city_id, (SELECT COUNT(*) FROM REVIEWS WHERE REVIEWS.shop_id = SHOPS.id) AS reviewscount
+			FROM SHOPS,CITIES,SHOP_TYPE,SHOP_HOURS,FAVORITES 
+			WHERE SHOPS.stype = SHOP_TYPE.id
+			AND SHOPS.city = CITIES.id
+			AND FAVORITES.user_id = '.$_SESSION['user_id'].' 
+			AND FAVORITES.shop_id = SHOPS.id';
 		    $stmt = $this->conn->prepare($sql);
 			if($stmt->execute()){
 				mysqli_stmt_execute($stmt);
