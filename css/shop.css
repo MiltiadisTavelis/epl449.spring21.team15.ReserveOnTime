@@ -69,17 +69,50 @@ a {
 }
 
 @media (max-width: 420px) {
-  .navbar {
+  .container-fluid {
+    position: relative;
+    top: 25px;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar * {
     display: none;
     z-index: 1;
   }
 }
 
 @media (max-width: 420px) {
-  .navbar-brand.nav-logo {
-    color: #ec9b3b !important;
+  .navbar .nav-logo {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    visibility: hidden;
+    display: initial;
   }
 }
+
+@media (max-width: 420px) {
+  .navbar .nav-logo:before {
+    margin: 10px;
+    padding: 0 20px;
+    border-radius: 10px;
+    background: #fff;
+    visibility: visible;
+    font-family: "Font Awesome 5 Free";
+    content: "\f060";
+    display: initial;
+    position: absolute;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar {
+    padding: 0;
+    z-index: 1;
+  }
+}
+
 
 #shop-header {
   height: 555px;
