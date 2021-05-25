@@ -65,7 +65,15 @@ function submit() {
     var title = document.getElementById('title-input');
     var content = document.getElementById('content-input');
     var start_date = document.getElementById('datefrom-input');
+    if(start_date.value.length === 0 ){
+        popUpMessage("Missing start date information.", "danger");
+        return;
+    }
     var stop_date = document.getElementById('dateto-input');
+    if(stop_date.value.length === 0 ){
+        popUpMessage("Missing stop date information.", "danger");
+        return;
+    }
     var start_time = document.getElementById('timefrom-input');
     var stop_time = document.getElementById('timeto-input');
     link = document.getElementById('link-input');
