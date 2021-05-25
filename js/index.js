@@ -65,7 +65,13 @@ function opensession() {
             var response = JSON.parse(xhr.responseText);
             session = response.status;
             loadShopTypes();
-            loadFavorites()
+            if(session === '1'){
+                loadFavorites()
+            }else{
+                loadTopRatedShops()
+                loadOpenShops()
+                loadClosedShops()
+            }
         } else {
             popUpMessage("There was an unexpected error", "danger");
         }
@@ -188,7 +194,7 @@ function loadShopTypes() {
     xhr.send(JSON.stringify(data));
 }
 
-let favorites;
+let favorites = [];
 
 function loadFavorites(){
     var xhr = new XMLHttpRequest();
