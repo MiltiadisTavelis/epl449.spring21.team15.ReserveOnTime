@@ -2197,6 +2197,314 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "620fc659-8c9a-41f2-ac31-a16b4fec44d4",
+    "name": "update - new review",
+    "commands": [{
+      "id": "e4f8e507-fb98-43b9-a45f-4f2e3eb43a7c",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d6b48e34-0068-45e8-9a32-1c1b269c17c9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "72237fe1-e1fa-4c2e-baf2-a83f2fde2dc7",
+      "comment": "",
+      "command": "click",
+      "target": "id=signin-btn",
+      "targets": [
+        ["id=signin-btn", "id"],
+        ["linkText=Sign In", "linkText"],
+        ["css=#signin-btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign In')]", "xpath:link"],
+        ["xpath=//a[@id='signin-btn']", "xpath:attributes"],
+        ["xpath=//div[@id='nav-list']/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'signin.html')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ed80849a-4558-4f73-ad2c-2d7b966aa36c",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-btn",
+      "targets": [
+        ["id=login-btn", "id"],
+        ["css=#login-btn", "css:finder"],
+        ["xpath=//button[@id='login-btn']", "xpath:attributes"],
+        ["xpath=//form[@id='form-padding']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Log In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d61f8eb1-11cd-4a97-bd9e-7d390bc4195d",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "linkText=Forgot your password?",
+      "targets": [
+        ["linkText=Forgot your password?", "linkText"],
+        ["css=.forgot", "css:finder"],
+        ["xpath=//a[contains(text(),'Forgot your password?')]", "xpath:link"],
+        ["xpath=//form[@id='form-padding']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'requestreset.html')]", "xpath:href"],
+        ["xpath=//form/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Forgot your password?')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ee657062-51b7-4ef1-b513-4e15ed9387ad",
+      "comment": "",
+      "command": "click",
+      "target": "css=#top-display > .card:nth-child(3) > a",
+      "targets": [
+        ["css=#top-display > .card:nth-child(3) > a", "css:finder"],
+        ["xpath=//div[@id='top-display']/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'shop.html?1')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae8118d8-f801-4eba-a957-6b41b15b4810",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-user-edit",
+      "targets": [
+        ["css=.fa-user-edit", "css:finder"],
+        ["xpath=//div[@id='contents']/main/div[2]/div/ul/li[3]/a/i", "xpath:idRelative"],
+        ["xpath=//li[3]/a/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "355a20ed-ef8f-4cee-9735-4d7a6b72f5e1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.review-create-btn",
+      "targets": [
+        ["css=.review-create-btn", "css:finder"],
+        ["xpath=(//button[@type='button'])[5]", "xpath:attributes"],
+        ["xpath=//div[@id='reviews']/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Create new Review')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "251210c2-5d0a-4aa9-95ef-6616461f9750",
+      "comment": "",
+      "command": "click",
+      "target": "css=label:nth-child(6)",
+      "targets": [
+        ["css=label:nth-child(6)", "css:finder"],
+        ["xpath=//div[@id='review-modal']/div/div/div/label[3]", "xpath:idRelative"],
+        ["xpath=//label[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9eabcf01-a021-479a-a34e-f4bc548195ff",
+      "comment": "",
+      "command": "click",
+      "target": "id=modal-content-input",
+      "targets": [
+        ["id=modal-content-input", "id"],
+        ["css=#modal-content-input", "css:finder"],
+        ["xpath=//textarea[@id='modal-content-input']", "xpath:attributes"],
+        ["xpath=//div[@id='review-modal']/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "885e92d0-b015-4920-bd02-3f8f9617f23d",
+      "comment": "",
+      "command": "type",
+      "target": "id=modal-content-input",
+      "targets": [
+        ["id=modal-content-input", "id"],
+        ["css=#modal-content-input", "css:finder"],
+        ["xpath=//textarea[@id='modal-content-input']", "xpath:attributes"],
+        ["xpath=//div[@id='review-modal']/div/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Selenium Review"
+    }, {
+      "id": "a11c618b-a796-465e-9ca6-4468e892c650",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit-review",
+      "targets": [
+        ["id=submit-review", "id"],
+        ["css=#submit-review", "css:finder"],
+        ["xpath=//button[@id='submit-review']", "xpath:attributes"],
+        ["xpath=//div[@id='review-modal']/div/div/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,' Create Review')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "78ec9103-ce4e-49b0-b5bc-6eb4df9a3650",
+      "comment": "",
+      "command": "click",
+      "target": "id=signout-btn",
+      "targets": [
+        ["id=signout-btn", "id"],
+        ["linkText=Sign Out", "linkText"],
+        ["css=#signout-btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Out')]", "xpath:link"],
+        ["xpath=//a[@id='signout-btn']", "xpath:attributes"],
+        ["xpath=//div[@id='nav-list']/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign Out')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "a0090afb-9b0c-4fd4-a1df-d56d734758a7",
+    "name": "update - new review(wrong input)",
+    "commands": [{
+      "id": "d2f292c9-2728-4ca9-9e49-93a9e4f39a3f",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b6068f37-da95-4cb1-ba0e-4e8a3c58333f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x840",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9aea6268-07d2-465b-8cc7-a79642d5344d",
+      "comment": "",
+      "command": "click",
+      "target": "id=signout-btn",
+      "targets": [
+        ["id=signout-btn", "id"],
+        ["linkText=Sign Out", "linkText"],
+        ["css=#signout-btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Out')]", "xpath:link"],
+        ["xpath=//a[@id='signout-btn']", "xpath:attributes"],
+        ["xpath=//div[@id='nav-list']/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign Out')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "12d216cf-7a77-47fa-bbf5-199c83c49d47",
+      "comment": "",
+      "command": "click",
+      "target": "id=signin-btn",
+      "targets": [
+        ["id=signin-btn", "id"],
+        ["linkText=Sign In", "linkText"],
+        ["css=#signin-btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign In')]", "xpath:link"],
+        ["xpath=//a[@id='signin-btn']", "xpath:attributes"],
+        ["xpath=//div[@id='nav-list']/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'signin.html')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b51600e8-d53c-489d-ab05-e5ba61ec4af3",
+      "comment": "",
+      "command": "click",
+      "target": "id=login-btn",
+      "targets": [
+        ["id=login-btn", "id"],
+        ["css=#login-btn", "css:finder"],
+        ["xpath=//button[@id='login-btn']", "xpath:attributes"],
+        ["xpath=//form[@id='form-padding']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Log In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5fa824ec-d2b7-4f6e-ba1f-c7a0d37d57d2",
+      "comment": "",
+      "command": "click",
+      "target": "css=#top-display > .card:nth-child(10) > a",
+      "targets": [
+        ["css=#top-display > .card:nth-child(10) > a", "css:finder"],
+        ["xpath=//div[@id='top-display']/div[10]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'shop.html?5')]", "xpath:href"],
+        ["xpath=//div[10]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2da860bc-0f71-4d8e-aa85-a4076bf1c0e8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-user-edit",
+      "targets": [
+        ["css=.fa-user-edit", "css:finder"],
+        ["xpath=//div[@id='contents']/main/div[2]/div/ul/li[3]/a/i", "xpath:idRelative"],
+        ["xpath=//li[3]/a/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d6a2ff60-5ada-4dce-b4b9-c4b7c3003e8d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.review-create-btn",
+      "targets": [
+        ["css=.review-create-btn", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='reviews']/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Create new Review')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a94b738b-8588-4c00-a914-c647138af427",
+      "comment": "",
+      "command": "click",
+      "target": "css=label:nth-child(6)",
+      "targets": [
+        ["css=label:nth-child(6)", "css:finder"],
+        ["xpath=//div[@id='review-modal']/div/div/div/label[3]", "xpath:idRelative"],
+        ["xpath=//label[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3405b3d0-547b-4371-808e-6ae552414037",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit-review",
+      "targets": [
+        ["id=submit-review", "id"],
+        ["css=#submit-review", "css:finder"],
+        ["xpath=//button[@id='submit-review']", "xpath:attributes"],
+        ["xpath=//div[@id='review-modal']/div/div/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,' Create Review')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d7db96fe-e4c3-4972-8015-0771bd5c292e",
+      "comment": "",
+      "command": "click",
+      "target": "id=review-modal",
+      "targets": [
+        ["id=review-modal", "id"],
+        ["css=#review-modal", "css:finder"],
+        ["xpath=//div[@id='review-modal']", "xpath:attributes"],
+        ["xpath=//div[@id='reviews']/div[3]", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div[3]", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "a8b2fb9f-4923-4c8c-b987-7618a7bf06a0",
