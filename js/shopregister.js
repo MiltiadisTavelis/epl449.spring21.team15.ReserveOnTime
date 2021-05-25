@@ -25,6 +25,11 @@ function submit() {
     var phone_code2 = "357";
     var shop_number = document.getElementById('shop-tel-input');
     var shop_email = document.getElementById('shop-email-input');
+    var birthday = document.getElementById('date-input');
+    if(birthday.value.length === 0 ){
+        popUpMessage("Missing birthday information.", "danger");
+        return;
+    }
     var xhr = new XMLHttpRequest();
     var data = {
         "type": "pendingShops/create",
